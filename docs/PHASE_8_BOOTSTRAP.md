@@ -56,7 +56,7 @@ opcode `DIV` (exato, Fraction; divisor zero recusado).
 | Etapa | Conteúdo | Estado |
 |-------|----------|--------|
 | B1 | degrau de Gauss na linguagem (esta fatia) | **CONCLUÍDA** |
-| B2 | degraus geométrico (`S = (r^(n+1)-r)/(r-1)`) e de média em linguagem | pendente |
+| B2 | degraus geométrico (`S = (r^(n+1)-r)/(r-1)`) e de média em linguagem | **CONCLUÍDA nesta fatia** |
 | B3 | lexer/parser em ZEPHIRUM | exige strings/tokens como dados (ISA futura) |
 | B4 | SHA-256 do certificado em bytecode | exige operações de bit (ISA futura) |
 | B5 | VM escrita em ZEPHIRUM | exige modelo de memória; fronteira declarada |
@@ -69,3 +69,19 @@ opcode `DIV` (exato, Fraction; divisor zero recusado).
   declarada, com os pré-requisitos de ISA explícitos acima.
 - A bateria cobre a família gauss_series; generalização para as outras
   famílias é trabalho das fatias B2+.
+
+
+## Fatia 2 (B2): geométrico e média na linguagem
+
+A implementação `prototype/zephirum_boot_b2.py` adiciona dois degraus
+certificados a partir de fonte ZEPHIRUM parseada:
+
+- `geometric_series`: expressa `(r^(n+1)-1)/(r-1)` em bytecode, com `SUB` e
+  `DIV` exactos; 100 casos aleatórios concordam com o somatório independente.
+- `mean_partial`: usa limites exactos para decidir a média sem avaliar os
+  desconhecidos quando o intervalo separa o limiar; casos que atravessam o
+  limiar permanecem `UNKNOWN`.
+
+A VM recebeu o opcode `SUB`, sem custo de unidade. Esta fatia é um bootstrap
+experimental do compilador de necessidade, não o bootstrap completo da VM. A
+VM continua implementada em Python, conforme a fronteira §12.
