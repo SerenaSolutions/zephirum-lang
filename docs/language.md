@@ -11,3 +11,10 @@ SWAP, TOFFOLI. Angles accept `pi` and `pi/k`.
 Neural: `zyql_rag "question";` runs docs -> BM25 -> translator -> gate -> receipt.
 Transpilation: `src/oq3.py` emits and ingests OpenQASM 3 (round-trip verified).
 Unknown lines raise; nothing executes silently.
+
+## C API
+
+`src/zephirum.h` declares the public C surface of the trivalent core:
+one oracle call per decision, declared noise band, canonical rational
+receipt (num/den) sealed with ML-DSA-44. Bindings and the language
+frontends sit above this contract; nothing decides above the core.
