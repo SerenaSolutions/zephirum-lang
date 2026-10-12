@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "ZEPHIRUM / ZYQL: quantum language and trivalent decision core"
+message: "If you use this software, cite it as below."
+type: software
+authors:
+  - name: "Serena Solutions"
+repository-code: "https://github.com/serena-solutions/zephirum-lang"
+abstract: "ZEPHIRUM is the language; ZYQL is the trivalent decision algorithm (1/0/REFUSED) with ML-DSA-44 receipts. Decisions by Deutsch-Jozsa interference; every claim carries a recorded receipt."
+keywords:
+  - quantum-computing
+  - programming-language
+  - decision-systems
+  - post-quantum
+license: MIT
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23302046"
+    description: "Zenodo concept DOI (software deposit)"

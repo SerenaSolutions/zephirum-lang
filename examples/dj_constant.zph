@@ -1,0 +1,6 @@
+// Deutsch-Jozsa, constant purpose: blanket decision by interference
+circuit dj_constant {
+  qubit[3] q;
+  H q[0]; H q[1]; H q[2];
+  H q[0]; H q[1]; H q[2];   // identity oracle = constant
+}

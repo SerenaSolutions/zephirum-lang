@@ -1,0 +1,11 @@
+// Grover on 2 qubits: |11> found in one iteration
+circuit grover {
+  qubit[2] q;
+  H q[0]; H q[1];
+  CZ q[0] -> q[1];
+  H q[0]; H q[1];
+  X q[0]; X q[1];
+  CZ q[0] -> q[1];
+  X q[0]; X q[1];
+  H q[0]; H q[1];
+}

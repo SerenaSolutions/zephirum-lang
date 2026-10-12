@@ -1,0 +1,67 @@
+<p align="center"><img src="assets/social-preview-1280x640.png" alt="ZYQL: Exact-decision language" width="640"></p>
+
+# ZEPHIRUM
+
+*The quantum programming language with receipts.*
+
+![version](https://img.shields.io/badge/version-1.4.3-6e46b8)
+![license](https://img.shields.io/badge/license-MIT-blue)
+![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
+![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23302046-gold)
+
+ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:
+every computational decision is trivalent - `1` (permitted), `0` (forbidden),
+`REFUSED` (input-dependent or insufficient confidence) - and carries a signed
+receipt (ML-DSA-44, FIPS 204) with provenance.
+
+Decisions are produced by Deutsch-Jozsa interference, one oracle call, with a
+declared noise band (+-0.15). Nothing executes silently: unknown syntax raises
+an explicit error. Simulation mode is labeled as simulation.
+
+```
+circuit bell {
+  qubit[2] q;
+  H q[0];
+  CNOT q[0] -> q[1];
+}
+```
+
+Verified on real hardware (IBM Heron `ibm_fez`, cited as test laboratory with
+verifiable job IDs; no endorsement claimed):
+- Constant purpose: measured p(000)=0.9844 (job db6ded84qg6s73c4jvug)
+- Balanced purpose: p(000)=0.0000, orthogonal outcome 93.9%
+- Same-task confrontation vs textbook Qiskit (job db6dklcvf2bc73d122t0):
+  Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
+
+## Quickstart
+
+```bash
+pip install -e .   # (or just add src/ to your path)
+python -c "from src.zyql_quantum_gate import ZYQLQuantumGate; \
+g = ZYQLQuantumGate(3, lambda x: 1); print(g.run_quantum())"
+```
+
+## Layout
+
+- `src/` - kernel (state-vector), OpenQASM 3 transpiler, trivalent gate,
+  quantum types (no-cloning enforced), neural RAG layer
+- `examples/` - `bell.zph`, `grover.zph`, `dj_constant.zph`
+- `tests/` - canonical rational test battery
+- `docs/` - language reference, receipt specification
+
+## Honest scope
+
+This repository contains the language heart only: kernel, types, gate, receipts.
+It does not contain, and will never contain, the Zephirum OS distribution,
+bootloader, installer, or activation keys. Simulations are labeled as
+simulations; without error correction, useful executions are bounded well
+under 20 qubits.
+
+## Citation
+
+See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23302046
+(code MIT, companion thesis CC BY-NC-ND 4.0), (c) Serena Solutions.
+
+## License
+
+MIT - see [LICENSE](LICENSE).
