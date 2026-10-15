@@ -1,0 +1,11 @@
+qiskit_runtime_service._discover_account:WARNING:2026-10-13 10:57:54,963: Loading account with the given token. A saved account will not be used.
+/app/conversations/6a499275110fe595b9330fdd/agents_lab/zca_conformidade_ibm.py:62: DeprecationWarning: The SamplerV2 class is deprecated as of qiskit-ibm-runtime 0.50.0 and will be removed no sooner than 3 months after the release date. `qiskit_ibm_runtime.executor_sampler.Sampler` provides a new Sampler implementation that runs all the pre- and post-processing in the client side. The top-level `qiskit_ibm_runtime.Sampler` import will be updated to point to the client-side sampler in an upcoming release, with the legacy Sampler being available until the deprecation is completed.
+  sampler = SamplerV2(mode=backend)
+[live] backend: ibm_fez
+DJ constant : p1=0.000 -> 0       (esperado 0) drift=False PASS
+DJ balanced : p1=0.953 -> 1       (esperado 1) drift=True PASS
+BELL base Z: corr=0.975 (teto >= 0.70) PASS
+BELL base X: corr=0.986 (teto >= 0.70) PASS
+
+resumo: 4 PASS / 0 FLAGGED
+recibos -> zca_conformidade_live.json

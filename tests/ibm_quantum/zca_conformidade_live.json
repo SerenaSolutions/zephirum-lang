@@ -1,0 +1,65 @@
+{
+  "modo": "live",
+  "banda": 0.15,
+  "autor": "Serena Solutions",
+  "recibos": [
+    {
+      "teste": "DJ_constant",
+      "payload": {
+        "esperado": "0",
+        "obtido": "0",
+        "p_hat": 0.0,
+        "regra": "p=0.000 abaixo da banda -> 0",
+        "drift_detectado": false,
+        "backend": "ibm_fez",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:58:05Z"
+      },
+      "sha3_256": "bbc498f09e1313d7c537fe7d2eb057871cceffaef07d2db8ccd3c7c12b41a313"
+    },
+    {
+      "teste": "DJ_balanced",
+      "payload": {
+        "esperado": "1",
+        "obtido": "1",
+        "p_hat": 0.9531,
+        "regra": "p=0.953 acima da banda -> 1",
+        "drift_detectado": true,
+        "backend": "ibm_fez",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:58:11Z"
+      },
+      "sha3_256": "dc2e39f94abc1d6f81091ffd36f8bfad133a85678231044ae910a34ce7b761aa"
+    },
+    {
+      "teste": "BELL_Z",
+      "payload": {
+        "correlacao": 0.9746,
+        "teto_esperado": 0.7,
+        "backend": "ibm_fez",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:58:17Z"
+      },
+      "sha3_256": "533f5c288152c6cdb1cb53baf160e2e3ae395ae1230b4e23df5a9c19fa229b78"
+    },
+    {
+      "teste": "BELL_X",
+      "payload": {
+        "correlacao": 0.9858,
+        "teto_esperado": 0.7,
+        "backend": "ibm_fez",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:58:32Z"
+      },
+      "sha3_256": "b3e0bfefc27904bc17a12aadd13f395819d8bed99140aa778ef890ee83ed5bf4"
+    }
+  ],
+  "resumo": {
+    "pass": 4,
+    "flagged": 0
+  }
+}
