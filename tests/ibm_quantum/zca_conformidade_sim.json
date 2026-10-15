@@ -1,0 +1,65 @@
+{
+  "modo": "sim",
+  "banda": 0.15,
+  "autor": "Serena Solutions",
+  "recibos": [
+    {
+      "teste": "DJ_constant",
+      "payload": {
+        "esperado": "0",
+        "obtido": "0",
+        "p_hat": 0.0,
+        "regra": "p=0.000 abaixo da banda -> 0",
+        "drift_detectado": false,
+        "backend": "generic_backend_7q",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:57:09Z"
+      },
+      "sha3_256": "fa6ebc47930d1c51b72b905df7c0983cf11194622da6ac6457e494101f4a3f9f"
+    },
+    {
+      "teste": "DJ_balanced",
+      "payload": {
+        "esperado": "1",
+        "obtido": "1",
+        "p_hat": 1.0,
+        "regra": "p=1.000 acima da banda -> 1",
+        "drift_detectado": false,
+        "backend": "generic_backend_7q",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:57:09Z"
+      },
+      "sha3_256": "e3609a0315b84697b51e34df6285203ccc01fb2eb54bab30751c7a35a929fb54"
+    },
+    {
+      "teste": "BELL_Z",
+      "payload": {
+        "correlacao": 1.0,
+        "teto_esperado": 0.7,
+        "backend": "generic_backend_7q",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:57:09Z"
+      },
+      "sha3_256": "1ffe502108dd90871ca338e145136900ae67ff8e476e2fbc2c5a2d66f5f62a2f"
+    },
+    {
+      "teste": "BELL_X",
+      "payload": {
+        "correlacao": 1.0,
+        "teto_esperado": 0.7,
+        "backend": "generic_backend_7q",
+        "shots": 2048,
+        "status": "PASS",
+        "ts": "2026-10-13T10:57:09Z"
+      },
+      "sha3_256": "1ffe502108dd90871ca338e145136900ae67ff8e476e2fbc2c5a2d66f5f62a2f"
+    }
+  ],
+  "resumo": {
+    "pass": 4,
+    "flagged": 0
+  }
+}
