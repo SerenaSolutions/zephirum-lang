@@ -11,8 +11,10 @@
 
 ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:
 every computational decision is trivalent - `1` (permitted), `0` (forbidden),
-`REFUSED` (input-dependent or insufficient confidence) - and carries a signed
-receipt (ML-DSA-44, FIPS 204) with provenance.
+`REFUSED` (input-dependent or insufficient confidence) - and carries a sealed
+receipt (SHA3-256 integrity seal, hash proves content integrity, not authorship).
+ML-DSA-44 / FIPS 204 signatures are a DECLARED ROADMAP item — to be implemented
+with an accredited module and HSM-held keys, never hand-rolled (see docs/receipts.md).
 
 Decisions are produced by Deutsch-Jozsa interference, one oracle call, with a
 declared noise band (+-0.15). Nothing executes silently: unknown syntax raises
