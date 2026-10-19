@@ -1,0 +1,6 @@
+# ZEPHIRUM/ZYQL — dependências travadas (audit item #2, 2026-10-19)
+# Runtime mínimo do kernel: stdlib puro (sem dependências).
+# A suíte ZCA (tests/ibm_quantum) usa as versões ABAIXO, travadas:
+numpy==2.4.6
+qiskit==2.6.0
+qiskit-ibm-runtime==0.50.0

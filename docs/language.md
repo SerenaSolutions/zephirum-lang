@@ -16,5 +16,5 @@ Unknown lines raise; nothing executes silently.
 
 `src/zephirum.h` declares the public C surface of the trivalent core:
 one oracle call per decision, declared noise band, canonical rational
-receipt (num/den) sealed with ML-DSA-44. Bindings and the language
+receipt (num/den) sealed with SHA3-256 (ML-DSA-44 signature: declared roadmap). Bindings and the language
 frontends sit above this contract; nothing decides above the core.
