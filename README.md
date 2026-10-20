@@ -31,6 +31,10 @@ circuit bell {
 Verified on real hardware (IBM Heron `ibm_fez`, cited as test laboratory with
 verifiable job IDs; no endorsement claimed):
 - Constant purpose: measured p(000)=0.9844 (job db6ded84qg6s73c4jvug)
+- S3 qutrit miniature: fusion channels (qutrit-in-qubits) + braiding non-commutativity,
+  noiseless with exact-zero deviation and on hardware: ch2=98.1% (RS) vs ch1=95.8% (SR),
+  full ZYQL battery 3/3 PASS on `ibm_fez` (jobs `dbbueufi0auc73dtp7og`, `dbbugbk24mrc73cif420`;
+  Z-QEA receipt sealed, see `experiments/`)
 - Balanced purpose: p(000)=0.0000, orthogonal outcome 93.9%
 - Same-task confrontation vs textbook Qiskit (job db6dklcvf2bc73d122t0):
   Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
