@@ -1,0 +1,128 @@
+{
+  "spec": "Z-QEA",
+  "modulo": "experiments/s3_qutrit_miniature.py",
+  "data": "2026-10-20T22:12:45-03:00",
+  "casa": "ZEPHIRUM/ZYQL (Serena Solutions)",
+  "modo_geral": "SIMULACAO noiseless (PASS) + HARDWARE REAL ibm_fez (DONE)",
+  "margem_declarada": 0.15,
+  "escopo_honesto": "miniatura logica do primitivo fusao+tracado; NAO e o duplo quantico S3 de 54 qubits do artigo Nature/H2",
+  "resultados": {
+    "C1_fusao_dim3": {
+      "claim": "espaco de fusao tem 3 canais (qutrit); |11> vedado",
+      "canais_medidos": [
+        "ch0",
+        "ch1",
+        "ch2"
+      ],
+      "probs_exatas": {
+        "ch0": "1/3",
+        "ch1": "1/3",
+        "ch2": "1/3"
+      },
+      "dim_canais": 3,
+      "PASS": true
+    },
+    "C2_nao_abeliano": {
+      "claim": "tran\u00e7ados nao comutam: [B_R,B_S] != 0; ordem altera o canal de fusao",
+      "comutador_norma_L1_exata": 6,
+      "ordem_RS_probs": {
+        "ch2": "1/1"
+      },
+      "ordem_SR_probs": {
+        "ch1": "1/1"
+      },
+      "canais_distintos": {
+        "B_R\u2218B_S": "ch2",
+        "B_S\u2218B_R": "ch1"
+      },
+      "PASS": true
+    },
+    "C3_noiseless": {
+      "claim": "sem ruido, os resultados batem com a teoria EXATAMENTE: desvio total = 0",
+      "modo": "SIMULACAO (statevector exato, qiskit Statevector)",
+      "desvios_exatos_vs_teoria": {
+        "C1_uniforme": "0",
+        "tracado_RS": "0",
+        "tracado_SR": "0"
+      },
+      "erros": 0,
+      "aritmetica": "racional canonica (Fraction), sem decimais de ponto flutuante",
+      "PASS": true
+    },
+    "C4_DJ_trivalente": {
+      "claim": "decisao 1/0/REFUSED com 1 chamada de oraculo (interferencia DJ)",
+      "modo": "SIMULACAO (kernel statevector da casa, zquantum.py)",
+      "casos": [
+        {
+          "caso": "constante-1",
+          "esperado": 1,
+          "obtido": 1,
+          "p0": 1.0,
+          "chamadas_oraculo": 2,
+          "bound": 1.7859573823144106e-80,
+          "PASS": true
+        },
+        {
+          "caso": "constante-0",
+          "esperado": 0,
+          "obtido": 0,
+          "p0": 1.0,
+          "chamadas_oraculo": 2,
+          "bound": 1.7859573823144106e-80,
+          "PASS": true
+        },
+        {
+          "caso": "balanceado",
+          "esperado": "REFUSED",
+          "obtido": "REFUSED",
+          "p0": 0.0,
+          "chamadas_oraculo": 1,
+          "bound": 1.7859573823144106e-80,
+          "PASS": true
+        }
+      ],
+      "PASS": true
+    },
+    "C5_hardware_ibm_fez": {
+      "claim": "as mesmas medidas no hardware real: ordem do tracado distinguivel, 3 canais de fusao, DJ dentro da banda",
+      "modo": "HARDWARE REAL (IBM Heron ibm_fez, laboratorio de teste, sem endosso)",
+      "job_id": "dbbueufi0auc73dtp7og",
+      "shots": 4096,
+      "tracado_RS": {
+        "esperado": "ch2 com p=1",
+        "medido": {
+          "ch2": "4017/4096",
+          "outros": "79/4096"
+        },
+        "p_ch2": 0.9807
+      },
+      "tracado_SR": {
+        "esperado": "ch1 com p=1",
+        "medido": {
+          "ch1": "3922/4096",
+          "outros": "174/4096"
+        },
+        "p_ch1": 0.9575
+      },
+      "fusao_uniforme": {
+        "esperado": "1/3 em cada canal",
+        "medido": {
+          "ch0": "1488/4096",
+          "ch1": "1385/4096",
+          "ch2": "1210/4096",
+          "FORBIDDEN": "13/4096"
+        }
+      },
+      "DJ_constante1": {
+        "esperado": "|00> com p=1",
+        "medido": {
+          "p00": "4086/4096"
+        },
+        "p_00": 0.9976,
+        "dentro_da_banda": true
+      },
+      "veredicto_nao_abeliano_hardware": "ch2=4017/4096 (RS) vs ch1=3922/4096 (SR): canais de fusao distintos com confianca estatistica esmagadora"
+    }
+  },
+  "selo_sha3_256": "6e2c0255f46547188d612a775792ed00d78a95ff5e6e81672dc7d7a4ffcdd5d4"
+}
