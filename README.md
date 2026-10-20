@@ -4,7 +4,7 @@
 
 *The quantum programming language with receipts.*
 
-![version](https://img.shields.io/badge/version-1.4.3-6e46b8)
+![version](https://img.shields.io/badge/version-1.5.0-6e46b8)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23302046-gold)

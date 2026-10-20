@@ -1,0 +1,17 @@
+{
+ "molecule": "NH3",
+ "geometry_angstrom": "N 0.0 0.0 0.0; H 0.0 0.937 0.381; H 0.812 -0.469 0.381; H -0.812 -0.469 0.381",
+ "basis": "STO-3G",
+ "qubits_jw": 16,
+ "e_fci_hartree_pyscf": -55.5190856,
+ "e_mapped_hartree_qubit_jw": -55.5190856,
+ "nuclear_repulsion_hartree": 11.95930477,
+ "mapping_abs_error_hartree": 0.0,
+ "e_vqe_hartree": -50.258387,
+ "vqe_abs_error_hartree": 5.260698,
+ "vqe_iterations": 120,
+ "runtime_s": 94.7,
+ "label": "DECLARED_CLASSICAL (statevector simulation; QPU é objetivo do Credits)",
+ "engine": "pyscf 2.14.0 + qiskit-nature 0.8.0 + qiskit 2.6.0",
+ "receipt_sha256": "4716c2ff7c18c5ba36a668289522d2e9de02c7fc030b2f34848ee565333b0788"
+}

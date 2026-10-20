@@ -1,0 +1,17 @@
+{
+ "molecule": "LiH",
+ "geometry_angstrom": "Li 0.0 0.0 0.0; H 0.0 0.0 1.595",
+ "basis": "STO-3G",
+ "qubits_jw": 12,
+ "e_fci_hartree_pyscf": -7.88240193,
+ "e_mapped_hartree_qubit_jw": -7.88240193,
+ "nuclear_repulsion_hartree": 0.99531764,
+ "mapping_abs_error_hartree": 0.0,
+ "e_vqe_hartree": -7.253225,
+ "vqe_abs_error_hartree": 0.629177,
+ "vqe_iterations": 120,
+ "runtime_s": 4.6,
+ "label": "DECLARED_CLASSICAL (statevector simulation; QPU é objetivo do Credits)",
+ "engine": "pyscf 2.14.0 + qiskit-nature 0.8.0 + qiskit 2.6.0",
+ "receipt_sha256": "c8fd8c626c8b82a2c2b2fabd6f54713ac4d7fb965ef4190bc1046b94833684dd"
+}

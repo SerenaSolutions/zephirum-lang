@@ -1,0 +1,17 @@
+{
+ "molecule": "H2O",
+ "geometry_angstrom": "O 0.0 0.0 0.117; H 0.0 0.757 -0.470; H 0.0 -0.757 -0.470",
+ "basis": "STO-3G",
+ "qubits_jw": 14,
+ "e_fci_hartree_pyscf": -75.01264712,
+ "e_mapped_hartree_qubit_jw": -75.01264712,
+ "nuclear_repulsion_hartree": 9.18825842,
+ "mapping_abs_error_hartree": 0.0,
+ "e_vqe_hartree": -67.94443,
+ "vqe_abs_error_hartree": 7.068217,
+ "vqe_iterations": 120,
+ "runtime_s": 13.7,
+ "label": "DECLARED_CLASSICAL (statevector simulation; QPU é objetivo do Credits)",
+ "engine": "pyscf 2.14.0 + qiskit-nature 0.8.0 + qiskit 2.6.0",
+ "receipt_sha256": "4f20c1b4e07b1b858231342b803069377919dfaf31a91b3e6d93fa8bd71b5871"
+}
