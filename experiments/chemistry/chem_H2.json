@@ -1,0 +1,17 @@
+{
+ "molecule": "H2",
+ "geometry_angstrom": "H 0.0 0.0 0.0; H 0.0 0.0 0.735",
+ "basis": "STO-3G",
+ "qubits_jw": 4,
+ "e_fci_hartree_pyscf": -1.13730604,
+ "e_mapped_hartree_qubit_jw": -1.13730604,
+ "nuclear_repulsion_hartree": 0.71996899,
+ "mapping_abs_error_hartree": 0.0,
+ "e_vqe_hartree": -1.114371,
+ "vqe_abs_error_hartree": 0.022935,
+ "vqe_iterations": 120,
+ "runtime_s": 0.6,
+ "label": "DECLARED_CLASSICAL (statevector simulation; QPU é objetivo do Credits)",
+ "engine": "pyscf 2.14.0 + qiskit-nature 0.8.0 + qiskit 2.6.0",
+ "receipt_sha256": "bebd2978c90a851b0f14f0e6e6514ecb2185228f25f7b0f708f5f65fdd1808a1"
+}

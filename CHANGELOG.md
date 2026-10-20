@@ -2,6 +2,21 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.5.0] - 2026-10-20
+### Added
+- Chemistry battery (experiments/chemistry): H2, LiH, H2O, NH3 — Jordan-Wigner
+  mapping reproduces PySCF FCI exactly in all four molecules (error 0 / < 1e-10),
+  battery receipt 85c20bc9. Nature-derived molecules through the full pipeline.
+- Formal statistical protocol (docs/ZYQL_STATISTICAL_PROTOCOL.md): noise band
+  d=0.15, binomial error bounds, minimum-shots formula, drift validity window.
+- REFUSED formal spec (docs/ZYQL_REFUSED_SPEC.md): six triggers (R1-R6),
+  bounded cost model (never consumes QPU), anti-DoS analysis, own receipt type.
+- External audit response (docs/AUDIT_RESPONSE_2026-10-19.md): secrets scan
+  clean over full history, dependencies locked (requirements-lock.txt).
+### Changed
+- Receipts documentation: SHA3-256 integrity seal is the implemented label;
+  ML-DSA-44 (FIPS 204) signatures are a declared roadmap item (honest labeling).
+
 ## [1.4.3] - 2026-10-12
 ### Added
 - `qif` quantum conditional (controlled-X decomposition, no collapse) - verified: Bell 1/2+1/2.
