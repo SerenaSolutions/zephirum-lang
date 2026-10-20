@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reginaldo Gonçalves — perfil</title>
+<style>
+  :root{--bg:#f4f2ee;--card:#fff;--ink:#1b1f23;--mut:#5f6b7a;--line:#e3e0da;--brand:#0a66c2;--accent:#6e46b8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:0 0 48px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 12px}
+  .banner{height:180px;background:linear-gradient(120deg,#0d1b2a 0%,#123a5c 45%,#6e46b8 100%);position:relative;overflow:hidden}
+  .banner .tag{position:absolute;right:18px;bottom:14px;color:#cfe4ff;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin-top:14px}
+  .head{display:flex;gap:20px;align-items:flex-start;margin-top:-70px}
+  .avatar{width:132px;height:132px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#25d0e8,#0a66c2 60%,#123a5c);border:4px solid #fff;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:30px;letter-spacing:.05em}
+  h1{font-size:24px;line-height:1.2}
+  .headline{color:var(--ink);margin-top:4px;font-size:16px}
+  .meta{color:var(--mut);font-size:13.5px;margin-top:8px}
+  .meta a{color:var(--brand);text-decoration:none}
+  .rule{height:1px;background:var(--line);margin:18px 0}
+  h2{font-size:17px;margin-bottom:10px}
+  p+p{margin-top:10px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}.head{flex-direction:column;margin-top:-60px}.avatar{width:104px;height:104px;font-size:24px}}
+  .item{padding:12px;border:1px solid var(--line);border-radius:10px}
+  .item b{display:block;font-size:14.5px}
+  .item span{color:var(--mut);font-size:13px}
+  ul{list-style:none}
+  li{padding:8px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+  li:last-child{border-bottom:0}
+  .skills{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid #c9d7e6;background:#eef4fb;color:#123a5c;border-radius:999px;padding:4px 12px;font-size:13px}
+  .stamp{font-size:12.5px;color:var(--mut)}
+  .btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;border-radius:999px;padding:8px 18px;font-weight:600;font-size:14px}
+  .btn.alt{background:#fff;color:var(--brand);border:1.5px solid var(--brand)}
+  footer{margin-top:20px;color:var(--mut);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+<div class="banner"><div class="tag">PERGUNTAR PRIMEIRO · PROVAR DEPOIS · COMPUTAR POR ÚLTIMO</div></div>
+<div class="wrap">
+
+  <div class="card">
+    <div class="head">
+      <div class="avatar">RG</div>
+      <div>
+        <h1>Reginaldo Gonçalves</h1>
+        <div class="headline">Pesquisador independente e fundador — computação quântica aplicada, linguagens e sistemas autônomos</div>
+        <div class="meta">
+          Serena Quantum Solutions · Cândido Mota, São Paulo, Brasil<br>
+          Repositório público: <a href="https://github.com/SerenaSolutions/zephirum-lang">github.com/SerenaSolutions/zephirum-lang</a> · 1.5.0
+        </div>
+        <div class="rule"></div>
+        <a class="btn" href="https://github.com/SerenaSolutions/zephirum-lang/releases/tag/v1.5.0">Ver release v1.5.0</a>
+        <a class="btn alt" href="https://github.com/SerenaSolutions/zephirum-lang/discussions/5">Discussões abertas</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Sobre</h2>
+    <p>Construo a linguagem <b>ZEPHIRUM / ZYQL</b> — uma linguagem de decisão exata para computação quântica onde toda decisão é trivalente (1 permitido, 0 proibido, REFUSED sem confiança) e carrega recibo selado com procedência. O princípio é inverter a ordem do campo: <b>decidir antes de executar</b>.</p>
+    <p>Resultados verificados em hardware real da IBM (ibm_fez, ibm_marrakesh, ibm_kingston), com job id citável em cada prova: violação de Bell (CHSH S = 2.73 ± 0.10), teleportação F = 0.929, troca de emaranhamento ⟨ZZ⟩ = 0.777 / ⟨XX⟩ = 0.848, e bateria de química exata em quatro moléculas da natureza (H₂, LiH, H₂O, NH₃).</p>
+    <p>Autor das obras da casa — <i>ZEPHIRUM: Computation Before Execution</i> (Livros I e II, edições em PT/EN/DE/AR em produção) — e arquiteto do <b>ZERØNE</b>, sistema operacional quântico com camada própria de correção de erros (código de repetição com dois decodificadores autorais + código de superfície 2D com decodificador union-find).</p>
+  </div>
+
+  <div class="card">
+    <h2>Atuação</h2>
+    <div class="grid">
+      <div class="item"><b>ZEPHIRUM / ZYQL — linguagem de decisão exata</b><span>Fundador e autor · 2026 — atual · v1.5.0 pública, CI com baterias a cada commit, recibos SHA3-256 encadeados em git</span></div>
+      <div class="item"><b>ZERØNE — sistema operacional quântico</b><span>Arquiteto · QEC autoral (repetição 1D + superfície 2D), multi-rodada absorvendo ruído de medição, livro-razão íntegro de experimentos</span></div>
+      <div class="item"><b>QALQON NEWS — jornal</b><span>Editor · "Your newspaper of the future — today" · divulgação científica e cobertura do ecossistema</span></div>
+      <div class="item"><b>Digital Journal Science Editions · MGN Science Editions</b><span>Edições científicas e publicações da casa</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Destaques verificáveis</h2>
+    <ul>
+      <li><b>Bell violado em QPU real</b> — CHSH S = 2.73 ± 0.10 · job db9bqnk24mrc7383pmhg (ibm_marrakesh)</li>
+      <li><b>Teleportação quântica</b> — F = 0.929 sobre 6 estados (limite clássico 2/3) · job db9d0tgc77vs738196u0</li>
+      <li><b>Troca de emaranhamento</b> — ⟨ZZ⟩ = 0.777, ⟨XX⟩ = 0.848, controle separável ≈ 0 · job db9d11fi0auc7390fio0</li>
+      <li><b>Confronto de transpilação</b> — profundidade 2 / 0 portas de 2 qubits contra profundidade 10 / 3 CZ do livro-texto Qiskit · job db6dklcvf2bc73d122t0</li>
+      <li><b>Química exata</b> — H₂, LiH, H₂O e NH₃: o mapeamento reproduz a referência FCI com erro zero · recibo de bateria 85c20bc9</li>
+      <li><b>Eliminação de computação</b> — 500.000 problemas, 0 respostas erradas, 76,5% eliminados por certificado</li>
+    </ul>
+    <div class="rule"></div>
+    <p class="stamp">Rótulos honestos: cada número acima declara a própria origem — <b>DECLARED_CLASSICAL</b> (cálculo exato) ou <b>PROVEN_QUANTUM</b> (execução em QPU real, com backend, job id e shots). Nada mistura etiquetas.</p>
+  </div>
+
+  <div class="card">
+    <h2>Áreas</h2>
+    <div class="skills">
+      <span class="chip">Computação quântica</span><span class="chip">Qiskit</span><span class="chip">Python</span>
+      <span class="chip">Linguagens formais</span><span class="chip">Correção de erros (QEC)</span><span class="chip">Química quântica (VQE/FCI)</span>
+      <span class="chip">Sistemas autônomos</span><span class="chip">Recibos e reprodutibilidade</span><span class="chip">GitHub Actions / CI</span>
+    </div>
+  </div>
+
+  <footer>
+    Página mantida pela casa ZEPHIRUM (Serena Quantum Solutions) · espelho próprio do perfil profissional ·
+    todo número desta página aponta para um recibo auditável no repositório público.
+  </footer>
+</div>
+</body>
+</html>
