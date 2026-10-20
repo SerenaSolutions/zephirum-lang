@@ -1,0 +1,45 @@
+{
+  "job_id": "dbbueufi0auc73dtp7og",
+  "backend": "ibm_fez",
+  "submetido_em": "2026-10-20T22:13:13-03:00",
+  "shots": 4096,
+  "circuitos": {
+    "tracado_RS": {
+      "depth": 9,
+      "ops": {
+        "rz": 4,
+        "sx": 4,
+        "cz": 2,
+        "measure": 2
+      }
+    },
+    "tracado_SR": {
+      "depth": 9,
+      "ops": {
+        "sx": 6,
+        "rz": 4,
+        "cz": 2,
+        "measure": 2
+      }
+    },
+    "fusao_uniforme": {
+      "depth": 10,
+      "ops": {
+        "sx": 6,
+        "rz": 5,
+        "reset": 2,
+        "measure": 2,
+        "cz": 1,
+        "x": 1
+      }
+    },
+    "DJ_constante1": {
+      "depth": 3,
+      "ops": {
+        "rz": 2,
+        "measure": 2,
+        "sx": 1
+      }
+    }
+  }
+}
