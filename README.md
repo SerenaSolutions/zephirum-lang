@@ -39,6 +39,32 @@ verifiable job IDs; no endorsement claimed):
 - Same-task confrontation vs textbook Qiskit (job db6dklcvf2bc73d122t0):
   Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
 
+## Evidence — with the quantum figures
+
+![S3 fusion channels measured on IBM Heron](assets/proofs/s3-fusion-hardware.png)
+
+*Real-data figure: theoretical braid curves (gold: B_R∘B_S, violet: B_S∘B_R) and the
+points measured on IBM Heron `ibm_fez` — 98.1% vs 95.8%. The braid order is
+distinguishable on silicon. Full detail: [docs/PROOFS.md](docs/PROOFS.md).*
+
+![Non-Abelian anyon braiding — AI art](assets/proofs/non-abelian-braids-art.png)
+
+*Hero art (declared: AI-generated) — braided world-lines of non-Abelian anyons
+converging into three fusion channels, the geometry the experiments probe.*
+
+### Proofs of concept — non-Abelian anyons (S3 qutrit miniature)
+
+| Claim | Mode | Result | Receipt |
+|-------|------|--------|---------|
+| Fusion space is 3-dimensional (qutrit in 2 qubits) | noiseless | exact 1/3+1/3+1/3, forbidden channel vetoed | [sealed receipt](experiments/s3_qutrit_final_receipt.json) |
+| Braiding is non-Abelian (order matters) | noiseless | commutator L1 = 6 exact; B_R∘B_S → ch2, B_S∘B_R → ch1 | same |
+| Noiseless round | noiseless | exact-zero deviation vs theory (canonical rationals) | same |
+| ZYQL trivalent decisions 1 / 0 / REFUSED | **IBM Heron** | **3/3 PASS** (job `dbbugbk24mrc73cif420`) | [battery receipt](experiments/zyql_hardware_battery.json) |
+| Braid order measured on real hardware | **IBM Heron** | **98.1% vs 95.8%** (job `dbbueufi0auc73dtp7og`) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
+
+Receipt seal (SHA3-256): `0277e09b78644a7193559b07f72590ec5705b11eeb7d4331a9e03962a4b30751`.
+In language: [`examples/s3_qutrit.zph`](examples/s3_qutrit.zph).
+
 ## Quickstart
 
 ```bash
