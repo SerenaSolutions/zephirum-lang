@@ -25,6 +25,8 @@ All notable changes to the ZEPHIRUM language are documented here.
   geometry is angstrom). Receipt sealed.
 - New .zph examples: s3_qutrit.zph (fusion-space miniature), chemistry_h2.zph.
 - .gitattributes: honest Linguist stats (receipts generated, assets vendored).
+- docs/PROOFS.md: public index of proofs of concept (S3 non-Abelian
+  miniature front and center) + proofs section on the Pages site.
 ### Fixed
 - Broken README quickstart: `from src.zyql_quantum_gate import ...` failed
   (sys.path.insert pointed at repo root, not src/). Modules now use a

@@ -36,6 +36,13 @@ footer{border-top:1px solid #172139;margin-top:40px;padding-top:18px;color:#5362
     <div class="stat"><strong>3/3</strong><small>trivalent battery on hardware: 1 / 0 / REFUSED (job dbbugbk24mrc73cif420)</small></div>
     <div class="stat"><strong>0</strong><small>noiseless deviation vs theory, canonical rational arithmetic</small></div>
   </div>
+  <h2>Proofs of concept — non-Abelian anyons, verified</h2>
+  <p>The S3 qutrit miniature: fusion space of a non-Abelian anyon pair is 3-dimensional (qutrit-in-qubits), and <b>braiding order is distinguishable on real hardware</b> — 98.1% vs 95.8% on IBM Heron <code>ibm_fez</code>. Full ZYQL trivalent battery on hardware: 3/3 PASS. Noiseless round: exact-zero deviation, canonical rational arithmetic. Every claim carries a Z-QEA receipt with a SHA3-256 seal.</p>
+  <div class="btns">
+    <a class="btn p" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/PROOFS.md">Index of proofs</a>
+    <a class="btn" href="https://raw.githubusercontent.com/SerenaSolutions/zephirum-lang/main/experiments/s3_qutrit_final_receipt.json">Master receipt (JSON, sealed)</a>
+    <a class="btn" href="https://raw.githubusercontent.com/SerenaSolutions/zephirum-lang/main/experiments/zyql_hardware_battery.json">Hardware battery receipt</a>
+  </div>
   <h2>Quickstart</h2>
   <pre>pip install -e .
 python -c "from zyql_quantum_gate import ZYQLQuantumGate; \
