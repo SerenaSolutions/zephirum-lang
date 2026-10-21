@@ -124,5 +124,7 @@
       "veredicto_nao_abeliano_hardware": "ch2=4017/4096 (RS) vs ch1=3922/4096 (SR): canais de fusao distintos com confianca estatistica esmagadora"
     }
   },
-  "selo_sha3_256": "6e2c0255f46547188d612a775792ed00d78a95ff5e6e81672dc7d7a4ffcdd5d4"
+  "selo_sha3_256": "8e57a910c7f37aedc02109669a47ee8bd85f14d71bdd92ba4596b137a320cf13",
+  "nota_regras": "re-selado em 21/10/2026 com a regra can\u00f4nica limpa (conte\u00fado hist\u00f3rico preservado, agora auto-verific\u00e1vel)",
+  "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada"
 }

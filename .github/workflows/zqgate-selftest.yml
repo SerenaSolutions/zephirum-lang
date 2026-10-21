@@ -1,0 +1,13 @@
+name: ZQ-GATE self-test
+
+on: [push, workflow_dispatch]
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run zq-gate action on itself
+        uses: ./
+        with:
+          battery: all
