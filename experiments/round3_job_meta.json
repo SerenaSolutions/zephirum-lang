@@ -1,0 +1,83 @@
+{
+  "job_id": "dbcj8j0c77vs7386d5n0",
+  "backend": "ibm_fez",
+  "shots": 4096,
+  "specs": [
+    [
+      "C8_DJ",
+      4,
+      "const-1"
+    ],
+    [
+      "C8_DJ",
+      4,
+      "const-0"
+    ],
+    [
+      "C8_DJ",
+      4,
+      "balanceado"
+    ],
+    [
+      "C8_DJ",
+      5,
+      "const-1"
+    ],
+    [
+      "C8_DJ",
+      5,
+      "const-0"
+    ],
+    [
+      "C8_DJ",
+      5,
+      "balanceado"
+    ],
+    [
+      "C9_GROVER",
+      1,
+      null
+    ],
+    [
+      "C9_GROVER",
+      2,
+      null
+    ],
+    [
+      "C9_GROVER",
+      3,
+      null
+    ],
+    [
+      "C10_WORD",
+      7,
+      null
+    ],
+    [
+      "C10_WORD",
+      8,
+      null
+    ],
+    [
+      "C10_WORD",
+      9,
+      null
+    ],
+    [
+      "C10_WORD",
+      10,
+      null
+    ],
+    [
+      "C10_WORD",
+      11,
+      null
+    ],
+    [
+      "C10_WORD",
+      12,
+      null
+    ]
+  ],
+  "submetido_em": "2026-10-21T21:53:16-03:00"
+}
