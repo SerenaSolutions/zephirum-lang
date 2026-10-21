@@ -4,6 +4,7 @@ All notable changes to the ZEPHIRUM language are documented here.
 
 ## [1.6.0] - 2026-10-21
 ### Added
+- docs/PROBLEM.md: dossier da expedição científica sobre a confiabilidade da decisão trivalente ZYQL em hardware quântico real (shots mínimos empíricos, calibração do REFUSED e hipóteses H1/H2).
 - S3 qutrit miniature (experiments/): braiding non-commutativity and 3-channel
   fusion space (qutrit-in-qubits), noiseless with exact-zero deviation vs theory
   (canonical rational arithmetic) and verified on real hardware: IBM Heron
