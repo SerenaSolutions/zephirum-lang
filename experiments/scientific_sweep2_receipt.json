@@ -1,0 +1,454 @@
+{
+  "spec": "Z-QEA",
+  "modulo": "experiments/scientific_sweep2.py + analyze_sweep2.py",
+  "data": "2026-10-21T21:52:25-03:00",
+  "modo": "HARDWARE REAL (IBM Heron ibm_fez, laboratorio de teste, sem endosso) + MITIGACAO DE LEITURA",
+  "job_id": "dbcfn70c77vs73866mdg",
+  "shots": 4096,
+  "circuitos": 30,
+  "hipotese": "a reprovacao do chi2 na v1 (0/10) foi vies de leitura (instrumento), nao fisica",
+  "calibracao": {
+    "fidelidade_leitura_diagonal": [
+      0.9761,
+      0.9575,
+      0.9646,
+      0.9463
+    ],
+    "fora_da_diagonal_max": 0.0298
+  },
+  "A2_sweep_angulo_mitigado": {
+    "pontos": 20,
+    "chi2_5pct_aprovados_raw": "16/20",
+    "chi2_5pct_aprovados_mitigado": "18/20",
+    "canais_dominantes_corretos_mitigado": "20/20",
+    "detalhe": [
+      {
+        "A2_RS": true,
+        "indice": 4,
+        "chi2_raw": 0.035,
+        "p_raw": 0.8521,
+        "chi2_mitigado": 0.023,
+        "p_valor_mitigado": 0.8796,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.84905,
+          "ch1": 0.0084,
+          "ch2": 0.1387,
+          "FORBIDDEN": 0.00384
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 5,
+        "chi2_raw": 0.054,
+        "p_raw": 0.9732,
+        "chi2_mitigado": 0.031,
+        "p_valor_mitigado": 0.9846,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.84829,
+          "ch1": 0.01399,
+          "ch2": 0.13287,
+          "FORBIDDEN": 0.00485
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 6,
+        "chi2_raw": 0.004,
+        "p_raw": 0.9475,
+        "chi2_mitigado": 0.004,
+        "p_valor_mitigado": 0.9485,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.61277,
+          "ch1": 0.01262,
+          "ch2": 0.36828,
+          "FORBIDDEN": 0.00632
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 7,
+        "chi2_raw": 0.0,
+        "p_raw": 0.9999,
+        "chi2_mitigado": 0.0,
+        "p_valor_mitigado": 0.9998,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.6534,
+          "ch1": 0.12324,
+          "ch2": 0.2172,
+          "FORBIDDEN": 0.00615
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 8,
+        "chi2_raw": 0.001,
+        "p_raw": 0.9747,
+        "chi2_mitigado": 0.0,
+        "p_valor_mitigado": 0.9838,
+        "canal_dominante_mitigado": "ch2",
+        "canal_dominante_teoria": "ch2",
+        "p_mitigado": {
+          "ch0": 0.33529,
+          "ch1": 0.00949,
+          "ch2": 0.64589,
+          "FORBIDDEN": 0.00933
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 9,
+        "chi2_raw": 0.003,
+        "p_raw": 0.9987,
+        "chi2_mitigado": 0.001,
+        "p_valor_mitigado": 0.9997,
+        "canal_dominante_mitigado": "ch1",
+        "canal_dominante_teoria": "ch1",
+        "p_mitigado": {
+          "ch0": 0.34917,
+          "ch1": 0.41461,
+          "ch2": 0.22952,
+          "FORBIDDEN": 0.0067
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 10,
+        "chi2_raw": 0.009,
+        "p_raw": 0.9265,
+        "chi2_mitigado": 0.001,
+        "p_valor_mitigado": 0.979,
+        "canal_dominante_mitigado": "ch2",
+        "canal_dominante_teoria": "ch2",
+        "p_mitigado": {
+          "ch0": 0.09416,
+          "ch1": 0.02083,
+          "ch2": 0.87977,
+          "FORBIDDEN": 0.00525
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 11,
+        "chi2_raw": 0.011,
+        "p_raw": 0.9944,
+        "chi2_mitigado": 0.002,
+        "p_valor_mitigado": 0.9988,
+        "canal_dominante_mitigado": "ch1",
+        "canal_dominante_teoria": "ch1",
+        "p_mitigado": {
+          "ch0": 0.09423,
+          "ch1": 0.79681,
+          "ch2": 0.09862,
+          "FORBIDDEN": 0.01034
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 12,
+        "chi2_raw": 2.2891849606535092e+29,
+        "p_raw": 0.0,
+        "chi2_mitigado": 9.372116231865576e+25,
+        "p_valor_mitigado": 0.0,
+        "canal_dominante_mitigado": "ch2",
+        "canal_dominante_teoria": "ch2",
+        "p_mitigado": {
+          "ch0": 0.00059,
+          "ch1": 0.02966,
+          "ch2": 0.96389,
+          "FORBIDDEN": 0.00586
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 13,
+        "chi2_raw": 6.3068635377782405e+29,
+        "p_raw": 0.0,
+        "chi2_mitigado": 1.1360057802006403e+29,
+        "p_valor_mitigado": 0.0,
+        "canal_dominante_mitigado": "ch1",
+        "canal_dominante_teoria": "ch1",
+        "p_mitigado": {
+          "ch0": 0.01621,
+          "ch1": 0.96661,
+          "ch2": 0.01277,
+          "FORBIDDEN": 0.00441
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 14,
+        "chi2_raw": 0.013,
+        "p_raw": 0.9078,
+        "chi2_mitigado": 0.002,
+        "p_valor_mitigado": 0.9684,
+        "canal_dominante_mitigado": "ch2",
+        "canal_dominante_teoria": "ch2",
+        "p_mitigado": {
+          "ch0": 0.10187,
+          "ch1": 0.0213,
+          "ch2": 0.87231,
+          "FORBIDDEN": 0.00452
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 15,
+        "chi2_raw": 0.01,
+        "p_raw": 0.995,
+        "chi2_mitigado": 0.001,
+        "p_valor_mitigado": 0.9995,
+        "canal_dominante_mitigado": "ch1",
+        "canal_dominante_teoria": "ch1",
+        "p_mitigado": {
+          "ch0": 0.09489,
+          "ch1": 0.80377,
+          "ch2": 0.09387,
+          "FORBIDDEN": 0.00746
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 16,
+        "chi2_raw": 0.003,
+        "p_raw": 0.955,
+        "chi2_mitigado": 0.001,
+        "p_valor_mitigado": 0.9723,
+        "canal_dominante_mitigado": "ch2",
+        "canal_dominante_teoria": "ch2",
+        "p_mitigado": {
+          "ch0": 0.3434,
+          "ch1": 0.02406,
+          "ch2": 0.6266,
+          "FORBIDDEN": 0.00595
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 17,
+        "chi2_raw": 0.0,
+        "p_raw": 0.9998,
+        "chi2_mitigado": 0.0,
+        "p_valor_mitigado": 0.9998,
+        "canal_dominante_mitigado": "ch1",
+        "canal_dominante_teoria": "ch1",
+        "p_mitigado": {
+          "ch0": 0.33421,
+          "ch1": 0.43406,
+          "ch2": 0.2234,
+          "FORBIDDEN": 0.00833
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 18,
+        "chi2_raw": 0.003,
+        "p_raw": 0.954,
+        "chi2_mitigado": 0.003,
+        "p_valor_mitigado": 0.9557,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.61689,
+          "ch1": 0.01362,
+          "ch2": 0.3634,
+          "FORBIDDEN": 0.00609
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 19,
+        "chi2_raw": 0.009,
+        "p_raw": 0.9955,
+        "chi2_mitigado": 0.008,
+        "p_valor_mitigado": 0.9959,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.61778,
+          "ch1": 0.11594,
+          "ch2": 0.26295,
+          "FORBIDDEN": 0.00333
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 20,
+        "chi2_raw": 0.014,
+        "p_raw": 0.9068,
+        "chi2_mitigado": 0.006,
+        "p_valor_mitigado": 0.9375,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.86789,
+          "ch1": 0.01078,
+          "ch2": 0.11658,
+          "FORBIDDEN": 0.00474
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 21,
+        "chi2_raw": 0.061,
+        "p_raw": 0.9701,
+        "chi2_mitigado": 0.036,
+        "p_valor_mitigado": 0.9823,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.84768,
+          "ch1": 0.01586,
+          "ch2": 0.13473,
+          "FORBIDDEN": 0.00172
+        }
+      },
+      {
+        "A2_RS": true,
+        "indice": 22,
+        "chi2_raw": 1.4788293816999492e+28,
+        "p_raw": 0.0,
+        "chi2_mitigado": 0.0,
+        "p_valor_mitigado": 0.9972,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.99645,
+          "ch1": 0.00331,
+          "ch2": 0.0,
+          "FORBIDDEN": 0.00023
+        }
+      },
+      {
+        "A2_SR": true,
+        "indice": 23,
+        "chi2_raw": 1.7913621476387765e+59,
+        "p_raw": 0.0,
+        "chi2_mitigado": 0.0,
+        "p_valor_mitigado": 1.0,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.99946,
+          "ch1": 0.0,
+          "ch2": 0.0,
+          "FORBIDDEN": 0.00054
+        }
+      }
+    ]
+  },
+  "B2_palavra_mitigado": {
+    "pontos": 6,
+    "detalhe": [
+      {
+        "B2_word": true,
+        "indice": 24,
+        "chi2_raw": 2.251190849153774e+29,
+        "p_raw": 0.0,
+        "chi2_mitigado": 1.3865098260730927e+25,
+        "p_valor_mitigado": 0.0,
+        "canal_dominante_mitigado": "ch2",
+        "canal_dominante_teoria": "ch2",
+        "p_mitigado": {
+          "ch0": 0.00023,
+          "ch1": 0.03028,
+          "ch2": 0.96728,
+          "FORBIDDEN": 0.00221
+        }
+      },
+      {
+        "B2_word": true,
+        "indice": 25,
+        "chi2_raw": 9.18551362580003e+29,
+        "p_raw": 0.0,
+        "chi2_mitigado": 2.4052947296904268e+29,
+        "p_valor_mitigado": 0.0,
+        "canal_dominante_mitigado": "ch1",
+        "canal_dominante_teoria": "ch1",
+        "p_mitigado": {
+          "ch0": 0.027,
+          "ch1": 0.95767,
+          "ch2": 0.01315,
+          "FORBIDDEN": 0.00218
+        }
+      },
+      {
+        "B2_word": true,
+        "indice": 26,
+        "chi2_raw": 1.5853400708414666e+28,
+        "p_raw": 0.0,
+        "chi2_mitigado": 0.0,
+        "p_valor_mitigado": 1.0,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.99997,
+          "ch1": 0.0,
+          "ch2": 0.0,
+          "FORBIDDEN": 3e-05
+        }
+      },
+      {
+        "B2_word": true,
+        "indice": 27,
+        "chi2_raw": 7.439851122123905e+28,
+        "p_raw": 0.0,
+        "chi2_mitigado": 4.967487982774043e+28,
+        "p_valor_mitigado": 0.0,
+        "canal_dominante_mitigado": "ch2",
+        "canal_dominante_teoria": "ch2",
+        "p_mitigado": {
+          "ch0": 0.00224,
+          "ch1": 0.02725,
+          "ch2": 0.96125,
+          "FORBIDDEN": 0.00926
+        }
+      },
+      {
+        "B2_word": true,
+        "indice": 28,
+        "chi2_raw": 7.348884281480654e+28,
+        "p_raw": 0.0,
+        "chi2_mitigado": 1.5259677793550364e+28,
+        "p_valor_mitigado": 0.0,
+        "canal_dominante_mitigado": "ch1",
+        "canal_dominante_teoria": "ch1",
+        "p_mitigado": {
+          "ch0": 0.01684,
+          "ch1": 0.96039,
+          "ch2": 0.01522,
+          "FORBIDDEN": 0.00756
+        }
+      },
+      {
+        "B2_word": true,
+        "indice": 29,
+        "chi2_raw": 3.8401475142907183e+27,
+        "p_raw": 0.0,
+        "chi2_mitigado": 0.0,
+        "p_valor_mitigado": 1.0,
+        "canal_dominante_mitigado": "ch0",
+        "canal_dominante_teoria": "ch0",
+        "p_mitigado": {
+          "ch0": 0.99997,
+          "ch1": 0.0,
+          "ch2": 0.0,
+          "FORBIDDEN": 3e-05
+        }
+      }
+    ]
+  },
+  "comparacao_v1": {
+    "job_v1": "dbbuh17i0auc73dtpaeg",
+    "chi2_v1_raw": "0/10 aprovados"
+  },
+  "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada",
+  "selo_sha3_256": "c703db5cd947091fd11fe8b17d55157fae282e253792f9b901dd0b7e22a0ddd2"
+}

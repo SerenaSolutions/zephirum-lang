@@ -72,7 +72,7 @@ def analyze(tag, idx, U3, kpi):
     chi_m, df2, p_m = chi2_stat(p_mit, th)
     kpi.append({
         tag: True, "indice": idx,
-        "chi2_raw": chi_r, "p_raw": p_r, "chi2_mitigado": chi_m, "p_mitigado": p_m,
+        "chi2_raw": chi_r, "p_raw": p_r, "chi2_mitigado": chi_m, "p_valor_mitigado": p_m,
         "canal_dominante_mitigado": max(p_mit, key=p_mit.get),
         "canal_dominante_teoria": max(th, key=th.get),
         "p_mitigado": {kk: round(v, 5) for kk, v in p_mit.items()},
@@ -89,7 +89,7 @@ for k in range(1, 7):
     analyze("B2_word", 24 + (k - 1), np.linalg.matrix_power(W, k), B2)
 
 pass_raw = sum(1 for r in A2 if r["p_raw"] > 0.05)
-pass_mit = sum(1 for r in A2 if r["p_mitigado"] > 0.05)
+pass_mit = sum(1 for r in A2 if r["p_valor_mitigado"] > 0.05)
 dom_ok = sum(1 for r in A2 if r["canal_dominante_mitigado"] == r["canal_dominante_teoria"])
 
 rec = {
