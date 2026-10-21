@@ -9,7 +9,11 @@ Layer map (mirrors the Hybrid Stack L1-L5 and the audited link):
   L4 ZYQL quantum gate (Deutsch-Jozsa) -> L5 signed receipt (traceable answer).
 """
 import sys, os, json, math, time, urllib.request
-from zyql_qutrit.zyql_quantum_gate import ZYQLQuantumGate
+try:
+    from zyql_quantum_gate import ZYQLQuantumGate
+except ImportError:  # in-tree, no install
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from zyql_quantum_gate import ZYQLQuantumGate
 
 HERE = os.path.dirname(__file__)
 
