@@ -1,0 +1,60 @@
+{
+  "backend": "ibm_fez",
+  "submetido_em": "2026-10-21T22:07:25.945068+00:00",
+  "jobs": [
+    {
+      "shots": 512,
+      "job_id": "dbcjf7ni0auc73dv36ug",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 1024,
+      "job_id": "dbcjf7pgv2cc73eaft1g",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 2048,
+      "job_id": "dbcjf7vi0auc73dv36vg",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 4096,
+      "job_id": "dbcjf81gv2cc73eaft20",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 8192,
+      "job_id": "dbcjf87i0auc73dv3700",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 16384,
+      "job_id": "dbcjf8fi0auc73dv370g",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    }
+  ]
+}
