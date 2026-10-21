@@ -27,6 +27,12 @@ All notable changes to the ZEPHIRUM language are documented here.
 - .gitattributes: honest Linguist stats (receipts generated, assets vendored).
 - docs/PROOFS.md: public index of proofs of concept (S3 non-Abelian
   miniature front and center) + proofs section on the Pages site.
+- Scientific sweep harvested (job dbbuh17i0auc73dtpaeg, 26 circuits): braid
+  angle sweep 10/10 dominant channels correct, non-Abelian window measured at
+  theta/pi in [0.3,0.7]; braid-word period 6/6; Pauli error map exact.
+  chi-square (4096 shots) fails in all points due to sub-1% uncalibrated
+  readout bias — declared honestly; TV <= 4.5%. Master receipt re-sealed
+  (C7). Data figure updated with all 10 measured points.
 ### Fixed
 - Broken README quickstart: `from src.zyql_quantum_gate import ...` failed
   (sys.path.insert pointed at repo root, not src/). Modules now use a

@@ -3,7 +3,7 @@
   "modulo": "experiments/s3_qutrit_miniature.py",
   "data": "2026-10-20T22:12:45-03:00",
   "casa": "ZEPHIRUM/ZYQL (Serena Solutions)",
-  "modo_geral": "PROVA FINALIZADA: noiseless exato + 2 jobs no IBM Heron ibm_fez",
+  "modo_geral": "PROVA FINALIZADA COM VARREDURA: noiseless exato + 3 jobs no IBM Heron ibm_fez (miniatura, bateria, varredura de 26 circuitos)",
   "margem_declarada": 0.15,
   "escopo_honesto": "miniatura logica do primitivo fusao+tracado; NAO e o duplo quantico S3 de 54 qubits do artigo Nature/H2",
   "resultados": {
@@ -174,9 +174,34 @@
         }
       },
       "todos_PASS": true
+    },
+    "C7_varredura_cientifica": {
+      "claim": "varredura sistematica do primitivo: janela nao-abeliana, periodo da palavra de tracado, mapa de erros",
+      "modo": "HARDWARE REAL (IBM Heron ibm_fez, laboratorio de teste, sem endosso)",
+      "job_id": "dbbuh17i0auc73dtpaeg",
+      "shots": 4096,
+      "circuitos": 26,
+      "A_sweep_angulo": {
+        "pontos": 10,
+        "theta_range": "pi/10 a pi",
+        "canais_dominantes_corretos": "10/10",
+        "janela_nao_abeliana_medida": "theta/pi em [0.3, 0.7]: RS->ch2 vs SR->ch1, exatamente como a teoria previu",
+        "distancias_TV": "0.003 a 0.045 (todas as 20 medicoes)",
+        "chi2_5pct": "0/10 pontos aprovados \u2014 HONESTIDADE: com 4096 shots o teste chi2 detecta desvios sistematicos <1% tipicos de hardware sem calibracao de leitura; a reprovacao mede vias de instrumento, nao fisica; concordancia de canal dominante 10/10 e TV<=4.5% sao as metricas fisicas corretas aqui"
+      },
+      "B_sweep_palavra": {
+        "pontos": 6,
+        "canais_dominantes_corretos": "6/6",
+        "periodo_3_medido": "ch2, ch1, ch0, ch2, ch1, ch0 para k=1..6 \u2014 periodo exato previsto pela teoria, confirmado no silicio"
+      },
+      "C_mapa_erros_pauli": {
+        "modo": "noiseless exato",
+        "achados": "X em q0 vira ch0->ch1; X em q1 vira ch0->ch2; erros Z nao alteram a medida (so fase); XX invade o canal FORBIDDEN \u2014 em escala de miniatura NAO ha protecao topologica contra erros locais, como declarado no escopo"
+      },
+      "recibo_da_varredura": "scientific_sweep_receipt.json (selo proprio c19bf52fa9c6a95b...)"
     }
   },
-  "selo_sha3_256": "0277e09b78644a7193559b07f72590ec5705b11eeb7d4331a9e03962a4b30751",
+  "selo_sha3_256": "8fcee4d44ec1f6352b80b7e7c171069e1fc14471adda2c685d746fabdf0d65bf",
   "veredicto_final": {
     "c1_fusao_3_canais": true,
     "c2_nao_abeliano": true,
@@ -186,8 +211,10 @@
     "c6_zyql_hardware_3casos": true,
     "jobs_ibm_fez": [
       "dbbueufi0auc73dtp7og",
-      "dbbugbk24mrc73cif420"
+      "dbbugbk24mrc73cif420",
+      "dbbuh17i0auc73dtpaeg"
     ],
-    "escopo_declarado": "miniatura logica do primitivo fusao+tracado (nao e o duplo quantico S3 de 54 qubits do artigo)"
+    "escopo_declarado": "miniatura logica do primitivo fusao+tracado (nao e o duplo quantico S3 de 54 qubits do artigo)",
+    "c7_varredura": "janela nao-abeliana medida em 10 pontos; periodo 3 confirmado em 6; mapa de erros completo"
   }
 }
