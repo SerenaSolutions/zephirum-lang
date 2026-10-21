@@ -1,29 +1,19 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "zephirum"
-version = "1.6.0"
-description = "ZEPHIRUM: the quantum programming language with receipts. ZYQL: trivalent decision core (1/0/REFUSED) with SHA3-256 sealed receipts."
+name = "zq-gate"
+version = "1.5.0"
+description = "ZQ-GATE: verified quantum decision gate — trivalent verdicts (1/0/REFUSED) with SHA3-256 receipts"
 readme = "README.md"
-license = { text = "MIT" }
-authors = [{ name = "Serena Solutions" }]
-requires-python = ">=3.9"
-keywords = ["quantum-computing", "quantum-programming-language", "trivalent-logic", "receipts", "openqasm3"]
-classifiers = [
-  "Development Status :: 3 - Alpha",
-  "Intended Audience :: Science/Research",
-  "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python :: 3",
-  "Topic :: Scientific/Engineering :: Physics",
-]
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = ["numpy", "lark"]
+authors = [{name = "Reginaldo Gonçalves", email = "builderquantunxia@gmail.com"}]
 
-[project.urls]
-Homepage = "https://serenasolutions.github.io/zephirum-lang/"
-Repository = "https://github.com/SerenaSolutions/zephirum-lang"
-DOI = "https://doi.org/10.5281/zenodo.23302046"
+[project.scripts]
+zqgate = "zqgate.cli:main"
 
 [tool.setuptools]
-package-dir = { "" = "src" }
-py-modules = ["zkernel", "zquantum", "zyql_quantum_gate", "quantum_types", "zyql_rag_layer", "oq3"]
+packages = ["zqgate"]
