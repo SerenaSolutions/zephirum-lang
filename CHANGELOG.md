@@ -46,6 +46,11 @@ All notable changes to the ZEPHIRUM language are documented here.
 - Sponsor button live: .github/FUNDING.yml (GitHub "Sponsor" on the repo
   points to the tier page); Stripe products/prices created for the three
   tiers ($5/$25/$100 monthly), checkout flow validated in test mode.
+- Scientific sweep v2 HARVESTED (job dbcfn70c77vs73866mdg, 30 circuits with
+  readout calibration): mitigated chi-square passes 18/20 (raw v1: 0/10),
+  dominant channels 20/20, measured readout fidelity 94.6-97.6%. Hypothesis
+  CONFIRMED: the v1 chi-square failure was readout bias (instrument), not
+  physics. Receipt sealed (scientific_sweep2_receipt.json).
 ### Fixed
 - Broken README quickstart: `from src.zyql_quantum_gate import ...` failed
   (sys.path.insert pointed at repo root, not src/). Modules now use a
