@@ -43,6 +43,9 @@ All notable changes to the ZEPHIRUM language are documented here.
   receipt itself (field selo_regra). New master seal: a4419246...
 - docs/MARKETPLACE.md: GitHub Marketplace listing plan (free verifier,
   hosted tier later). Site: sponsor page with declared tiers.
+- Sponsor button live: .github/FUNDING.yml (GitHub "Sponsor" on the repo
+  points to the tier page); Stripe products/prices created for the three
+  tiers ($5/$25/$100 monthly), checkout flow validated in test mode.
 ### Fixed
 - Broken README quickstart: `from src.zyql_quantum_gate import ...` failed
   (sys.path.insert pointed at repo root, not src/). Modules now use a
