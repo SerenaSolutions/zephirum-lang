@@ -21,7 +21,7 @@ order is physically distinguishable** — the non-Abelian signature.
 
 - Script: `experiments/s3_qutrit_miniature.py` (noiseless, exact)
 - Hardware submission: `experiments/submit_fez.py`, `experiments/zyql_hardware_battery.py`
-- Master receipt seal: `0277e09b78644a7193559b07f72590ec5705b11eeb7d4331a9e03962a4b30751`
+- Master receipt seal: `a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a`
 - In language: `examples/s3_qutrit.zph`
 - News: QALQON — "the braid order is distinguishable on silicon"
   (https://serenasolutions.github.io/qalqon-quantum-ia/zephirum-v160.html)

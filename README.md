@@ -32,7 +32,7 @@ converging into three fusion channels, the geometry the experiments probe.*
 | ZYQL trivalent decisions 1 / 0 / REFUSED | **IBM Heron** | **3/3 PASS** (job `dbbugbk24mrc73cif420`) | [battery receipt](experiments/zyql_hardware_battery.json) |
 | Braid order measured on real hardware | **IBM Heron** | **98.1% vs 95.8%** (job `dbbueufi0auc73dtp7og`) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
 
-Receipt seal (SHA3-256): `0277e09b78644a7193559b07f72590ec5705b11eeb7d4331a9e03962a4b30751`.
+Receipt seal (SHA3-256): `a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a` — verify it yourself: `python3 .github/actions/zqea-verify/zqea_verify.py experiments/s3_qutrit_final_receipt.json`
 In language: [`examples/s3_qutrit.zph`](examples/s3_qutrit.zph).
 
 ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:

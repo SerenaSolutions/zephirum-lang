@@ -1,0 +1,24 @@
+name: 'Z-QEA Receipt Verifier'
+description: 'Verify the SHA3-256 seal (Z-QEA) of a receipt JSON — SELO ÍNTEGRO passes the job; a broken seal fails it. Nothing executes silently.'
+branding:
+  icon: 'shield'
+  color: 'blue'
+inputs:
+  receipt-file:
+    description: 'Path to the receipt JSON to verify'
+    required: true
+outputs:
+  status:
+    description: '"INTEGRAL" or "BROKEN"'
+    value: ${{ steps.verify.outputs.status }}
+  seal:
+    description: 'Recomputed SHA3-256 seal'
+    value: ${{ steps.verify.outputs.seal }}
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Verify Z-QEA receipt seal'
+      id: verify
+      shell: bash
+      run: |
+        python3 "${{ github.action_path }}/zqea_verify.py" "${{ inputs.receipt-file }}"
