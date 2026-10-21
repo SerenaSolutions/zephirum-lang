@@ -1,0 +1,20 @@
+name: 'zq-gate'
+description: 'ZQ-GATE: verified quantum decision gate — run the trivalent decision battery (1/0/REFUSED) and verify SHA3-256 receipts in your CI.'
+author: 'Serena Quantum Solutions'
+branding:
+  icon: 'check-circle'
+  color: 'blue'
+inputs:
+  battery:
+    description: 'Which battery to run (all | battery | verify-receipts)'
+    required: false
+    default: 'all'
+runs:
+  using: 'composite'
+  steps:
+    - run: python3 -m pip install --quiet numpy lark
+      shell: bash
+    - run: python3 ${{ github.action_path }}/src/battery_ci.py
+      shell: bash
+      env:
+        ZQG_MODE: ${{ inputs.battery }}

@@ -1,0 +1,343 @@
+{
+  "canonical_receipt": {
+    "house": "ZEPHIRUM (Serena Quantum Solutions)",
+    "purpose": "Independent Receipt Verifier (POC 2)",
+    "sha3_256": "56dc3a1a7953f1272d6c2edf33a5a8eed0ff5ffbd375d937aab97c1d60592034",
+    "seal_alg": "SHA3-256",
+    "signature_status": "DECLARED_ROADMAP_ML_DSA_44",
+    "timestamp_utc": "2026-10-20T19:28:00Z"
+  },
+  "data": {
+    "experiment": "independent_receipt_verifier",
+    "version": "1.0.0",
+    "timestamp_utc": "2026-10-20T19:28:00Z",
+    "tampering_battery": {
+      "total_attacks": 5,
+      "attacks_rejected_count": 5,
+      "tampering_battery_pass_rate": 100.0,
+      "all_tampered_rejected": true,
+      "attack_details": [
+        {
+          "attack_id": "attack_a_forged_verdict",
+          "description": "Verdict tampered from REFUSED to 1 without updating cryptographic seal",
+          "rejected_by_verifier": true,
+          "detected_issues": [
+            "HASH_SEAL_MISMATCH: Declared seal 93f57d302a1284e0d436e1d6d0e8b2b49bb81c59df2fc1c18bbf3e91e4926ad5 does not match recomputed SHA3-256 (c67015720c8796a3b0f20aa1491655a32b795dbf3bf638b43ead14258db54f72) or SHA-256 (5f88f2e627ef45d1cdece1e9230cff0396eead2b98504c5abde015c25dd4470b).",
+            "VERDICT_EVIDENCE_DIVERGENCE: Measured p0=0.5000 falls inside noise band (0.15, 0.85), requiring verdict 'REFUSED', but got '1'."
+          ],
+          "PASS": true
+        },
+        {
+          "attack_id": "attack_b_omitted_field",
+          "description": "Mandatory cryptographic seal field deleted",
+          "rejected_by_verifier": true,
+          "detected_issues": [
+            "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt."
+          ],
+          "PASS": true
+        },
+        {
+          "attack_id": "attack_c_reordered_records",
+          "description": "Chain records reordered (r3 before r2), breaking hash linkage",
+          "rejected_by_verifier": true,
+          "detected_issues": [
+            "RECEIPT_INDEX_0_INVALID: HASH_SEAL_MISMATCH: Declared seal hash_111 does not match recomputed SHA3-256 (52d2f92b379e19344f39660e3c7f6d46e7e2574651f4c811581a41358f1f916d) or SHA-256 (ff22f6e2974fc9a45f9502ec647d027c2f46ecebb72c09fa56179cf3d1d86ae7).",
+            "RECEIPT_INDEX_1_INVALID: HASH_SEAL_MISMATCH: Declared seal hash_333 does not match recomputed SHA3-256 (3064b5ecb43dee05fad63c5d93bb4157bd7d78d76486503310117a83929dae3f) or SHA-256 (9f88310781e586a70f6fb1cfd833fafa760512107272d51ccbc3b1e2ceb3fcb7).",
+            "CHAIN_BREAK_DETECTED at index 1: Declared previous_hash 'hash_222' != calculated previous hash 'hash_111'.",
+            "RECEIPT_INDEX_2_INVALID: HASH_SEAL_MISMATCH: Declared seal hash_222 does not match recomputed SHA3-256 (8c7da38bef526ca8348576b93da18571b2b8458674e4e762311925bda4f6787d) or SHA-256 (75628310cd66a2630dc213f90d609908e61c79fba829988f8acf698cadc5b071).",
+            "CHAIN_BREAK_DETECTED at index 2: Declared previous_hash 'hash_111' != calculated previous hash 'hash_333'."
+          ],
+          "PASS": true
+        },
+        {
+          "attack_id": "attack_d_replay_duplicate",
+          "description": "Duplicate receipt replayed at end of chain",
+          "rejected_by_verifier": true,
+          "detected_issues": [
+            "RECEIPT_INDEX_0_INVALID: HASH_SEAL_MISMATCH: Declared seal hash_111 does not match recomputed SHA3-256 (52d2f92b379e19344f39660e3c7f6d46e7e2574651f4c811581a41358f1f916d) or SHA-256 (ff22f6e2974fc9a45f9502ec647d027c2f46ecebb72c09fa56179cf3d1d86ae7).",
+            "RECEIPT_INDEX_1_INVALID: HASH_SEAL_MISMATCH: Declared seal hash_222 does not match recomputed SHA3-256 (8c7da38bef526ca8348576b93da18571b2b8458674e4e762311925bda4f6787d) or SHA-256 (75628310cd66a2630dc213f90d609908e61c79fba829988f8acf698cadc5b071).",
+            "RECEIPT_INDEX_2_INVALID: HASH_SEAL_MISMATCH: Declared seal hash_222 does not match recomputed SHA3-256 (8c7da38bef526ca8348576b93da18571b2b8458674e4e762311925bda4f6787d) or SHA-256 (75628310cd66a2630dc213f90d609908e61c79fba829988f8acf698cadc5b071).",
+            "REPLAY_ATTACK_DETECTED: Duplicate receipt identifier 'rec_002' at index 2.",
+            "CHAIN_BREAK_DETECTED at index 2: Declared previous_hash 'hash_111' != calculated previous hash 'hash_222'."
+          ],
+          "PASS": true
+        },
+        {
+          "attack_id": "attack_e_verdict_evidence_divergence",
+          "description": "Payload verdict = 1 despite raw p0 = 0.50 inside noise band (seal validly signed over fake payload)",
+          "rejected_by_verifier": true,
+          "detected_issues": [
+            "VERDICT_EVIDENCE_DIVERGENCE: Measured p0=0.5000 falls inside noise band (0.15, 0.85), requiring verdict 'REFUSED', but got '1'."
+          ],
+          "PASS": true
+        }
+      ]
+    },
+    "repo_receipts_verification": {
+      "repo_files_evaluated": 4,
+      "files_summary": [
+        {
+          "file": "zephirum_lang_audit/tests/ibm_quantum/zca_conformidade_sim.json",
+          "status": "VERIFIED",
+          "receipts_checked": 4,
+          "valid_receipts": 4,
+          "invalid_receipts": 0,
+          "issues": []
+        },
+        {
+          "file": "zephirum_lang_audit/tests/ibm_quantum/zca_conformidade_live.json",
+          "status": "VERIFIED",
+          "receipts_checked": 4,
+          "valid_receipts": 4,
+          "invalid_receipts": 0,
+          "issues": []
+        },
+        {
+          "file": "zephirum_lang_audit/experiments/chemistry/chemistry_battery_20261020.json",
+          "status": "VERIFIED",
+          "receipts_checked": 1,
+          "valid_receipts": 0,
+          "invalid_receipts": 1,
+          "issues": [
+            {
+              "receipt_index": 0,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt."
+              ]
+            }
+          ]
+        },
+        {
+          "file": "dexia_receipts.jsonl",
+          "status": "VERIFIED",
+          "receipts_checked": 26,
+          "valid_receipts": 0,
+          "invalid_receipts": 26,
+          "issues": [
+            {
+              "receipt_index": 0,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 1,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 2,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 3,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 4,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 5,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 6,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 7,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 8,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 9,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 10,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 11,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 12,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 13,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 14,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 15,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 16,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 17,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 18,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 19,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 20,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 21,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 22,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 23,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 24,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            },
+            {
+              "receipt_index": 25,
+              "issues": [
+                "MISSING_MANDATORY_FIELD: None of ['sha3_256', 'cert_hash', 'seal', 'hash'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['decision', 'verdict', 'status', 'obtido'] found in receipt.",
+                "MISSING_MANDATORY_FIELD: None of ['ts', 'timestamp', 'timestamp_utc', 'date', 'created_at'] found in receipt."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "declared_verifier_capabilities": [
+      "Mandatory schema and fields presence check",
+      "SHA3-256 and SHA-256 cryptographic seal integrity check",
+      "Chain linkage, sequence monotonicity, and replay detection",
+      "Coherence check between raw probability (p0) and trivalent verdict (1/0/REFUSED)",
+      "Prohibited purpose policy alignment check"
+    ],
+    "declared_verifier_limitations": [
+      "Cryptographic seal proves structural integrity and non-tampering of record; DOES NOT prove scientific correctness of physical laws.",
+      "Raw measurement evidence coherence proves mathematical consistency with decision rule; DOES NOT guarantee hardware calibration state at run time.",
+      "Signature attribution relies on ML-DSA-44 roadmap implementation; current hash seals confirm data integrity, not non-repudiable author identity."
+    ]
+  }
+}
