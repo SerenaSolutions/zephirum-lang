@@ -33,6 +33,16 @@ All notable changes to the ZEPHIRUM language are documented here.
   chi-square (4096 shots) fails in all points due to sub-1% uncalibrated
   readout bias — declared honestly; TV <= 4.5%. Master receipt re-sealed
   (C7). Data figure updated with all 10 measured points.
+- Z-QEA Receipt Verifier (GitHub Action, Marketplace candidate):
+  `.github/actions/zqea-verify` — recomputes the SHA3-256 seal of any receipt
+  JSON; INTEGRAL passes the job, a broken seal fails it. Tested both ways
+  (tests/test_zqea_verify.py).
+- Seal rule upgrade: master receipt re-sealed with the clean canonical rule
+  (seal = SHA3-256 over the receipt with the seal field removed —
+  self-contained verification, no history chaining). Documented in the
+  receipt itself (field selo_regra). New master seal: a4419246...
+- docs/MARKETPLACE.md: GitHub Marketplace listing plan (free verifier,
+  hosted tier later). Site: sponsor page with declared tiers.
 ### Fixed
 - Broken README quickstart: `from src.zyql_quantum_gate import ...` failed
   (sys.path.insert pointed at repo root, not src/). Modules now use a

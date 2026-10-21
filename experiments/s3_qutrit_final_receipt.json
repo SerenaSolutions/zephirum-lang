@@ -201,7 +201,7 @@
       "recibo_da_varredura": "scientific_sweep_receipt.json (selo proprio c19bf52fa9c6a95b...)"
     }
   },
-  "selo_sha3_256": "8fcee4d44ec1f6352b80b7e7c171069e1fc14471adda2c685d746fabdf0d65bf",
+  "selo_sha3_256": "a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a",
   "veredicto_final": {
     "c1_fusao_3_canais": true,
     "c2_nao_abeliano": true,
@@ -216,5 +216,6 @@
     ],
     "escopo_declarado": "miniatura logica do primitivo fusao+tracado (nao e o duplo quantico S3 de 54 qubits do artigo)",
     "c7_varredura": "janela nao-abeliana medida em 10 pontos; periodo 3 confirmado em 6; mapa de erros completo"
-  }
+  },
+  "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada; verificador oficial: .github/actions/zqea-verify (v1.6.0+)"
 }
