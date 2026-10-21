@@ -1,0 +1,51 @@
+{
+  "job_id": "dbbugbk24mrc73cif420",
+  "backend": "ibm_fez",
+  "shots": 4096,
+  "finalizado_em": "2026-10-20T22:16:54-03:00",
+  "casos": {
+    "constante-1": {
+      "esperado": 1,
+      "contagens": {
+        "00": 4084,
+        "10": 8,
+        "01": 4
+      },
+      "p0_hardware": 0.9971,
+      "decisao_trivalente_hardware": 1,
+      "modo": "DECIDED_BY_INTERFERENCE",
+      "regra": "banda>=0.85",
+      "bound_hoeffding": 1.7859573823144106e-80,
+      "PASS": true
+    },
+    "constante-0": {
+      "esperado": 0,
+      "contagens": {
+        "00": 4082,
+        "01": 5,
+        "10": 9
+      },
+      "p0_hardware": 0.9966,
+      "decisao_trivalente_hardware": 0,
+      "modo": "DECIDED_BY_INTERFERENCE",
+      "regra": "banda>=0.85",
+      "bound_hoeffding": 1.7859573823144106e-80,
+      "PASS": true
+    },
+    "balanceado": {
+      "esperado": "REFUSED",
+      "contagens": {
+        "11": 3927,
+        "10": 102,
+        "00": 16,
+        "01": 51
+      },
+      "p0_hardware": 0.0039,
+      "decisao_trivalente_hardware": "REFUSED",
+      "modo": "DECIDED_BY_INTERFERENCE",
+      "regra": "banda<=0.15 (balanceado: dependente da entrada)",
+      "bound_hoeffding": 1.7859573823144106e-80,
+      "PASS": true
+    }
+  }
+}

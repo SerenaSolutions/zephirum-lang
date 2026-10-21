@@ -4,7 +4,7 @@
 
 *The quantum programming language with receipts.*
 
-![version](https://img.shields.io/badge/version-1.5.0-6e46b8)
+![version](https://img.shields.io/badge/version-1.6.0-6e46b8)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23302046-gold)
@@ -42,10 +42,13 @@ verifiable job IDs; no endorsement claimed):
 ## Quickstart
 
 ```bash
-pip install -e .   # (or just add src/ to your path)
-python -c "from src.zyql_quantum_gate import ZYQLQuantumGate; \
+pip install -e .
+python -c "from zyql_quantum_gate import ZYQLQuantumGate; \
 g = ZYQLQuantumGate(3, lambda x: 1); print(g.run_quantum())"
 ```
+
+(No install? `PYTHONPATH=src` works too. The old `from src.zyql_quantum_gate`
+quickstart was broken — fixed in v1.6.0, see docs/AUDIT.md.)
 
 ## Layout
 

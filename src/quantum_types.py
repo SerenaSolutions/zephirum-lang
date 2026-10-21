@@ -10,8 +10,11 @@ What it enforces:
   3. qif: quantum conditional via controlled operation (no collapse)
 """
 import sys, os, json, time
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from zquantum import QCircuit
+try:
+    from zquantum import QCircuit
+except ImportError:  # in-tree, no install
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from zquantum import QCircuit
 
 class CompileError(Exception):
     pass

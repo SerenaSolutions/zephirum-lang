@@ -2,6 +2,29 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.6.0] - 2026-10-21
+### Added
+- S3 qutrit miniature (experiments/): braiding non-commutativity and 3-channel
+  fusion space (qutrit-in-qubits), noiseless with exact-zero deviation vs theory
+  (canonical rational arithmetic) and verified on real hardware: IBM Heron
+  ibm_fez, jobs dbbueufi0auc73dtp7og and dbbugbk24mrc73cif420; full ZYQL
+  trivalent battery 3/3 PASS on hardware (receipt sealed in
+  experiments/s3_qutrit_full_receipt.json). Scientific sweep of 26 circuits
+  (job dbbuh17i0auc73dtpaeg) submitted; harvest pending.
+- Packaging: pyproject.toml — `pip install -e .` exposes zkernel, zquantum,
+  zyql_quantum_gate, quantum_types, zyql_rag_layer, oq3 as installable modules.
+- docs/AUDIT.md: external audit record (GitHub Copilot audit, 2026-10-21) with
+  our validation, findings and remediation status.
+- docs/ROADMAP.md: public roadmap (compiler, type layer, benchmarks, FIPS 204).
+- docs/PARTNERSHIP.md: GitHub partnership dossier.
+- GitHub Pages deployment via GitHub Actions (site/).
+
+### Fixed
+- Broken README quickstart: `from src.zyql_quantum_gate import ...` failed
+  (sys.path.insert pointed at repo root, not src/). Modules now use a
+  deterministic in-tree fallback and work installed or from source.
+- Topics: removed typo tag `betta`.
+
 ## [1.5.0] - 2026-10-20
 ### Added
 - Chemistry battery (experiments/chemistry): H2, LiH, H2O, NH3 — Jordan-Wigner
