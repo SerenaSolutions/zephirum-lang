@@ -1,0 +1,16 @@
+{
+  "spec": "Z-QEA",
+  "modulo": "experiments/chemistry/pennylane_crosscheck.py",
+  "data": "2026-10-21T11:35:40-03:00",
+  "modo": "SIMULACAO (pennylane default.qubit, VQE gradient descent, 60 iter)",
+  "molecula": "H2 0.735 A STO-3G",
+  "referencia": "PySCF FCI -1.13730604 Ha (bateria da casa, chem_H2.json)",
+  "e_hf_hartree": -1.116999,
+  "energia_vqe_ha": -1.13730604,
+  "erro_vs_fci": 4.2e-09,
+  "erro_exato_frac": "1/235476128",
+  "theta_final": 0.223537,
+  "engine": "pennylane 0.45.1 + pyscf",
+  "declaracao": "cross-check independente da bateria quimica; convencao unit=angstrom obrigatoria",
+  "selo_sha3_256": "4c6ef51c44611d312dd77c39c32e5317b0fbdd257a9613b472bce93f3be913bf"
+}

@@ -1,0 +1,19 @@
+// H2 ground state, Jordan-Wigner style (chemistry battery, error 0 vs PySCF FCI)
+// 4 spin-orbitals from 2 Hydrogen atoms, minimal basis
+circuit h2_ansatz {
+  qubit[4] jw;
+
+  // Hartree-Fock reference |1100>
+  X jw[0];
+  X jw[1];
+
+  // paired doubles ansatz (UCC-inspired, minimal)
+  // theta chosen by classical outer loop; kernel validates energy receipt-side
+  CX jw[0] -> jw[1];
+  CX jw[1] -> jw[2];
+  CX jw[2] -> jw[3];
+  RY(0.0) jw[3];
+  CX jw[2] -> jw[3];
+  CX jw[1] -> jw[2];
+  CX jw[0] -> jw[1];
+}

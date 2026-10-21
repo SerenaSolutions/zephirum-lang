@@ -19,6 +19,12 @@ All notable changes to the ZEPHIRUM language are documented here.
 - docs/PARTNERSHIP.md: GitHub partnership dossier.
 - GitHub Pages deployment via GitHub Actions (site/).
 
+- PennyLane cross-check (experiments/chemistry/pennylane_crosscheck.py):
+  H2 VQE reproduces the battery FCI reference -1.13730604 Ha with error
+  4.2e-09 (convention documented: PennyLane default unit is bohr; battery
+  geometry is angstrom). Receipt sealed.
+- New .zph examples: s3_qutrit.zph (fusion-space miniature), chemistry_h2.zph.
+- .gitattributes: honest Linguist stats (receipts generated, assets vendored).
 ### Fixed
 - Broken README quickstart: `from src.zyql_quantum_gate import ...` failed
   (sys.path.insert pointed at repo root, not src/). Modules now use a

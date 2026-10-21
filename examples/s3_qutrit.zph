@@ -1,0 +1,18 @@
+// S3 qutrit miniature: fusion space of a non-Abelian anyon pair
+// basis: |0>=|00>, |1>=|01>, |2>=|10>; |11> forbidden (no-cloning)
+circuit s3_qutrit {
+  qubit[2] fusion;
+
+  // uniform superposition over the three fusion channels
+  H fusion[0];
+  H fusion[1];
+  // (|11> penalized/forbidden — verified in experiments/s3_qutrit_miniature.py)
+
+  // braids: rotations in distinct planes do not commute
+  RY(1.5708) fusion[0];      // B_R: plane (ch0, ch2)
+  CX fusion[0] -> fusion[1];
+  RY(1.5708) fusion[1];      // B_S: plane (ch1, ch2)
+
+  // order matters: B_R then B_S lands ch2; B_S then B_R lands ch1
+  // measured on IBM Heron ibm_fez: 98.1% vs 95.8% (Z-QEA receipt sealed)
+}

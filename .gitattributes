@@ -1,0 +1,12 @@
+# --- GitHub Linguist: honest language stats ---
+# Receipts and measured artifacts are generated data, not source code
+experiments/*.json linguist-generated
+experiments/chemistry/*.json linguist-generated
+experiments/chemistry/*_receipt*.json linguist-generated
+*.egg-info/** linguist-generated
+requirements-lock.txt linguist-generated
+# Brand assets are vendored media
+assets/** linguist-vendored
+# .zph is ZEPHIRUM source. Not yet registered in Linguist (see
+# docs/PARTNERSHIP.md); kept unmapped rather than faked to another language.
+*.zph -diff
