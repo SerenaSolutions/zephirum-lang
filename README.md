@@ -9,36 +9,6 @@
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23302046-gold)
 
-ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:
-every computational decision is trivalent - `1` (permitted), `0` (forbidden),
-`REFUSED` (input-dependent or insufficient confidence) - and carries a sealed
-receipt (SHA3-256 integrity seal, hash proves content integrity, not authorship).
-ML-DSA-44 / FIPS 204 signatures are a DECLARED ROADMAP item — to be implemented
-with an accredited module and HSM-held keys, never hand-rolled (see docs/receipts.md).
-
-Decisions are produced by Deutsch-Jozsa interference, one oracle call, with a
-declared noise band (+-0.15). Nothing executes silently: unknown syntax raises
-an explicit error. Simulation mode is labeled as simulation.
-
-```
-circuit bell {
-  qubit[2] q;
-  H q[0];
-  CNOT q[0] -> q[1];
-}
-```
-
-Verified on real hardware (IBM Heron `ibm_fez`, cited as test laboratory with
-verifiable job IDs; no endorsement claimed):
-- Constant purpose: measured p(000)=0.9844 (job db6ded84qg6s73c4jvug)
-- S3 qutrit miniature: fusion channels (qutrit-in-qubits) + braiding non-commutativity,
-  noiseless with exact-zero deviation and on hardware: ch2=98.1% (RS) vs ch1=95.8% (SR),
-  full ZYQL battery 3/3 PASS on `ibm_fez` (jobs `dbbueufi0auc73dtp7og`, `dbbugbk24mrc73cif420`;
-  Z-QEA receipt sealed, see `experiments/`)
-- Balanced purpose: p(000)=0.0000, orthogonal outcome 93.9%
-- Same-task confrontation vs textbook Qiskit (job db6dklcvf2bc73d122t0):
-  Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
-
 ## Evidence — with the quantum figures
 
 ![S3 fusion channels measured on IBM Heron](assets/proofs/s3-fusion-hardware.png)
@@ -64,6 +34,38 @@ converging into three fusion channels, the geometry the experiments probe.*
 
 Receipt seal (SHA3-256): `0277e09b78644a7193559b07f72590ec5705b11eeb7d4331a9e03962a4b30751`.
 In language: [`examples/s3_qutrit.zph`](examples/s3_qutrit.zph).
+
+ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:
+every computational decision is trivalent - `1` (permitted), `0` (forbidden),
+`REFUSED` (input-dependent or insufficient confidence) - and carries a sealed
+receipt (SHA3-256 integrity seal, hash proves content integrity, not authorship).
+ML-DSA-44 / FIPS 204 signatures are a DECLARED ROADMAP item — to be implemented
+with an accredited module and HSM-held keys, never hand-rolled (see docs/receipts.md).
+
+Decisions are produced by Deutsch-Jozsa interference, one oracle call, with a
+declared noise band (+-0.15). Nothing executes silently: unknown syntax raises
+an explicit error. Simulation mode is labeled as simulation.
+
+Verified on real hardware (IBM Heron `ibm_fez`, cited as test laboratory with
+verifiable job IDs; no endorsement claimed):
+- Constant purpose: measured p(000)=0.9844 (job db6ded84qg6s73c4jvug)
+- S3 qutrit miniature: fusion channels (qutrit-in-qubits) + braiding non-commutativity,
+  noiseless with exact-zero deviation and on hardware: ch2=98.1% (RS) vs ch1=95.8% (SR),
+  full ZYQL battery 3/3 PASS on `ibm_fez` (jobs `dbbueufi0auc73dtp7og`, `dbbugbk24mrc73cif420`;
+  Z-QEA receipt sealed, see `experiments/`)
+- Balanced purpose: p(000)=0.0000, orthogonal outcome 93.9%
+- Same-task confrontation vs textbook Qiskit (job db6dklcvf2bc73d122t0):
+  Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
+
+The language:
+
+```
+circuit bell {
+  qubit[2] q;
+  H q[0];
+  CNOT q[0] -> q[1];
+}
+```
 
 ## Quickstart
 
