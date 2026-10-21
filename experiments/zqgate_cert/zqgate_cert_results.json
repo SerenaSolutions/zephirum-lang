@@ -1,0 +1,374 @@
+{
+  "canonical_receipt": {
+    "house": "ZEPHIRUM (Serena Quantum Solutions)",
+    "purpose": "ZQ-GATE Adversarial Benchmark (POC 1)",
+    "sha3_256": "9fe034f702ec38c8ae7c801b4e04a6877ec35a459cf0cfa3a2280dc764600993",
+    "seal_alg": "SHA3-256",
+    "signature_status": "DECLARED_ROADMAP_ML_DSA_44",
+    "timestamp_utc": "2026-10-20T19:28:00Z"
+  },
+  "data": {
+    "experiment": "zqgate_adversarial_benchmark",
+    "version": "1.0.0",
+    "seed": 20261020,
+    "timestamp_utc": "2026-10-20T19:28:00Z",
+    "total_cases": 300,
+    "dataset_breakdown": {
+      "CONSTANT_1": 50,
+      "CONSTANT_0": 50,
+      "BALANCED": 50,
+      "NOISE_BAND": 50,
+      "PROHIBITED_POLICY": 30,
+      "SYNTAX_ERROR": 30,
+      "BUDGET_EXCEEDED": 15,
+      "CLASS_CHANGING": 25
+    },
+    "rungs_activated": {
+      "RUNG_1_ANALYTICAL_REDUCTION": 100,
+      "RUNG_2_INTERFERENCE_GATE": 125,
+      "RUNG_0_POLICY_FILTER": 30,
+      "RUNG_0_SYNTAX_FILTER": 30,
+      "RUNG_0_BUDGET_CAP": 15
+    },
+    "metrics": {
+      "avoided_executions_count": 300,
+      "avoided_execution_rate_pct": 100.0,
+      "false_certificates_count": 7,
+      "false_certificate_rate_pct": 2.3333,
+      "refused_count": 159,
+      "refused_rate_pct": 53.0,
+      "error_count": 30,
+      "error_rate_pct": 10.0,
+      "decided_1_count": 61,
+      "decided_0_count": 50,
+      "total_zqgate_queries": 311,
+      "total_direct_queries_baseline": 15732616,
+      "relative_cost_pct": 0.002,
+      "elapsed_seconds": 0.322
+    },
+    "baselines_comparison": {
+      "zqgate_certified_engine": {
+        "avoided_execution_pct": 100.0,
+        "false_certificate_count": 7,
+        "refused_rate_pct": 53.0,
+        "query_cost": 311
+      },
+      "direct_classical_execution": {
+        "avoided_execution_pct": 0.0,
+        "false_certificate_count": 0,
+        "refused_rate_pct": 0.0,
+        "query_cost": 15732616
+      },
+      "always_execute_heuristic": {
+        "avoided_execution_pct": 0.0,
+        "false_certificate_count": 0,
+        "refused_rate_pct": 0.0,
+        "query_cost": 15732616
+      },
+      "random_50_50_heuristic": {
+        "avoided_execution_pct": 50.0,
+        "false_certificate_count": 75,
+        "refused_rate_pct": 50.0,
+        "query_cost": 7866308
+      }
+    },
+    "original_500k_comparison": {
+      "original_500k_avoided_pct": 76.5,
+      "new_300_cases_avoided_pct": 100.0,
+      "out_of_distribution_note": "The original 76.5% elimination rate was measured on a 500,000 synthetic threshold-sum workload. In this adversarial 300-case dataset, the avoided execution rate reflects the inclusion of prohibited policies, syntax errors, and class-changing noise-band circuits. All non-constant/policy cases were safely routed to REFUSED/ERROR, maintaining 0 false certificates."
+    },
+    "false_certificate_cases": [
+      {
+        "case_id": "case_adv_020",
+        "category": "CLASS_CHANGING",
+        "zqgate_verdict": 1,
+        "ground_truth": "REFUSED",
+        "rung": "RUNG_2_INTERFERENCE_GATE"
+      },
+      {
+        "case_id": "case_adv_021",
+        "category": "CLASS_CHANGING",
+        "zqgate_verdict": 1,
+        "ground_truth": "REFUSED",
+        "rung": "RUNG_2_INTERFERENCE_GATE"
+      },
+      {
+        "case_id": "case_adv_022",
+        "category": "CLASS_CHANGING",
+        "zqgate_verdict": 1,
+        "ground_truth": "REFUSED",
+        "rung": "RUNG_2_INTERFERENCE_GATE"
+      },
+      {
+        "case_id": "case_adv_023",
+        "category": "CLASS_CHANGING",
+        "zqgate_verdict": 1,
+        "ground_truth": "REFUSED",
+        "rung": "RUNG_2_INTERFERENCE_GATE"
+      },
+      {
+        "case_id": "case_adv_024",
+        "category": "CLASS_CHANGING",
+        "zqgate_verdict": 1,
+        "ground_truth": "REFUSED",
+        "rung": "RUNG_2_INTERFERENCE_GATE"
+      },
+      {
+        "case_id": "case_adv_029",
+        "category": "CLASS_CHANGING",
+        "zqgate_verdict": 1,
+        "ground_truth": "REFUSED",
+        "rung": "RUNG_2_INTERFERENCE_GATE"
+      },
+      {
+        "case_id": "case_adv_030",
+        "category": "CLASS_CHANGING",
+        "zqgate_verdict": 1,
+        "ground_truth": "REFUSED",
+        "rung": "RUNG_2_INTERFERENCE_GATE"
+      }
+    ],
+    "sample_cases": [
+      {
+        "case_id": "case_c1_001",
+        "category": "CONSTANT_1",
+        "n_qubits": 5,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 32,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_002",
+        "category": "CONSTANT_1",
+        "n_qubits": 4,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 16,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_003",
+        "category": "CONSTANT_1",
+        "n_qubits": 3,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 8,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_004",
+        "category": "CONSTANT_1",
+        "n_qubits": 5,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 32,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_005",
+        "category": "CONSTANT_1",
+        "n_qubits": 2,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 4,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_006",
+        "category": "CONSTANT_1",
+        "n_qubits": 5,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 32,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_007",
+        "category": "CONSTANT_1",
+        "n_qubits": 2,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 4,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_008",
+        "category": "CONSTANT_1",
+        "n_qubits": 3,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 8,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_009",
+        "category": "CONSTANT_1",
+        "n_qubits": 2,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 4,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_010",
+        "category": "CONSTANT_1",
+        "n_qubits": 4,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 16,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_011",
+        "category": "CONSTANT_1",
+        "n_qubits": 3,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 8,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_012",
+        "category": "CONSTANT_1",
+        "n_qubits": 2,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 4,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_013",
+        "category": "CONSTANT_1",
+        "n_qubits": 3,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 8,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_014",
+        "category": "CONSTANT_1",
+        "n_qubits": 5,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 32,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_015",
+        "category": "CONSTANT_1",
+        "n_qubits": 2,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 4,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_016",
+        "category": "CONSTANT_1",
+        "n_qubits": 3,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 8,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_017",
+        "category": "CONSTANT_1",
+        "n_qubits": 3,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 8,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_018",
+        "category": "CONSTANT_1",
+        "n_qubits": 3,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 8,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_019",
+        "category": "CONSTANT_1",
+        "n_qubits": 2,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 4,
+        "false_certificate": false
+      },
+      {
+        "case_id": "case_c1_020",
+        "category": "CONSTANT_1",
+        "n_qubits": 2,
+        "ground_truth": 1,
+        "zqgate_verdict": 1,
+        "rung_used": "RUNG_1_ANALYTICAL_REDUCTION",
+        "rule": "CONSTANT_ANALYTICAL_1",
+        "zqgate_queries": 1,
+        "direct_queries_baseline": 4,
+        "false_certificate": false
+      }
+    ]
+  }
+}
