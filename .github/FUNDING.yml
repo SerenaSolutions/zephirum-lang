@@ -1,0 +1,3 @@
+# Sponsor button — leads to the stable tier page (live payment links
+# activate with the Stripe live account; see site/sponsor.html)
+custom: ['https://serenasolutions.github.io/zephirum-lang/sponsor.html']
