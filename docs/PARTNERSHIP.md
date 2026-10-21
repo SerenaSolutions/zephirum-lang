@@ -24,6 +24,21 @@ track stands. Maintained by the house; updated as tracks move.
 | GitHub Sponsors | Funding for maintainers | Requires personal account setup by owner | Owner decision |
 | Community enablement | Discussions, topics, health files | DONE in v1.6.0 | — |
 
+
+## Brazil / São Paulo / Campinas — quantum ecosystem (verified 2026-10-21)
+
+| Target | What it is | Fit / route |
+|---|---|---|
+| **FAPESP CEPID program at Unicamp (Campinas)** | ~R$ 40M, 5 years, started Jul/2025; areas: materials, enabling tech, **quantum computing**; IFGW + IMECC; **8 partner companies incl. software** | Companies partner directly with the program — offer Z-QEA auditable receipts for their quantum experiments |
+| **PIPE-FAPESP / PIPE-TC** | Funding for innovative research in **small companies** (no university affiliation required) | Serena Solutions as applicant; project: auditable quantum decisions (Z-QEA) — needs SP PJ |
+| **Qiskit Ecosystem (IBM)** | Official catalog of tools built on Qiskit | ZEPHIRUM transpiles to OpenQASM 3 + runs IBM Heron with cited job IDs — affiliation-free application via PR |
+| **SENAI CIMATEC (BA)** | First quantum computing excellence center for the BUSINESS sector (Atos); educational QPU installed 2026 | B2B door: Z-QEA compliance receipts for Brazilian companies testing quantum |
+| **MCTI — International Year of Quantum 2026** | Webinar cycle (11 episodes, YouTube), national visibility | Free visibility + networking for ZEPHIRUM's sealed-receipt story |
+| **CESAR BrazilQuantumCamp** | Quantum training program with project tracks | Teaching/training route — fits the house's MEI training CNAE |
+
+**House position of strength (what we offer partners):** auditable quantum experimentation —
+sealed Z-QEA receipts with job IDs, reproducible pipelines, honest labeling. Research
+groups and corporate labs need exactly this: tamper-evident experiment trails.
 ## Requests to GitHub (draft, for the partnership conversation)
 
 1. Inclusion of ZEPHIRUM/ZYQL in open-source program visibility (Stars
