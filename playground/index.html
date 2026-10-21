@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZEPHIRUM Playground — decide antes de executar</title>
+<style>
+:root{--bg:#0d1427;--card:#111a33;--ink:#e8ecf8;--mut:#8e9bb6;--ok:#2ecc71;--no:#e74c3c;--ref:#f39c12;--line:#1d2944}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 'SF Mono',Consolas,monospace;padding:20px}
+h1{font-size:17px;color:#a9baff}h1 span{color:var(--mut);font-size:12px;display:block;margin-top:4px}
+.wrap{max-width:980px;margin:0 auto}
+textarea{width:100%;height:150px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px;font:13px/1.5 monospace;margin:12px 0}
+button{background:#2544d8;color:#fff;border:0;border-radius:8px;padding:10px 22px;font-weight:700;cursor:pointer}
+button:hover{background:#1a35b8}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:80px;white-space:pre-wrap}
+.v1{color:var(--ok);font-weight:700}.v0{color:var(--no);font-weight:700}.vr{color:var(--ref);font-weight:700}
+.meta{color:var(--mut);font-size:11px;margin-top:8px}
+a{color:#7aa2ff}
+</style></head><body><div class="wrap">
+<h1>ZEPHIRUM PLAYGROUND<span>decida antes de executar — veredito trivalente 1 / 0 / REFUSED com recibo SHA-256 (demo clássica, rótulo DECLARED_CLASSICAL)</span></h1>
+<textarea id="src">MODEL bell_pair;
+PURPOSE demo_gate;
+
+ZZ(a,b) == 1 ?
+XX(a,b) == 1 ?
+entangled(a,b) ?
+outcome(a) == 0 ?
+qiskit_circuit(depth=100) == needed ?</textarea>
+<button onclick="run()">Decidir (ZQ-GATE)</button>
+<pre id="out">// os vereditos e recibos aparecem aqui</pre>
+<p class="meta">Demo determinística em JavaScript (simulação clássica declarada — não é QPU). Linguagem completa: <a href="https://github.com/SerenaSolutions/zephirum-lang">github.com/SerenaSolutions/zephirum-lang</a> · Recibos reais com backend/job_id rodam no pacote Python.</p>
+</div>
+<script>
+// Núcleo de decisão trivalente (port JS do ZQ-GATE, demo)
+// Rótulo honesto: DECLARED_CLASSICAL — decisão analítica, sem QPU.
+const RU={exato:(q)=>{ // Bell (|00>+|11>)/√2: ZZ=+1, XX=+1, emaranhado=1, outcome(a)=0
+  if(/^ZZ/i.test(q)) return {v:'1',why:'ZZ=+1 exato no par de Bell (analítico)'};
+  if(/^XX/i.test(q)) return {v:'1',why:'XX=+1 exato no par de Bell (analítico)'};
+  if(/^entangled/i.test(q)) return {v:'1',why:'Schmidt rank 2 > 1: emaranhado (analítico)'};
+  if(/^outcome\(a\)/i.test(q)) return {v:'0',why:'outcome(a)=0: metade do par de Bell (analítico)'};
+  if(/needed/i.test(q)) return {v:'REFUSED',why:'circuito fora do domínio demo: exige camada quântica (no pacote Python: executa em QPU com recibo)'};
+  return {v:'REFUSED',why:'sintaxe não reconhecida no playground demo'};
+}};
+async function receipt(q,v,why){const canon=JSON.stringify({q,v,why,t:Date.now(),label:'DECLARED_CLASSICAL'});
+  const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(canon));
+  return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('');}
+async function run(){const out=[];const lines=document.getElementById('src').value.split('\n');
+  for(const l of lines){const q=l.trim().replace(/\?$/,'');if(!q||/^(MODEL|PURPOSE|\/\/)/.test(q))continue;
+    const {v,why}=RU.exato(q);const r=await receipt(q,v,why);
+    const cls=v==='1'?'v1':v==='0'?'v0':'vr';
+    out.push(`${q}\n  → veredito: <span class="${cls}">${v}</span> — ${why}\n  → recibo SHA-256: ${r.slice(0,32)}…\n`);}
+  document.getElementById('out').innerHTML=out.join('\n')||'// nada a decidir';}
+</script></body></html>

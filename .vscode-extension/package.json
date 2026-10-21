@@ -1,0 +1,10 @@
+{
+  "name": "zephirum-lang", "displayName": "ZEPHIRUM / ZYQL",
+  "description": "ZEPHIRUM language support — syntax for the trivalent decision language (1/0/REFUSED)",
+  "version": "0.1.0", "publisher": "SerenaSolutions", "engines": {"vscode": "^1.70.0"},
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [{"id": "zephirum", "aliases": ["ZEPHIRUM", "zyql"], "extensions": [".zeph", ".zyql"], "configuration": "./language-configuration.json"}],
+    "grammars": [{"language": "zephirum", "scopeName": "source.zephirum", "path": "./syntaxes/zephirum.tmLanguage.json"}]
+  }
+}

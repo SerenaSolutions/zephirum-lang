@@ -1,0 +1,7 @@
+{"name":"ZEPHIRUM","scopeName":"source.zephirum","patterns":[
+ {"match":"\\b(1|0|REFUSED)\\b","name":"constant.language.zephirum"},
+ {"match":"\\b(ZZ|XX|entangled|outcome|needed)\\b","name":"support.function.zephirum"},
+ {"match":"\\b(MODEL|PURPOSE)\\b","name":"keyword.control.zephirum"},
+ {"match":"//.*$","name":"comment.line.zephirum"},
+ {"match":"\"[^\"]*\"","name":"string.quoted.double.zephirum"},
+ {"match":"\\b(bell_pair|quantum_circuit)\\b","name":"entity.name.type.zephirum"}]}
