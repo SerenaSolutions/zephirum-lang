@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZEPHIRUM — the quantum programming language with receipts</title>
+<meta name="description" content="ZEPHIRUM compiles. ZYQL decides: 1, 0 or REFUSED. Sealed receipts, verified on real IBM Heron hardware.">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#050712;color:#eef3ff;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 0,#263b8426,transparent 35%),radial-gradient(circle at 85% 70%,#39d6c40b,transparent 30%)}
+main{max-width:920px;margin:auto;padding:60px 20px}
+.badge{display:inline-block;border:1px solid #304474;background:#101a36;color:#91a7ff;border-radius:999px;padding:8px 14px;font-size:10px;letter-spacing:.18em}
+h1{font-size:clamp(38px,7vw,64px);line-height:1;letter-spacing:-.05em;margin:26px 0 16px}
+h1 span{background:linear-gradient(90deg,#a6b8ff,#69e5d8);background-clip:text;color:transparent}
+.lead{color:#8996b1;font-size:15px;line-height:1.8;max-width:680px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:34px 0;background:#26304a;border:1px solid #26304a;border-radius:17px;overflow:hidden}
+.stat{background:#0a1020;padding:20px}.stat strong{font-size:26px;display:block;color:#a9baff}.stat small{color:#6c7a98;font-size:9px;line-height:1.5}
+h2{font-size:18px;margin:36px 0 10px;color:#c9d4f0}
+p{color:#8e9bb6;font-size:13px;line-height:1.8}
+pre{background:#0a1020;border:1px solid #1c2740;border-radius:12px;padding:18px;overflow:auto;font-size:12px;color:#69e5d8}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0}
+.btn{border:1px solid #3d568a;border-radius:30px;padding:11px 22px;color:#a9baff;font-size:12px;text-decoration:none}
+.btn:hover{background:#1a274a;border-color:#6b84ff}
+.btn.p{background:#182647;border-color:#38519a}
+footer{border-top:1px solid #172139;margin-top:40px;padding-top:18px;color:#53627e;font-size:10px;line-height:1.7}
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">◈ ZEPHIRUM v1.6.0 · SERENA SOLUTIONS</span>
+  <h1>The quantum programming language <span>with receipts.</span></h1>
+  <p class="lead">ZEPHIRUM compiles. ZYQL decides: <b>1</b>, <b>0</b> or <b>REFUSED</b> — every decision produced by Deutsch-Jozsa interference, one oracle call, sealed with a SHA3-256 receipt (Z-QEA). Nothing executes silently. Simulations are labeled as simulations. Hardware runs cite job IDs.</p>
+  <div class="stats">
+    <div class="stat"><strong>98.1%</strong><small>braid B_R∘B_S → ch2, IBM Heron ibm_fez (job dbbueufi0auc73dtp7og)</small></div>
+    <div class="stat"><strong>95.8%</strong><small>braid B_S∘B_R → ch1 — order matters, on silicon</small></div>
+    <div class="stat"><strong>3/3</strong><small>trivalent battery on hardware: 1 / 0 / REFUSED (job dbbugbk24mrc73cif420)</small></div>
+    <div class="stat"><strong>0</strong><small>noiseless deviation vs theory, canonical rational arithmetic</small></div>
+  </div>
+  <h2>Quickstart</h2>
+  <pre>pip install -e .
+python -c "from zyql_quantum_gate import ZYQLQuantumGate; \
+g = ZYQLQuantumGate(3, lambda x: 1); print(g.run_quantum())"</pre>
+  <div class="btns">
+    <a class="btn p" href="https://github.com/SerenaSolutions/zephirum-lang">GitHub repository (MIT)</a>
+    <a class="btn" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/AUDIT.md">Audit record</a>
+    <a class="btn" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/ROADMAP.md">Roadmap</a>
+    <a class="btn" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/PARTNERSHIP.md">Partnership</a>
+    <a class="btn" href="https://doi.org/10.5281/zenodo.23302046">DOI · Zenodo</a>
+    <a class="btn" href="https://serenasolutions.github.io/qalqon-quantum-ia/zephirum-v160.html">QALQON News: the proof</a>
+  </div>
+  <footer>ZEPHIRUM/ZYQL © Serena Solutions · IBM cited as test laboratory, no endorsement claimed · Useful executions without error correction are bounded well under 20 qubits (declared) · ML-DSA-44/FIPS 204 signatures: declared roadmap, accredited module only.</footer>
+</main>
+</body>
+</html>

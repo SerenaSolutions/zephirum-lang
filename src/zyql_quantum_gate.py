@@ -22,8 +22,11 @@ SIMULATION MODE (numpy-free state vector of the house kernel zquantum.py).
 import math, json, time, random, hashlib
 from collections import Counter
 import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from zquantum import QCircuit
+try:
+    from zquantum import QCircuit
+except ImportError:  # in-tree, no install
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from zquantum import QCircuit
 
 MARGIN = 0.15          # declared confidence band (+-0.15) of the noise rule
 class ZYQLQuantumGate:
