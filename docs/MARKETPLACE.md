@@ -6,11 +6,12 @@
 - **One-liner:** Verify the SHA3-256 seal of a Z-QEA receipt JSON — INTEGRAL
   passes the job, a broken seal fails it. *Nothing executes silently.*
 - **Category:** Utilities → Security (CI/CD compliance checkpoint)
-- **Action path (usable now, in-repo):**
+- **Action path (in-repo, legacy):**
   `uses: SerenaSolutions/zephirum-lang/.github/actions/zqea-verify@main`
-- **Marketplace publishing:** move the action to its own public repo
-  (`SerenaSolutions/zqea-verify`) and publish from there — requires the owner's
-  click in the Marketplace tab. Draft ready.
+- **Standalone marketplace repo (live):** https://github.com/SerenaSolutions/zqea-verify
+  — use `uses: SerenaSolutions/zqea-verify@v1`. Release v1.0.0 published with
+  self-test CI (sealed receipt passes, tampered receipt fails). Remaining step:
+  owner's one-click publish in the Marketplace tab of the release page.
 
 ## Usage
 
