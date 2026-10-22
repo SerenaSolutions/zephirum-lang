@@ -2,6 +2,19 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.7.1] - 2026-10-21
+### Added
+- ZYQL Lisp interpreter (src/zyql_lisp.py) + photonic layer: programs written
+  IN the language (.zph) execute against an exact photonic Fock simulator
+  (numpy/scipy, cutoff 10, no shots, no hardware, declared honestly).
+- Round 5 photonic lab (experiments/round5_photonic_receipt.json, sealed):
+  HOM bunching p(1,1)=0 exact; Mach-Zehnder deterministic exit with port
+  switching at phase pi; ZYQL trivalent decision ON photonic dual-rail qubits
+  (const-0 => 0, const-1 => 1, balanced => REFUSED, 1 oracle call); SU(2)
+  beam-splitter rotations: order matters (photonic analog of the braid
+  signature). Photonic Hadamard verified exact: BS50 . phase(pi/2) . BS50
+  = e^{-i pi/4} H.
+
 ## [1.7.0] - 2026-10-21
 ### Changed
 - ZYQL v2 syntax: Lisp-style s-expressions replace the Python-style surface
