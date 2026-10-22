@@ -2,6 +2,26 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.7.0] - 2026-10-21
+### Changed
+- ZYQL v2 syntax: Lisp-style s-expressions replace the Python-style surface
+  (owner decision 2026-10-21). Core is the ZeptonQL trivalent decision —
+  declared NOT quantum; quantum execution is an optional explicit layer.
+  Spec: docs/ZYQL_LISP_SPEC.md; examples: examples/*_lisp.zph;
+  .zph now highlights as Lisp on GitHub (.gitattributes, linguist-language=Lisp,
+  mapping to be dropped once Linguist registers ZEPHIRUM natively).
+- VS Code grammar updated to the v2 s-expression syntax.
+
+### Added
+- Rodada 4 (noiseless, statevector, sealed): experiments/round4_derived.py +
+  round4_derived_receipt.json — C11 Grover n=3 (matches theory to 9 decimals),
+  C12 DJ n=6 trivalent (1/0/REFUSED exact), C13 GHZ-5 parity, C14 QFT-3
+  roundtrip, C15 receipt registry sweep (6 receipts INTEGRAL), C16 Z-ANYON LAB:
+  non-Abelian braid battery (commutator L1 = 6, |11> veto exact, period-3 echo
+  verified) — NAO_ABELIANO_VERIFICADO.
+- Marketplace product line (derived, all ZeptonQL/Z-QEA based):
+  zqea-verify (live), z-anyon-lab, zq-gate, zqea-seal — see docs/MARKETPLACE.md.
+
 ## [1.6.0] - 2026-10-21
 ### Added
 - docs/PROBLEM.md: dossier da expedição científica sobre a confiabilidade da decisão trivalente ZYQL em hardware quântico real (shots mínimos empíricos, calibração do REFUSED e hipóteses H1/H2).
