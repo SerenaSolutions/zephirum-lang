@@ -7,6 +7,8 @@ experiments/chemistry/*_receipt*.json linguist-generated
 requirements-lock.txt linguist-generated
 # Brand assets are vendored media
 assets/** linguist-vendored
-# .zph is ZEPHIRUM source. Not yet registered in Linguist (see
-# docs/PARTNERSHIP.md); kept unmapped rather than faked to another language.
+# .zph is ZEPHIRUM source. ZYQL v2 syntax is Lisp-style s-expressions
+# (owner decision 2026-10-21, see docs/ZYQL_LISP_SPEC.md): highlight as Lisp
+# until Linguist registers ZEPHIRUM natively (see docs/PARTNERSHIP.md).
+*.zph linguist-language=Lisp
 *.zph -diff
