@@ -1,0 +1,242 @@
+{
+  "spec": "Z-QEA",
+  "modo": "HARDWARE REAL",
+  "hardware": "IBM Heron ibm_fez (laboratorio de teste da IBM Quantum, plano aberto; sem endosso institucional)",
+  "experimento": "Rodada A — sweep de shots da decisao trivalente (Deutsch-Jozsa n=3, 1 chamada de oraculo)",
+  "casos": [
+    "const-1",
+    "const-0",
+    "balanceado"
+  ],
+  "regra_decisao": "const-1: p(000)>0.85 -> 1 | const-0: p(000)>0.85 -> 0 | balanceado: p(000)<0.15 -> REFUSED; senao REFUSED (recusa honesta)",
+  "jobs": [
+    {
+      "shots": 512,
+      "job_id": "dbcjf7ni0auc73dv36ug"
+    },
+    {
+      "shots": 1024,
+      "job_id": "dbcjf7pgv2cc73eaft1g"
+    },
+    {
+      "shots": 2048,
+      "job_id": "dbcjf7vi0auc73dv36vg"
+    },
+    {
+      "shots": 4096,
+      "job_id": "dbcjf81gv2cc73eaft20"
+    },
+    {
+      "shots": 8192,
+      "job_id": "dbcjf87i0auc73dv3700"
+    },
+    {
+      "shots": 16384,
+      "job_id": "dbcjf8fi0auc73dv370g"
+    }
+  ],
+  "medicoes": [
+    {
+      "shots": 512,
+      "caso": "const-1",
+      "p000": 0.998,
+      "decisao": "1",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 512,
+      "caso": "const-0",
+      "p000": 1.0,
+      "decisao": "0",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 512,
+      "caso": "balanceado",
+      "p000": 0.0,
+      "decisao": "REFUSED",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 1024,
+      "caso": "const-1",
+      "p000": 0.999,
+      "decisao": "1",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 1024,
+      "caso": "const-0",
+      "p000": 0.999,
+      "decisao": "0",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 1024,
+      "caso": "balanceado",
+      "p000": 0.0,
+      "decisao": "REFUSED",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 2048,
+      "caso": "const-1",
+      "p000": 0.9985,
+      "decisao": "1",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 2048,
+      "caso": "const-0",
+      "p000": 0.998,
+      "decisao": "0",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 2048,
+      "caso": "balanceado",
+      "p000": 0.0005,
+      "decisao": "REFUSED",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 4096,
+      "caso": "const-1",
+      "p000": 0.999,
+      "decisao": "1",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 4096,
+      "caso": "const-0",
+      "p000": 0.9983,
+      "decisao": "0",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 4096,
+      "caso": "balanceado",
+      "p000": 0.0024,
+      "decisao": "REFUSED",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 8192,
+      "caso": "const-1",
+      "p000": 0.9978,
+      "decisao": "1",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 8192,
+      "caso": "const-0",
+      "p000": 0.9982,
+      "decisao": "0",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 8192,
+      "caso": "balanceado",
+      "p000": 0.001,
+      "decisao": "REFUSED",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 16384,
+      "caso": "const-1",
+      "p000": 0.9979,
+      "decisao": "1",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 16384,
+      "caso": "const-0",
+      "p000": 0.9977,
+      "decisao": "0",
+      "correto": true,
+      "recusa_espuria": false
+    },
+    {
+      "shots": 16384,
+      "caso": "balanceado",
+      "p000": 0.0015,
+      "decisao": "REFUSED",
+      "correto": true,
+      "recusa_espuria": false
+    }
+  ],
+  "curva_shots_acerto": [
+    {
+      "shots": 512,
+      "acertos": 3,
+      "de": 3,
+      "taxa": 1.0,
+      "respostas_ruins": 0
+    },
+    {
+      "shots": 1024,
+      "acertos": 3,
+      "de": 3,
+      "taxa": 1.0,
+      "respostas_ruins": 0
+    },
+    {
+      "shots": 2048,
+      "acertos": 3,
+      "de": 3,
+      "taxa": 1.0,
+      "respostas_ruins": 0
+    },
+    {
+      "shots": 4096,
+      "acertos": 3,
+      "de": 3,
+      "taxa": 1.0,
+      "respostas_ruins": 0
+    },
+    {
+      "shots": 8192,
+      "acertos": 3,
+      "de": 3,
+      "taxa": 1.0,
+      "respostas_ruins": 0
+    },
+    {
+      "shots": 16384,
+      "acertos": 3,
+      "de": 3,
+      "taxa": 1.0,
+      "respostas_ruins": 0
+    }
+  ],
+  "shots_min_empirico": 512,
+  "protocolo_declarado": {
+    "formula": "n_min(a) = ln(a)/ln(1-d), a=0.01, d=0.15",
+    "n_min_declarado": 29
+  },
+  "bound_hoeffding": {
+    "formula": "n >= ln(2/a)/(2*e^2), e=0.15, a=0.05",
+    "n_min_hoeffding": 82
+  },
+  "veredito": "VALIDADO",
+  "nota": "Todos os 3 casos acertam ja no menor nivel testado (512 shots): p(000) das constantes acima de 0.85 e do balanceado abaixo de 0.15 em todos os niveis [512, 16384]. A formula declarada (29 shots) e o bound de Hoeffding (82 shots) ficam ABAIXO do menor nivel testado — protocolo consistente com o hardware no intervalo testado; o limiar empirico exato (se existir abaixo de 512) permanece nao determinado.",
+  "colhido_em": "2026-10-22T13:06:21.176037+00:00",
+  "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada",
+  "selo_sha3_256": "9cd39440a49373600b6d1eaf79e22f6e2bdacf133491c9faf748ec71a1be9b3a"
+}
