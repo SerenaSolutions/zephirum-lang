@@ -1,0 +1,4 @@
+;; hello_world.zph — ZEPHIRUM v2 (Lisp)
+;; O Hello World canonico da casa: saudacao trivalente selada pela linguagem.
+(hello "Zephirum")
+(seal "examples/hello_world.receipt.json")

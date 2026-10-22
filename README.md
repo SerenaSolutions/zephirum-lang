@@ -9,6 +9,27 @@
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23302046-gold)
 
+## Hello World
+
+The baptism of the language — a trivalent greeting, sealed by ZEPHIRUM itself:
+
+```lisp
+;; hello_world.zph — ZEPHIRUM v2 (Lisp)
+(hello "Zephirum")
+(seal "examples/hello_world.receipt.json")
+```
+
+```console
+$ python3 src/zyql_lisp.py examples/hello_world.zph
+Hello, Zephirum! | decisao = 1
+SELO: 1eb3230f4361c795ee68976b04ea7031af4fe1c44b0256e6410b5856458eb9de
+```
+
+The `hello` form prints the greeting and returns the trivalent verdict `1`
+(a greeting is always permitted). The `seal` form writes a Z-QEA receipt
+(SHA3-256) of everything executed — the Hello World carries a sealed receipt,
+as every decision in this house does. Source: [`examples/hello_world.zph`](examples/hello_world.zph).
+
 ## Evidence — with the quantum figures
 
 ![S3 fusion channels measured on IBM Heron](assets/proofs/s3-fusion-hardware.png)

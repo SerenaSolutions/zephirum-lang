@@ -169,6 +169,13 @@ def run(program_path):
                 if isinstance(sub, list):
                     process(sub)
             return
+        if head == "hello":
+            quem = f[1] if len(f) > 1 else "world"
+            r = {"saudacao": "Hello, %s!" % quem, "decisao": "1",
+                 "nota": "saudacao permitida — ZEPHIRUM v2 (Lisp): o primeiro Hello World da casa, selado pela propria linguagem"}
+            print(r["saudacao"], "| decisao =", r["decisao"])
+            ctx["results"]["hello"] = r
+            return)
         if head == "encoding":
             return
         if head == "test":

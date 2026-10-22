@@ -11,6 +11,10 @@ All notable changes to the ZEPHIRUM language are documented here.
 ## [1.7.2] - 2026-10-21
 ### Added
 - Problem solved: minimum shots for reliable trivalent decisions measured on IBM Heron ibm_fez (Rodada A, 18/18 correct at 512..16384, protocol VALIDADO) — docs/PROBLEM.md, docs/ZYQL_STATISTICAL_PROTOCOL.md §6, experiments/refusal_receipt.json (sealed)
+- Hello World canônico da linguagem: forma `(hello)` no núcleo Lisp, exemplo `examples/hello_world.zph` selado (Z-QEA).
+
+## [1.7.2] - 2026-10-21
+### Added
 - Rodada 6 — HARDWARE REAL (IBM Quantum ibm_marrakesh, job dbclitfi0auc73dv77dg,
   512 shots, plano open ativo do dono): bateria ZYQL completa no silicio — DJ
   trivalente (1/0/REFUSED), palavras de tracado S3 (B_R B_S)^2 -> |01> vs

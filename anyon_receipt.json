@@ -1,0 +1,97 @@
+{
+ "spec": "Z-QEA",
+ "modulo": "anyon_lab.py (SerenaSolutions/z-anyon-lab)",
+ "data": "2026-10-22T00:19:38+00:00",
+ "modo": "SIMULACAO STATEVECTOR LOCAL (numpy, aritmetica exata) \u2014 sem hardware, sem shots, sem endosso",
+ "model": "S3 qutrit miniature (fusion space dim 3, |11> vetoed) \u2014 declarado: nao e o duplo quantico completo",
+ "resultados": {
+  "commutator_L1": 6,
+  "braids_noncommuting": true,
+  "braid_words": {
+   "1": {
+    "BR_BS_k": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "BS_BR_k": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "diverge": true
+   },
+   "2": {
+    "BR_BS_k": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "BS_BR_k": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "diverge": true
+   },
+   "3": {
+    "BR_BS_k": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "BS_BR_k": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "diverge": false
+   },
+   "4": {
+    "BR_BS_k": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "BS_BR_k": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "diverge": true
+   },
+   "5": {
+    "BR_BS_k": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "BS_BR_k": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "diverge": true
+   },
+   "6": {
+    "BR_BS_k": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "BS_BR_k": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "diverge": false
+   }
+  },
+  "diverge_k_not_multiple_of_3": true,
+  "period_3_echo": true,
+  "forbidden_channel_p": 0.0,
+  "verdict": "NAO_ABELIANO_VERIFICADO"
+ },
+ "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada",
+ "selo_sha3_256": "5070172048ac15b383289fa8eb588c33c8dadc0dc2fa039499bee68f1602a8bd"
+}
