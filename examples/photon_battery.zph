@@ -1,0 +1,14 @@
+;; ============================================================================
+;; ZEPHIRUM v2 (ZYQL) — BATERIA FOTONICA, escrita na linguagem da casa.
+;; Executada pelo interpretador src/zyql_lisp.py: o recibo selado abaixo e
+;; gerado PELA linguagem, com qubits fotonicos dual-rail (espaco de Fock exato).
+;; ============================================================================
+(photon-lab round5-fotonica
+  (encoding dual-rail)
+  (test hom-bunching (expect p11 = 0))
+  (test mzi-interference (expect deterministic-exit))
+  (test trivalent const-0 (expect decision 0))
+  (test trivalent const-1 (expect decision 1))
+  (test trivalent balanced (expect decision REFUSED))
+  (test braid-order (expect commutator != 0))
+  (seal "experiments/round5_photonic_receipt.json"))
