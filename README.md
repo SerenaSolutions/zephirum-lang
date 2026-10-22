@@ -22,7 +22,7 @@ The baptism of the language — a trivalent greeting, sealed by ZEPHIRUM itself:
 ```console
 $ python3 src/zyql_lisp.py examples/hello_world.zph
 Hello, Zephirum! | decisao = 1
-SELO: 1eb3230f4361c795ee68976b04ea7031af4fe1c44b0256e6410b5856458eb9de
+SELO: <sha3-256 do recibo — carimbo temporal, varia por execucao>
 ```
 
 The `hello` form prints the greeting and returns the trivalent verdict `1`
