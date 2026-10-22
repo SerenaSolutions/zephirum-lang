@@ -1,0 +1,5 @@
+;; ZYQL v2 — ZeptonQL trivalent core (classical, NOT quantum)
+(decide (model governance) (purpose "Is use x permitted?")
+  (rule (oracle all-ones)  -> 1)
+  (rule (oracle all-zeros) -> 0)
+  (rule (oracle balanced)  -> REFUSED))
