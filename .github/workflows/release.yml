@@ -39,7 +39,7 @@ jobs:
         run: python tests/test_canonical.py
 
       - name: Build provenance attestation (SLSA)
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: "dist/*"
 
