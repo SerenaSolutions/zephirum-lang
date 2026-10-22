@@ -50,14 +50,17 @@ Constant purpose p(000) = 0.9844 (job `db6ded84qg6s73c4jvug`); same-task
 confrontation vs textbook Qiskit (job `db6dklcvf2bc73d122t0`): depth 2 /
 0 two-qubit gates vs depth 10 / 3 CZ. See README and `docs/`.
 
-## 5. Solved problem — reliable trivalent decisions: minimum shots on real hardware (2026-10-22) ⭐
+## 5. Minimum shots for reliable trivalent decision (Hardware Validation) ⭐
 
-**Problem** (docs/PROBLEM.md): how many shots does a real QPU need to decide
-trivalently (1 / 0 / REFUSED) with statistical confidence, and when must it refuse?
+**Problem dossier:** [`docs/PROBLEM.md`](PROBLEM.md) — empirical reliability of ZYQL trivalent decision (1 / 0 / REFUSED) under hardware readout noise.
 
-**Solution** (Rodada A, measured on IBM Heron ibm_fez): 18/18 correct decisions (100%)
-at every tested shots level 512..16384, zero spurious refusals; p(0n) >= 0.998 for
-constants, <= 0.0024 for balanced. Empirical minimum shots: 512 (smallest tested);
-declared formula (29) and Hoeffding bound (82) both below it. Protocol VALIDATED on
-the tested range. Sealed receipt (Z-QEA, clean rule):
-[experiments/refusal_receipt.json](../experiments/refusal_receipt.json)
+| Evidence | Mode | Result | Receipt |
+|----------|------|--------|---------|
+| Shot sweep (512 to 16384) | **IBM Heron ibm_fez** | 100% accuracy (3/3 cases across 6 shot levels), 0 spurious refusals | [`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json) |
+| Protocol verdict | Hardware validation | **VALIDADO** in interval [512, 16384] shots | same |
+| Open gap | Sub-512 shots | Real lower bound between 29/82 shots and 512 shots unmeasured; Rodada B proposed | same |
+
+- Hardware: IBM Heron `ibm_fez` (open plan, test laboratory)
+- Jobs: `dbcjf7ni0auc73dv36ug` (512), `dbcjf7pgv2cc73eaft1g` (1024), `dbcjf7vi0auc73dv36vg` (2048), `dbcjf81gv2cc73eaft20` (4096), `dbcjf87i0auc73dv3700` (8192), `dbcjf8fi0auc73dv370g` (16384)
+- Master receipt seal: `9cd39440a49373600b6d1eaf79e22f6e2bdacf133491c9faf748ec71a1be9b3a`
+- Full details in [`docs/ZYQL_STATISTICAL_PROTOCOL.md`](ZYQL_STATISTICAL_PROTOCOL.md#6-validação-em-hardware).

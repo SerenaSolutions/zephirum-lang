@@ -2,6 +2,12 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.7.3] - 2026-10-22
+### Added
+- Validação do Protocolo Estatístico ZYQL em Hardware Real (IBM Heron `ibm_fez`, Rodada A): sweep de 512 a 16384 shots no Deutsch-Jozsa $n=3$ trivalente com 100% de acerto (3/3 casos em todos os 6 níveis), zero recusa espúria e $p(000) \ge 0.9977$ para constantes / $\le 0.0024$ para balanceado. Veredicto **VALIDADO** no intervalo [512, 16384] com recibo selado SHA3-256 (`experiments/refusal_receipt.json`).
+- Documentação da lacuna aberta abaixo de 512 shots em `docs/ZYQL_STATISTICAL_PROTOCOL.md` e proposta da Rodada B (sweep 16..256 shots).
+- Atualização do índice de provas de conceito em `docs/PROOFS.md` (seção do problema com links para `docs/PROBLEM.md` e `experiments/refusal_receipt.json`).
+
 ## [1.7.2] - 2026-10-21
 ### Added
 - Problem solved: minimum shots for reliable trivalent decisions measured on IBM Heron ibm_fez (Rodada A, 18/18 correct at 512..16384, protocol VALIDADO) — docs/PROBLEM.md, docs/ZYQL_STATISTICAL_PROTOCOL.md §6, experiments/refusal_receipt.json (sealed)
