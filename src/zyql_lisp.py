@@ -175,7 +175,7 @@ def run(program_path):
                  "nota": "saudacao permitida — ZEPHIRUM v2 (Lisp): o primeiro Hello World da casa, selado pela propria linguagem"}
             print(r["saudacao"], "| decisao =", r["decisao"])
             ctx["results"]["hello"] = r
-            return)
+            return
         if head == "encoding":
             return
         if head == "test":
