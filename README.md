@@ -78,6 +78,13 @@ g = ZYQLQuantumGate(3, lambda x: 1); print(g.run_quantum())"
 (No install? `PYTHONPATH=src` works too. The old `from src.zyql_quantum_gate`
 quickstart was broken — fixed in v1.6.0, see docs/AUDIT.md.)
 
+
+## Learn
+
+- `docs/LEARN.md` — progressive tutorial: first decision to sealed hardware receipts
+- `docs/COOKBOOK.md` — copy-paste recipes, every one executed and recorded
+- `docs/MIGRATION.md` — embedding Zephirum in Python, C and CI pipelines
+
 ## Layout
 
 - `src/` - kernel (state-vector), OpenQASM 3 transpiler, trivalent gate,
