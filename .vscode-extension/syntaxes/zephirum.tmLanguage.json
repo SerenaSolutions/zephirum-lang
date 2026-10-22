@@ -1,7 +1,8 @@
 {"name":"ZEPHIRUM","scopeName":"source.zephirum","patterns":[
+ {"match":";.*$","name":"comment.line.semicolon.zephirum"},
+ {"match":"\\((decide|rule|quantum|circuit|measure|verify|qubits|oracle|model|purpose|word|fusion-channels|anyons)\\b","name":"keyword.control.zephirum"},
  {"match":"\\b(1|0|REFUSED)\\b","name":"constant.language.zephirum"},
- {"match":"\\b(ZZ|XX|entangled|outcome|needed)\\b","name":"support.function.zephirum"},
- {"match":"\\b(MODEL|PURPOSE)\\b","name":"keyword.control.zephirum"},
- {"match":"//.*$","name":"comment.line.zephirum"},
+ {"match":"\\b(h|x|y|z|cz|cx)\\b","name":"support.function.zephirum"},
+ {"match":"->","name":"keyword.operator.arrow.zephirum"},
  {"match":"\"[^\"]*\"","name":"string.quoted.double.zephirum"},
- {"match":"\\b(bell_pair|quantum_circuit)\\b","name":"entity.name.type.zephirum"}]}
+ {"match":"[()\\[\\]]","name":"punctuation.section.zephirum"}]}
