@@ -57,3 +57,20 @@ The suite records `drift_detectado` per test. Observed: DJ balanced live run fla
 drift (p̂ = 0.9531 with q ≈ 0.02 implies measurable decay relative to calibration).
 Rule: a verdict with `drift_detectado = true` remains valid only within its receipt's
 session window; cross-session claims require a fresh calibration receipt.
+
+## 6. Hardware validation — Rodada A (measured on silicon)
+
+Measured on IBM Heron `ibm_fez` (IBM Quantum open plan, test laboratory; no institutional
+endorsement), jobs `dbcjf7ni0auc73dv36ug .. dbcjf8fi0auc73dv370g`, sealed receipt:
+[`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json)
+(SHA3-256 `9cd39440a49373600b6d1eaf79e22f6e2bdacf133491c9faf748ec71a1be9b3a`).
+
+Shots sweep {512, 1024, 2048, 4096, 8192, 16384} on the trivalent DJ battery (n=3,
+one oracle call): **18/18 correct decisions (100%) at every level**, zero spurious
+REFUSED. Measured p(0...0): constant cases >= 0.998; balanced case <= 0.0024 — the
+declared band holds with order-of-magnitude margin on this hardware.
+
+**Verdict: VALIDADO.** The declared minimum-shots formula (n_min(0.01) = 29) and the
+Hoeffding bound (82 shots at eps=0.15, alpha=0.05) both sit BELOW the smallest tested
+level (512): the protocol is consistent with the hardware across [512, 16384]. The
+exact empirical threshold below 512 shots remains undetermined (untested range).

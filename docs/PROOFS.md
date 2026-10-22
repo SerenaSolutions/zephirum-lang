@@ -49,3 +49,15 @@ battery geometry is angstrom).
 Constant purpose p(000) = 0.9844 (job `db6ded84qg6s73c4jvug`); same-task
 confrontation vs textbook Qiskit (job `db6dklcvf2bc73d122t0`): depth 2 /
 0 two-qubit gates vs depth 10 / 3 CZ. See README and `docs/`.
+
+## 5. Solved problem — reliable trivalent decisions: minimum shots on real hardware (2026-10-22) ⭐
+
+**Problem** (docs/PROBLEM.md): how many shots does a real QPU need to decide
+trivalently (1 / 0 / REFUSED) with statistical confidence, and when must it refuse?
+
+**Solution** (Rodada A, measured on IBM Heron ibm_fez): 18/18 correct decisions (100%)
+at every tested shots level 512..16384, zero spurious refusals; p(0n) >= 0.998 for
+constants, <= 0.0024 for balanced. Empirical minimum shots: 512 (smallest tested);
+declared formula (29) and Hoeffding bound (82) both below it. Protocol VALIDATED on
+the tested range. Sealed receipt (Z-QEA, clean rule):
+[experiments/refusal_receipt.json](../experiments/refusal_receipt.json)
