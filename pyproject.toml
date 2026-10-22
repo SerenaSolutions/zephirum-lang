@@ -3,9 +3,9 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "zq-gate"
-version = "1.5.0"
-description = "ZQ-GATE: verified quantum decision gate — trivalent verdicts (1/0/REFUSED) with SHA3-256 receipts"
+name = "zephirum"
+version = "1.7.2"
+description = "ZEPHIRUM: Lisp-style quantum programming language with the ZYQL trivalent decision core (1/0/REFUSED)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
