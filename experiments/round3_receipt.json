@@ -1,0 +1,127 @@
+{
+  "spec": "Z-QEA",
+  "modulo": "experiments/round3_battery.py + analyze_round3.py",
+  "data": "2026-10-22T10:00:36-03:00",
+  "modo": "HARDWARE REAL (IBM Heron ibm_fez, laboratorio de teste, sem endosso)",
+  "job_id": "dbcj8j0c77vs7386d5n0",
+  "shots": 4096,
+  "circuitos": 15,
+  "rodada": "3 \u2014 ESCALADA DA DECISAO TRIVALENTE",
+  "C8_DJ_escala": {
+    "pontos": 6,
+    "aprovados": "6/6",
+    "nota": "p(0^n)>0.9 decide const (1 ou 0); p(0^n)<0.1 => REFUSED (balanceado); 1 chamada de oraculo",
+    "detalhe": [
+      {
+        "n": 4,
+        "caso": "const-1",
+        "p_zero_n": 0.9431,
+        "decisao": "1",
+        "passou": true
+      },
+      {
+        "n": 4,
+        "caso": "const-0",
+        "p_zero_n": 0.9358,
+        "decisao": "0",
+        "passou": true
+      },
+      {
+        "n": 4,
+        "caso": "balanceado",
+        "p_zero_n": 0.0034,
+        "decisao": "REFUSED",
+        "passou": true
+      },
+      {
+        "n": 5,
+        "caso": "const-1",
+        "p_zero_n": 0.9407,
+        "decisao": "1",
+        "passou": true
+      },
+      {
+        "n": 5,
+        "caso": "const-0",
+        "p_zero_n": 0.9331,
+        "decisao": "0",
+        "passou": true
+      },
+      {
+        "n": 5,
+        "caso": "balanceado",
+        "p_zero_n": 0.0017,
+        "decisao": "REFUSED",
+        "passou": true
+      }
+    ]
+  },
+  "C9_GROVER_amplificacao": {
+    "pontos": 3,
+    "teoria": "1 iter:1.0, 2:0.25, 3:1.0 (rotacao periodica)",
+    "detalhe": [
+      {
+        "iteracoes": 1,
+        "p_11": 0.9202,
+        "teoria_p11": 1.0,
+        "dominante": "11"
+      },
+      {
+        "iteracoes": 2,
+        "p_11": 0.2607,
+        "teoria_p11": 0.25,
+        "dominante": "00"
+      },
+      {
+        "iteracoes": 3,
+        "p_11": 0.2351,
+        "teoria_p11": 1.0,
+        "dominante": "00"
+      }
+    ]
+  },
+  "C10_palavras_k7_12": {
+    "pontos": 6,
+    "aprovados_periodo3": "6/6",
+    "detalhe": [
+      {
+        "k": 7,
+        "dominante_medido": "ch2",
+        "previsto_periodo3": "ch2",
+        "bate": true
+      },
+      {
+        "k": 8,
+        "dominante_medido": "ch1",
+        "previsto_periodo3": "ch1",
+        "bate": true
+      },
+      {
+        "k": 9,
+        "dominante_medido": "ch0",
+        "previsto_periodo3": "ch0",
+        "bate": true
+      },
+      {
+        "k": 10,
+        "dominante_medido": "ch2",
+        "previsto_periodo3": "ch2",
+        "bate": true
+      },
+      {
+        "k": 11,
+        "dominante_medido": "ch1",
+        "previsto_periodo3": "ch1",
+        "bate": true
+      },
+      {
+        "k": 12,
+        "dominante_medido": "ch0",
+        "previsto_periodo3": "ch0",
+        "bate": true
+      }
+    ]
+  },
+  "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada",
+  "selo_sha3_256": "0f0882ced020b26e5bf113eaff0aa014f2ee386efa4aa5263117ad7ae2284b0f"
+}
