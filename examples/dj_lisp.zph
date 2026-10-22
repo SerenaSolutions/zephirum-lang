@@ -1,0 +1,5 @@
+;; ZYQL v2 — quantum layer: Deutsch-Jozsa, one oracle call, trivalent verdict
+(quantum dj (oracle f)
+  (qubits 6)
+  (circuit (h 0..5) (oracle f) (h 0..5))
+  (measure (0 0 0 0 0 0) -> trivalent))
