@@ -1,7 +1,7 @@
 # ZYQL Statistical Protocol — formal decision specification
 
 Status: ESPECIFICAÇÃO FORMAL (implemented by `tests/ibm_quantum/zca_conformidade_ibm.py`,
-receipts archived in `zca_conformidade_live.json` / `zca_conformidade_sim.json`)
+receipts archived in `zca_conformidade_live.json` / `zca_conformidade_sim.json` / `experiments/refusal_receipt.json`)
 Date: 2026-10-19 (ISO 8601) · Band: δ = 0.15 (declared) · Reference shots: n = 2048
 
 ## 1. Decision states
@@ -58,19 +58,31 @@ drift (p̂ = 0.9531 with q ≈ 0.02 implies measurable decay relative to calibra
 Rule: a verdict with `drift_detectado = true` remains valid only within its receipt's
 session window; cross-session claims require a fresh calibration receipt.
 
-## 6. Hardware validation — Rodada A (measured on silicon)
+## 6. Validação em hardware
 
-Measured on IBM Heron `ibm_fez` (IBM Quantum open plan, test laboratory; no institutional
-endorsement), jobs `dbcjf7ni0auc73dv36ug .. dbcjf8fi0auc73dv370g`, sealed receipt:
-[`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json)
-(SHA3-256 `9cd39440a49373600b6d1eaf79e22f6e2bdacf133491c9faf748ec71a1be9b3a`).
+Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots no processador quântico **IBM Heron (`ibm_fez`)** (plano aberto da IBM Quantum, operado como laboratório de teste sem endosso institucional). O recibo selado em [`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json) (SHA3-256 `9cd39440a49373600b6d1eaf79e22f6e2bdacf133491c9faf748ec71a1be9b3a`) documenta os seguintes resultados medidos:
 
-Shots sweep {512, 1024, 2048, 4096, 8192, 16384} on the trivalent DJ battery (n=3,
-one oracle call): **18/18 correct decisions (100%) at every level**, zero spurious
-REFUSED. Measured p(0...0): constant cases >= 0.998; balanced case <= 0.0024 — the
-declared band holds with order-of-magnitude margin on this hardware.
+### Jobs e níveis de shots testados (Deutsch-Jozsa n=3, 1 chamada de oráculo)
+- **512 shots:** job `dbcjf7ni0auc73dv36ug` — Acerto 3/3 (100%), recusa espúria: 0
+- **1024 shots:** job `dbcjf7pgv2cc73eaft1g` — Acerto 3/3 (100%), recusa espúria: 0
+- **2048 shots:** job `dbcjf7vi0auc73dv36vg` — Acerto 3/3 (100%), recusa espúria: 0
+- **4096 shots:** job `dbcjf81gv2cc73eaft20` — Acerto 3/3 (100%), recusa espúria: 0
+- **8192 shots:** job `dbcjf87i0auc73dv3700` — Acerto 3/3 (100%), recusa espúria: 0
+- **16384 shots:** job `dbcjf8fi0auc73dv370g` — Acerto 3/3 (100%), recusa espúria: 0
 
-**Verdict: VALIDADO.** The declared minimum-shots formula (n_min(0.01) = 29) and the
-Hoeffding bound (82 shots at eps=0.15, alpha=0.05) both sit BELOW the smallest tested
-level (512): the protocol is consistent with the hardware across [512, 16384]. The
-exact empirical threshold below 512 shots remains undetermined (untested range).
+### Métricas estatísticas observadas
+- **Conformidade de probabilidade:** $p(000) \ge 0.9977$ para casos constantes (const-1 e const-0) e $p(000) \le 0.0024$ para o caso balanceado em todos os 6 níveis.
+- **Taxa de acerto:** 100% (3/3 casos corretos) em todas as medições de 512 a 16384 shots, com zero recusas espúrias.
+- **Shots mínimo empírico testado:** 512 shots (menor nível testado).
+- **Comparação com o modelo teórico:**
+  - Fórmula declarada do protocolo: $n_{\min}(\alpha) = \ln(\alpha)/\ln(1-\delta) = 29$ shots ($\alpha = 0.01, \delta = 0.15$).
+  - Cota de Hoeffding: $n \ge \frac{\ln(2/\alpha)}{2\epsilon^2} = 82$ shots ($\epsilon = 0.15, \alpha = 0.05$).
+  - Ambas as previsões teóricas (29 e 82 shots) situam-se abaixo do menor nível empírico testado (512 shots).
+- **Veredicto:** **VALIDADO** no intervalo $[512, 16384]$ shots.
+
+### Limitações honestas e lacunas abertas
+1. **Lacuna no limite inferior real:** Como a varredura da Rodada A iniciou em 512 shots, o ponto exato de inflexão (entre 29 e 512 shots) onde o ruído de hardware começa a degradar a decisão trivalente não foi medido. O limite inferior empírico exato permanece uma **lacuna aberta**.
+2. **Escopo do algoritmo e hardware:** A validação cobre apenas o algoritmo Deutsch-Jozsa $n=3$ em um único backend quântico (**IBM Heron `ibm_fez`**).
+
+### Próximos passos (Rodada B proposta)
+Para fechar a lacuna aberta abaixo de 512 shots, propõe-se a **Rodada B**: varredura de alta resolução nos níveis $\{16, 32, 64, 128, 256\}$ shots, mapeando o limiar crítico exato onde ocorrem decisões incorretas ou recusas espúrias (`REFUSED`).
