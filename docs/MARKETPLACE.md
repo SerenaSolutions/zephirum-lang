@@ -37,3 +37,12 @@ Outputs: `status` (INTEGRAL/BROKEN), `seal` (recomputed SHA3-256).
 Z-QEA receipts align with audit-trail expectations of governance standards
 (e.g., ISO/IEC 42001 AI management, in-house editorial standard) — the Action
 turns any CI pipeline into a checkpoint with tamper-evident evidence.
+
+## Product line (derived from ZeptonQL / Z-QEA) — 2026-10-21
+
+| Product | What it does | Repo | Status |
+|---------|--------------|------|--------|
+| Z-QEA Receipt Verifier | verify SHA3-256 seal in CI | SerenaSolutions/zqea-verify | **LIVE** in Marketplace (@v1) |
+| Z-Anyon Lab | non-Abelian anyon braid battery (S3 qutrit) with sealed receipt | SerenaSolutions/z-anyon-lab | release v1 ready — one-click publish |
+| ZQ-GATE | trivalent decision battery (1/0/REFUSED) in CI | SerenaSolutions/zq-gate | release v1 ready — one-click publish |
+| Z-QEA Receipt Sealer | seal any JSON artifact with SHA3-256 in CI | SerenaSolutions/zqea-seal | release v1 ready — one-click publish |
