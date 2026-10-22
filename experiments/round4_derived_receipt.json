@@ -1,0 +1,160 @@
+{
+ "spec": "Z-QEA",
+ "modulo": "experiments/round4_derived.py",
+ "data": "2026-10-22T00:18:50+00:00",
+ "modo": "SIMULACAO STATEVECTOR LOCAL (numpy, aritmetica exata, kernel da casa) \u2014 sem hardware, sem shots, sem endosso",
+ "rodada": "4",
+ "hipotese": "produtos derivados do kernel ZEPHIRUM/ZeptonQL (zq-gate, zqea-seal, z-anyon-lab, lisp syntax) repousam sobre capacidades nucleares verificaveis: amplificacao Grover, decisao trivalente DJ escalada, correlacao GHZ, QFT exato, integridade do registro e nao-comutatividade do tracado de anions S3",
+ "resultados": {
+  "C11_grover3": {
+   "curva_p_alvo": {
+    "1": 0.78125,
+    "2": 0.9453125,
+    "3": 0.330078125,
+    "4": 0.012207031
+   },
+   "curva_teorica_sin2_(2k+1)theta": {
+    "1": 0.78125,
+    "2": 0.9453125,
+    "3": 0.330078125,
+    "4": 0.012207031
+   },
+   "melhor_iteracao": 2,
+   "p_max": 0.9453125,
+   "veredito": "1"
+  },
+  "C12_dj6": {
+   "const-1": {
+    "p_0n": 1.0,
+    "decisao": "1"
+   },
+   "const-0": {
+    "p_0n": 1.0,
+    "decisao": "0"
+   },
+   "balanceado": {
+    "p_0n": 0.0,
+    "decisao": "REFUSED"
+   }
+  },
+  "C13_ghz5": {
+   "correlacoes_ZiZj": {
+    "Z0Z1": 1.0,
+    "Z0Z2": 1.0,
+    "Z0Z3": 1.0,
+    "Z0Z4": 1.0,
+    "Z1Z2": 1.0,
+    "Z1Z3": 1.0,
+    "Z1Z4": 1.0,
+    "Z2Z3": 1.0,
+    "Z2Z4": 1.0,
+    "Z3Z4": 1.0
+   },
+   "max_desvio_de_1": 0.0,
+   "veredito": "EMARANHADO"
+  },
+  "C14_qft3_roundtrip": {
+   "erro_L2_vs_identidade": 1e-15,
+   "veredito": "INTEGRAL"
+  },
+  "C15_registro": {
+   "s3_qutrit_final_receipt.json": "INTEGRAL",
+   "s3_qutrit_full_receipt.json": "INTEGRAL",
+   "s3_qutrit_noiseless_receipt.json": "INTEGRAL",
+   "scientific_sweep2_receipt.json": "INTEGRAL",
+   "scientific_sweep_receipt.json": "INTEGRAL",
+   "pennylane_crosscheck_receipt.json": "INTEGRAL"
+  },
+  "C16_z_anyon_lab": {
+   "comutador_L1_BR_BS": 6,
+   "nao_abeliano": true,
+   "palavras_de_tracado": {
+    "1": {
+     "BR_BS_k": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "BS_BR_k": [
+      0.0,
+      -1.0,
+      0.0
+     ],
+     "canais_divergem": true
+    },
+    "2": {
+     "BR_BS_k": [
+      0.0,
+      -1.0,
+      0.0
+     ],
+     "BS_BR_k": [
+      0.0,
+      0.0,
+      1.0
+     ],
+     "canais_divergem": true
+    },
+    "3": {
+     "BR_BS_k": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "BS_BR_k": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "canais_divergem": false
+    },
+    "4": {
+     "BR_BS_k": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "BS_BR_k": [
+      0.0,
+      -1.0,
+      0.0
+     ],
+     "canais_divergem": true
+    },
+    "5": {
+     "BR_BS_k": [
+      0.0,
+      -1.0,
+      0.0
+     ],
+     "BS_BR_k": [
+      0.0,
+      0.0,
+      1.0
+     ],
+     "canais_divergem": true
+    },
+    "6": {
+     "BR_BS_k": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "BS_BR_k": [
+      1.0,
+      0.0,
+      0.0
+     ],
+     "canais_divergem": false
+    }
+   },
+   "divergem_nos_k_nao_multiplos_de_3": true,
+   "eco_do_periodo_3": true,
+   "veto_canal_vedado_p11": 0.0,
+   "veredito": "NAO_ABELIANO_VERIFICADO",
+   "nota": "palavras de tracado de periodo 3: as duas ordens coincidem em W^3k (eco do periodo, ja documentado na rodada 3) e divergem fora dele \u2014 nao-abelianidade vem do comutador L1=6 e da divergencia entre os ecos"
+  }
+ },
+ "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada",
+ "selo_sha3_256": "b76cdabdcb8ca2e23acbaf65f5c8930af89f5d39dfcf8144ad0201c02b5b8fdf"
+}
