@@ -1,0 +1,109 @@
+{
+ "spec": "Z-QEA",
+ "modulo": "experiments/round6_hardware.py",
+ "data": "2026-10-22T00:32:51+00:00",
+ "modo": "HARDWARE REAL (IBM Quantum, ibm_marrakesh, 156 qubits, plano open do dono) \u2014 ruido fisico real, 512 shots, sem endosso da IBM",
+ "rodada": "6",
+ "job": {
+  "id": "dbclitfi0auc73dv77dg",
+  "backend": "ibm_marrakesh",
+  "shots": 512,
+  "circuits": [
+   "dj_const1",
+   "dj_const0",
+   "dj_balanced",
+   "braid_RS2",
+   "braid_SR2",
+   "grover2_11"
+  ]
+ },
+ "hipotese": "o nucleo trivalente do ZYQL e o tracado nao-abeliano S3 funcionam em hardware supercondutor real dentro da banda de ruido declarada",
+ "resultados": {
+  "dj_const1": {
+   "counts": {
+    "00": 502,
+    "01": 9,
+    "10": 1
+   },
+   "shots": 512,
+   "p_alvo": 0.9805,
+   "esperado": "00",
+   "desvio_abs": 0.0195,
+   "dentro_da_banda_0.15": true,
+   "decisao": "1"
+  },
+  "dj_const0": {
+   "counts": {
+    "00": 494,
+    "01": 16,
+    "10": 2
+   },
+   "shots": 512,
+   "p_alvo": 0.9648,
+   "esperado": "00",
+   "desvio_abs": 0.0352,
+   "dentro_da_banda_0.15": true,
+   "decisao": "0"
+  },
+  "dj_balanced": {
+   "counts": {
+    "11": 489,
+    "10": 11,
+    "00": 7,
+    "01": 5
+   },
+   "shots": 512,
+   "p_alvo": 0.9551,
+   "esperado": "11",
+   "desvio_abs": 0.0449,
+   "dentro_da_banda_0.15": true,
+   "decisao": "REFUSED"
+  },
+  "braid_RS2": {
+   "counts": {
+    "01": 500,
+    "00": 8,
+    "11": 3,
+    "10": 1
+   },
+   "shots": 512,
+   "p_alvo": 0.9766,
+   "esperado": "01",
+   "desvio_abs": 0.0234,
+   "dentro_da_banda_0.15": true,
+   "decisao": "NAO_ABELIANO"
+  },
+  "braid_SR2": {
+   "counts": {
+    "10": 505,
+    "01": 1,
+    "00": 4,
+    "11": 2
+   },
+   "shots": 512,
+   "p_alvo": 0.9863,
+   "esperado": "10",
+   "desvio_abs": 0.0137,
+   "dentro_da_banda_0.15": true,
+   "decisao": "NAO_ABELIANO"
+  },
+  "grover2_11": {
+   "counts": {
+    "11": 495,
+    "10": 12,
+    "01": 4,
+    "00": 1
+   },
+   "shots": 512,
+   "p_alvo": 0.9668,
+   "esperado": "11",
+   "desvio_abs": 0.0332,
+   "dentro_da_banda_0.15": true,
+   "decisao": "AMPLIFICADO"
+  }
+ },
+ "nao_abeliano_no_hardware": true,
+ "veredito_geral": "HARDWARE_OK",
+ "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com selo_sha3_256 REMOVIDO da entrada",
+ "selo_sha3_256": "2b299da473407bfda5c76a059dc4922646f648a47f82b499ba3293472ccbe46d"
+}
