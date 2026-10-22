@@ -52,3 +52,22 @@ Nothing about the seal protocol changes.
 Lisp is the closest registered Linguist language to ZYQL v2. This is an
 explicit, documented mapping (owner decision) — when Linguist registers
 ZEPHIRUM, the mapping is dropped in favor of native highlighting.
+
+## Photonic layer (dual-rail qubits, verified round 5)
+
+```lisp
+(photon-lab round5-fotonica
+  (encoding dual-rail)                     ; |0_L>=|1,0>  |1_L>=|0,1>
+  (test hom-bunching (expect p11 = 0))     ; two photons, 50:50 BS
+  (test mzi-interference (expect deterministic-exit))
+  (test trivalent const-0 (expect decision 0))
+  (test trivalent const-1 (expect decision 1))
+  (test trivalent balanced (expect decision REFUSED))
+  (test braid-order (expect commutator != 0))
+  (seal "experiments/round5_photonic_receipt.json"))
+```
+
+The interpreter is `src/zyql_lisp.py` — programs are .zph s-expressions and the
+sealed Z-QEA receipt is emitted BY the language itself. Photonic Hadamard
+(verified exact): BS50 . phase(pi/2 on rail 1) . BS50 = e^{-i pi/4} H — a
+Mach-Zehnder with internal phase pi/2 IS the Hadamard.
