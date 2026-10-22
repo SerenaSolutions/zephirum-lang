@@ -1,0 +1,6 @@
+;; ZYQL v2 — quantum layer: non-Abelian anyons (S3 qutrit miniature)
+(quantum braid (anyons s3-qutrit)
+  (fusion-channels ch0 ch1 ch2)   ; dimension 3; |11> vetoed
+  (word R S R S)                  ; order matters — commutator L1 = 6
+  (word S R S R)                  ; echo of period 3 documented in round 3
+  (verify (commutator-L1 != 0) (veto-forbidden) (order-matters)))
