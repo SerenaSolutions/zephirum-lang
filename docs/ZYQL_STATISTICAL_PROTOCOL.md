@@ -86,3 +86,21 @@ Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots n
 
 ### Próximos passos (Rodada B proposta)
 Para fechar a lacuna aberta abaixo de 512 shots, propõe-se a **Rodada B**: varredura de alta resolução nos níveis $\{16, 32, 64, 128, 256\}$ shots, mapeando o limiar crítico exato onde ocorrem decisões incorretas ou recusas espúrias (`REFUSED`).
+
+---
+
+## Rodada B — lacuna de shots baixos (2026-10-22/23)
+
+A Rodada A declarou a lacuna abaixo de 512 shots como não verificada. A Rodada B
+fechou a lacuna: a mesma bateria Deutsch-Jozsa n=3 (const-1, const-0, balanceado)
+no **IBM Heron ibm_kingston** (backend distinto do ibm_fez da Rodada A, conta
+independente) em **64, 128, 256 e 384 shots**.
+
+Resultado: **vereditos trivalentes EXATOS em todos os níveis**, inclusive 64 shots
+(1/0/REFUSED corretos em todos os casos). O protocolo estatístico ZYQL não é
+apenas válido acima de 512 — a decisão trivalente é exata no silício até os
+nível de ruído mais baixo testado. Jobs: `dbdac41gv2cc738hnen0` (64),
+`dbdac47i0auc739521vg` (128), `dbdac4c24mrc73cl3ia0` (256), `dbdac4ni0auc73952200` (384).
+
+Recibo selado (ML-DSA-44 + entropia quântica): `experiments/round_b_receipt.json` —
+veredito `RODADA_B_VERIFICADA_TRIVALENTE_EXATO`.

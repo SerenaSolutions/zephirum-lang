@@ -1,0 +1,42 @@
+{
+  "backend": "ibm_kingston",
+  "submetido_em": "2026-10-23T00:10:55.810769+00:00",
+  "jobs": [
+    {
+      "shots": 64,
+      "job_id": "dbdac41gv2cc738hnen0",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 128,
+      "job_id": "dbdac47i0auc739521vg",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 256,
+      "job_id": "dbdac4c24mrc73cl3ia0",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    },
+    {
+      "shots": 384,
+      "job_id": "dbdac4ni0auc73952200",
+      "casos": [
+        "const-1",
+        "const-0",
+        "balanceado"
+      ]
+    }
+  ]
+}

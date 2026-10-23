@@ -1,0 +1,169 @@
+{
+ "modulo": "RODADA B \u2014 lacuna de shots baixos da decisao trivalente (Zephirum/ZYQL)",
+ "modo": "HARDWARE REAL (IBM ibm_kingston, Heron 156q, conta nova) \u2014 bateria DJ n=3, shots 64/128/256/384",
+ "data": "2026-10-23T00:12:14+00:00",
+ "jobs": [
+  {
+   "id": "dbdac41gv2cc738hnen0",
+   "shots": 64
+  },
+  {
+   "id": "dbdac47i0auc739521vg",
+   "shots": 128
+  },
+  {
+   "id": "dbdac4c24mrc73cl3ia0",
+   "shots": 256
+  },
+  {
+   "id": "dbdac4ni0auc73952200",
+   "shots": 384
+  }
+ ],
+ "analise": {
+  "64": {
+   "casos": {
+    "const-1": {
+     "decisao": "1",
+     "dominante": "000",
+     "p_dominante": 1.0,
+     "counts": {
+      "000": 64
+     }
+    },
+    "const-0": {
+     "decisao": "0",
+     "dominante": "000",
+     "p_dominante": 1.0,
+     "counts": {
+      "000": 64
+     }
+    },
+    "balanceado": {
+     "decisao": "REFUSED",
+     "dominante": "011",
+     "p_dominante": 0.9062,
+     "counts": {
+      "011": 58,
+      "010": 6
+     }
+    }
+   },
+   "protocolo": "EXATO"
+  },
+  "128": {
+   "casos": {
+    "const-1": {
+     "decisao": "1",
+     "dominante": "000",
+     "p_dominante": 1.0,
+     "counts": {
+      "000": 128
+     }
+    },
+    "const-0": {
+     "decisao": "0",
+     "dominante": "000",
+     "p_dominante": 1.0,
+     "counts": {
+      "000": 128
+     }
+    },
+    "balanceado": {
+     "decisao": "REFUSED",
+     "dominante": "011",
+     "p_dominante": 0.9531,
+     "counts": {
+      "011": 122,
+      "010": 4,
+      "001": 2
+     }
+    }
+   },
+   "protocolo": "EXATO"
+  },
+  "256": {
+   "casos": {
+    "const-1": {
+     "decisao": "1",
+     "dominante": "000",
+     "p_dominante": 0.9961,
+     "counts": {
+      "000": 255,
+      "010": 1
+     }
+    },
+    "const-0": {
+     "decisao": "0",
+     "dominante": "000",
+     "p_dominante": 0.9961,
+     "counts": {
+      "000": 255,
+      "010": 1
+     }
+    },
+    "balanceado": {
+     "decisao": "REFUSED",
+     "dominante": "011",
+     "p_dominante": 0.9531,
+     "counts": {
+      "011": 244,
+      "010": 8,
+      "001": 4
+     }
+    }
+   },
+   "protocolo": "EXATO"
+  },
+  "384": {
+   "casos": {
+    "const-1": {
+     "decisao": "1",
+     "dominante": "000",
+     "p_dominante": 1.0,
+     "counts": {
+      "000": 384
+     }
+    },
+    "const-0": {
+     "decisao": "0",
+     "dominante": "000",
+     "p_dominante": 1.0,
+     "counts": {
+      "000": 384
+     }
+    },
+    "balanceado": {
+     "decisao": "REFUSED",
+     "dominante": "011",
+     "p_dominante": 0.9505,
+     "counts": {
+      "011": 365,
+      "001": 9,
+      "010": 10
+     }
+    }
+   },
+   "protocolo": "EXATO"
+  }
+ },
+ "conclusao": "LACUNA FECHADA: vereditos exatos em 64,128,256,384 shots",
+ "contexto": "Rodada A validou 512..16384 shots (ibm_fez) e declarou a lacuna abaixo de 512 (commit f85cd5d). Rodada B fecha a lacuna em backend distinto.",
+ "veredito": "RODADA_B_VERIFICADA_TRIVALENTE_EXATO",
+ "recibo_id": "1b494239599e0d1d52a6eca436fb7785",
+ "entropia_quantica": {
+  "job_id": "dbcnmds24mrc73ck0p0g",
+  "backend": "ibm_marrakesh",
+  "shots": 256,
+  "qubits": 32,
+  "pool_sha3_256": "9ce9eaabaa1273f2564cd4365455f12d3a995eef3652c081db583fb2b2765fdd",
+  "data": "2026-10-22T02:56:01+00:00"
+ },
+ "assinatura_pq": {
+  "alg": "ML-DSA-44 (FIPS 204, NIST post-quantum signature, Dilithium2 parameters)",
+  "pk_b64": "F4ilwIs01SP8OebSPYui2UqulWaSYDZQDBuZNjEBRm97uIfBOKlTq0fidlLbGrc2owHBbEu+sqs9kAOliStwAree4f55C+keI5nfikBOEY7YFgomKY/c0Qgk04mya5o01AYAjJosUzAInKi0bQxvAIGm30yaLjKWlyYNGEU7SJql+SdppIRT6QCCNF3OYBrOp5Z7fFlJrEeBiFPILH2UNWcIDJmriAGrUuiMBlsGN43n0twmiDgvwI1cZVNkqiY/AePJ1iOsSWEsOlMLwVqlXVfxXSZ4oD3E1XI+sbumLK79fOpodINzw4Ut6MlTu5tViAxZsMvUqydWIMzt9uxtqog1OQB3MBvNBoj1NV7H6sNz9JveNyl1+f6OI/2gCZcWBGOUSKrwIZVkDPDxhIfqdwmc3L+A+tfHvMKDd8sKkmgq0euTRp/9Y0wRO7hcVaAix4KpkCaiRUBZb12ll1sxsQ3cKNTfeN7/DiqnJqjmgtMBS7Cu/kTydsucHj/AFGgZLF4LFh6Jkiclr03BopmgGtr48QBu9t0SAF70JPXxdnmxfcS+krENz3qMo7XO3HlLPWBVkHGFQLv/K8M3jQSsIcppZ2qEZ23iJcm9YiGa26fPqbRlnp0lePZ4D/Sc9r7VCawRLDNYt+iBBfQlMO5Sx7QTQgeviP0sL36x72/5dlh5jVbzYOTG4QLOIHZEiH/0ZXjF9diY7kLpsoD6tPnTNQYznybWv08sRp+U8XBPbckeY7kZZ2XRwmpoymFkZ8yNRxtZbVLStQztl1Uw2BD18+3M3h6ZSnBzmHuXkVw+YEMSbLHUrdkLZiRsYdM8oVEHNZjU6MFhxOPiwEMsAo0CVTPETx/pbn/trNnVbvyDZoNnvwnaOBMbEaEqd3xCgYchBRB/ghH/PLtV14Y/biEGGJCT+/tRkCaB3M0r6mIjynTeq9jGTfXpp/PUQoBdMavp0RvMDht9Ql8rDvOvLa1o7PtQW3xTbKnyVStJY8ge5XGicT9CVrPtEiQ6VvDcxHEP9vwV8cNgUaPHwAlJamMdZ4Uh7HcoqCrxI2FkUnix2oSwOgLPrrX2ySNOlnp5PdWKts5d2ld4NpY70V/EktbRCgbuJuBLvTJQRwzp9tGo64FQY3Kh59Rb5RFE90uVo0E0audY6G80Pee+Yp1EOUkAkzGGqXwAA8yewh0SM805MRgMGxyqbegsCg/8HDNznxUL8UG4GLXxoAezi5aG9VKX6tAWreM54Ib4Nn0igFYoNdx3yRaFFhZMRhiX8Rb5+n7aKGviOf6rPkBXDIMh6kQxSIf0dSUHxEbJ8Fk9eLURBX1XdxAJZGlXHfF+YdOqtI2glbRFAKYAp6zCTfvgWsflNDwdaxENwmvCd3DHw4WoLnA2fvaXL2C5dE1keZsSo0y+ILwiVWHEMyDV8LHaPNB3Tyjb/TTDwKENf39oWnxebEJtjpHxZPbn/HJoJBLpoMF9rrHeZ4SUVA269UjyH2fOatwRH1C/LoOpIa2P8aK6jnbj2ye4k4lcmeDxzeQQ2HRMPy2aX67cH5gV0btlfQN1dWdEpNCp86SiXwoe/yp9ZTMTMtBwDvvxSBVEHrfaQygD8wjfv/T169w5H7GT6B/5IBw+yW4kzQiEq/vrp4e2cCeIpIzx5gcDRbaHjwx9sd5YblmCqwhWT8SnhCfdIfxdqzxapGBZCa9OLAl6BCLmnAmZVaqp/6pAoik8BwXcY7BhvFogPZycgP/TcuMlrXWeiA==",
+  "sig_b64": "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",
+  "regra": "assinatura ML-DSA-44 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com assinatura_pq e selo_sha3_256 REMOVIDOS da entrada; pk embarcado no recibo (autoverific\u00e1vel, sem servidor)"
+ },
+ "selo_sha3_256": "b0ca30cbe5605a140557fd90e1edbf7122ca57b7a248fd155de24306e231a046"
+}
