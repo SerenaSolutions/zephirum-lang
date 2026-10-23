@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """RODADA 6 — HARDWARE REAL (IBM Quantum, ibm_marrakesh, 156 qubits Heron-class).
-Job dbclitfi0auc73dv77dg, 512 shots, plano open ativo do dono.
+Job dbclitfi0auc73dv77dg, 512 shots, laboratorio do dono.
 Bateria ZYQL real: DJ trivalente n=2 (1/0/REFUSED), palavras de tracado S3
 (B_R B_S)^2 vs (B_S B_R)^2 — divergencia nao-abeliana no silicio — e Grover n=2.
 MODO DECLARADO: HARDWARE REAL com ruido fisico; teoria exata para comparacao.
@@ -41,7 +41,7 @@ rec = {
   "spec": "Z-QEA",
   "modulo": "experiments/round6_hardware.py",
   "data": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
-  "modo": "HARDWARE REAL (IBM Quantum, ibm_marrakesh, 156 qubits, plano open do dono) — ruido fisico real, 512 shots, sem endosso da IBM",
+  "modo": "HARDWARE REAL (IBM Quantum, ibm_marrakesh, 156 qubits, laboratorio do dono) — ruido fisico real, 512 shots, sem endosso da IBM",
   "rodada": "6",
   "job": {"id": "dbclitfi0auc73dv77dg", "backend": "ibm_marrakesh", "shots": 512,
           "circuits": list(counts.keys())},

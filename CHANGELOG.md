@@ -62,7 +62,7 @@ All notable changes to the ZEPHIRUM language are documented here.
 ## [1.7.2] - 2026-10-21
 ### Added
 - Rodada 6 — HARDWARE REAL (IBM Quantum ibm_marrakesh, job dbclitfi0auc73dv77dg,
-  512 shots, plano open ativo do dono): bateria ZYQL completa no silicio — DJ
+  512 shots, laboratório próprio): bateria ZYQL completa no silicio — DJ
   trivalente (1/0/REFUSED), palavras de tracado S3 (B_R B_S)^2 -> |01> vs
   (B_S B_R)^2 -> |10> — divergencia nao-abeliana medida no hardware — e Grover
   n=2. Todos os 6 circuitos dentro da banda de ruido declarada (desvio max 0.045).

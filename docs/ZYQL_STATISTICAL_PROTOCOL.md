@@ -60,7 +60,7 @@ session window; cross-session claims require a fresh calibration receipt.
 
 ## 6. Validação em hardware
 
-Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots no processador quântico **IBM Heron (`ibm_fez`)** (plano aberto da IBM Quantum, operado como laboratório de teste sem endosso institucional). O recibo selado em [`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json) (SHA3-256 `9cd39440a49373600b6d1eaf79e22f6e2bdacf133491c9faf748ec71a1be9b3a`) documenta os seguintes resultados medidos:
+Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots no processador quântico **IBM Heron (`ibm_fez`)** (laboratório de teste, sem endosso institucional). O recibo selado em [`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json) (SHA3-256 `92b27f730b79cfd4b732e6c70fb90fd4dbb8dcad52ef1cc1f26d1242ab53e737`) documenta os seguintes resultados medidos:
 
 ### Jobs e níveis de shots testados (Deutsch-Jozsa n=3, 1 chamada de oráculo)
 - **512 shots:** job `dbcjf7ni0auc73dv36ug` — Acerto 3/3 (100%), recusa espúria: 0

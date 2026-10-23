@@ -70,7 +70,7 @@ else:
 rec = {
     "spec": "Z-QEA",
     "modo": "HARDWARE REAL",
-    "hardware": "IBM Heron ibm_fez (laboratorio de teste da IBM Quantum, plano aberto; sem endosso institucional)",
+    "hardware": "IBM Heron ibm_fez (laboratorio de teste; sem endosso institucional)",
     "experimento": "Rodada A — sweep de shots da decisao trivalente (Deutsch-Jozsa n=3, 1 chamada de oraculo)",
     "casos": CASOS,
     "regra_decisao": ("const-1: p(000)>0.85 -> 1 | const-0: p(000)>0.85 -> 0 | "

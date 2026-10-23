@@ -1,8 +1,8 @@
 {
   "spec": "Z-QEA",
   "modo": "HARDWARE REAL",
-  "hardware": "IBM Heron ibm_fez (laboratorio de teste da IBM Quantum, plano aberto; sem endosso institucional)",
-  "experimento": "Rodada A — sweep de shots da decisao trivalente (Deutsch-Jozsa n=3, 1 chamada de oraculo)",
+  "hardware": "IBM Heron ibm_fez (laboratorio de teste; sem endosso institucional)",
+  "experimento": "Rodada A \u2014 sweep de shots da decisao trivalente (Deutsch-Jozsa n=3, 1 chamada de oraculo)",
   "casos": [
     "const-1",
     "const-0",
@@ -235,8 +235,8 @@
     "n_min_hoeffding": 82
   },
   "veredito": "VALIDADO",
-  "nota": "Todos os 3 casos acertam ja no menor nivel testado (512 shots): p(000) das constantes acima de 0.85 e do balanceado abaixo de 0.15 em todos os niveis [512, 16384]. A formula declarada (29 shots) e o bound de Hoeffding (82 shots) ficam ABAIXO do menor nivel testado — protocolo consistente com o hardware no intervalo testado; o limiar empirico exato (se existir abaixo de 512) permanece nao determinado.",
+  "nota": "Todos os 3 casos acertam ja no menor nivel testado (512 shots): p(000) das constantes acima de 0.85 e do balanceado abaixo de 0.15 em todos os niveis [512, 16384]. A formula declarada (29 shots) e o bound de Hoeffding (82 shots) ficam ABAIXO do menor nivel testado \u2014 protocolo consistente com o hardware no intervalo testado; o limiar empirico exato (se existir abaixo de 512) permanece nao determinado.",
   "colhido_em": "2026-10-22T13:06:21.176037+00:00",
   "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada",
-  "selo_sha3_256": "9cd39440a49373600b6d1eaf79e22f6e2bdacf133491c9faf748ec71a1be9b3a"
+  "selo_sha3_256": "92b27f730b79cfd4b732e6c70fb90fd4dbb8dcad52ef1cc1f26d1242ab53e737"
 }
