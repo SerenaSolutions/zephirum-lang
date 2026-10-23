@@ -1,6 +1,9 @@
+battery_ci
 oq3
 quantum_types
 zkernel
+zqgate
 zquantum
+zyql_lisp
 zyql_quantum_gate
 zyql_rag_layer

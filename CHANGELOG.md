@@ -2,6 +2,15 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.7.5] - 2026-10-23
+### Fixed
+- Badge de versão do README desatualizada (1.6.0) — agora 1.7.5, em sincronia com `pyproject.toml`.
+- CI e Makefile agora executam TODOS os testes (`test_canonical.py` + `test_zqea_verify.py`), não apenas o canônico.
+
+### Added
+- `tests/test_meta.py`: meta-teste de consistência de versão (pyproject = badge README = CHANGELOG). O mismatch apontado em auditoria externa não pode mais voltar a acontecer despercebido.
+- Packaging corrigido para distribuição PyPI: `package-dir = src` + `py-modules` com TODOS os módulos da linguagem (`zquantum`, `zkernel`, `quantum_types`, `zyql_lisp`, `zyql_quantum_gate`, `zyql_rag_layer`, `battery_ci`, `oq3`) + pacote `zqgate` (CLI). Antes, `pip install zephirum` entregaria apenas o CLI antigo, sem a linguagem.
+
 ## [1.7.4] - 2026-10-23
 ### Added
 - **Rodada B executada — lacuna de shots baixos FECHADA**: bateria Deutsch-Jozsa n=3 trivalente no IBM Heron `ibm_kingston` (conta independente, backend distinto da Rodada A) em 64, 128, 256 e 384 shots. Vereditos trivalentes (1/0/REFUSED) **EXATOS em todos os níveis**, inclusive 64 shots (abaixo da previsão teórica de 82). Protocolo Estatístico ZYQL agora validado em hardware no intervalo completo [64, 16384] shots. Recibo ML-DSA-44 + entropia quântica: `experiments/round_b_receipt.json` (veredito `RODADA_B_VERIFICADA_TRIVALENTE_EXATO`).
