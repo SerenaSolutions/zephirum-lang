@@ -4,7 +4,7 @@
 
 *The quantum programming language with receipts.*
 
-![version](https://img.shields.io/badge/version-1.7.5-6e46b8)
+![version](https://img.shields.io/badge/version-1.8.0-6e46b8)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23302046-gold)
@@ -130,3 +130,14 @@ See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23302046
 ## License
 
 MIT - see [LICENSE](LICENSE).
+
+
+## Runtime de produção (v1.8.0)
+
+```python
+from zyql_runtime import decide, Verdict
+r = decide(lambda x: x & 1, n=3, shots=512)   # -> Verdict.REFUSED
+r.error_bound                                 # limite de erro Hoeffding declarado
+```
+CLI: `zyql-decide --oracle balanced --shots 512`
+Maturidade componente a componente: [docs/MATURITY.md](docs/MATURITY.md)

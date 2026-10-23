@@ -18,3 +18,4 @@ jobs:
       - run: python tests/test_zqea_verify.py
       - run: python tests/test_lisp_regression.py
       - run: python tests/test_meta.py
+      - run: python tests/test_runtime.py
