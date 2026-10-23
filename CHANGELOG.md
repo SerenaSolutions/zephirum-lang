@@ -2,6 +2,18 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.8.0] - 2026-10-23
+### Added — resposta à auditoria: "runtime de produção no algoritmo"
+- `zyql_runtime`: runtime de PRODUÇÃO do núcleo ZYQL. API estável `decide()->Decision`,
+  enum `Verdict` (PERMIT/DENY/REFUSED), validação pré-oráculo (ConfigError), determinismo
+  por seed, recibo SHA3-256 opcional por decisão (verificável offline), thread-safe,
+  zero prints no caminho da lib. Throughput local: ~3.4k decisões/s (n=3).
+- CLI `zyql-decide` (console script) + `python -m zyql_runtime`.
+- `docs/MATURITY.md`: declaração oficial de maturidade POR COMPONENTE (produção/beta/
+  experimental/legacy) com limites explícitos — fim da ambiguidade "protótipo de pesquisa".
+- `tests/test_runtime.py`: matriz de vereditos, determinismo, validação pré-oráculo,
+  recibo selado→verificado→adulterado→recusado, honestidade do limite de erro, stress 200 decisões.
+
 ## [1.7.5] - 2026-10-23
 ### Fixed
 - Badge de versão do README desatualizada (1.6.0) — agora 1.7.5, em sincronia com `pyproject.toml`.
