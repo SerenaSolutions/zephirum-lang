@@ -1,2 +1,3 @@
 [console_scripts]
 zqgate = zqgate.cli:main
+zyql-decide = zyql_runtime:main

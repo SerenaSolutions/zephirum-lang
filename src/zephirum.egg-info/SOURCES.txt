@@ -9,6 +9,7 @@ src/zquantum.py
 src/zyql_lisp.py
 src/zyql_quantum_gate.py
 src/zyql_rag_layer.py
+src/zyql_runtime.py
 src/zephirum.egg-info/PKG-INFO
 src/zephirum.egg-info/SOURCES.txt
 src/zephirum.egg-info/dependency_links.txt
@@ -18,5 +19,7 @@ src/zephirum.egg-info/top_level.txt
 src/zqgate/__init__.py
 src/zqgate/cli.py
 tests/test_canonical.py
+tests/test_lisp_regression.py
 tests/test_meta.py
+tests/test_runtime.py
 tests/test_zqea_verify.py
