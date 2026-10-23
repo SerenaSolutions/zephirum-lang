@@ -1,0 +1,9 @@
+{
+ "ghz_job": "dbdlb7424mrc739iievg",
+ "dj_job": "dbdlbv424mrc739iig60",
+ "backend": "ibm_kingston",
+ "shots": 256,
+ "eps": 0.05,
+ "margin": 0.08488134473378872,
+ "opt_level": 2
+}

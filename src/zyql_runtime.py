@@ -19,7 +19,7 @@ decisões com oráculo caro devem usar backend IBM (via Serena Quantum API).
 import hashlib, json, logging, time
 from dataclasses import dataclass, field, asdict
 from enum import Enum
-from zyql_quantum_gate import ZYQLQuantumGate
+from zyql_quantum_gate import ZYQLQuantumGate, ghz_integrity, adaptive_margin
 
 log = logging.getLogger("zyql")
 
@@ -53,12 +53,31 @@ def _validate(f, n, shots, seed):
     if seed is not None and not isinstance(seed, int):
         raise ConfigError("seed precisa ser int ou None")
 
-def decide(f, n=3, shots=2048, seed=1701, seal_path=None) -> Decision:
-    """Decisão trivalente 1/0/REFUSED por interferência Deutsch-Jozsa."""
+def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
+           epsilon=None, require_device_trust=False, device_shots=2048,
+           previous_seal=None) -> Decision:
+    """Decisão trivalente 1/0/REFUSED por interferência Deutsch-Jozsa.
+
+    v1.9.0 — upgrades:
+      epsilon: banda adaptativa (Hoeffding inverso). O veredito declara o erro.
+      require_device_trust: porta GHZ primeiro; dispositivo inconfiável =>
+        REFUSED por decoerência, SEM gastar oráculo (semântica inédita).
+      previous_seal: cadeia de proveniência — o recibo sela o selo do anterior.
+    """
     _validate(f, n, shots, seed)
     t0 = time.perf_counter()
+    gate_result = None
+    if require_device_trust:
+        gate_result = ghz_integrity(n=n, shots=device_shots, seed=seed if seed is not None else 1701)
+        if not gate_result["device_trusted"]:
+            return Decision(verdict=Verdict.REFUSED, p0=0.0,
+                            mode="REFUSED_DEVICE_DECOHERED (GHZ fidelity %.3f < %.2f)"
+                                 % (gate_result["fidelity_ghz"], gate_result["threshold"]),
+                            error_bound=1.0, oracle_calls=0, shots=0, n=n,
+                            latency_ms=round((time.perf_counter()-t0)*1000, 3),
+                            receipt=None)
     g = ZYQLQuantumGate(n, f)
-    r = g.run_quantum(shots=shots, seed=seed if seed is not None else 1701)
+    r = g.run_quantum(shots=shots, seed=seed if seed is not None else 1701, epsilon=epsilon)
     latency_ms = round((time.perf_counter() - t0) * 1000, 3)
     verdict = Verdict(r["decision"]) if r["decision"] in (1, 0) else Verdict.REFUSED
     receipt = None
@@ -66,7 +85,10 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None) -> Decision:
         payload = {"verdict": verdict.value if verdict != Verdict.REFUSED else "REFUSED",
                    "p0": r["p0"], "shots": shots, "n": n, "seed": seed,
                    "mode": r["mode"], "error_bound": r["error_bound"],
-                   "oracle_calls": g.oracle_calls, "sealed_by": "zyql-runtime-1.8.0"}
+                   "epsilon_declared": epsilon,
+                   "device_gate": gate_result,
+                   "previous_seal": previous_seal,
+                   "oracle_calls": g.oracle_calls, "sealed_by": "zyql-runtime-1.9.0"}
         selo = hashlib.sha3_256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
         receipt = {"payload": payload, "selo_sha3_256": selo}
         with open(seal_path, "w") as fh:
@@ -99,3 +121,20 @@ def main(argv=None):
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def verify_chain(paths):
+    """v1.9.0 — cadeia de proveniência: recibo[i].payload.previous_seal == recibo[i-1].selo."""
+    seals = []
+    for p in paths:
+        rec = json.load(open(p))
+        if not verify_receipt(p):
+            return {"chain_ok": False, "broken_at": p, "reason": "selo interno rompido"}
+        seals.append(rec["selo_sha3_256"])
+    for i in range(1, len(paths)):
+        rec = json.load(open(paths[i]))
+        prev = rec["payload"].get("previous_seal")
+        if prev != seals[i - 1]:
+            return {"chain_ok": False, "broken_at": paths[i],
+                    "reason": "elos nao batem com recibo anterior"}
+    return {"chain_ok": True, "links": len(paths)}

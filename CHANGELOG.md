@@ -2,6 +2,25 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.9.0] - 2026-10-23
+### Added — upgrade do algoritmo + Rodada C no silício (semânticas inéditas)
+- **Margem adaptativa (Hoeffding inverso)**: `decide(f, epsilon=0.05)` — a banda de confiança
+  é DERIVADA do erro máximo declarado; com shots suficientes a banda estreita, sem shots
+  o núcleo recusa em vez de mentir. `adaptive_margin(eps, shots)` é API pública.
+- **Porta de integridade GHZ** (semântica inédita no GitHub): `decide(..., require_device_trust=True)`
+  testa o PRÓPRIO QPU (GHZ_3, fidelidade |000>+|111>) antes de confiar no veredito;
+  dispositivo decoerido => REFUSED SEM gastar oráculo, modo `REFUSED_DEVICE_DECOHERED`.
+- **Cadeia de proveniência**: recibos do runtime selam o selo do anterior
+  (`previous_seal`) + `verify_chain([...])`. Ledger tamper-evidente de rodadas.
+- **RODADA C no IBM Heron ibm_kingston** (jobs dbdlb7424mrc739iievg / dbdlbv424mrc739iig60,
+  256 shots, epsilon=0.05): porta GHZ fidelidade **0.977 → dispositivo confiável**;
+  DJ adaptativo **EXATO**: const-1 p0=0.9922→1, const-0 p0=1.0000→0, balanceado p0=0.0039→REFUSED.
+  Recibo ML-DSA-44 **encadeado** no selo da Rodada B: experiments/round_c_receipt.json.
+- Lição selada no silício: transpilar com optimization_level=2 no Heron (nível 1 mapeou
+  a bateria em qubits ruidosos — primeira tentativa RECUSADA honestamente e refeita).
+- 5 testes novos no runtime (11/11): banda adaptativa, vereditos adaptativos, porta GHZ,
+  recusa sem oráculo, cadeia tamper-evidente.
+
 ## [1.8.0] - 2026-10-23
 ### Added — resposta à auditoria: "runtime de produção no algoritmo"
 - `zyql_runtime`: runtime de PRODUÇÃO do núcleo ZYQL. API estável `decide()->Decision`,
