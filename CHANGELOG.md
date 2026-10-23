@@ -2,6 +2,12 @@
 
 All notable changes to the ZEPHIRUM language are documented here.
 
+## [1.7.4] - 2026-10-23
+### Added
+- **Rodada B executada — lacuna de shots baixos FECHADA**: bateria Deutsch-Jozsa n=3 trivalente no IBM Heron `ibm_kingston` (conta independente, backend distinto da Rodada A) em 64, 128, 256 e 384 shots. Vereditos trivalentes (1/0/REFUSED) **EXATOS em todos os níveis**, inclusive 64 shots (abaixo da previsão teórica de 82). Protocolo Estatístico ZYQL agora validado em hardware no intervalo completo [64, 16384] shots. Recibo ML-DSA-44 + entropia quântica: `experiments/round_b_receipt.json` (veredito `RODADA_B_VERIFICADA_TRIVALENTE_EXATO`).
+- Scripts da rodada no repositório: `experiments/round_b_battery.py` (submissão) e `experiments/round_b_analyze.py` (análise + selagem v2).
+- Documentação atualizada: `docs/ZYQL_STATISTICAL_PROTOCOL.md` (seção Rodada B + proposta concluída), `docs/PROOFS.md` (índice de evidências com a lacuna fechada).
+
 ## [1.7.3] - 2026-10-22
 ### Added
 - Validação do Protocolo Estatístico ZYQL em Hardware Real (IBM Heron `ibm_fez`, Rodada A): sweep de 512 a 16384 shots no Deutsch-Jozsa $n=3$ trivalente com 100% de acerto (3/3 casos em todos os 6 níveis), zero recusa espúria e $p(000) \ge 0.9977$ para constantes / $\le 0.0024$ para balanceado. Veredicto **VALIDADO** no intervalo [512, 16384] com recibo selado SHA3-256 (`experiments/refusal_receipt.json`).

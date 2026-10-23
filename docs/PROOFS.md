@@ -58,7 +58,7 @@ confrontation vs textbook Qiskit (job `db6dklcvf2bc73d122t0`): depth 2 /
 |----------|------|--------|---------|
 | Shot sweep (512 to 16384) | **IBM Heron ibm_fez** | 100% accuracy (3/3 cases across 6 shot levels), 0 spurious refusals | [`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json) |
 | Protocol verdict | Hardware validation | **VALIDADO** in interval [512, 16384] shots | same |
-| Open gap | Sub-512 shots | Real lower bound between 29/82 shots and 512 shots unmeasured; Rodada B proposed | same |
+| Low-shot sweep (64 to 384) | **IBM Heron ibm_kingston** | 100% accuracy (3/3 cases across 4 shot levels), verdicts EXATO down to 64 shots — **sub-512 gap CLOSED** | [`experiments/round_b_receipt.json`](../experiments/round_b_receipt.json) |
 
 - Hardware: IBM Heron `ibm_fez` (open plan, test laboratory)
 - Jobs: `dbcjf7ni0auc73dv36ug` (512), `dbcjf7pgv2cc73eaft1g` (1024), `dbcjf7vi0auc73dv36vg` (2048), `dbcjf81gv2cc73eaft20` (4096), `dbcjf87i0auc73dv3700` (8192), `dbcjf8fi0auc73dv370g` (16384)
