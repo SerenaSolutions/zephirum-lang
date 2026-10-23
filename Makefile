@@ -5,6 +5,7 @@ test:
 	python3 tests/test_canonical.py
 	python3 tests/test_zqea_verify.py
 	python3 tests/test_meta.py
+	python3 tests/test_lisp_regression.py
 
 lint:
 	python3 -m py_compile src/*.py
