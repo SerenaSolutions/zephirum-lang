@@ -1,0 +1,6 @@
+;; ai_gating.zph — dominio: gating de inferencia (estilo ZY-AI-RAG)
+;; Inferencia fraca / misturada => o gate recusa em vez de propagar resposta ruim.
+(decide (model ai-gating) (purpose "Should the AI answer be released?")
+  (rule (oracle all-ones)   -> 1)
+  (rule (oracle all-zeros)  -> 0)
+  (rule (oracle balanced)   -> REFUSED))

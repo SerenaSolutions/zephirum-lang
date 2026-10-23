@@ -1,0 +1,24 @@
+{
+  "name": "zephirum",
+  "displayName": "Zephirum (.zph)",
+  "description": "Language support for Zephirum, the Lisp-style quantum language with the ZYQL trivalent decision core.",
+  "version": "0.1.0",
+  "publisher": "SerenaSolutions",
+  "license": "MIT",
+  "engines": {"vscode": "^1.75.0"},
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [{
+      "id": "zephirum",
+      "aliases": ["Zephirum", "zph"],
+      "extensions": [".zph"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "zephirum",
+      "scopeName": "source.zephirum",
+      "path": "./syntaxes/zephirum.tmLanguage.json"
+    }]
+  },
+  "repository": {"type": "git", "url": "https://github.com/SerenaSolutions/zephirum-lang"}
+}
