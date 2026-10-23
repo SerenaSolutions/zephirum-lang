@@ -1,0 +1,7 @@
+;; security_decision.zph — dominio: decisao de seguranca
+;; Uma regra de seguranca SO autoriza quando o oraculo e constante-confiavel;
+;; oraculo balanceado = ambiguidade => RECUSA legitima (fail-closed).
+(decide (model security) (purpose "Is this action permitted?")
+  (rule (oracle all-ones)  -> 1)
+  (rule (oracle all-zeros) -> 0)
+  (rule (oracle balanced)  -> REFUSED))

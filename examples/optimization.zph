@@ -1,0 +1,6 @@
+;; optimization.zph — dominio: busca/otimizacao (Grover como decisora)
+;; Marcar a solucao e a decisao; ausencia de dominancia => RECUSA em vez de chute.
+(quantum grover (oracle marked)
+  (qubits 4)
+  (purpose "decision: is the marked item dominant?")
+  (measure dominant -> trivalent))

@@ -1,0 +1,13 @@
+{
+  "name": "Zephirum",
+  "scopeName": "source.zephirum",
+  "patterns": [
+    {"name": "comment.line.zephirum", "match": ";.*$"},
+    {"name": "string.quoted.double.zephirum", "begin": "\"", "end": "\""},
+    {"name": "keyword.control.decision.zephirum", "match": "\\b(decide|quantum|rule|oracle|measure|seal|hello)\\b"},
+    {"name": "constant.language.verdict.zephirum", "match": "\\b(REFUSED)\\b"},
+    {"name": "constant.numeric.zephirum", "match": "\\b[0-9]+\\b"},
+    {"name": "keyword.operator.arrow.zephirum", "match": "->"},
+    {"name": "variable.parameter.model.zephirum", "match": "\\((model|purpose|qubits|circuit)\\s+[^)]*\\)"}
+  ]
+}
