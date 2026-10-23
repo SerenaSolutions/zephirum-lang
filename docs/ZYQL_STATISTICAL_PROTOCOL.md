@@ -84,8 +84,8 @@ Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots n
 1. **Lacuna no limite inferior real:** Como a varredura da Rodada A iniciou em 512 shots, o ponto exato de inflexão (entre 29 e 512 shots) onde o ruído de hardware começa a degradar a decisão trivalente não foi medido. O limite inferior empírico exato permanece uma **lacuna aberta**.
 2. **Escopo do algoritmo e hardware:** A validação cobre apenas o algoritmo Deutsch-Jozsa $n=3$ em um único backend quântico (**IBM Heron `ibm_fez`**).
 
-### Próximos passos (Rodada B proposta)
-Para fechar a lacuna aberta abaixo de 512 shots, propõe-se a **Rodada B**: varredura de alta resolução nos níveis $\{16, 32, 64, 128, 256\}$ shots, mapeando o limiar crítico exato onde ocorrem decisões incorretas ou recusas espúrias (`REFUSED`).
+### Próximos passos (Rodada B — EXECUTADA)
+A Rodada B foi executada (ver seção seguinte) e **fechou a lacuna**: vereditos exatos em 64, 128, 256 e 384 shots no `ibm_kingston`. O limiar empírico de confiabilidade fica abaixo de 64 shots; níveis inferiores (8 a 32) permanecem não medidos — abaixo da previsão teórica de 29 shots, sem relevância operacional.
 
 ---
 
