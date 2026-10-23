@@ -14,3 +14,4 @@ jobs:
       - run: python tests/test_canonical.py
         env:
           PYTHONHASHSEED: "0"
+      - run: python tests/test_zqea_verify.py
