@@ -1,0 +1,5 @@
+;; fail_closed.zph — doutrina da casa: sem confianca, recusa
+;; A recusa nao e derrota; e o unico veredito que nao mente.
+(decide (model doctrine) (purpose "What happens without trust?")
+  (rule (trust present) -> decide)
+  (rule (trust absent) -> REFUSED))

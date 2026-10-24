@@ -1,0 +1,6 @@
+;; ghz_gate.zph — porta de integridade GHZ v1.9.0
+;; O veredito desconfia do PROPRIO QPU antes de decidir.
+(decide (model device-trust) (purpose "Is this QPU coherent?")
+  (rule (ghz fidelity >= 0.80) -> 1)
+  (rule (ghz fidelity < 0.80) -> REFUSED)
+  (gate (entangle 3) (measure 256)))

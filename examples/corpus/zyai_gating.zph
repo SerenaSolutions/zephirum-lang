@@ -1,0 +1,5 @@
+;; zyai_gating.zph — portao de IA: recusar quando a evidencia e fraca
+(decide (model ai-gating) (purpose "Should the model answer?")
+  (rule (evidence strong) -> 1)
+  (rule (evidence weak) -> REFUSED)
+  (rule (evidence absent) -> 0))

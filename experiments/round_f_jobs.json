@@ -1,0 +1,17 @@
+{
+ "rodada": "F",
+ "protocolo": "fronteiras: CHSH nao-localidade + QEC repeticao + Grover n=4",
+ "backend": "ibm_kingston",
+ "shots": 2048,
+ "alvo_grover": "1101",
+ "bandas": {
+  "chsh": "S>=2.20 -> 1; 2.0<S<2.20 -> REFUSED; S<=2.0 -> 0",
+  "qec": "erro_logico < erro_fisico -> 1 (PROTEGIDO); senao REFUSED",
+  "grover": "p>=0.50 e >=2x segundo -> 1; p<=0.20 -> 0; senao REFUSED"
+ },
+ "jobs": {
+  "chsh": "dbeg91fsstms73fc0skg",
+  "qec": "dbeg918m94ac738rou10",
+  "grover4": "dbeg91ngdj9s73flnso0"
+ }
+}

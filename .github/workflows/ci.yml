@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install numpy lark scipy
+      - run: pip install numpy lark scipy pqcrypto cryptography
       - run: python tests/test_canonical.py
         env:
           PYTHONHASHSEED: "0"
@@ -19,3 +19,6 @@ jobs:
       - run: python tests/test_lisp_regression.py
       - run: python tests/test_meta.py
       - run: python tests/test_runtime.py
+      - run: python tests/test_kem.py
+        env:
+          PYTHONPATH: src

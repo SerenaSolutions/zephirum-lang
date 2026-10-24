@@ -1,0 +1,6 @@
+;; qec_repetition.zph — codigo de repeticao (Rodada F)
+;; A fronteira que o MATURITY.md declarava ausente: correcao de erro.
+(decide (model qec) (purpose "Is the logical qubit protected?")
+  (rule (logical-error < physical-error) -> 1)
+  (rule (logical-error >= physical-error) -> REFUSED)
+  (code (data 3) (syndrome 2) (majority decode)))

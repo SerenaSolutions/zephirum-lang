@@ -1,0 +1,5 @@
+;; hoeffding_band.zph — margem adaptativa declarada
+;; A banda vem do erro que o dono DECLARA, nao de conveniencia.
+(decide (model statistics) (purpose "Is the margin honest?")
+  (rule (band = sqrt(ln(2/eps) / (2S))) -> 1)
+  (rule (eps undeclared) -> REFUSED))
