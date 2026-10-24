@@ -54,8 +54,8 @@ processor's coherence before any verdict is accepted.
    found at p = 0.54 vs runner-up 0.06
 5. **CHSH nonlocality [Clauser-Horne-Shimony-Holt, 1969]:** S = 2.71
    (theoretical 2.83) — clear violation of the classical bound S <= 2
-6. **Repetition-code QEC:** injected bit-flip error 99% → logical error
-   1.5% after majority vote
+6. **Repetition-code QEC:** single deterministic bit-flip injected (measured
+   physical error 99.3%); majority vote leaves 1.5% logical error
 
 ## Discussion and limitations
 
