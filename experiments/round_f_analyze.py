@@ -41,6 +41,10 @@ else:
     if S >= 2.20: ver = "1"
     elif S <= 2.0: ver = "0"
     else: ver = "REFUSED"
+    # AUDITORIA: com ry(2a) os 4 ajustes tem E teorico = 0 (dobra de angulo).
+    # O QPU mediu EXATAMENTE a teoria do circuito enviado — nao e defeito da maquina.
+    if all(abs(e) < 0.05 for e in es):
+        ver = "INCONCLUSIVO: bug de angulo no experimento (E teorico=0 nos 4 ajustes); QPU fiel a teoria do circuito; re-teste na Rodada F-rev"
     res["chsh"] = {"job": meta["jobs"]["chsh"], "correlacoes": [round(e, 4) for e in es],
                    "S": round(S, 4), "tsirelson": 2.8284, "limite_classico": 2.0,
                    "veredito": ver}
@@ -68,13 +72,15 @@ else:
     p_logico_ok = ok / SHOTS
     erro_logico = 1 - p_logico_ok
     p_fisico_medio = sum(per_qubit) / (3 * SHOTS)
-    ver = "1" if erro_logico < p_fisico_medio else "REFUSED"
+    ver = "1" if erro_logico < (1 - p1_ctrl) else "REFUSED"
+    # AUDITORIA: codigo de repeticao Z-basis aplicado a |+> (X-basis) e design
+    # invalido (CX nao clona |+>); e a comparacao usava 50% em vez do baseline.
     res["qec"] = {"job": meta["jobs"]["qec"],
                    "erro_logico": round(erro_logico, 4),
                    "p_fisico_medio": round(p_fisico_medio, 4),
                    "erro_fisico_baseline": round(1 - p1_ctrl, 4),
                    "veredito": ver,
-                   "nota": "PROTEGIDO se erro logico < fisico medio"}
+                   "nota": "PROTEGIDO se erro logico < fisico baseline; design Z-basis vs estado X-basis invalido — re-teste na Rodada F-rev"}
 
 # 3) Grover n=4
 job = service.job(meta["jobs"]["grover4"]); st = str(job.status())
@@ -102,7 +108,7 @@ gr_ok = res.get("grover4", {}).get("veredito") == "1"
 veredito = ("FRONTEIRAS VENCIDAS: nao-localidade (S=%.2f), correcao de erro valida "
             "(logico < fisico), Grover n=4 dominante" % res["chsh"]["S"]
             if (chsh_ok and qec_ok and gr_ok)
-            else "FRONTEIRAS PARCIAIS: vereditos honestos registrados (a falha e resultado)")
+            else "FRONTEIRAS INVALIDADAS POR BUG DE DESIGN (CHSH e QEC): dados brutos honestos, Grover n=4 legitimo; re-teste Rodada F-rev")
 
 rec = {"spec": "Z-QEA/2.2", "modulo": "RODADA F",
        "data": datetime.now(timezone.utc).isoformat(),

@@ -1,0 +1,41 @@
+{
+ "rodada": "F-rev",
+ "protocolo": "re-teste das fronteiras invalidadas: CHSH angulos corretos + QEC base Z com injecao de erro",
+ "backend": "ibm_kingston",
+ "shots": 2048,
+ "ajustes_chsh": [
+  [
+   0.0,
+   0.7853981633974483
+  ],
+  [
+   0.0,
+   -0.7853981633974483
+  ],
+  [
+   1.5707963267948966,
+   0.7853981633974483
+  ],
+  [
+   1.5707963267948966,
+   -0.7853981633974483
+  ]
+ ],
+ "teoria": {
+  "E": [
+   0.7071,
+   0.7071,
+   0.7071,
+   -0.7071
+  ],
+  "S_esperado": 2.8284
+ },
+ "bandas": {
+  "chsh": "S>=2.20 -> 1; 2.0<S<2.20 -> REFUSED; S<=2.0 -> 0",
+  "qec": "erro_logico(injetado) < erro_fisico/2 -> 1 (PROTEGIDO); erro_logico>=erro_fisico -> 0; senao REFUSED"
+ },
+ "jobs": {
+  "chsh": "dbehrdnpc3tc739lo2i0",
+  "qec": "dbehrdngdj9s73flr1ng"
+ }
+}
