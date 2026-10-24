@@ -18,8 +18,9 @@ ID and calibration snapshot in a tamper-evident chain. The core is validated
 on three IBM Heron QPUs (ibm_fez, ibm_kingston, ibm_marrakesh) with citable
 job IDs: exact trivalent battery 9/9 at n=4/5/6, GHZ fidelity 0.977, CHSH
 S=2.71, Bernstein-Vazirani secret recovery, Grover n=4 target detection, and
-repetition-code correction of an injected 99% bit-flip error down to 1.5%
-logical error. The same battery agrees exactly across six SDKs (Qiskit,
+repetition-code correction of a single deterministic bit-flip (measured
+physical error 99.3%, the one-qubit error class this code is designed to
+correct) down to 1.5% logical error. The same battery agrees exactly across six SDKs (Qiskit,
 OpenQASM 3, Cirq, PennyLane, Braket, Q#). REFUSED is not failure: it is the
 honest verdict of a circuit that can prove what it knows.
 
@@ -34,7 +35,7 @@ interferencia Deutsch-Jozsa em decisao exata trivalente: 1, 0 ou RECUSADO. A
 margem estatistica e declarada antes do teste, a porta GHZ desconfia do
 proprio processador antes de aceitar veredito, e cada decisao vem selada com
 recibo criptografico pos-quantico. Tudo validado em tres processadores IBM
-Heron com job IDs citaveis - inclusive correcao de erro 99% para 1,5%.
+Heron com job IDs citaveis - inclusive codigo de repeticao corrigindo um bit-flip deterministico (erro fisico medido 99,3%) para 1,5% logico.
 
 ## Links de apoio
 - Repo: https://github.com/SerenaSolutions/zephirum-lang

@@ -12,7 +12,7 @@ We built **ZYQL**, a trivalent exact-decision core (part of the ZEPHIRUM languag
 
 Recent results on IBM Heron processors (Open Plan, all job IDs citable):
 
-- **Repetition-code QEC**: injected bit-flip error 99% -> logical error 1.5% after majority vote (ibm_kingston)
+- **Repetition-code QEC**: single deterministic bit-flip injected (measured physical error 99.3% - the error class the code is designed to correct); majority vote leaves 1.5% logical error (ibm_kingston)
 - **CHSH**: S = 2.71 vs theoretical 2.83 (classical bound 2.0) - the deficit is consistent with the declared mean readout error (2.02%) from the calibration snapshot taken minutes before the run
 - **GHZ device-trust gate**: state fidelity 0.977; decisions below threshold are REFUSED rather than guessed
 - **Exact trivalent battery**: 9/9 exact Deutsch-Jozsa decisions at n = 4/5/6 (1024 shots)
@@ -45,7 +45,7 @@ Design choices we care about scientifically:
 - Every run produces a sealed receipt (SHA3-256 + ML-DSA-44) binding verdict, job ID, backend and calibration snapshot, in a tamper-evident provenance chain
 - Circuits are audited against statevector theory BEFORE hardware submission (we caught a real design bug in our CHSH circuit this way - the QPU executed it perfectly; the theory check exposed our error)
 
-Hardware validation (IBM Heron: ibm_fez, ibm_kingston, ibm_marrakesh; job IDs citable): GHZ fidelity 0.977; exact trivalent battery 9/9 at n=4/5/6; Bernstein-Vazirani secret recovery; Grover n=3/n=4 dominant; CHSH S=2.71; repetition-code correction of an injected 99% error down to 1.5% logical.
+Hardware validation (IBM Heron: ibm_fez, ibm_kingston, ibm_marrakesh; job IDs citable): GHZ fidelity 0.977; exact trivalent battery 9/9 at n=4/5/6; Bernstein-Vazirani secret recovery; Grover n=3/n=4 dominant; CHSH S=2.71; repetition-code correction of a single deterministic bit-flip (physical 99.3%) down to 1.5% logical.
 
 The poliglota core agrees exactly across six SDKs (Qiskit, OpenQASM 3, Cirq, PennyLane, Braket, Q#).
 
