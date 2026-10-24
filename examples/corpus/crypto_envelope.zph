@@ -1,0 +1,6 @@
+;; crypto_envelope.zph — decisao selada por CONFIDENCIALIDADE (Z-KEM)
+;; A camada 3 nao muda o veredito; muda QUEM pode ler o recibo.
+(decide (model crypto) (purpose "Can this decision be read?")
+  (rule (reader has-kem-secret)     -> 1)
+  (rule (reader foreign)            -> REFUSED)
+  (envelope (kem ml-kem-768) (aead aes-256-gcm)))

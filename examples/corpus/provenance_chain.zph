@@ -1,0 +1,5 @@
+;; provenance_chain.zph — ledger tamper-evidente
+;; Cada recibo carrega o selo do anterior; a historia nao se reescreve.
+(decide (model provenance) (purpose "Is the chain intact?")
+  (rule (previous-seal valid) -> 1)
+  (rule (previous-seal tampered) -> REFUSED))

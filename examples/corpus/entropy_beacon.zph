@@ -1,0 +1,5 @@
+;; entropy_beacon.zph — entropia quantica medida em silicio
+;; receipt_id nasce de bits MEDIDOS em QPU, nao de clock.
+(decide (model entropy) (purpose "Is the receipt id real?")
+  (rule (pool from-qpu 8192) -> 1)
+  (rule (pool from-clock) -> REFUSED))

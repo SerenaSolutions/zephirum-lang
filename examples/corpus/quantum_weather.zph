@@ -1,0 +1,5 @@
+;; quantum_weather.zph — estabilidade temporal do veredito
+;; O mesmo oraculo, horarios diferentes: o veredito sobrevive ao ruido?
+(decide (model stability) (purpose "Is the verdict stable over time?")
+  (rule (verdicts identical across runs) -> 1)
+  (rule (verdicts drift) -> REFUSED))

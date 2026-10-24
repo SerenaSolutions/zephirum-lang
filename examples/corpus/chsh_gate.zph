@@ -1,0 +1,7 @@
+;; chsh_gate.zph — porta de nao-localidade (Rodada F)
+;; Mais profunda que GHZ: o dispositivo prova que viola desigualdade de Bell.
+(decide (model nonlocality) (purpose "Does the device beat CHSH?")
+  (rule (S >= 2.20) -> 1)
+  (rule (2.0 < S < 2.20) -> REFUSED)
+  (rule (S <= 2.0) -> 0)
+  (bases (a 0 pi/2) (b pi/4 3pi/4)) (shots 2048))

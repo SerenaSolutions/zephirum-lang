@@ -1,0 +1,6 @@
+;; grover_search.zph — busca com amplificacao de amplitude
+;; O alvo existe; a pergunta e se o hardware encontra com dominancia.
+(decide (model search) (purpose "Is the target found?")
+  (rule (p-target >= 0.50 and >= 2x runner-up) -> 1)
+  (rule (p-target <= 0.20) -> 0)
+  (rule (else) -> REFUSED))
