@@ -1,0 +1,34 @@
+{
+ "rodada": "D",
+ "protocolo": "matriz de reprodutibilidade 3 QPUs",
+ "backends": [
+  "ibm_fez",
+  "ibm_marrakesh"
+ ],
+ "shots_levels": [
+  64,
+  256
+ ],
+ "eps": 0.05,
+ "margins": {
+  "64": 0.16976268946757744,
+  "256": 0.08488134473378872
+ },
+ "jobs": {
+  "ibm_fez": {
+   "ghz_job": "dbeg1gvgdj9s73flnc4g",
+   "dj_jobs": {
+    "64": "dbeg1h7pc3tc739lkcn0",
+    "256": "dbeg1h7pc3tc739lkcng"
+   }
+  },
+  "ibm_marrakesh": {
+   "ghz_job": "dbeg1hvgdj9s73flnc6g",
+   "dj_jobs": {
+    "64": "dbeg1hvgdj9s73flnc70",
+    "256": "dbeg1hvpc3tc739lkcq0"
+   }
+  }
+ },
+ "referencia_rodada_b_c": "ibm_kingston (jobs dbdac41gv2cc738hnen0/dbdac4c24mrc73cl3ia0 + GHZ dbdlb7424mrc739iievg)"
+}
