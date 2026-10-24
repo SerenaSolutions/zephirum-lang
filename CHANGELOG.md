@@ -1,3 +1,28 @@
+## [1.9.1] - 2026-10-24
+
+### Adicionado (auditoria adversarial — resposta ao auditor externo e RFC #36)
+- **Correcao de testes multiplos (Bonferroni, direcao correta)**:
+  `adaptive_margin_family(epsilon, shots, family)` => banda
+  m' = 2*m(eps) - m(eps/k); a banda ENCOLHE com a familia, protegendo
+  a mesma zona do teste unico com erro de familia <= epsilon.
+  `run_quantum(..., family=k)` e `decide(..., family=k)`.
+  Familia grande demais para os shots => RECUSA TUDO
+  (refusal_reason=FAMILY_EXCEEDS_SHOTS), nunca risco somado.
+  ACHADO PUBLICO DA FALSIFICACAO: a primeira implementacao (alargar a
+  banda com eps/k) foi pega pelo proprio teste de Monte Carlo
+  (tests/test_multiple_testing.py) e revertida — alargar tornava a
+  alegacao de constante MAIS agressiva, direcao errada.
+- **Taxonomia de recusa**: toda RECUSA carrega refusal_reason
+  (BALANCED_ORACLE | INSIDE_NOISE_BAND | FAMILY_EXCEEDS_SHOTS);
+  runtime decide() propaga no Decision e no recibo selado.
+- **Registro de protocolo** no recibo (auditoria: epsilon declarado
+  ANTES da execucao, shots, regra de parada, comparacoes da familia,
+  tratamento do inconclusivo, hipotese de independencia declarada).
+- 7 testes falsificaveis novos (tests/test_multiple_testing.py):
+  banda encolhe com familia, valores-guia, entrada adversarial,
+  controle de risco de familia por Monte Carlo, taxonomia, familia
+  no recibo, recusa honesta sob familia absurda.
+
 # Changelog
 
 All notable changes to the ZEPHIRUM language are documented here.

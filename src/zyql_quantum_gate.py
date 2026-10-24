@@ -41,7 +41,32 @@ def adaptive_margin(epsilon, shots):
     """
     if not (0.0 < epsilon < 0.5):
         raise ValueError("epsilon precisa em (0, 0.5); recebido %r" % epsilon)
-    return math.sqrt(math.log(2.0 / epsilon) / (2.0 * shots))
+    return adaptive_margin_family(epsilon, shots, 1)
+
+
+def adaptive_margin_family(epsilon, shots, family=1):
+    """v1.9.1 — correcao de testes multiplos (Bonferroni, DIRECAO CORRETA).
+
+    ACHADO DA FALSIFICACAO (nosso, publico): a primeira implementacao
+    ingênua (eps/k na formula da banda) ALARGAVA a banda e tornava a
+    alegacao de constante MAIS agressiva — direção errada, pega pelo
+    proprio teste de Monte Carlo que a disciplina do auditor exige.
+
+    Derivacao correta para esta semantica (veredito 1 = "consistente
+    com constante ideal" dentro da banda +-m; erro por veredito na
+    borda da zona protegida = 2*exp(-2*S*m^2)):
+      Bonferroni exige erro por veredito <= eps/k na MESMA zona
+      protegida do teste unico: exp(-2*S*m'^2) com m' = 2*m(eps) - m(eps/k).
+    A banda ENCOLHE com a familia => mais RECUSA, menos risco somado.
+    Familia tao grande que m' <= 0 => banda negativa => o nucleo recusa
+    TUDO (honesto): shots insuficientes para k vereditos com eps de familia.
+    Responde ao RFC #36 (item 1). Uso honesto: k=1 para decisao unica.
+    """
+    if not isinstance(family, int) or family < 1:
+        raise ValueError("family precisa ser inteiro >= 1; recebido %r" % family)
+    m_single = math.sqrt(math.log(2.0 / epsilon) / (2.0 * shots))
+    m_fam = math.sqrt(math.log(2.0 / (epsilon / family)) / (2.0 * shots))
+    return 2.0 * m_single - m_fam
 
 
 def ghz_integrity(n=3, shots=2048, seed=1701, threshold=0.80):
@@ -79,13 +104,28 @@ class ZYQLQuantumGate:
         self.oracle_calls += 1
         qc.gates_applied.append("Uf(x) [1 oracle call]")
 
-    def run_quantum(self, shots=2048, seed=1701, epsilon=None):
+    def run_quantum(self, shots=2048, seed=1701, epsilon=None, family=1):
         """Interference decision: 1 oracle call.
 
         epsilon (v1.9.0): banda adaptativa por Hoeffding inverso.
+        family (v1.9.1): k vereditos conjuntos -> banda Bonferroni
+        (erro de familia <= epsilon). k=1 = decisao unica.
         Sem epsilon: banda fixa MARGIN (comportamento v1.x preservado).
         """
-        margin = adaptive_margin(epsilon, shots) if epsilon is not None else MARGIN
+        if epsilon is not None:
+            margin = adaptive_margin_family(epsilon, shots, family)
+            if margin <= 0:
+                # familia grande demais para os shots: RECUSA TUDO, honesto
+                self.p0 = None
+                return {"decision": "REFUSED", "mode": "INSUFFICIENT_CONFIDENCE",
+                        "refusal_reason": "FAMILY_EXCEEDS_SHOTS",
+                        "p0": None, "rule": "banda Bonferroni <= 0: shots "
+                        "insuficientes para %d vereditos com eps de familia" % family,
+                        "error_bound": epsilon,
+                        "error_bound_type": "Hoeffding",
+                        "family": family, "epsilon_family": epsilon}
+        else:
+            margin = MARGIN
         qc = QCircuit(self.n)
         for q in range(self.n):
             qc.h(q)
@@ -99,26 +139,42 @@ class ZYQLQuantumGate:
         self.counts = counts
         return self._trivalent(p0, shots, margin=margin,
                                adaptive=epsilon is not None,
-                               epsilon_declared=epsilon if epsilon is not None else 1.0)
+                               epsilon_declared=epsilon if epsilon is not None else 1.0,
+                               family=family if epsilon is not None else 1)
 
     def _trivalent(self, p0, shots, eps_name="Hoeffding", margin=MARGIN,
-                   adaptive=False, epsilon_declared=1.0):
-        """Noise rule: band +-margin around 0 and 1; outside both -> REFUSED."""
+                   adaptive=False, epsilon_declared=1.0, family=1):
+        """Noise rule: band +-margin around 0 and 1; outside both -> REFUSED.
+
+        v1.9.1: toda RECUSA carrega refusal_reason — o núcleo distingue
+        POR QUE recusou (oraculo balanceado vs zona cinzenta), em vez de
+        lumping de toda dificuldade numa recusa unica.
+        """
         hoeff = min(epsilon_declared, 2 * math.exp(-2 * shots * margin ** 2)) if adaptive else 2 * math.exp(-2 * shots * margin ** 2)
+        family_field = {"family": family,
+                        "epsilon_family": (epsilon_declared if adaptive else None)}
         if p0 >= 1 - margin:
             # constant. Which constant? the classical f(0) probe (1 extra call)
             self.oracle_calls += 1
             verdict = 1 if self.f(0) == 1 else 0
-            return {"decision": verdict, "mode": "DECIDED_BY_INTERFERENCE",
-                    "p0": p0, "rule": ("adaptive band>=%.4f" % (1 - margin)) if adaptive else ("band>=%.2f" % (1 - margin)),
-                    "error_bound": hoeff, "error_bound_type": eps_name}
+            d = {"decision": verdict, "mode": "DECIDED_BY_INTERFERENCE",
+                 "p0": p0, "rule": ("adaptive band>=%.4f" % (1 - margin)) if adaptive else ("band>=%.2f" % (1 - margin)),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
         if p0 <= margin:
-            return {"decision": "REFUSED", "mode": "DECIDED_BY_INTERFERENCE",
-                    "p0": p0, "rule": ("adaptive band<=%.4f (balanced: input-dependent)" % margin) if adaptive else ("band<=%.2f (balanced: input-dependent)" % margin),
-                    "error_bound": hoeff, "error_bound_type": eps_name}
-        return {"decision": "REFUSED", "mode": "INSUFFICIENT_CONFIDENCE",
-                "p0": p0, "rule": "inside noise band (+-%.4f), margin declared" % margin,
-                "error_bound": hoeff, "error_bound_type": eps_name}
+            d = {"decision": "REFUSED", "mode": "DECIDED_BY_INTERFERENCE",
+                 "refusal_reason": "BALANCED_ORACLE",
+                 "p0": p0, "rule": ("adaptive band<=%.4f (balanced: input-dependent)" % margin) if adaptive else ("band<=%.2f (balanced: input-dependent)" % margin),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
+        d = {"decision": "REFUSED", "mode": "INSUFFICIENT_CONFIDENCE",
+             "refusal_reason": "INSIDE_NOISE_BAND",
+             "p0": p0, "rule": "inside noise band (+-%.4f), margin declared" % margin,
+             "error_bound": hoeff, "error_bound_type": eps_name}
+        d.update(family_field)
+        return d
 
     # --- classical baselines for the query-advantage receipt ---
     def classical_deterministic(self):
