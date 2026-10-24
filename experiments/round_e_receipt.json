@@ -1,0 +1,223 @@
+{
+  "spec": "Z-QEA/2.2",
+  "modulo": "RODADA E",
+  "data": "2026-10-24T19:11:04.498290+00:00",
+  "protocolo": "carga maxima: GHZ n=5/n=8 + DJ n=4/5/6 + BV n=6 + Grover n=3",
+  "eps": 0.05,
+  "backend": "ibm_kingston",
+  "bandas_calibradas": {
+    "bv": "1 se p_segredo>=0.80; 0 se p<=0.0312 (2x baseline 1/64); senao REFUSED",
+    "grover": "1 se p_alvo>=0.50 e >=2x segundo; 0 se p_alvo<=0.25; senao REFUSED"
+  },
+  "resultados": {
+    "ghz5_gate": {
+      "job": "dbeg4dfsstms73fc0itg",
+      "n": 5,
+      "shots": 256,
+      "papel": "porta",
+      "fidelidade": 0.8828,
+      "confiavel": true,
+      "top_estado": "00000",
+      "p_top": 0.4492
+    },
+    "ghz8_stress": {
+      "job": "dbeg4dfgdj9s73flnj80",
+      "n": 8,
+      "shots": 512,
+      "papel": "estresse",
+      "fidelidade": 0.793,
+      "confiavel": false,
+      "top_estado": "00000000",
+      "p_top": 0.416
+    },
+    "dj_escala": {
+      "const-1@n4": {
+        "p0": 0.9971,
+        "veredito": "1",
+        "banda": 0.0424
+      },
+      "const-0@n4": {
+        "p0": 0.9941,
+        "veredito": "0",
+        "banda": 0.0424
+      },
+      "balanceado@n4": {
+        "p0": 0.002,
+        "veredito": "REFUSED",
+        "banda": 0.0424
+      },
+      "const-1@n5": {
+        "p0": 0.9941,
+        "veredito": "1",
+        "banda": 0.0424
+      },
+      "const-0@n5": {
+        "p0": 0.9912,
+        "veredito": "0",
+        "banda": 0.0424
+      },
+      "balanceado@n5": {
+        "p0": 0.0039,
+        "veredito": "REFUSED",
+        "banda": 0.0424
+      },
+      "const-1@n6": {
+        "p0": 0.9873,
+        "veredito": "1",
+        "banda": 0.0424
+      },
+      "const-0@n6": {
+        "p0": 0.9951,
+        "veredito": "0",
+        "banda": 0.0424
+      },
+      "balanceado@n6": {
+        "p0": 0.002,
+        "veredito": "REFUSED",
+        "banda": 0.0424
+      }
+    },
+    "bv_segredo": {
+      "job": "dbeg4dvpc3tc739lkk1g",
+      "segredo": "101101",
+      "p_segredo": 0.9102,
+      "top_estado": "101101",
+      "p_top": 0.9102,
+      "veredito": "1"
+    },
+    "grover_alvo": {
+      "job": "dbeg4dvpc3tc739lkk20",
+      "alvo": "110",
+      "p_alvo": 0.7744,
+      "p_segundo": 0.0625,
+      "top_estado": "011",
+      "veredito": "1"
+    }
+  },
+  "veredito": "CARGA MAXIMA SUPORTADA: porta GHZ n=5 confiavel, 9/9 DJ exatos, BV recupera o segredo, Grover encontra o alvo",
+  "receipt_id": "a9024be2c9f6c99b182e28929a1c8dea",
+  "entropia": {
+    "job_id": "dbcnmds24mrc73ck0p0g",
+    "backend": "ibm_marrakesh",
+    "shots": 256,
+    "qubits": 32,
+    "pool_sha3_256": "9ce9eaabaa1273f2564cd4365455f12d3a995eef3652c081db583fb2b2765fdd",
+    "data": "2026-10-22T02:56:01+00:00"
+  },
+  "previous_seal": "5f59a5d74ddcaeeaf0f02900710344645b73a3d43655d216227d460cd59e3812",
+  "assinatura_pq": {
+    "spec": "Z-QEA/2.2",
+    "modulo": "RODADA E",
+    "data": "2026-10-24T19:11:04.498290+00:00",
+    "protocolo": "carga maxima: GHZ n=5/n=8 + DJ n=4/5/6 + BV n=6 + Grover n=3",
+    "eps": 0.05,
+    "backend": "ibm_kingston",
+    "bandas_calibradas": {
+      "bv": "1 se p_segredo>=0.80; 0 se p<=0.0312 (2x baseline 1/64); senao REFUSED",
+      "grover": "1 se p_alvo>=0.50 e >=2x segundo; 0 se p_alvo<=0.25; senao REFUSED"
+    },
+    "resultados": {
+      "ghz5_gate": {
+        "job": "dbeg4dfsstms73fc0itg",
+        "n": 5,
+        "shots": 256,
+        "papel": "porta",
+        "fidelidade": 0.8828,
+        "confiavel": true,
+        "top_estado": "00000",
+        "p_top": 0.4492
+      },
+      "ghz8_stress": {
+        "job": "dbeg4dfgdj9s73flnj80",
+        "n": 8,
+        "shots": 512,
+        "papel": "estresse",
+        "fidelidade": 0.793,
+        "confiavel": false,
+        "top_estado": "00000000",
+        "p_top": 0.416
+      },
+      "dj_escala": {
+        "const-1@n4": {
+          "p0": 0.9971,
+          "veredito": "1",
+          "banda": 0.0424
+        },
+        "const-0@n4": {
+          "p0": 0.9941,
+          "veredito": "0",
+          "banda": 0.0424
+        },
+        "balanceado@n4": {
+          "p0": 0.002,
+          "veredito": "REFUSED",
+          "banda": 0.0424
+        },
+        "const-1@n5": {
+          "p0": 0.9941,
+          "veredito": "1",
+          "banda": 0.0424
+        },
+        "const-0@n5": {
+          "p0": 0.9912,
+          "veredito": "0",
+          "banda": 0.0424
+        },
+        "balanceado@n5": {
+          "p0": 0.0039,
+          "veredito": "REFUSED",
+          "banda": 0.0424
+        },
+        "const-1@n6": {
+          "p0": 0.9873,
+          "veredito": "1",
+          "banda": 0.0424
+        },
+        "const-0@n6": {
+          "p0": 0.9951,
+          "veredito": "0",
+          "banda": 0.0424
+        },
+        "balanceado@n6": {
+          "p0": 0.002,
+          "veredito": "REFUSED",
+          "banda": 0.0424
+        }
+      },
+      "bv_segredo": {
+        "job": "dbeg4dvpc3tc739lkk1g",
+        "segredo": "101101",
+        "p_segredo": 0.9102,
+        "top_estado": "101101",
+        "p_top": 0.9102,
+        "veredito": "1"
+      },
+      "grover_alvo": {
+        "job": "dbeg4dvpc3tc739lkk20",
+        "alvo": "110",
+        "p_alvo": 0.7744,
+        "p_segundo": 0.0625,
+        "top_estado": "011",
+        "veredito": "1"
+      }
+    },
+    "veredito": "CARGA MAXIMA SUPORTADA: porta GHZ n=5 confiavel, 9/9 DJ exatos, BV recupera o segredo, Grover encontra o alvo",
+    "receipt_id": "a9024be2c9f6c99b182e28929a1c8dea",
+    "entropia": {
+      "job_id": "dbcnmds24mrc73ck0p0g",
+      "backend": "ibm_marrakesh",
+      "shots": 256,
+      "qubits": 32,
+      "pool_sha3_256": "9ce9eaabaa1273f2564cd4365455f12d3a995eef3652c081db583fb2b2765fdd",
+      "data": "2026-10-22T02:56:01+00:00"
+    },
+    "previous_seal": "5f59a5d74ddcaeeaf0f02900710344645b73a3d43655d216227d460cd59e3812",
+    "assinatura_pq": {
+      "alg": "ML-DSA-44 (FIPS 204, NIST post-quantum signature, Dilithium2 parameters)",
+      "pk_b64": "/jEM8XeesQcDCtHwdipdHPOkPaEEOsPu5Ly+ZODVX8m2LpU+o/dWVmyNRY0M89hQL7j035JqK/vOIkhuwpS9/UiibMgbtNQFKkOPXULaxjoe0GWV1ss/aK7KyyTJPRLSSEQ50bt5YCHRRperjDhjkkFsrgczE3cKPk4ucmqAQlGg5A1V/86LhY6q2xZd5KVq8vwGVrDc80dq1KC1hFGHxO7m2+jROhdKm3JOjz0gkZ8EHeYIrsYrHAlnh3Qp7kITotLJNyDatqKH68kHz7sadA1dnJYEqqO97bGnOgJz3bx8fPLm8Iqs0tOnVOlmBpFNGw4SjsY3hfghHs7X4mNUkaGOQ8Fpcb8HcSJX/su9rK0e66/UK49EydCb7MPHnsNPBaEePwbiry7lxdbGeZuinn3T+rJlu8mhsM9puWF9RE62Umc9TJNNTMOUANpyM6A2ftVhPv+2Dov0Ugzumcx8dNIQSb0tBVQ1y2w5zAaystG66HMRt/4nfkiB2FAfD+bm3wUX3WbH8fIHTX7qNsYVNkwo/PgqxcOPmmYPxHmaGCsuKDlF7Yapje8H+CCktUc3foHs0HBHAyrZ+cwatkGAXB3cTzMSoge6ahhc3wtqUepwGEl4qV9pobzpEMUk1WAlamLwTAZoAHBhjzXfz5wqvYk9jbIClN5e01tRJn7f38Ovuc1hNI30Z65gIIKhwG1bhx1uq+vtvGbIAXmMDvf9Hrh/nwtmSzKsYsd7Adb+CL/HOFuXradtJDCT2we178O/sbU7JV80VADZIkOOANrR9wBECoq9DxKUXVO+ghBfS117gE41WB5xXMQfSNsxN4nxCBEvEZXcG2bmFzGF4ij6JI5DcNaqEgwryraAYvWyF7emJ+Ny88W/XeynOpiTAaQyNwwpiEx/1wNtQfLT7LQTGJFqY91Zp5KVomQO6SdO81qmx49ryL8tWqC8A1BJUSz3Z3n9DxmjjQBtnO3/yg7M1bXJAfw5JfKbKvVDM7oDCDL5q2aGY2KjKl55JFsMEqSRvsBEB6eyCt2xQZTfAN51LaIZhpOQm6t/Ik5ERFLPMEPYexFTEmy795wIkqPCGFGu4DInbTT2sGxL+31PUspx0LjSEcdvwlN6DPNOfCvdFYGrmr+qobvlPmE178lih7RdCMZKFTMbYCUSEZLW2ISV+TE5VODS/JI7CVYAKFSa45qmYHU2gOsrPDZgOuPkVYQ8Zm3UDD8plimj4kZY0XvWG4rwFgsD9vIhMnUA9WCGq1YaPwXp+zxmUmo1t82m8DfZEJVVew9LMIf3pjyV8OBGUSR6DgdNkIftE0c5smqUCc9PSO/mxjb7SGDS7KdxuyACSQ+jRDxyuR/bVcqUM4UVHOMHkRnyWqQzY2ZZ0WgVXlzdSyVDhG/FNjyg8YXRRPRRCf/+s6RQZy3rrG2ZT0Rzs8lFP6eGDx+AVdJviExOLIL1ttpstttAzR1Oz7iv6G9zA7Y3iWAp+nDHtO1skcdHNjuyKfKALCnsfVIt3co+oKx7Phe0cKuBDbREDQBt4rvM4jN87mK+y+TxNNtxQ+wR1Iky0eFY1i248ClNeiCDFEM1EGKRW8GB/RzUu490R0cGAW7nZ3PtOaGJ/ZXanODG2srGL5YhXnYiUj43fymBshBRFteQP0K4c0Md+GKgob7lEbjAMY5oqJK5FRdzzamWTFOQV27zkASmuAIaonxy1Hm/MJXAYwXViGyanTlpWUlITSg8NdgoqnXkiBgVTtonYA==",
+      "sig_b64": "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",
+      "regra": "assinatura ML-DSA-44 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com assinatura_pq e selo_sha3_256 REMOVIDOS da entrada; pk embarcado no recibo (autoverificável, sem servidor)"
+    }
+  },
+  "selo_sha3_256": "ea9a07e6d46009f2436504427c2e665d901ee84ffc620924043f0e948e3982ae"
+}
