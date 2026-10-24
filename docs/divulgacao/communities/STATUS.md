@@ -1,6 +1,12 @@
 # Divulgacao direta em comunidades quanticas (24/10/2026)
 
-## AO VIVO (posts diretos)
+## AO VIVO (posts diretos) — LEVADA 2 (24/10, 18:30)
+- PaddlePaddle/Quantum Discussion #55 (Show and tell, Baidu/China, Asia) — proposta de backend Paddle pra bateria trivalente
+- QunaSys/quri-sdk Discussion #619 (Show and tell, QunaSys/Japao, Asia) — angulo: proveniencia de DECISOES para NISQ
+- softwareQInc/staq Discussion #94 (Show and tell, softwareQ/Canada) — angulo: compilacao + auditoria pre-submissao
+- qBraid/qBraid Discussion #1503 (Show and tell, qBraid/EUA-global) — angulo: bateria poliglota cross-SDK, proposta de notebook qBraid
+
+## AO VIVO (posts diretos) — LEVADA 1
 - unitaryfoundation/mitiq Discussion #3172 (Show and tell) — comunidade Unitary Fund (EUA/global), angulo: correcao de erro, margens adaptativas
 - qutip/qutip Discussion #3067 (Show and tell) — comunidade QuTiP (Europa), angulo: design da linguagem + validacao em hardware
 - zephirum-lang Discussion #35 — anuncio cientifico completo (metodologia + job IDs), publico e indexavel
