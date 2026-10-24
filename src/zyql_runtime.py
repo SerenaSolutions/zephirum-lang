@@ -38,6 +38,7 @@ class Decision:
     shots: int
     n: int
     latency_ms: float
+    refusal_reason: object = None
     receipt: dict = field(default=None, repr=False, compare=False)
 
 class ConfigError(ValueError):
@@ -55,7 +56,7 @@ def _validate(f, n, shots, seed):
 
 def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
            epsilon=None, require_device_trust=False, device_shots=2048,
-           previous_seal=None) -> Decision:
+           previous_seal=None, family=1) -> Decision:
     """Decisão trivalente 1/0/REFUSED por interferência Deutsch-Jozsa.
 
     v1.9.0 — upgrades:
@@ -76,8 +77,25 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
                             error_bound=1.0, oracle_calls=0, shots=0, n=n,
                             latency_ms=round((time.perf_counter()-t0)*1000, 3),
                             receipt=None)
+    if not isinstance(family, int) or family < 1:
+        raise ValueError("family precisa ser inteiro >= 1; recebido %r" % family)
+    # REGISTRO DE PROTOCOLO (auditoria v1.9.1): declarado ANTES da execucao.
+    # O auditor exige: epsilon pre-declarado, shots, regra de parada,
+    # numero de comparacoes, tratamento do inconclusivo, hipoteses.
+    protocol = {
+        "epsilon_declared_before_execution": epsilon,
+        "shots": shots,
+        "stopping_rule": "fixed_shots_no_peeking (nada adaptado pos-observacao)",
+        "comparisons_in_family": family,
+        "inconclusive_treatment": "REFUSED; sem retry silencioso",
+        "independence_hypothesis": "shots assumidos i.i.d.; regimes de "
+                                   "ruido correlacionado declarados fora do escopo",
+        "multiple_testing": "Bonferroni: epsilon/family por veredito" if family > 1
+                            else "decisao unica",
+    }
     g = ZYQLQuantumGate(n, f)
-    r = g.run_quantum(shots=shots, seed=seed if seed is not None else 1701, epsilon=epsilon)
+    r = g.run_quantum(shots=shots, seed=seed if seed is not None else 1701,
+                      epsilon=epsilon, family=family)
     latency_ms = round((time.perf_counter() - t0) * 1000, 3)
     verdict = Verdict(r["decision"]) if r["decision"] in (1, 0) else Verdict.REFUSED
     receipt = None
@@ -86,9 +104,11 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
                    "p0": r["p0"], "shots": shots, "n": n, "seed": seed,
                    "mode": r["mode"], "error_bound": r["error_bound"],
                    "epsilon_declared": epsilon,
+                   "refusal_reason": r.get("refusal_reason"),
+                   "protocol": protocol,
                    "device_gate": gate_result,
                    "previous_seal": previous_seal,
-                   "oracle_calls": g.oracle_calls, "sealed_by": "zyql-runtime-1.9.0"}
+                   "oracle_calls": g.oracle_calls, "sealed_by": "zyql-runtime-1.9.1"}
         selo = hashlib.sha3_256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
         receipt = {"payload": payload, "selo_sha3_256": selo}
         with open(seal_path, "w") as fh:
@@ -96,7 +116,8 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
         log.info("recibo selado: %s", seal_path)
     return Decision(verdict=verdict, p0=r["p0"], mode=r["mode"],
                     error_bound=r["error_bound"], oracle_calls=g.oracle_calls,
-                    shots=shots, n=n, latency_ms=latency_ms, receipt=receipt)
+                    shots=shots, n=n, latency_ms=latency_ms, receipt=receipt,
+                    refusal_reason=r.get("refusal_reason"))
 
 def verify_receipt(path) -> bool:
     """Verificação offline do selo SHA3-256 de um recibo do runtime."""
