@@ -1,0 +1,38 @@
+{
+ "chsh": {
+  "job_id": "dbeg91fsstms73fc0skg",
+  "backend": "ibm_kingston",
+  "status": "DONE",
+  "qubits_calibrados": 155,
+  "T1_medio_us": 242.8,
+  "T2_medio_us": 184.0,
+  "readout_err_medio_pct": 2.02,
+  "melhor_qubit_readout_pct": 0.269,
+  "pior_qubit_readout_pct": 49.15,
+  "calibrado_em": "2026-10-24 20:25:26+00:00"
+ },
+ "qec": {
+  "job_id": "dbeg918m94ac738rou10",
+  "backend": "ibm_kingston",
+  "status": "DONE",
+  "qubits_calibrados": 155,
+  "T1_medio_us": 242.8,
+  "T2_medio_us": 184.0,
+  "readout_err_medio_pct": 2.02,
+  "melhor_qubit_readout_pct": 0.269,
+  "pior_qubit_readout_pct": 49.15,
+  "calibrado_em": "2026-10-24 20:25:26+00:00"
+ },
+ "grover4": {
+  "job_id": "dbeg91ngdj9s73flnso0",
+  "backend": "ibm_kingston",
+  "status": "DONE",
+  "qubits_calibrados": 155,
+  "T1_medio_us": 242.8,
+  "T2_medio_us": 184.0,
+  "readout_err_medio_pct": 2.02,
+  "melhor_qubit_readout_pct": 0.269,
+  "pior_qubit_readout_pct": 49.15,
+  "calibrado_em": "2026-10-24 20:25:26+00:00"
+ }
+}
