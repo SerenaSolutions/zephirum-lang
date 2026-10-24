@@ -59,9 +59,8 @@ for key, n, shots, tag in (("ghz5_gate", 5, 256, "porta"), ("ghz8_stress", 8, 51
     print(f"{key} ({meta['jobs'][key]}): {st}")
     if st != "DONE": all_done = False; continue
     counts = counts_of(job.result()[0])
-    bom = "0" * n + "1" * n
     keys = sorted(counts, key=counts.get, reverse=True)
-    p_ghz = (counts.get(bom, 0) + counts.get(bom[::-1], 0)) / shots
+    p_ghz = (counts.get("0" * n, 0) + counts.get("1" * n, 0)) / shots
     res[key] = {"job": meta["jobs"][key], "n": n, "shots": shots, "papel": tag,
                 "fidelidade": round(p_ghz, 4), "confiavel": p_ghz >= 0.80,
                 "top_estado": keys[0], "p_top": round(counts[keys[0]] / shots, 4)}
