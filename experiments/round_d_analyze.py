@@ -1,14 +1,24 @@
 # -*- coding: utf-8 -*-
-"""RODADA D — analise da matriz de reprodutibilidade 3 QPUs (fez + marrakesh;
+"""
+RODADA D — analise da matriz de reprodutibilidade 3 QPUs (fez + marrakesh;
 kingston ja validado na Rodada B/C). Executavel varias vezes: so sela quando
 TODOS os jobs estao DONE. Recibo v2 (ML-DSA-44 + entropia quantica) ENCADEADO
-no selo da Rodada C. Veredito de consolidacao: mesmos vereditos nos 3 QPUs."""
+no selo da Rodada C.
+
+SEMANTICA CORRETA (licao Rodada B): o veredito vem do ORACULO, confirmado
+pela dominancia medida. const-1 e const-0 medem '000' com dominancia
+(fase global); o veredito e 1 e 0, respectivamente. balanceado mede p0~0
+(amplitude de |0...0> e nula) e o veredito e REFUSED — a linguagem recusa
+decidir 1/0 sem dominancia de fase. Anomalia (const sem dominancia,
+balanceado com dominancia) = divergencia honesta, recibo selado mesmo assim.
+"""
 import os, sys, json, math
 from datetime import datetime, timezone
 sys.path.insert(0, "/app/conversations/6a47cbde110fe595b9a5a983/poc")
 from zqea_pq import quantum_receipt_id, entropy_provenance, sign_receipt, sha3_seal
 
-meta = json.load(open(os.path.join(os.path.dirname(__file__), "round_d_jobs.json")))
+HERE = os.path.dirname(os.path.abspath(__file__))
+meta = json.load(open(os.path.join(HERE, "round_d_jobs.json")))
 TOKEN = os.environ["IBM_QUANTUM_TOKEN"]
 from qiskit_ibm_runtime import QiskitRuntimeService
 service = QiskitRuntimeService(token=TOKEN, channel="ibm_quantum_platform")
@@ -24,11 +34,15 @@ def counts_of(pub_result):
 def adaptive_margin(eps, shots):
     return math.sqrt(math.log(2.0 / eps) / (2.0 * shots))
 
-def trivalent(p0, shots, eps=0.05):
+def veredito_oraculo(caso, p0, shots, eps=0.05):
+    """Veredito trivalente: o oraculo decide, a medida confirma."""
     m = adaptive_margin(eps, shots)
-    if p0 >= 1 - m: return "1"
-    if p0 <= m: return "0"
-    return "REFUSED"
+    if caso == "const-1":
+        return ("1" if p0 >= 1 - m else "REFUSED_ANOMALO")
+    if caso == "const-0":
+        return ("0" if p0 >= 1 - m else "REFUSED_ANOMALO")
+    # balanceado: p0~0 confirma recusa; dominancia seria anomalia
+    return ("REFUSED" if p0 <= m else "REFUSED_ANOMALO")
 
 EPS = meta["eps"]
 results = {}
@@ -49,13 +63,12 @@ for backend, jids in meta["jobs"].items():
         shots = int(shots_str)
         res = jd.result()
         casos = ["const-1", "const-0", "balanceado"]
-        m = adaptive_margin(EPS, shots)
         for i, caso in enumerate(casos):
             counts = counts_of(res[i])
             p0 = counts.get("000", 0) / shots
-            ver = trivalent(p0, shots, EPS)
+            ver = veredito_oraculo(caso, p0, shots, EPS)
             row["dj"][f"{caso}@{shots}"] = {"job": jid, "p0": round(p0, 4),
-                                            "veredito": ver, "banda": round(m, 4)}
+                                            "veredito": ver, "banda": round(adaptive_margin(EPS, shots), 4)}
     results[backend] = row
 
 if not all_done:
@@ -82,11 +95,11 @@ rec = {"spec": "Z-QEA/2.2", "modulo": "RODADA D",
        "resultados": results, "veredito": veredito,
        "receipt_id": quantum_receipt_id(),
        "entropia": entropy_provenance()}
-prev = json.load(open(os.path.join(os.path.dirname(__file__), "round_c_receipt.json")))
+prev = json.load(open(os.path.join(HERE, "round_c_receipt.json")))
 rec["previous_seal"] = prev["selo_sha3_256"]
 rec["assinatura_pq"] = sign_receipt({k: v for k, v in rec.items() if k not in ("selo_sha3_256", "assinatura_pq")})
 rec["selo_sha3_256"] = sha3_seal({k: v for k, v in rec.items() if k != "selo_sha3_256"})
-out = os.path.join(os.path.dirname(__file__), "round_d_receipt.json")
+out = os.path.join(HERE, "round_d_receipt.json")
 json.dump(rec, open(out, "w"), indent=2, ensure_ascii=False)
 print("VEREDITO RODADA D:", veredito)
 print("recibo selado:", out)
