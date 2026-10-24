@@ -1,0 +1,24 @@
+{
+ "rodada": "E",
+ "protocolo": "carga maxima: GHZ n=5/n=8 + DJ n=4/5/6 + BV n=6 + Grover n=3",
+ "backend": "ibm_kingston",
+ "eps": 0.05,
+ "margens": {
+  "256": 0.0849,
+  "512": 0.06,
+  "1024": 0.0424
+ },
+ "jobs": {
+  "ghz5_gate": "dbeg4dfsstms73fc0itg",
+  "ghz8_stress": "dbeg4dfgdj9s73flnj80",
+  "dj_escala": "dbeg4dngdj9s73flnja0",
+  "bv_segredo": "dbeg4dvpc3tc739lkk1g",
+  "grover_alvo": "dbeg4dvpc3tc739lkk20"
+ },
+ "segredo_bv": "101101",
+ "alvo_grover": "110",
+ "bandas_calibradas_familias_novas": {
+  "bv": "1 se p_segredo>=0.80; 0 se p<=0.0312 (2x baseline 1/64); senao REFUSED",
+  "grover": "1 se p_alvo>=0.50 e >=2x segundo; 0 se p_alvo<=0.25; senao REFUSED"
+ }
+}
