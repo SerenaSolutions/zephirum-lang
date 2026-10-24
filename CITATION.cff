@@ -4,7 +4,7 @@ message: "If you use this software, cite it as below."
 type: software
 authors:
   - name: "Serena Solutions"
-repository-code: "https://github.com/serena-solutions/zephirum-lang"
+repository-code: "https://github.com/SerenaSolutions/zephirum-lang"
 abstract: "ZEPHIRUM is the language; ZYQL is the trivalent decision algorithm (1/0/REFUSED) with ML-DSA-44 receipts. Decisions by Deutsch-Jozsa interference; every claim carries a recorded receipt."
 keywords:
   - quantum-computing
@@ -16,3 +16,11 @@ identifiers:
   - type: doi
     value: "10.5281/zenodo.23302046"
     description: "Zenodo concept DOI (software deposit)"
+preferred-citation:
+  type: article
+  title: "Necessity-First Computational Quantum Chemistry: The ZYQL Exact-Decision Language and Quantum-Witnessed Verification on Superconducting Hardware (thesis v0.1)"
+  authors:
+    - name: "Ravimah Anjo"
+  doi: "10.5281/zenodo.23302046"
+  year: 2026
+url: "https://github.com/SerenaSolutions/zephirum-lang"

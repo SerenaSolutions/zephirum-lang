@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "title": "ZEPHIRUM v1.9.0 and ZYQL trivalent decision core: quantum language with receipts — software record and thesis v0.1",
+    "version": "1.9.0",
+    "publication_date": "2026-10-24",
+    "license": "mit-license",
+    "doi": "10.5281/zenodo.23302046",
+    "keywords": ["quantum computing", "programming languages", "trivalent logic", "exact decision", "NISQ", "QPU witness", "ML-DSA", "FIPS 204", "ML-KEM", "FIPS 203", "GHZ state", "CHSH inequality", "error correction", "Zephirum", "ZYQL"],
+    "description": "<p><b>ZEPHIRUM v1.9.0</b> — the quantum programming language with receipts. Trivalent decisions (1 / 0 / REFUSED) read from Deutsch-Jozsa interference, with adaptive Hoeffding margins, a GHZ device-trust gate that interrogates the QPU before every verdict, tamper-evident provenance chains, and three-layer post-quantum cryptography: SHA3-256 integrity, ML-DSA-44 (FIPS 204) authenticity and ML-KEM-768 (FIPS 203) confidentiality (Z-KEM).</p><p>Validated on three IBM Heron quantum processors (ibm_fez, ibm_kingston, ibm_marrakesh) with citable job IDs: GHZ fidelity 0.977, exact trivalent battery at n=4/5/6 qubits (1024 shots, adaptive band), Bernstein-Vazirani secret recovery, Grover dominance. Production runtime ~3.4k decisions/s with offline-verifiable receipts. Poliglota core cross-validated in 6 quantum languages (Qiskit, OpenQASM 3, Cirq, PennyLane, Braket, Q#).</p><p>Includes the thesis draft <i>Necessity-First Computational Quantum Chemistry: The ZYQL Exact-Decision Language and Quantum-Witnessed Verification on Superconducting Hardware</i> (v0.1).</p>",
+    "related_identifiers": [
+      {"identifier": "https://github.com/SerenaSolutions/zephirum-lang", "relation": "isSupplementTo", "resource_type": "software"},
+      {"identifier": "https://serenasolutions.github.io/", "relation": "isDocumentedBy", "resource_type": "publication-softwaredocumentation"},
+      {"identifier": "https://serenasolutions.github.io/zephirum-lang/", "relation": "isDocumentedBy", "resource_type": "publication-softwaredocumentation"},
+      {"identifier": "10.5281/zenodo.23302046", "relation": "isVersionOf", "resource_type": "software"}
+    ],
+    "creators": [{"name": "Serena Solutions", "affiliation": "Serena Quantum Solutions, Brazil"}]
+  }
+}
