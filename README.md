@@ -136,6 +136,10 @@ quickstart was broken — fixed in v1.6.0, see docs/AUDIT.md.)
 - `tests/` - canonical rational test battery
 - `docs/` - language reference, receipt specification
 
+## Technical Dossier
+
+A consolidated, receipt-cited dossier of the project — what it is, what has been measured on real quantum hardware, the public m50 commitment, Industry 5.0 applications and the declared honest limits: **[docs/DOSSIER.md](docs/DOSSIER.md)**
+
 ## Honest scope
 
 This repository contains the language heart only: kernel, types, gate, receipts.
