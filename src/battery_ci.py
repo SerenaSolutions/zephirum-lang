@@ -72,7 +72,8 @@ def run_verify():
     any_sealed = False
     for p in sealed:
         try:
-            if json.load(open(p)).get("selo_sha3_256"):
+            d = json.load(open(p))
+            if isinstance(d, dict) and d.get("selo_sha3_256"):
                 verify_receipt(p)
                 any_sealed = True
         except Exception:
