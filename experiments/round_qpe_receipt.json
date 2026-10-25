@@ -1,0 +1,23 @@
+{
+ "spec": "Z-QEA/2.2",
+ "modulo": "RODADA QPE TRIVALENTE",
+ "data": "2026-10-25T22:21:58+00:00",
+ "protocolo": "QPE 3+1 no silicio: autoestado |1> (phi=1/8, contagem 001) vs nao-autoestado |+> (recusa esperada); protocolo selado ANTES do envio",
+ "protocolo_seal": "5918c8aaed1d8602df4037d586f9c9fb04de7049db80dabe01fa4c06372f0d0d",
+ "backend": "ibm_kingston",
+ "modo": "HARDWARE REAL, laboratorio do dono, sem endosso do fornecedor",
+ "jobs": {
+  "eigenstate": "dbf80k8m94ac738t1b20",
+  "nao_autoestado_plus": "dbf80knpc3tc739mu3b0"
+ },
+ "margem_family2": 0.0273,
+ "eigenstate_p001": 0.8418,
+ "veredito_a": "REFUSED INSUFFICIENT_CONFIDENCE (fora da banda)",
+ "nao_autoestado_p_max": 0.4604,
+ "uniforme": 0.125,
+ "veredito_b": "REFUSED NO_SINGLE_PHASE (correto: mistura de fases, nenhuma fase unica)",
+ "veredito_global": "CONFORME_EVIDENCIA",
+ "previous_seal": "40193cb020677077556a699a5e020ff13b293b44e2b49b5fdad707d8029d14b3",
+ "receipt_id": "qpe-trivalente-5918c8aa",
+ "selo_sha3_256": "2759b0e036eb8f532fac1dde650d895fb4b75b9faaa0f69cfa377d116a66d05e"
+}
