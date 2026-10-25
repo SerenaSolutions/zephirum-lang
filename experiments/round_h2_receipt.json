@@ -1,0 +1,75 @@
+{
+ "spec": "Z-QEA/2.2",
+ "modulo": "RODADA H-2 SILICIO",
+ "data": "2026-10-25T22:09:31+00:00",
+ "protocolo": "Guardas da bateria H-2 confrontadas em hardware supercondutor real: H1 correlacao temporal entre shots (familia de lags, Bonferroni 95%) e H2 DJ selado; protocolo selado (SHA3-256) ANTES do envio",
+ "protocolo_seal": "94ec3a825f84b33f1aa8b283d70cb8a626f857dfc9ef7d6d2b33c03a88371e4c",
+ "backend": "ibm_fez",
+ "modo": "HARDWARE REAL, laboratorio do dono, sem endosso do fornecedor",
+ "jobs": {
+  "h2_dj_selado": "dbf7qs7sstms73fd9gdg",
+  "h1_lotes": [
+   {
+    "job": "dbf7qsfpc3tc739mtm9g",
+    "shots": 256
+   },
+   {
+    "job": "dbf7qsfpc3tc739mtma0",
+    "shots": 256
+   },
+   {
+    "job": "dbf7qsfsstms73fd9ge0",
+    "shots": 256
+   },
+   {
+    "job": "dbf7qsnpc3tc739mtmag",
+    "shots": 256
+   },
+   {
+    "job": "dbf7qsnsstms73fd9gf0",
+    "shots": 256
+   },
+   {
+    "job": "dbf7qsngdj9s73fn0o9g",
+    "shots": 256
+   },
+   {
+    "job": "dbf7qsvsstms73fd9gg0",
+    "shots": 256
+   },
+   {
+    "job": "dbf7qsvgdj9s73fn0oag",
+    "shots": 256
+   }
+  ]
+ },
+ "h2_dj_selado": {
+  "p0": 0.8999,
+  "margem": 0.03,
+  "veredito": "REFUSED (fora da banda)",
+  "shots": 2048
+ },
+ "h1_correlacao_temporal": {
+  "bits": 2048,
+  "veredito": 1,
+  "detalhe": {
+   "decision": 1,
+   "mode": "INDEPENDENCE_PLAUSIBLE",
+   "autocorr_lags": {
+    "1": -0.010412934892524605,
+    "2": -0.044807984881674034,
+    "3": 0.019410803561142803,
+    "4": -0.0166402884061898,
+    "5": -0.018313749911647668
+   },
+   "lag1_autocorr": -0.010412934892524605,
+   "threshold": 0.056922095885517075,
+   "N": 2048
+  },
+  "stopping_rule": 1
+ },
+ "veredito_global": "CONFORME_EVIDENCIA",
+ "previous_seal": "c81822235f634c609560dfcf22b274fca1c8a7abcf8d9334705b37c0b0863d1c",
+ "receipt_id": "rodada-h2-silicio-94ec3a82",
+ "selo_sha3_256": "ea1cc335557b2bbcc40790e3d46e47837931b767f5ca84ef3b1dd10324b8b341"
+}
