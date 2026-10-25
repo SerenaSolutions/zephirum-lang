@@ -1,3 +1,38 @@
+## [2.0.0] - 2026-10-24
+
+### Adicionado (fronteiras da IA quantica europeia, implementadas NATIVAS,
+da fonte primaria da ciencia — papers originais, zero codigo copiado)
+- **zyqml_core.py — QML trivalente**: simulador statevector proprio, ansatz
+  em anel RY+CZ, gradiente por parameter-shift EXATO (Schuld/Mitarai 2018-19),
+  e o veredito TERNARIO do treino: 1=TRAINABLE / REFUSED(GRADIENT_VANISHED)
+  quando a variancia do gradiente sinaliza barren plateau (McClean 2018) /
+  REFUSED(DEPTH_EXCEEDS_BUDGET). Onde o mundo detecta o plateau e sofre,
+  o nucleo RECUSA O TREINO com motivo rastreavel — semantica inedita.
+  Kernels quanticos K(x,y)=|<psi(x)|psi(y)>|^2 com PSD provado pelo teorema
+  do produto de Schur (Schuld & Killoran 2019).
+- **zyql_zne.py — mitigacao de erro antes da recusa**: extrapolacao a ruido
+  zero por interpolacao de Richardson (Temme 2017, Li & Benjamin 2017),
+  nativa e framework-free. Veredito ternario: MITIGATED com residuo honesto
+  OU REFUSED(EXTRAPOLATION_ILL_CONDITIONED) pelo guard leave-one-out —
+  o chute embalado nunca e vendido como mitigacao. Pipeline da porta:
+  ZNE -> GHZ gate -> veredito.
+- **zyql_mps.py — simulador MPS quebra o limite n<=8 declarado**: produto de
+  estados de matriz com truncagem Schmidt/SVD por elo (Vidal 2003-04,
+  Schollwoeck 2011), escalando O(n·d·chi^2). GHZ n=12 exato com chi=4 no
+  teste. LIMITACAO DECLARADA: portas 1q e 2q VIZINHAS; oraculos diagonais
+  globais ficam fora ate a rota ancilla. Truncagem sempre declarada.
+- **tests/test_frontiers.py — 9 testes falsificaveis**: parameter-shift vs
+  finite difference; plateau profundo vs raso; kernel PSD (e detector pega
+  matriz destruida); ZNE mitiga ruido moderado E RECUSA ruido severo; MPS
+  exato em n=12, cross-validado contra o statevector independente, recusa
+  porta nao-vizinha com erro declarado.
+
+### Pendente (declarado, sem fake)
+- QNLP (estilo lambeq) e modo analogico (estilo Pasqal): roadmap — exigem
+  decisao de design da linguagem, nao ficou pronto hoje. Nao reivindicado.
+- Decodificador QEC em tempo real (estilo Riverlane): a rota natural e o
+  decode por sindrome ja validado na Rodada F-rev, elevado a streaming.
+
 ## [1.9.1] - 2026-10-24
 
 ### Adicionado (auditoria adversarial — resposta ao auditor externo e RFC #36)

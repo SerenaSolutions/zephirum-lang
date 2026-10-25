@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zephirum"
-version = "1.9.1"
+version = "2.0.0"
 description = "ZEPHIRUM: Lisp-style quantum programming language with the ZYQL trivalent decision core (1/0/REFUSED)"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -19,4 +19,4 @@ zyql-decide = "zyql_runtime:main"
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["zqgate"]
-py-modules = ["zquantum", "zkernel", "quantum_types", "zyql_lisp", "zyql_quantum_gate", "zyql_rag_layer", "battery_ci", "oq3", "zyql_runtime"]
+py-modules = ["zquantum", "zkernel", "quantum_types", "zyql_lisp", "zyql_quantum_gate", "zyql_rag_layer", "battery_ci", "oq3", "zyql_runtime", "zyqml_core", "zyql_zne", "zyql_mps"]
