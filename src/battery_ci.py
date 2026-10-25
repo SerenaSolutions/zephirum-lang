@@ -51,7 +51,11 @@ def verify_receipt(path):
         print(f"[FAIL] {os.path.basename(path)}: no selo_sha3_256")
         FAILED.append(path)
         return
-    payload = {k: v for k, v in rec.items() if k != "selo_sha3_256"}
+    if isinstance(rec.get("payload"), dict) and "selo_sha3_256" in rec:
+        # formato aninhado (Rodada G em diante): o selo cobre rec["payload"]
+        payload = rec["payload"]
+    else:
+        payload = {k: v for k, v in rec.items() if k != "selo_sha3_256"}
     recomputed = hashlib.sha3_256(canon(payload).encode()).hexdigest()
     ok = declared == recomputed
     print(f"[{'PASS' if ok else 'FAIL'}] {os.path.basename(path)}: "

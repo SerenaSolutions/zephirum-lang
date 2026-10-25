@@ -176,3 +176,32 @@ def test_band_boundary_is_refused():
     one_tick_out = gate._trivalent(0.84, 100, margin=0.15)  # centro da banda
     assert one_tick_out["decision"] == "REFUSED"
     assert one_tick_out["refusal_reason"] == "INSIDE_NOISE_BAND"
+
+
+# ---------- H9: verificador de recibos entende o formato aninhado ----------
+def test_receipt_verifier_handles_nested_format(tmp_path):
+    """Achado real da Rodada H: o recibo G (formato aninhado {payload, selo})
+    era dado como ROMPIDO pelo verificador da casa — bug da FERRAMENTA, nao
+    do recibo. FALSIFICAVEL: reverta o patch e este teste quebra."""
+    import json, hashlib, importlib
+    import battery_ci
+    importlib.reload(battery_ci)
+    canon = battery_ci.canon
+    # recibo integro (formato aninhado, como a Rodada G)
+    payload = {"experimento": "H9", "job": "abc123", "veredito": "PASS"}
+    rec = {"payload": payload,
+           "selo_sha3_256": hashlib.sha3_256(canon(payload).encode()).hexdigest()}
+    good = tmp_path / "good.json"; good.write_text(json.dumps(rec))
+    battery_ci.FAILED.clear()
+    battery_ci.verify_receipt(str(good))
+    assert str(good) not in battery_ci.FAILED, "recibo aninhado integro deve PASSAR"
+    # recibo adulterado: um campo mudado apos o selo
+    rec["payload"]["veredito"] = "PASS_APOS_TAMPER"
+    bad = tmp_path / "bad.json"; bad.write_text(json.dumps(rec))
+    battery_ci.FAILED.clear()
+    battery_ci.verify_receipt(str(bad))
+    assert str(bad) in battery_ci.FAILED, "recibo aninhado adulterado deve FALHAR"
+    # o recibo real da Rodada G, do repo, e INTEGRAL (selo sobre payload)
+    d = json.load(open(os.path.join(os.path.dirname(__file__), "..",
+                                    "experiments", "round_g_receipt.json")))
+    assert hashlib.sha3_256(canon(d["payload"]).encode()).hexdigest() == d["selo_sha3_256"]

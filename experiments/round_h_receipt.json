@@ -1,0 +1,128 @@
+{
+ "spec": "Z-QEA/2.2",
+ "modulo": "RODADA H-SILICIO",
+ "data": "2026-10-25T02:14:33.983058+00:00",
+ "protocolo": "Rodada H (v2.1.0) confrontada no silicio, protocolos selados (SHA3-256) ANTES do envio: H5 GHZ-16 fidelidade vs MPS exato com guarda de decoerencia; H3 ZNE com folding manual de CX gamma=1/3/5; H6 curva de decaimento do gradiente parameter-shift em base X (McClean 2018 no hardware); achado de auditoria: verificador de recibos nao entendia o formato aninhado da Rodada G \u2014 bug da ferramenta corrigido com teste falsificavel (H9)",
+ "backend": "ibm_kingston",
+ "bandas": {
+  "ghz16": "fidelidade >= 0.80 -> DEVICE_TRUSTED; < 0.80 -> REFUSED DEVICE_DECOHERED",
+  "zne": "guard leave-one-out rel_err <= 0.5 -> MITIGATED; senao REFUSED EXTRAPOLATION_ILL_CONDITIONED",
+  "gradiente": "var >= 1e-3 -> TRAINABLE; < 1e-3 -> REFUSED GRADIENT_VANISHED; L > 16 -> REFUSED DEPTH_EXCEEDS_BUDGET"
+ },
+ "h5_ghz16": {
+  "job": "dbema3fpc3tc739lvlb0",
+  "seal_protocolo": "4a7c9382c45d8c486ea83c72",
+  "fidelidade_silicio": 0.6118,
+  "p_zero": 0.3496,
+  "p_um": 0.2622,
+  "referencia_mps_exato": {
+   "p_zero": 0.5,
+   "p_um": 0.5
+  },
+  "veredito": {
+   "decision": "REFUSED",
+   "refusal_reason": "DEVICE_DECOHERED",
+   "fidelity_ghz16": 0.6118,
+   "threshold": 0.8
+  }
+ },
+ "h3_zne": {
+  "job": "dbemafvsstms73fcbiq0",
+  "seal_protocolo": "1b33932c6662854d46067eb9",
+  "fidelidades_gamma_1_3_5": [
+   0.9292,
+   0.9019,
+   0.915
+  ],
+  "veredito": 1,
+  "modo": "MITIGATED",
+  "estimativa_zero_noise": 0.958,
+  "guard_relative_error": 0.044153
+ },
+ "h6_gradiente": {
+  "job": "dbemafgm94ac738s3e1g",
+  "seal_protocolo": "ae8231352229580acc84fcac",
+  "n_qubits": 4,
+  "shots": 2048,
+  "base": "X (CZ e diagonal)",
+  "curva_variancia_L_1_2_4_8": {
+   "1": 0.0030353516340255737,
+   "2": 0.009548421949148178,
+   "4": 0.004770568571984768,
+   "8": 0.004903092980384827
+  },
+  "vereditos": {
+   "1": 1,
+   "2": 1,
+   "4": 1,
+   "8": 1
+  }
+ },
+ "veredito_global": "GHZ-16: REFUSED DEVICE_DECOHERED (0.6118 < 0.80) \u2014 a linguagem recusa em vez de fingir; a curva de decoerencia com n e visivel (G: 0.7595 em n=12; H: 0.6118 em n=16). ZNE: MITIGATED, 0.9292 -> 0.958 com guard 0.0442 aprovado. Gradiente: TRAINABLE em toda a grade (n=4, observavel local) com variancia declarada \u2014 o plateau nao morde neste regime e o nucleo nao finge que morde",
+ "previous_seal": "9b1a878982d420a970312cf562d6f1530efcfb3b16a1e8232b971bf9aa56582b",
+ "receipt_id": "7e125cfe066a0ff5ca1d548a38574d8c",
+ "assinatura_pq": {
+  "spec": "Z-QEA/2.2",
+  "modulo": "RODADA H-SILICIO",
+  "data": "2026-10-25T02:14:33.983058+00:00",
+  "protocolo": "Rodada H (v2.1.0) confrontada no silicio, protocolos selados (SHA3-256) ANTES do envio: H5 GHZ-16 fidelidade vs MPS exato com guarda de decoerencia; H3 ZNE com folding manual de CX gamma=1/3/5; H6 curva de decaimento do gradiente parameter-shift em base X (McClean 2018 no hardware); achado de auditoria: verificador de recibos nao entendia o formato aninhado da Rodada G \u2014 bug da ferramenta corrigido com teste falsificavel (H9)",
+  "backend": "ibm_kingston",
+  "bandas": {
+   "ghz16": "fidelidade >= 0.80 -> DEVICE_TRUSTED; < 0.80 -> REFUSED DEVICE_DECOHERED",
+   "zne": "guard leave-one-out rel_err <= 0.5 -> MITIGATED; senao REFUSED EXTRAPOLATION_ILL_CONDITIONED",
+   "gradiente": "var >= 1e-3 -> TRAINABLE; < 1e-3 -> REFUSED GRADIENT_VANISHED; L > 16 -> REFUSED DEPTH_EXCEEDS_BUDGET"
+  },
+  "h5_ghz16": {
+   "job": "dbema3fpc3tc739lvlb0",
+   "seal_protocolo": "4a7c9382c45d8c486ea83c72",
+   "fidelidade_silicio": 0.6118,
+   "p_zero": 0.3496,
+   "p_um": 0.2622,
+   "referencia_mps_exato": {
+    "p_zero": 0.5,
+    "p_um": 0.5
+   },
+   "veredito": {
+    "decision": "REFUSED",
+    "refusal_reason": "DEVICE_DECOHERED",
+    "fidelity_ghz16": 0.6118,
+    "threshold": 0.8
+   }
+  },
+  "h3_zne": {
+   "job": "dbemafvsstms73fcbiq0",
+   "seal_protocolo": "1b33932c6662854d46067eb9",
+   "fidelidades_gamma_1_3_5": [
+    0.9292,
+    0.9019,
+    0.915
+   ],
+   "veredito": 1,
+   "modo": "MITIGATED",
+   "estimativa_zero_noise": 0.958,
+   "guard_relative_error": 0.044153
+  },
+  "h6_gradiente": {
+   "job": "dbemafgm94ac738s3e1g",
+   "seal_protocolo": "ae8231352229580acc84fcac",
+   "n_qubits": 4,
+   "shots": 2048,
+   "base": "X (CZ e diagonal)",
+   "curva_variancia_L_1_2_4_8": {
+    "1": 0.0030353516340255737,
+    "2": 0.009548421949148178,
+    "4": 0.004770568571984768,
+    "8": 0.004903092980384827
+   },
+   "vereditos": {
+    "1": 1,
+    "2": 1,
+    "4": 1,
+    "8": 1
+   }
+  },
+  "veredito_global": "GHZ-16: REFUSED DEVICE_DECOHERED (0.6118 < 0.80) \u2014 a linguagem recusa em vez de fingir; a curva de decoerencia com n e visivel (G: 0.7595 em n=12; H: 0.6118 em n=16). ZNE: MITIGATED, 0.9292 -> 0.958 com guard 0.0442 aprovado. Gradiente: TRAINABLE em toda a grade (n=4, observavel local) com variancia declarada \u2014 o plateau nao morde neste regime e o nucleo nao finge que morde",
+  "previous_seal": "9b1a878982d420a970312cf562d6f1530efcfb3b16a1e8232b971bf9aa56582b"
+ },
+ "selo_sha3_256": "c81822235f634c609560dfcf22b274fca1c8a7abcf8d9334705b37c0b0863d1c"
+}
