@@ -1,0 +1,22 @@
+{
+ "spec": "Z-QEA/2.2",
+ "modulo": "RODADA m50-DD",
+ "data": "2026-10-25T22:14:40+00:00",
+ "protocolo": "GHZ-16 cru vs GHZ-16 com desacoplamento dinamico XY4, mesmo backend/dia, 2048 shots cada; protocolo selado ANTES do envio",
+ "protocolo_seal": "c91f980c780814807f584975f069cd51a1ed4506d0dc4e46ce7708de63530775",
+ "backend": "ibm_fez",
+ "modo": "HARDWARE REAL, laboratorio do dono, sem endosso do fornecedor",
+ "jobs": {
+  "raw": "dbf7tcfsstms73fd9m4g",
+  "dd_xy4": "dbf7tc8m94ac738t13p0"
+ },
+ "f_raw": 0.4878,
+ "f_dd": 0.3223,
+ "delta": -0.1655,
+ "claim": "F_dd > F_raw",
+ "claim_veredito": "REFUTADO",
+ "m50_nota": "linha separada do m50 oficial (que permanece cru); DD e intervencao de circuito, nao pos-processamento",
+ "previous_seal": "ea1cc335557b2bbcc40790e3d46e47837931b767f5ca84ef3b1dd10324b8b341",
+ "receipt_id": "m50-dd-c91f980c",
+ "selo_sha3_256": "40193cb020677077556a699a5e020ff13b293b44e2b49b5fdad707d8029d14b3"
+}
