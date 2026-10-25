@@ -63,23 +63,24 @@ def verificar_log(log):
 def executar_bateria(log_original):
     """5 ataques; cada um tem que ser DETECTADO. Retorna lista (ataque, detectado)."""
     res = []
-    # A1: edicao retroativa de uma decisao
-    log = json.loads(json.dumps(log_original)); log[17]["veredito"] = "1"
+    # A1: edicao retroativa de uma decisao (indice relativo: valida p/ qualquer tamanho)
+    k = len(log_original) // 3
+    log = json.loads(json.dumps(log_original)); log[k]["veredito"] = "1"
     res.append(("A1_edicao_retroativa", not verificar_log(log)))
     # A2: reordenacao da cadeia
-    log = json.loads(json.dumps(log_original)); log[5], log[6] = log[6], log[5]
+    log = json.loads(json.dumps(log_original)); log[k], log[k + 1] = log[k + 1], log[k]
     res.append(("A2_reordenacao_cadeia", not verificar_log(log)))
     # A3: recibo forjado (selo copiado de outro)
-    log = json.loads(json.dumps(log_original)); log[9]["selo"] = log[8]["selo"]
+    log = json.loads(json.dumps(log_original)); log[k + 2]["selo"] = log[k + 1]["selo"]
     res.append(("A3_recibo_forjado", not verificar_log(log)))
     # A4: decisao fabricada apos o fato, inserida sem selo coerente
     log = json.loads(json.dumps(log_original))
-    log.insert(20, {"id": 999, "evidencia_p0": 0.9999, "banda_margem": 0.02,
+    log.insert(k + 3, {"id": 999, "evidencia_p0": 0.9999, "banda_margem": 0.02,
                     "veredito": "1", "limiar": 0.97, "prev": log[0]["selo"],
                     "selo": h(json.dumps({"fake": True}))})
     res.append(("A4_insercao_fabricada", not verificar_log(log)))
     # A5: remocao silenciosa de um recibo (romper encadeamento)
-    log = json.loads(json.dumps(log_original)); del log[30]
+    log = json.loads(json.dumps(log_original)); del log[k]
     res.append(("A5_remocao_silenciosa", not verificar_log(log)))
     return res
 
