@@ -1,0 +1,26 @@
+{
+ "spec": "Z-QEA/2.2",
+ "modulo": "RODADA REPRO",
+ "data": "2026-10-25T22:48:57+00:00",
+ "protocolo": "Repetibilidade auditada: o mesmo circuito DJ n=4 executado duas vezes; a casa audita concordancia contra a banda selada; claim refutavel: as execucoes concordam dentro da banda",
+ "protocolo_seal": "b9a5301b067aebcef19dead5ceb84d1d40e172364983b4d33f1fde64b14db6f2",
+ "backends": {
+  "r1": "ibm_fez",
+  "r2": "ibm_fez"
+ },
+ "modo": "HARDWARE REAL, laboratorio do dono, sem endosso do fornecedor",
+ "jobs": {
+  "r1": "dbf8ctnsstms73fdalk0",
+  "r2": "dbf8ds0m94ac738t23jg"
+ },
+ "p0_r1": 0.9106,
+ "p0_r2": 0.9131,
+ "delta_entre_execucoes": 0.0024,
+ "banda": 0.03,
+ "referencia_historica_h2": 0.8999,
+ "claim_veredito": "CONFIRMADO: execucoes concordam dentro da banda",
+ "veredito_global": "REPRODUTIVEL_DENTRO_DA_BANDA",
+ "previous_seal": "2759b0e036eb8f532fac1dde650d895fb4b75b9faaa0f69cfa377d116a66d05e",
+ "receipt_id": "repro-b9a5301b",
+ "selo_sha3_256": "d4e2033c5118f49b28c20550209b0ae41b6a6f241d35764260c0913cfeeed093"
+}

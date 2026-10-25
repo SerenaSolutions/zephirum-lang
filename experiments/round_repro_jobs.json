@@ -1,0 +1,11 @@
+{
+ "proto_seal": "b9a5301b067aebcef19dead5ceb84d1d40e172364983b4d33f1fde64b14db6f2",
+ "r1": {
+  "job": "dbf8ctnsstms73fdalk0",
+  "backend": "ibm_fez"
+ },
+ "r2": {
+  "job": "dbf8ds0m94ac738t23jg",
+  "backend": "ibm_fez"
+ }
+}
