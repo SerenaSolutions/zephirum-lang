@@ -88,6 +88,28 @@ circuit bell {
 }
 ```
 
+## Installation
+
+```bash
+# nucleo + testes (sem hardware):
+pip install -e .
+# OU, com dependencias travadas (reprodutibilidade das rodadas de hardware):
+pip install -r requirements-lock.txt && pip install -e .
+```
+
+**Dependências e versões suportadas** (declaradas em
+[requirements-lock.txt](requirements-lock.txt), testadas por CI em cada release):
+
+* Python 3.11
+* `qiskit==2.6.0` (compatível com Qiskit 2.x; circuits ISA no SamplerV2)
+* `qiskit-ibm-runtime==0.50.0` (acesso IBM Quantum: `experiments/*.py`
+  constroem os circuitos Qiskit e submetem via `QiskitRuntimeService`)
+
+O acesso IBM (`IBM_QUANTUM_TOKEN`) vive só nos scripts de experimento:
+`experiments/round_*.py` transpilam nível 2 e submetem via `SamplerV2`.
+Sem token, o núcleo roda em simulação local — nenhuma funcionalidade
+de decisão depende de hardware.
+
 ## Quickstart
 
 ```bash
