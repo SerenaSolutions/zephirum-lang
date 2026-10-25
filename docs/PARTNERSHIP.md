@@ -9,7 +9,7 @@ track stands. Maintained by the house; updated as tracks move.
   the auditable-quantum-decision niche is unclaimed (search verified).
 - Real-hardware verification with citable job IDs (IBM Heron `ibm_fez`) and
   sealed receipts (Z-QEA, SHA3-256) — reproducibility as a first-class feature.
-- Permanent deposit: Zenodo DOI 10.5281/zenodo.23302046 (code MIT).
+- Permanent deposit: Zenodo DOI 10.5281/zenodo.23302045 (code MIT).
 - Community pipeline already in motion: PRs to QOSF
   (awesome-quantum-software #202) and awesome-quantum-computing (#132).
 - External audit recorded and answered in public (docs/AUDIT.md).

@@ -12,16 +12,16 @@ We built **ZYQL**, a trivalent exact-decision core (part of the ZEPHIRUM languag
 
 Recent results on IBM Heron processors (Open Plan, all job IDs citable):
 
-- **Repetition-code QEC**: single deterministic bit-flip injected (measured physical error 99.3% - the error class the code is designed to correct); majority vote leaves 1.5% logical error (ibm_kingston)
+- **Repetition-code QEC**: single deterministic bit-flip injected (measured physical error 99.3% - the error class the code is designed to correct); majority vote leaves 1.5% logical error (superconducting QPU)
 - **CHSH**: S = 2.71 vs theoretical 2.83 (classical bound 2.0) - the deficit is consistent with the declared mean readout error (2.02%) from the calibration snapshot taken minutes before the run
 - **GHZ device-trust gate**: state fidelity 0.977; decisions below threshold are REFUSED rather than guessed
 - **Exact trivalent battery**: 9/9 exact Deutsch-Jozsa decisions at n = 4/5/6 (1024 shots)
 
-The core is deliberately honest about noise: REFUSED is a first-class outcome and margins are derived from a declared epsilon, not tuned post hoc. Cross-validated in six SDKs (Qiskit, OpenQASM 3, Cirq, PennyLane, Braket, Q#) with exact agreement.
+The core is deliberately honest about noise: REFUSED is a first-class outcome and margins are derived from a declared epsilon, not tuned post hoc. Cross-validated in six SDKs (the Python quantum SDK, OpenQASM 3, Cirq, PennyLane, Braket, Q#) with exact agreement.
 
 Code (MIT): https://github.com/SerenaSolutions/zephirum-lang
 Proof index with all job IDs: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
-DOI: 10.5281/zenodo.23302046
+DOI: 10.5281/zenodo.23302045
 
 Questions welcome, especially: has anyone here combined Mitiq's ZNE with a decision-bounded readout layer? We're considering it for the noise-sensitive frontiers (CHSH, larger Grover instances)."""
 }
@@ -45,13 +45,13 @@ Design choices we care about scientifically:
 - Every run produces a sealed receipt (SHA3-256 + ML-DSA-44) binding verdict, job ID, backend and calibration snapshot, in a tamper-evident provenance chain
 - Circuits are audited against statevector theory BEFORE hardware submission (we caught a real design bug in our CHSH circuit this way - the QPU executed it perfectly; the theory check exposed our error)
 
-Hardware validation (IBM Heron: ibm_fez, ibm_kingston, ibm_marrakesh; job IDs citable): GHZ fidelity 0.977; exact trivalent battery 9/9 at n=4/5/6; Bernstein-Vazirani secret recovery; Grover n=3/n=4 dominant; CHSH S=2.71; repetition-code correction of a single deterministic bit-flip (physical 99.3%) down to 1.5% logical.
+Hardware validation (IBM Heron: superconducting QPU, superconducting QPU, superconducting QPU; job IDs citable): GHZ fidelity 0.977; exact trivalent battery 9/9 at n=4/5/6; Bernstein-Vazirani secret recovery; Grover n=3/n=4 dominant; CHSH S=2.71; repetition-code correction of a single deterministic bit-flip (physical 99.3%) down to 1.5% logical.
 
-The poliglota core agrees exactly across six SDKs (Qiskit, OpenQASM 3, Cirq, PennyLane, Braket, Q#).
+The poliglota core agrees exactly across six SDKs (the Python quantum SDK, OpenQASM 3, Cirq, PennyLane, Braket, Q#).
 
 Code (MIT): https://github.com/SerenaSolutions/zephirum-lang
 Methodology + all job IDs: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
-DOI: 10.5281/zenodo.23302046
+DOI: 10.5281/zenodo.23302045
 
 Would love feedback from this community on the trivalent semantics and the receipt-chain design."""
 }
@@ -64,12 +64,12 @@ PENNYLANE = {
 
 We built **ZYQL** (core of the ZEPHIRUM language): it reads three-valued verdicts from Deutsch-Jozsa interference - **1** (constant-1 oracle), **0** (constant-0), **REFUSED** (balanced oracle; the circuit proves the split, no answer is claimed).
 
-As a sanity check before hardware, we implemented the same trivalent battery in **six SDKs** - Qiskit, OpenQASM 3, Cirq, **PennyLane 0.45**, Braket and Q# - and all agree exactly, which was a very reassuring cross-check.
+As a sanity check before hardware, we implemented the same trivalent battery in **six SDKs** - the Python quantum SDK, OpenQASM 3, Cirq, **PennyLane 0.45**, Braket and Q# - and all agree exactly, which was a very reassuring cross-check.
 
 The design decisions we'd like feedback on:
 
 1. **Adaptive margins**: verdict bands derive from an adaptive Hoeffding bound given a declared epsilon (band = sqrt(ln(2/eps)/(2S))): is this a sound way to declare shot-based confidence per verdict, or would you approach it differently?
-2. **Device-trust gate**: a GHZ circuit measures state fidelity before any verdict is accepted (0.977 measured on ibm_kingston; below threshold -> REFUSED_DEVICE_DECOHERED): reasonable as a per-run coherence check?
+2. **Device-trust gate**: a GHZ circuit measures state fidelity before any verdict is accepted (0.977 measured on superconducting QPU; below threshold -> REFUSED_DEVICE_DECOHERED): reasonable as a per-run coherence check?
 3. Hardware results (three IBM Heron QPUs, job IDs citable): exact trivalent battery 9/9 at n=4/5/6; Bernstein-Vazirani secret recovery p=0.91; Grover n=4 target at p=0.54 vs runner-up 0.06; CHSH S=2.71 vs 2.83 theoretical (deficit consistent with the declared 2.02% mean readout error).
 
 Every run is sealed with a receipt (SHA3-256 + ML-DSA-44) binding verdict + job ID + calibration snapshot.
