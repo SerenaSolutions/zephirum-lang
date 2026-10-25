@@ -1,0 +1,102 @@
+{
+ "payload": {
+  "a1_qml_trivalente": {
+   "energy_base": {
+    "deep": 0.673828125,
+    "shallow": 0.76171875
+   },
+   "gradient_variance": {
+    "deep": 0.03950450155470107,
+    "shallow": 0.12070486280653213
+   },
+   "gradients_deep": [
+    0.08203125,
+    0.2158203125,
+    0.1416015625,
+    -0.048828125,
+    0.525390625,
+    0.056640625,
+    0.140625,
+    0.109375,
+    0.060546875,
+    -0.064453125,
+    -0.26171875,
+    -0.0283203125,
+    0.169921875,
+    -0.3671875,
+    0.4013671875,
+    0.1220703125,
+    0.0791015625,
+    -0.0009765625
+   ],
+   "gradients_shallow": [
+    0.505859375,
+    -0.341796875,
+    0.0166015625
+   ],
+   "layers": {
+    "deep": 6,
+    "shallow": 1
+   },
+   "method": "parameter-shift no QPU real, base X em q0 (H pre-medida), 1024 shots",
+   "n": 3,
+   "verdict_deep": {
+    "decision": 1,
+    "gradient_variance": 0.03950450155470107,
+    "mode": "TRAINABLE",
+    "rule": "gradiente informativo; treino com sinal"
+   },
+   "verdict_shallow": {
+    "decision": 1,
+    "gradient_variance": 0.12070486280653213,
+    "mode": "TRAINABLE",
+    "rule": "gradiente informativo; treino com sinal"
+   }
+  },
+  "a2_zne_manual_folding": {
+   "gammas": [
+    1,
+    3,
+    5
+   ],
+   "ghz5_fidelities": [
+    0.9404296875,
+    0.92626953125,
+    0.91796875
+   ],
+   "method": "CX dobrados a mao pos-transpile; Richardson nativo",
+   "verdict": {
+    "decision": 1,
+    "disclaimer": "estimativa assume ruido ~polinomial em \u03b3 ate \u03b3=0; recibo deve citar gammas e contagens de cada ponto",
+    "estimate": 0.94970703125,
+    "guard_relative_error": 0.006382978723404497,
+    "mode": "MITIGATED",
+    "noisy_value": 0.9404296875
+   }
+  },
+  "a3_ghz12_vs_mps": {
+   "hardware_fidelity": 0.759521484375,
+   "mps_chi": 4,
+   "mps_p0_12": 0.4999999999999999
+  },
+  "backend": "ibm_fez",
+  "correction_log": "leitura inicial de pubs fatiava Bits (bug nosso, achado na analise); A1 refeito em base X; nada selado antes da correcao",
+  "jobs": {
+   "g12_job": "dbeknk7gdj9s73flvobg",
+   "qml_job": "dbekp27pc3tc739lstv0",
+   "zne_job": "dbeknjvsstms73fc8pgg"
+  },
+  "previous_receipt": "round_frev_receipt.json",
+  "previous_seal": "fc611388239cab35e3054ce82439c9241b27b511e18fa5c00e5145204f56efab",
+  "qml_basis": "X0 (H antes da medida)",
+  "round": "G",
+  "sealed_by": "zyql-round-g-2.0.0",
+  "shots": {
+   "g12": 4096,
+   "qml": 1024,
+   "zne": 2048
+  },
+  "theme": "fronteiras v2.0.0 no silicio"
+ },
+ "selo_sha3_256": "9b1a878982d420a970312cf562d6f1530efcfb3b16a1e8232b971bf9aa56582b"
+}
