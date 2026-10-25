@@ -1,3 +1,35 @@
+## [2.1.0] - 2026-10-24
+
+### Adicionado (RODADA H: bateria adversarial de alta complexidade, pensada
+como o cientista hostil que submetera a linguagem; 15 testes falsificaveis)
+- **zyql_robust.py — guardas adversariais nativos, primeira fonte**:
+  H1 correlacao entre shots (Hoeffding 1963 exige independencia: recusa
+  CORRELATED_SHOTS antes de invocar a margem); H2 pre-registro selado
+  (SHA3-256 do protocolo canonico; peeking de epsilon pos-hoc =>
+  REFUSED PROTOCOL_TAMPERED); H3 kernel concentrado pelo ruido global
+  (depolarizante leva K ao valor uniforme 2^-n: PSD passa, informacao
+  morreu — recusa KERNEL_CONCENTRATED); H4 honestidade da truncagem MPS
+  (erro relativo acima do orcamento => REFUSED TRUNCATION_EXCEEDS_BUDGET,
+  numero truncado nao e medida).
+- **zyql_llm_compress.py — compressao tensorial de pesos (TT/SVD),
+  fonte primaria (Oseledets 2011; Novikov 2015; Sainath 2013)**: veredito
+  TERNARIO da compressao — COMPRESSED com erro e ratio declarados /
+  REFUSED NO_STRUCTURE (sem rank baixo: comprimir e apagar informacao) /
+  REFUSED TRUNCATION_EXCEEDS_BUDGET. Primeiro passo honesto rumo a
+  compressao de LLMs dentro do runtime ZYQL (autonomia com pesos locais);
+  re-treino pos-compressao e limites DECLARADOS como roadmap, sem fake.
+- **tests/test_rodada_h.py + test_llm_compress.py**: 15 testes, cada um
+  construido para FALHAR se a protecao sumir; curva de decaimento do
+  gradiente medida (n=6/8/10 a L fixo, McClean 2018) com veredito
+  consistente com o limiar em toda a grade.
+- **experiments/rodada_h_spec.md**: especificacao dos jobs de QPU para o
+  confronto da Rodada H em silicio IBM (pronta para execucao quando as
+  credenciais estiverem ativas na sessao).
+
+### Testes
+- Suite: 65/65 verde (50 da v2.0.0 + 15 da Rodada H), zero dependencia
+  externa nova (numpy + crypto stdlib apenas).
+
 ## [2.0.0] - 2026-10-24
 
 ### Adicionado (fronteiras da IA quantica europeia, implementadas NATIVAS,
