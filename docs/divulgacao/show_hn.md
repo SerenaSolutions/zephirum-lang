@@ -15,7 +15,7 @@ Every mainstream stack returns 0 or 1 from a computation. But real hardware is n
 What's in the repo:
 
 1. A Lisp-style language (.zph) with a trivalent core — the quantum layer (OpenQASM 3) is optional; the decision logic runs classically too
-2. Cross-language validation: the same Deutsch–Jozsa battery agrees exactly across Qiskit, OpenQASM 3, Cirq, PennyLane and Braket
+2. Cross-language validation: the same Deutsch–Jozsa battery agrees exactly across the Python quantum SDK, OpenQASM 3, Cirq, PennyLane and Braket
 3. Real-hardware receipts: every experiment round is sealed in a two-layer receipt — SHA3-256 plus an ML-DSA-44 (FIPS 204) post-quantum signature — with entropy sourced from IBM quantum measurements
 4. The statistical protocol is documented with raw data: we validated the trivalent verdict on IBM Heron processors across 64–16384 shots, 100% accuracy at every level, zero spurious refusals (theory predicted the threshold near 29–82 shots; we measured exact verdicts down to 64)
 
