@@ -7,7 +7,7 @@
 ![version](https://img.shields.io/badge/version-2.1.0-6e46b8)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
-![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23302045-gold)
+![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23632019-gold)
 
 ## Hello World
 
@@ -124,7 +124,7 @@ under 20 qubits.
 
 ## Citation
 
-See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23302045
+See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23632019
 (code MIT, companion thesis CC BY-NC-ND 4.0), (c) Serena Solutions.
 
 ## License
