@@ -14,8 +14,9 @@ Fonte primaria da ciencia (papers, nao codigo alheio):
   "noise-induced barren plateaus", Wang et al. 2021).
 
 SEMANTICA TRIVALENTE DA CASA (guardas que a Europa nao tem):
-  correlation_verdict          -> REFUSED CORRELATED_SHOTS
+  correlation_verdict          -> REFUSED CORRELATED_SHOTS (familia lag 1..5)
   protocol_check               -> REFUSED PROTOCOL_TAMPERED
+  stopping_rule_check          -> REFUSED EARLY_DECISION / EXTRA_SHOTS
   kernel_concentration_verdict -> REFUSED KERNEL_CONCENTRATED
   mps_truncation_verdict       -> REFUSED TRUNCATION_EXCEEDS_BUDGET
 Tudo FALSIFICAVEL: remova o guarda e o teste da Rodada H quebra.
@@ -35,25 +36,45 @@ def lag1_autocorr(bits):
     return float(np.corrcoef(b[:-1], b[1:])[0, 1])
 
 
-def correlation_verdict(bits, threshold=None):
-    """Veredito de independencia ANTES de invocar Hoeffding.
+def lagk_autocorr(bits, k):
+    """Autocorrelacao de ordem k de um fluxo de shots (lag-k)."""
+    b = np.asarray(bits, dtype=float)
+    if len(b) <= k or b[:-k].std() == 0 or b[k:].std() == 0:
+        return 0.0
+    return float(np.corrcoef(b[:-k], b[k:])[0, 1])
 
-    |rho_lag1| > 2/sqrt(N) (intervalo ~95% para ruido branco) => correlacao:
-    a margem de Hoeffding nao se aplica; o nucleo recusa com motivo rastreavel.
+
+def correlation_verdict(bits, threshold=None, lags=(1, 2, 3, 4, 5)):
+    """Veredito de independencia ANTES de invocar Hoeffding (H10).
+
+    Varre a FAMILIA de lags 1..K (Bonferroni 95% family-wise: para K=5,
+    z=2.807 => banda |rho_k| > 2.807/sqrt(N)). Lag-1 sozinho e cego por
+    construcao: cadeias intercaladas tem rho_1 ~ 0 e rho_2 ~ 0.9 —
+    Hoeffding 1963 exige independencia MUTUA, nao de ordem 1. Primeiro lag
+    que estourar a banda: recusa com lag_detected rastreavel.
     """
     b = np.asarray(bits, dtype=float)
     N = len(b)
+    K = len(lags)
     if threshold is None:
-        threshold = 2.0 / float(np.sqrt(N)) if N > 0 else 1.0
-    r = lag1_autocorr(b)
-    if abs(r) > threshold:
-        return {"decision": "REFUSED", "refusal_reason": "CORRELATED_SHOTS",
-                "lag1_autocorr": r, "threshold": threshold, "N": N,
-                "rule": "Hoeffding 1963 exige independencia entre shots; "
-                        "correlacao detectada => a garantia estatistica "
-                        "NAO pode ser invocada nesta amostra"}
+        # Bonferroni: alpha/(2K) por cauda two-sided, z ~= 2.807 para K=5
+        Z_FAMILY = {1: 1.960, 2: 2.241, 3: 2.394, 4: 2.498, 5: 2.576}
+        z = Z_FAMILY.get(K, 2.807)
+        threshold = z / float(np.sqrt(N)) if N > 0 else 1.0
+    rhos = {k: lagk_autocorr(b, k) for k in lags}
+    r1 = rhos.get(1, 0.0)
+    for k in lags:
+        if abs(rhos[k]) > threshold:
+            return {"decision": "REFUSED", "refusal_reason": "CORRELATED_SHOTS",
+                    "lag_detected": k, "autocorr_lags": rhos,
+                    "lag1_autocorr": r1, "threshold": threshold, "N": N,
+                    "rule": "Hoeffding 1963 exige independencia MUTUA entre "
+                            "shots; correlacao detectada no lag %d => a "
+                            "garantia estatistica NAO pode ser invocada "
+                            "nesta amostra" % k}
     return {"decision": 1, "mode": "INDEPENDENCE_PLAUSIBLE",
-            "lag1_autocorr": r, "threshold": threshold, "N": N}
+            "autocorr_lags": rhos, "lag1_autocorr": r1,
+            "threshold": threshold, "N": N}
 
 
 # ---------- 2) pre-registro selado: criterio ANTES dos dados ----------
@@ -78,6 +99,41 @@ def protocol_check(sealed, spec_now):
                         "veredito e invalido; re-executar com protocolo novo "
                         "selado ANTES dos dados"}
     return {"decision": 1, "mode": "PROTOCOL_INTACT", "seal": sealed["seal"]}
+
+
+# ---------- 2b) stopping rule amarrada a EXECUCAO (H11) ----------
+def stopping_rule_check(sealed, execution):
+    """Amarracao em runtime: o recibo de execucao honra a stopping rule SELADA.
+
+    execution: {"shots_observed": int, "decision_at_shot": int}.
+    Decidir antes de todos os shots selados = peeking em runtime (o selo
+    original so detectava adulteracao da SPEC); coletar alem do selado
+    apos a decisao = verificacao pos-hoc. Ambos => REFUSED.
+    """
+    spec = sealed.get("spec", {})
+    sealed_shots = int(spec.get("shots", 0))
+    observed = int(execution.get("shots_observed", 0))
+    decided_at = int(execution.get("decision_at_shot", 0))
+    if sealed_shots <= 0:
+        return {"decision": "REFUSED", "refusal_reason": "NO_SEALED_SHOTS",
+                "rule": "protocolo selado sem shots declarados: impossivel "
+                        "amarrar a execucao a uma stopping rule"}
+    if decided_at < sealed_shots:
+        return {"decision": "REFUSED", "refusal_reason": "EARLY_DECISION",
+                "sealed_shots": sealed_shots, "decision_at_shot": decided_at,
+                "rule": "decisao emitida com %d de %d shots selados "
+                        "(peeking em runtime): veredito invalido; re-executar "
+                        "com protocolo novo selado ANTES dos dados"
+                        % (decided_at, sealed_shots)}
+    if observed > sealed_shots:
+        return {"decision": "REFUSED", "refusal_reason": "EXTRA_SHOTS",
+                "sealed_shots": sealed_shots, "shots_observed": observed,
+                "rule": "coletou %d shots apos decisao nos %d selados "
+                        "(verificacao pos-hoc): veredito invalido"
+                        % (observed, sealed_shots)}
+    return {"decision": 1, "mode": "STOPPING_RULE_HONORED",
+            "sealed_shots": sealed_shots,
+            "shots_observed": observed, "decision_at_shot": decided_at}
 
 
 # ---------- 3) concentracao de kernel sob ruido global ----------
