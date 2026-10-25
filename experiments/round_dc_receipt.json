@@ -1,0 +1,42 @@
+{
+ "spec": "Z-QEA/2.2",
+ "modulo": "RODADA DECISOES CERTIFICADAS",
+ "data": "2026-10-25T23:27:39+00:00",
+ "protocolo": "50 decisoes automaticas sobre reamostragens das contagens medidas no silicio (REPRO, recibo d4e2033c), cada decisao trivalente com banda declarada e selada em cadeia; bateria de 5 ataques ao historico; criterio refutavel: qualquer ataque nao detectado => rodada FALHA",
+ "evidencia_fonte": "REPRO r1=0.9106 r2=0.9131 (silicio, recibos encadeados)",
+ "decisoes": {
+  "total": 50,
+  "confiadas": 0,
+  "negadas": 0,
+  "recusadas": 50
+ },
+ "raiz_log": "6935a9a0d06c08addfb7324d4e2605185bbd35c54b2d12004412a7a3be5b1e74",
+ "integridade_verificada": true,
+ "ataques": [
+  {
+   "ataque": "A1_edicao_retroativa",
+   "detectado": true
+  },
+  {
+   "ataque": "A2_reordenacao_cadeia",
+   "detectado": true
+  },
+  {
+   "ataque": "A3_recibo_forjado",
+   "detectado": true
+  },
+  {
+   "ataque": "A4_insercao_fabricada",
+   "detectado": true
+  },
+  {
+   "ataque": "A5_remocao_silenciosa",
+   "detectado": true
+  }
+ ],
+ "ataques_detectados": 5,
+ "veredito_global": "CERTIFICADO: pipeline integra, 5/5 ataques detectados",
+ "previous_seal": "d4e2033c5118f49b28c20550209b0ae41b6a6f241d35764260c0913cfeeed093",
+ "receipt_id": "decisoes-cert-6935a9a0",
+ "selo_sha3_256": "6e4f26114cdbdfdc0408d956c3ffaf4d4f6de50b06eda225a4af90dd6b7cbfc5"
+}

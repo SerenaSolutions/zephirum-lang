@@ -1,0 +1,502 @@
+[
+ {
+  "id": 0,
+  "evidencia_p0": 0.915,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "GENESIS-DC",
+  "selo": "b5104bac9ad12b350a39cfc8aed8439bb4b0cab489d4ebefc87df52df390102b"
+ },
+ {
+  "id": 1,
+  "evidencia_p0": 0.917,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "b5104bac9ad12b350a39cfc8aed8439bb4b0cab489d4ebefc87df52df390102b",
+  "selo": "9b1e6ef68fc9414125b537138b8434f292817deb2ceb6ee30777090fa0fe1bf5"
+ },
+ {
+  "id": 2,
+  "evidencia_p0": 0.9043,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "9b1e6ef68fc9414125b537138b8434f292817deb2ceb6ee30777090fa0fe1bf5",
+  "selo": "9dd8e8fb3c4cef9df726b910a11b95e27238ac992ee2aa90ac4ea675375eadad"
+ },
+ {
+  "id": 3,
+  "evidencia_p0": 0.895,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "9dd8e8fb3c4cef9df726b910a11b95e27238ac992ee2aa90ac4ea675375eadad",
+  "selo": "d5e73ff78a8e352704b1a18f8f603d45fdcc4cdc5b9728f25f070695355e6461"
+ },
+ {
+  "id": 4,
+  "evidencia_p0": 0.9038,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "d5e73ff78a8e352704b1a18f8f603d45fdcc4cdc5b9728f25f070695355e6461",
+  "selo": "91a50f0edda1b4429740cc1a9a9645e40f280801c895e264e05f2d3af426ee2a"
+ },
+ {
+  "id": 5,
+  "evidencia_p0": 0.9175,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "91a50f0edda1b4429740cc1a9a9645e40f280801c895e264e05f2d3af426ee2a",
+  "selo": "64753242c119e7b975318a58a16a46833d8e9e14d2cf4cd9185b9e770cc209d4"
+ },
+ {
+  "id": 6,
+  "evidencia_p0": 0.9219,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "64753242c119e7b975318a58a16a46833d8e9e14d2cf4cd9185b9e770cc209d4",
+  "selo": "89436fedf2053144dafa2d8659b97033cc6c55c2660fee6de1989e37565157de"
+ },
+ {
+  "id": 7,
+  "evidencia_p0": 0.9028,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "89436fedf2053144dafa2d8659b97033cc6c55c2660fee6de1989e37565157de",
+  "selo": "03d0f79f5e6021bd124bb3d96f12b6b03e5396baa5815fcd1d11aae2f5696bdb"
+ },
+ {
+  "id": 8,
+  "evidencia_p0": 0.9165,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "03d0f79f5e6021bd124bb3d96f12b6b03e5396baa5815fcd1d11aae2f5696bdb",
+  "selo": "d274ab56a9932c23e5045226cd79c16c5e67bbd29ec9ad7a73aad0a0e3832a55"
+ },
+ {
+  "id": 9,
+  "evidencia_p0": 0.9087,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "d274ab56a9932c23e5045226cd79c16c5e67bbd29ec9ad7a73aad0a0e3832a55",
+  "selo": "c9cbd660b7a5d4a65d739d231f0bad1487f236b9237fcef1e11459c9588b0ed1"
+ },
+ {
+  "id": 10,
+  "evidencia_p0": 0.9028,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "c9cbd660b7a5d4a65d739d231f0bad1487f236b9237fcef1e11459c9588b0ed1",
+  "selo": "75e9eeb33a857f3fbd68d8a8c067a06605d091596f3fc0b6b660a0c0f7c3f05b"
+ },
+ {
+  "id": 11,
+  "evidencia_p0": 0.9243,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "75e9eeb33a857f3fbd68d8a8c067a06605d091596f3fc0b6b660a0c0f7c3f05b",
+  "selo": "69e705aa1d1fa3ddef62493c2cdcc31af8fa6f531c44d9710d1f7597ead9e257"
+ },
+ {
+  "id": 12,
+  "evidencia_p0": 0.9136,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "69e705aa1d1fa3ddef62493c2cdcc31af8fa6f531c44d9710d1f7597ead9e257",
+  "selo": "864f631c1ffe5de66dfbc93c2a1824593e82af117d0749bedc653f310a96fdf6"
+ },
+ {
+  "id": 13,
+  "evidencia_p0": 0.9136,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "864f631c1ffe5de66dfbc93c2a1824593e82af117d0749bedc653f310a96fdf6",
+  "selo": "c8bbd51aca1142ad31e3c2b1a9b74432ab90af79b40d38979387b60e651b7fc6"
+ },
+ {
+  "id": 14,
+  "evidencia_p0": 0.9204,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "c8bbd51aca1142ad31e3c2b1a9b74432ab90af79b40d38979387b60e651b7fc6",
+  "selo": "983c9913e9412abbc6800d0892211e70ef478d734bdfb4d572209d30d06a8212"
+ },
+ {
+  "id": 15,
+  "evidencia_p0": 0.9092,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "983c9913e9412abbc6800d0892211e70ef478d734bdfb4d572209d30d06a8212",
+  "selo": "1a2eb6560e7d49fcc8b3cb0d7727b1f480036235bc471f1da8c8f9e1c8d7c9ad"
+ },
+ {
+  "id": 16,
+  "evidencia_p0": 0.9092,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "1a2eb6560e7d49fcc8b3cb0d7727b1f480036235bc471f1da8c8f9e1c8d7c9ad",
+  "selo": "1bae64e891d976c5b758849381c77545ffc68aecdbaabf7b4f1425a0e75b87a0"
+ },
+ {
+  "id": 17,
+  "evidencia_p0": 0.9097,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "1bae64e891d976c5b758849381c77545ffc68aecdbaabf7b4f1425a0e75b87a0",
+  "selo": "3001d367d7d5a7088cc18402a093ca257c42533082f2fc036312cb14855088ca"
+ },
+ {
+  "id": 18,
+  "evidencia_p0": 0.9185,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "3001d367d7d5a7088cc18402a093ca257c42533082f2fc036312cb14855088ca",
+  "selo": "30f5ff0eb58c695202a070018efd7e55d9360fa763f4a118b0157e79926c7242"
+ },
+ {
+  "id": 19,
+  "evidencia_p0": 0.9087,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "30f5ff0eb58c695202a070018efd7e55d9360fa763f4a118b0157e79926c7242",
+  "selo": "dc4c19def5b1916ee6e02a537945e3a98ff779b856ca7629e5710c0d5833ae0a"
+ },
+ {
+  "id": 20,
+  "evidencia_p0": 0.9126,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "dc4c19def5b1916ee6e02a537945e3a98ff779b856ca7629e5710c0d5833ae0a",
+  "selo": "ecff21320561c1c387e4e30e888d711ce728dcf94c4f6e8c7ef838c2b2677ba8"
+ },
+ {
+  "id": 21,
+  "evidencia_p0": 0.9043,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "ecff21320561c1c387e4e30e888d711ce728dcf94c4f6e8c7ef838c2b2677ba8",
+  "selo": "ff869e27f83281ddfe312bb602669ae7a593bed1c1fc3a7ce48d6536a1ba76a2"
+ },
+ {
+  "id": 22,
+  "evidencia_p0": 0.9131,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "ff869e27f83281ddfe312bb602669ae7a593bed1c1fc3a7ce48d6536a1ba76a2",
+  "selo": "24cd9f36f94b2697bfb8447be909068b99a6b97d6ca0f340ffe1ac678ad903c3"
+ },
+ {
+  "id": 23,
+  "evidencia_p0": 0.9019,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "24cd9f36f94b2697bfb8447be909068b99a6b97d6ca0f340ffe1ac678ad903c3",
+  "selo": "97881a977a0343d0680b311df9e4d75a2d6008dbbe516659a9d5a8c062033feb"
+ },
+ {
+  "id": 24,
+  "evidencia_p0": 0.9082,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "97881a977a0343d0680b311df9e4d75a2d6008dbbe516659a9d5a8c062033feb",
+  "selo": "18b87f32875abd3fb370ec9359d53d159d65d359e7b0868e89a5fa69a2744bdc"
+ },
+ {
+  "id": 25,
+  "evidencia_p0": 0.9106,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "18b87f32875abd3fb370ec9359d53d159d65d359e7b0868e89a5fa69a2744bdc",
+  "selo": "eaa7fc559f5a97ab1ce007c16e374fcc7a2a2196ecaed0b67f856d3460989872"
+ },
+ {
+  "id": 26,
+  "evidencia_p0": 0.9097,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "eaa7fc559f5a97ab1ce007c16e374fcc7a2a2196ecaed0b67f856d3460989872",
+  "selo": "2eca4ef6499cf55055ddb27b2e38b24850fffd32a2355c8665137d6d1c286ab1"
+ },
+ {
+  "id": 27,
+  "evidencia_p0": 0.9082,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "2eca4ef6499cf55055ddb27b2e38b24850fffd32a2355c8665137d6d1c286ab1",
+  "selo": "1d3faf88fa9bdc5a66967330ddb018d55574e5e91d8a59694445d8d2a83a245b"
+ },
+ {
+  "id": 28,
+  "evidencia_p0": 0.9082,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "1d3faf88fa9bdc5a66967330ddb018d55574e5e91d8a59694445d8d2a83a245b",
+  "selo": "2b42e0694c8891ece491e3da078e4432b35231224f82abc60af4a93e13283b99"
+ },
+ {
+  "id": 29,
+  "evidencia_p0": 0.9126,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "2b42e0694c8891ece491e3da078e4432b35231224f82abc60af4a93e13283b99",
+  "selo": "16f0fb303580d7a88532dd9025f778a2ac4f9e709f7a79ad460fd555d0834cee"
+ },
+ {
+  "id": 30,
+  "evidencia_p0": 0.918,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "16f0fb303580d7a88532dd9025f778a2ac4f9e709f7a79ad460fd555d0834cee",
+  "selo": "a87b7fddb676e80f5dd88aa579671c2f7b69c5db17f01f1ce54ddb3b0a0c7796"
+ },
+ {
+  "id": 31,
+  "evidencia_p0": 0.9155,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "a87b7fddb676e80f5dd88aa579671c2f7b69c5db17f01f1ce54ddb3b0a0c7796",
+  "selo": "91906591356091e8cd7c8515a17cb162c0037db6d4d2e0ff2342c7306f805de9"
+ },
+ {
+  "id": 32,
+  "evidencia_p0": 0.9155,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "91906591356091e8cd7c8515a17cb162c0037db6d4d2e0ff2342c7306f805de9",
+  "selo": "60d43ee6e9a5dab207d220e65f09cfb781afdbdfa6fb125e741f89d73ca6a251"
+ },
+ {
+  "id": 33,
+  "evidencia_p0": 0.9092,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "60d43ee6e9a5dab207d220e65f09cfb781afdbdfa6fb125e741f89d73ca6a251",
+  "selo": "3a3957d049ac6c7c20932a2889e521e54480b20ba099499371f291bf389ae78b"
+ },
+ {
+  "id": 34,
+  "evidencia_p0": 0.9258,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "3a3957d049ac6c7c20932a2889e521e54480b20ba099499371f291bf389ae78b",
+  "selo": "7169f97bf4b565dd49545f277830a24f42453c1a734256c1c73d9cab96b660ec"
+ },
+ {
+  "id": 35,
+  "evidencia_p0": 0.916,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "7169f97bf4b565dd49545f277830a24f42453c1a734256c1c73d9cab96b660ec",
+  "selo": "3bf0862d2c7d31dffee1d81d89e8f5168f499e7ea8dea7742cc6cf3773ca3a9c"
+ },
+ {
+  "id": 36,
+  "evidencia_p0": 0.8994,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "3bf0862d2c7d31dffee1d81d89e8f5168f499e7ea8dea7742cc6cf3773ca3a9c",
+  "selo": "73c7a350d47a024ebe20d4e8ce5c36ac1f65280d8a5982465dccac1ec1f8292a"
+ },
+ {
+  "id": 37,
+  "evidencia_p0": 0.9136,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "73c7a350d47a024ebe20d4e8ce5c36ac1f65280d8a5982465dccac1ec1f8292a",
+  "selo": "918b179e8d656121e0ace815cc228f3da5fda6e840f37113e42e0969243ebe4d"
+ },
+ {
+  "id": 38,
+  "evidencia_p0": 0.9141,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "918b179e8d656121e0ace815cc228f3da5fda6e840f37113e42e0969243ebe4d",
+  "selo": "0da6ed1425afb362e424403d76bfceca8bbc3340574b67b6162fad4ea92e2145"
+ },
+ {
+  "id": 39,
+  "evidencia_p0": 0.9097,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "0da6ed1425afb362e424403d76bfceca8bbc3340574b67b6162fad4ea92e2145",
+  "selo": "33014d05fb8dfc5aee238da5293bd6ea8f208b9a2736246868978fb8d7a7bb79"
+ },
+ {
+  "id": 40,
+  "evidencia_p0": 0.9048,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "33014d05fb8dfc5aee238da5293bd6ea8f208b9a2736246868978fb8d7a7bb79",
+  "selo": "bf2a10e74bb16f5fa5425925cfaafd3079acef5cdc7fb8d46bfaeaedc7ca8b7e"
+ },
+ {
+  "id": 41,
+  "evidencia_p0": 0.8965,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "bf2a10e74bb16f5fa5425925cfaafd3079acef5cdc7fb8d46bfaeaedc7ca8b7e",
+  "selo": "3e2a35fe02f8cc8a74484fb41597f8ca39506951a4437f8fde7cd98f0526e35a"
+ },
+ {
+  "id": 42,
+  "evidencia_p0": 0.9189,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "3e2a35fe02f8cc8a74484fb41597f8ca39506951a4437f8fde7cd98f0526e35a",
+  "selo": "4cba56ca446ac498333e3a8792ee4fd7e46d3311b7318a32f5b18ff6f0613f4e"
+ },
+ {
+  "id": 43,
+  "evidencia_p0": 0.8979,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "4cba56ca446ac498333e3a8792ee4fd7e46d3311b7318a32f5b18ff6f0613f4e",
+  "selo": "0b8f425436058bd401b7ab539f03288874e4d2869defd91ab52a4af98f56bd0b"
+ },
+ {
+  "id": 44,
+  "evidencia_p0": 0.9111,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "0b8f425436058bd401b7ab539f03288874e4d2869defd91ab52a4af98f56bd0b",
+  "selo": "d4d7a39f4723986fc610906c220c3846bd4aedc9c54e7452b71fcfeed00ebecd"
+ },
+ {
+  "id": 45,
+  "evidencia_p0": 0.9214,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "d4d7a39f4723986fc610906c220c3846bd4aedc9c54e7452b71fcfeed00ebecd",
+  "selo": "bcff20c6e4cb0f38ad4e00f38da34256594b1e0dc197dd3a6653c4263a60bc01"
+ },
+ {
+  "id": 46,
+  "evidencia_p0": 0.9102,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "bcff20c6e4cb0f38ad4e00f38da34256594b1e0dc197dd3a6653c4263a60bc01",
+  "selo": "0377c8820f38e3f0c2a1ba92888e7bae628a36b650898b20029be4c19690bf32"
+ },
+ {
+  "id": 47,
+  "evidencia_p0": 0.9126,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "0377c8820f38e3f0c2a1ba92888e7bae628a36b650898b20029be4c19690bf32",
+  "selo": "45f4ef9d65e83e845e55fe1e2b81da175ec908932c2986e28425f0debc9f2af4"
+ },
+ {
+  "id": 48,
+  "evidencia_p0": 0.915,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "45f4ef9d65e83e845e55fe1e2b81da175ec908932c2986e28425f0debc9f2af4",
+  "selo": "bb95479db2788af7486f2896abf1a51e72e9e6b1a19097d995b6d2ee04acaf5b"
+ },
+ {
+  "id": 49,
+  "evidencia_p0": 0.9116,
+  "banda_margem": 0.0273,
+  "veredito": "REFUSED",
+  "limiar": 0.97,
+  "fonte": "reamostragem das contagens REPRO (silicio, recibo d4e2033c)",
+  "prev": "bb95479db2788af7486f2896abf1a51e72e9e6b1a19097d995b6d2ee04acaf5b",
+  "selo": "5326760aedc8477b208b27f552d4b7b7396d5e7ea6e02f82085a5ae7853f4c6f"
+ }
+]
