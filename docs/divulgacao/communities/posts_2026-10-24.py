@@ -21,7 +21,7 @@ The core is deliberately honest about noise: REFUSED is a first-class outcome an
 
 Code (MIT): https://github.com/SerenaSolutions/zephirum-lang
 Proof index with all job IDs: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
-DOI: 10.5281/zenodo.23302045
+DOI: 10.5281/zenodo.23632019
 
 Questions welcome, especially: has anyone here combined Mitiq's ZNE with a decision-bounded readout layer? We're considering it for the noise-sensitive frontiers (CHSH, larger Grover instances)."""
 }
@@ -51,7 +51,7 @@ The poliglota core agrees exactly across six SDKs (the Python quantum SDK, OpenQ
 
 Code (MIT): https://github.com/SerenaSolutions/zephirum-lang
 Methodology + all job IDs: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
-DOI: 10.5281/zenodo.23302045
+DOI: 10.5281/zenodo.23632019
 
 Would love feedback from this community on the trivalent semantics and the receipt-chain design."""
 }

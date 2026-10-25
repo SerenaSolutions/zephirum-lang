@@ -1,0 +1,31 @@
+name: ZENODO_SYNC
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to archive (e.g. v2.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync release to Zenodo concept DOI
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            TAG="${GITHUB_REF#refs/tags/}"
+            NOTES="${{ github.event.release.body }}"
+          else
+            TAG="${{ github.event.inputs.tag }}"
+            NOTES=""
+          fi
+          python3 .github/scripts/zenodo_sync.py "$TAG" "$NOTES"

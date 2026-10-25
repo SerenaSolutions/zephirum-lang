@@ -27,7 +27,7 @@ honest verdict of a circuit that can prove what it knows.
 ## Bio curta (EN)
 Ravimah Anjo (SerenaSolutions) - creator of ZEPHIRUM/ZYQL, a trivalent quantum
 decision language with cryptographic provenance, validated on real QPU provider
-hardware. MIT-licensed, DOI 10.5281/zenodo.23302045.
+hardware. MIT-licensed, DOI 10.5281/zenodo.23632019.
 
 ## Pitch 60 segundos (PT)
 Toda computacao quantica hoje responde com probabilidades. Nos transformamos a
@@ -40,6 +40,6 @@ Heron com job IDs citaveis - inclusive codigo de repeticao corrigindo um bit-fli
 ## Links de apoio
 - Repo: https://github.com/SerenaSolutions/zephirum-lang
 - Provas e job IDs: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
-- DOI: 10.5281/zenodo.23302045
+- DOI: 10.5281/zenodo.23632019
 - RFC metodologia (cutucada aberta): https://github.com/SerenaSolutions/zephirum-lang/issues/36
 - Draft paper: docs/preprint/ZYQL_TRIVALENT_DECISION.md

@@ -14,13 +14,13 @@ keywords:
 license: MIT
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.23302045"
+    value: "10.5281/zenodo.23632019"
     description: "Zenodo concept DOI (software deposit)"
 preferred-citation:
   type: article
   title: "Necessity-First Computational Quantum Chemistry: The ZYQL Exact-Decision Language and Quantum-Witnessed Verification on Superconducting Hardware (thesis v0.1)"
   authors:
     - name: "Ravimah Anjo"
-  doi: "10.5281/zenodo.23302045"
+  doi: "10.5281/zenodo.23632019"
   year: 2026
 url: "https://github.com/SerenaSolutions/zephirum-lang"
