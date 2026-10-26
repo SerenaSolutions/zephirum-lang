@@ -1,0 +1,15 @@
+{
+ "decisoes": [
+  {
+   "depth": 1,
+   "g": -0.0195,
+   "sigma": 0.0221,
+   "banda": 0.0434,
+   "decisao": "STOP",
+   "motivo": "GRADIENTE_DENTRO_DA_BANDA",
+   "job": "dbfjbpvpc3tc739njb2g",
+   "backend": "ibm_fez"
+  }
+ ],
+ "jobs": []
+}
