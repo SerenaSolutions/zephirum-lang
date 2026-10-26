@@ -1,0 +1,19 @@
+{
+ "spec": "Z-QEA/2.2",
+ "modulo": "RODADA PONTE KET",
+ "data": "2026-10-26T02:10:08+00:00",
+ "protocolo": "Primeira ponte entre linguagens quanticas brasileiras: circuito Bell construido e executado NA LINGUAGEM KET (v0.10.4.1, simulador local KBW, 1024 medicoes independentes, processo novo por medida); p0 observado testado contra hipotese refutavel de uniformidade pelo portao trivalente ZEPHIRUM com banda adaptativa declarada antes do resultado",
+ "evidencia": {
+  "fonte": "Ket v0.10.4.1 (linguagem quantica brasileira, KBW local)",
+  "circuito": "Bell: H(q0), CNOT(q0,q1), measure(q0)",
+  "shots": 1024,
+  "p0_observado": 0.5322,
+  "banda_margem": 0.0424,
+  "hipotese_nula": 0.5
+ },
+ "veredito": "1",
+ "motivo": "bit da Ket e uniforme dentro da banda declarada",
+ "previous_seal": "6e4f26114cdbdfdc0408d956c3ffaf4d4f6de50b06eda225a4af90dd6b7cbfc5",
+ "receipt_id": "ponte-ket-e4897a6d",
+ "selo_sha3_256": "0bf0799b922ac05f8783fe773fbe63c5b76f7d10ea363c928115ae3eb2898930"
+}
