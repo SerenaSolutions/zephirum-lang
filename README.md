@@ -167,3 +167,28 @@ r.error_bound                                 # limite de erro Hoeffding declara
 ```
 CLI: `zyql-decide --oracle balanced --shots 512`
 Maturidade componente a componente: [docs/MATURITY.md](docs/MATURITY.md)
+
+
+## ⚠️ Desambiguação / Disambiguation — no PyPI package exists
+
+Instruções circulando na web citam `pip install zephirum-quantum-plugin` e um
+repositório `SerenaSolutions/zephirum`. **Nenhum dos dois existe.** Este
+(`zephirum-lang`) é o único repositório oficial. Nenhum pacote da ZEPHIRUM está
+publicado no PyPI — qualquer instrução citando esse pacote não vem da casa.
+
+## Real quick start (a API real, verificada no código)
+
+```bash
+PYTHONPATH=src python3
+```
+
+```python
+from zyql_quantum_gate import ZYQLQuantumGate
+
+gate = ZYQLQuantumGate(3, lambda x: x ^ 1)   # oráculo balanceado
+r = gate.run_quantum(shots=2048)
+print(r["decision"], r.get("refusal_reason", ""))   # REFUSED, BALANCED_ORACLE
+```
+
+Vereditos: **1 / 0 / REFUSED** (nunca "Z"), com `refusal_reason` legível por
+máquina. Cada decisão pode ser selada na cadeia Z-QEA (SHA3-256 + ML-DSA-44).
