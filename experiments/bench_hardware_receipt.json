@@ -1,0 +1,21 @@
+{
+ "modulo": "benchmarks/hardware_leg",
+ "backend": "ibm_fez",
+ "data": "2026-10-27T19:12:59Z",
+ "kernel": "DJ n=3 const + gray(w=1/8)",
+ "resultados": {
+  "const1": {
+   "p0_hardware": 0.9718,
+   "veredito": "1",
+   "shots": 8192
+  },
+  "gray_w1_8": {
+   "p0_hardware": 0.5159,
+   "veredito": "REFUSED_GRAY",
+   "shots": 8192
+  }
+ },
+ "previous_seal": "4be974a51a1f66cee8fd19fbc8fff98c233f632f556e10566b2987378317707e",
+ "protocolo": "BENCHMARK-01 hardware leg: mesmos kernels do bench local (eps=0.05, banda 0.15 declarados antes), DJ n=3 no ibm_fez (plano open), 8192 shots por caso, sem re-rolagem; alegacao honesta: no hardware NAO se afirma p0 verdadeiro, afirma-se apenas o comportamento do portao: confirmou o constante (0.9718>=0.85) e RECUSOU a zona cinzenta (0.5159 dentro de (0.15,0.85)) sem falsa confirmacao",
+ "selo_sha3_256": "1bb568e949f817f42311bd53680409a7725a4c2124a3780a6a8c4206d512ff58"
+}
