@@ -1,0 +1,133 @@
+{
+ "modulo": "benchmarks/bench_decision_layer.py",
+ "kernel_A": {
+  "shots_to_verdict": 64,
+  "ladder_steps": 1,
+  "hoeffding_min_shots": 67,
+  "economy_vs_8192_pct": 99.22,
+  "verdict": "1"
+ },
+ "kernel_B": {
+  "0": {
+   "true_p0": 1.0,
+   "gray_zone": false,
+   "trials": {
+    "64": {
+     "confirms": 200,
+     "refuses": 0,
+     "false_confirms": 0
+    },
+    "128": {
+     "confirms": 200,
+     "refuses": 0,
+     "false_confirms": 0
+    },
+    "256": {
+     "confirms": 200,
+     "refuses": 0,
+     "false_confirms": 0
+    }
+   },
+   "expect": "CONFIRM",
+   "pass_all": true
+  },
+  "1/8": {
+   "true_p0": 0.5625,
+   "gray_zone": true,
+   "trials": {
+    "64": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "128": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "256": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    }
+   },
+   "expect": "REFUSE",
+   "pass_all": true
+  },
+  "1/4": {
+   "true_p0": 0.25,
+   "gray_zone": true,
+   "trials": {
+    "64": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "128": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "256": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    }
+   },
+   "expect": "REFUSE",
+   "pass_all": true
+  },
+  "3/8": {
+   "true_p0": 0.0625,
+   "gray_zone": false,
+   "trials": {
+    "64": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "128": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "256": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    }
+   },
+   "expect": "REFUSE",
+   "pass_all": true
+  },
+  "1/2": {
+   "true_p0": 0.0,
+   "gray_zone": false,
+   "trials": {
+    "64": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "128": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    },
+    "256": {
+     "confirms": 0,
+     "refuses": 200,
+     "false_confirms": 0
+    }
+   },
+   "expect": "REFUSE",
+   "pass_all": true
+  }
+ },
+ "kernel_B_all_pass": true,
+ "veredito_global": "BENCHMARK_OK",
+ "previous_seal": "efd0bb92ab04724c9921a0f0ec877f2009274a408a61e9ac7cd0543dea6aabd6",
+ "data": "2026-10-27T19:10:17Z",
+ "protocolo": "BENCHMARK-01: regra declarada antes do dado (eps=0.05, banda 0.15); Kernel A shots-to-verdict com parada antecipada; Kernel B refusal-fidelity 500+400 tentativas; sem re-rolagem de semente (peeking proibido)",
+ "selo_sha3_256": "4be974a51a1f66cee8fd19fbc8fff98c233f632f556e10566b2987378317707e"
+}
