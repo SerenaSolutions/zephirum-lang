@@ -1,0 +1,48 @@
+{
+ "modulo": "experiments/round_interop_sdk.py",
+ "proposito": "Paridade do veredito trivalente DJ n=3 entre SDKs independentes",
+ "kernel": "Deutsch-Jozsa n=3 + ancilla, oraculo de fase",
+ "margin": 0.15,
+ "leg": {
+  "const": {
+   "qiskit": {
+    "p0": 1.0,
+    "verdict": "1"
+   },
+   "cirq": {
+    "p0": 1.0,
+    "verdict": "1"
+   },
+   "pennylane": {
+    "p0": 1.0,
+    "verdict": "1"
+   },
+   "openqasm3": {
+    "p0": 1.0,
+    "verdict": "1"
+   }
+  },
+  "balanced": {
+   "qiskit": {
+    "p0": 0.0,
+    "verdict": "REFUSED_BALANCED"
+   },
+   "cirq": {
+    "p0": 0.0,
+    "verdict": "REFUSED_BALANCED"
+   },
+   "pennylane": {
+    "p0": 0.0,
+    "verdict": "REFUSED_BALANCED"
+   },
+   "openqasm3": {
+    "p0": 0.0,
+    "verdict": "REFUSED_BALANCED"
+   }
+  }
+ },
+ "parity_ok": true,
+ "previous_seal": "f910a2b4049d901206c9f4131257b7c82ab2ed75efaa924d5e82a04e761c6f57",
+ "resultado": "PARITY_OK_VERDICTOS_IDENTICOS",
+ "selo_sha3_256": "efd0bb92ab04724c9921a0f0ec877f2009274a408a61e9ac7cd0543dea6aabd6"
+}
