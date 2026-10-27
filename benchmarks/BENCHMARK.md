@@ -25,3 +25,12 @@ Oráculos com fração de uns w ∈ {0, 1/8, 1/4, 3/8, 1/2} ⇒ p0=(1−2w)²; 2
 
 *Revisão pré-silício interna incorporada (declaração de epsilon/margem, parada
 antecipada, poder estatístico do kernel B). Nenhuma alegação acima da evidência.*
+
+
+## Perna de hardware (ibm_fez, plano open — 27/10/2026)
+Mesmos kernels, 8192 shots/caso, regra declarada antes:
+- `const1`: p0 = 0.9718 ≥ 0.85 → veredito **1** (déficit vs. 1.0 = ruído real, declarado)
+- `gray (w=1/8)`: p0 = 0.5159 dentro de (0.15, 0.85) → **REFUSED_GRAY** — o portão
+  recusou na zona ambígua EM HARDWARE, sem falsa confirmação
+- No hardware não se afirma p0 "verdadeiro"; afirma-se apenas o comportamento do
+  portão sob a banda declarada. Recibo selado na cadeia Z-QEA junto aos demais.
