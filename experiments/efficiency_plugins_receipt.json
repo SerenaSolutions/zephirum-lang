@@ -1,0 +1,20 @@
+{
+ "modulo": "experiments/round_efficiency_plugins",
+ "backend": "ibm_fez",
+ "data": "2026-10-28",
+ "kernel": "DJ const n=3, escada adaptativa com parada no primeiro veredito",
+ "ladder": [
+  256,
+  512,
+  1024,
+  2048,
+  4096
+ ],
+ "shots_to_verdict": 256,
+ "p0": 0.9844,
+ "economia_vs_8192_pct": 96.88,
+ "banda_declarada": 0.15,
+ "veredito": "1",
+ "previous_seal": "1bb568e949f817f42311bd53680409a7725a4c2124a3780a6a8c4206d512ff58",
+ "selo_sha3_256": "28f406202e9d125aa0e5af652ae56d6e36eb10c74ebaccc6ea94e3ab09a6adb6"
+}
