@@ -1,0 +1,30 @@
+{
+ "protocolo": {
+  "primitiva": "refusal_witness",
+  "oraculo": "balanced",
+  "n": 3,
+  "epsilon": 0.1,
+  "alpha": 0.01,
+  "shots": 64,
+  "limite": "sqrt(K*ln(2/alpha)/(2N)); veredito por [lower,upper] vs epsilon",
+  "K": 8,
+  "semantica": "1=certificado, 0=reprovado, REFUSED=insuficiente"
+ },
+ "referencia_ideal_sha3": "ec5bd768cb4562d851108262f121276c4d54573ddafc74c598733ec442112b37",
+ "execucao": {
+  "dispositivo": "aer_simulator",
+  "job_id": "local",
+  "counts": {
+   "001": 64
+  }
+ },
+ "resultado": {
+  "tvd": 0.0,
+  "delta": 0.575452,
+  "lower": 0.0,
+  "upper": 0.575452,
+  "veredito": "REFUSED",
+  "modo": "REFUSED_EVIDENCIA_INSUFICIENTE"
+ },
+ "receipt_sha3_256": "a6fc3d5e7c7e36679cc515fd748e5e75a059f56fcfade4f7c5a560e137682957"
+}
