@@ -10,8 +10,8 @@ de shots explícito e recibo selado no fim.
 |---|---|---|---|
 | AuditKit (entropia certificada) | Recibo + witness substituem "confie que é aleatório" por evidência de viés < ε | B2B lento, exige piloto | especificado |
 | Quantum Regression Seal (CI de compiladores) | Dor universal: miscompilação silenciosa; C† roda em 128 shots | pronto para demo de 1 página | **ativo** (selfcheck) |
-| Quantum PUF (fingerprint de chip) | TVD como identidade física | exige baseline de calibração | parqueado |
-| Policy Engine (bancos/farma) | witness como gate de compliance replayable | depende de adoção | especificado |
+| Quantum PUF (fingerprint de chip) | TVD como identidade física | exige baseline de calibração | **DECLINADO (direção, 29/10)** |
+| Policy Engine (bancos/farma) | witness como gate de compliance replayable | depende de adoção | **DECLINADO (direção, 29/10)** |
 | Seguro de "vantagem quântica" | — | mercado inexistente | **morto** |
 | Playground Enterprise | camada comercial do que já existe | depois de PMF | parqueado |
 
@@ -23,8 +23,8 @@ de shots explícito e recibo selado no fim.
 | P-08 | ZNE vs C† no mesmo circuito | 1 job, ~8k shots | **rodar hoje** |
 | P-09 | KCBS contextual com REFUSED | 5 qubits, 25 contextos | issue |
 | P-10 | Fronteira MPS (n=12 local) vs hardware (n=3..5) | 1 job, ~12k shots | **rodar hoje** |
-| P-11 | T-state com verificação C† | — | **DECLINADO (direção, 29/10)** |
-| P-12 | Blind DJ (deleg. verificável, toy n=3) | — | **DECLINADO (direção, 29/10)** |
+| P-11 | T-state com verificação C† | pequeno, exige |T⟩ estável | ativo |
+| P-12 | Blind DJ (deleg. verificável, toy n=3) | 1 job pequeno | ativo |
 
 ## Orçamento
 
