@@ -2,14 +2,56 @@
 
 # ZEPHIRUM
 
-*The quantum programming language with receipts.*
+**The quantum programming language with receipts.** ZYQL, its decision core, returns one of three verdicts — `1` (permitted), `0` (forbidden) or `REFUSED` (insufficient confidence) — and seals every decision in a verifiable receipt.
 
 ![version](https://img.shields.io/badge/version-2.1.0-6e46b8)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23632019-gold)
+[![CI](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml)
+![python](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue)
 
-## Hello World
+**Contents** — [What it is](#what-it-is) · [Quickstart](#quickstart) · [Evidence](#evidence) · [Architecture](#architecture) · [Tests & reproducibility](#tests--reproducibility) · [Learn](#learn) · [Layout](#layout) · [Scope & honest limits](#honest-scope) · [Citation](#citation)
+
+---
+
+## What it is
+
+ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:
+every computational decision is trivalent — `1` (permitted), `0` (forbidden),
+`REFUSED` (input-dependent or insufficient confidence) — and carries a sealed
+receipt (SHA3-256 integrity seal, hash proves content integrity, not authorship).
+ML-DSA-44 / FIPS 204 signatures are a DECLARED ROADMAP item — to be implemented
+with an accredited module and HSM-held keys, never hand-rolled (see [docs/receipts.md](docs/receipts.md)).
+
+Decisions are produced by Deutsch–Jozsa interference, one oracle call, with a
+declared noise band (±0.15). Nothing executes silently: unknown syntax raises
+an explicit error. Simulation mode is labeled as simulation.
+
+- **Trivalent semantics** — refusal is a first-class verdict, not an exception.
+- **Receipts by construction** — every decision can be sealed (Z-QEA, SHA3-256).
+- **Hardware-verified** — measured on IBM Heron with job IDs published below.
+
+## Quickstart
+
+```bash
+git clone https://github.com/SerenaSolutions/zephirum-lang.git && cd zephirum-lang
+pip install -e .            # or: PYTHONPATH=src
+```
+
+```python
+from zyql_quantum_gate import ZYQLQuantumGate
+
+gate = ZYQLQuantumGate(3, lambda x: x ^ 1)      # balanced oracle
+r = gate.run_quantum(shots=2048)
+print(r["decision"], r.get("refusal_reason", ""))   # REFUSED BALANCED_ORACLE
+```
+
+```bash
+zyql-decide --oracle balanced --shots 512      # CLI runtime, Hoeffding error bound
+python3 src/zyql_lisp.py examples/hello_world.zph   # language front-end + sealed receipt
+```
 
 The baptism of the language — a trivalent greeting, sealed by ZEPHIRUM itself:
 
@@ -30,7 +72,7 @@ The `hello` form prints the greeting and returns the trivalent verdict `1`
 (SHA3-256) of everything executed — the Hello World carries a sealed receipt,
 as every decision in this house does. Source: [`examples/hello_world.zph`](examples/hello_world.zph).
 
-## Evidence — with the quantum figures
+## Evidence
 
 ![S3 fusion channels measured on IBM Heron](assets/proofs/s3-fusion-hardware.png)
 
@@ -52,31 +94,42 @@ converging into three fusion channels, the geometry the experiments probe.*
 | Noiseless round | noiseless | exact-zero deviation vs theory (canonical rationals) | same |
 | ZYQL trivalent decisions 1 / 0 / REFUSED | **IBM Heron** | **3/3 PASS** (job `dbbugbk24mrc73cif420`) | [battery receipt](experiments/zyql_hardware_battery.json) |
 | Braid order measured on real hardware | **IBM Heron** | **98.1% vs 95.8%** (job `dbbueufi0auc73dtp7og`) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
+| **Shots-to-verdict efficiency** | **IBM Heron** | **256 shots** to a first-step verdict — **96.88% savings vs 8192** | receipt `28f406202e9d125a` (issue #40) |
 
 Receipt seal (SHA3-256): `a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a` — verify it yourself: `python3 .github/actions/zqea-verify/zqea_verify.py experiments/s3_qutrit_final_receipt.json`
 In language: [`examples/s3_qutrit.zph`](examples/s3_qutrit.zph).
 
-ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:
-every computational decision is trivalent - `1` (permitted), `0` (forbidden),
-`REFUSED` (input-dependent or insufficient confidence) - and carries a sealed
-receipt (SHA3-256 integrity seal, hash proves content integrity, not authorship).
-ML-DSA-44 / FIPS 204 signatures are a DECLARED ROADMAP item — to be implemented
-with an accredited module and HSM-held keys, never hand-rolled (see docs/receipts.md).
-
-Decisions are produced by Deutsch-Jozsa interference, one oracle call, with a
-declared noise band (+-0.15). Nothing executes silently: unknown syntax raises
-an explicit error. Simulation mode is labeled as simulation.
-
 Verified on real hardware (IBM Heron `ibm_fez`, cited as test laboratory with
 verifiable job IDs; no endorsement claimed):
-- Constant purpose: measured p(000)=0.9844 (job db6ded84qg6s73c4jvug)
+
+- Constant purpose: measured p(000)=0.9844 (job `db6ded84qg6s73c4jvug`)
 - S3 qutrit miniature: fusion channels (qutrit-in-qubits) + braiding non-commutativity,
   noiseless with exact-zero deviation and on hardware: ch2=98.1% (RS) vs ch1=95.8% (SR),
   full ZYQL battery 3/3 PASS on `ibm_fez` (jobs `dbbueufi0auc73dtp7og`, `dbbugbk24mrc73cif420`;
   Z-QEA receipt sealed, see `experiments/`)
 - Balanced purpose: p(000)=0.0000, orthogonal outcome 93.9%
-- Same-task confrontation vs textbook Qiskit (job db6dklcvf2bc73d122t0):
+- Same-task confrontation vs textbook Qiskit (job `db6dklcvf2bc73d122t0`):
   Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
+
+Benchmark suite: [`benchmarks/`](benchmarks/) (public comparative benchmark, issue #28).
+
+## Architecture
+
+```
+ program (.zph, Lisp)  ──►  front-end parser ──► canonical decision form
+        │                                              │
+        │                                    Deutsch–Jozsa interference
+        │                                    (one oracle call, noise band ±0.15)
+        │                                              │
+        │                                    trivalent verdict: 1 / 0 / REFUSED
+        │                                              │
+        └──────────────►  Z-QEA receipt  ◄─────────────┘
+                     (SHA3-256 seal + machine-readable refusal_reason)
+```
+
+The repository ships the language heart only: kernel (state-vector, `[re,im]`
+float64), OpenQASM 3 transpiler, trivalent gate, quantum types (no-cloning
+enforced) and the receipt chain. See [Honest scope](#honest-scope).
 
 The language:
 
@@ -88,53 +141,44 @@ circuit bell {
 }
 ```
 
-## Installation
+## Tests & reproducibility
 
-```bash
-# nucleo + testes (sem hardware):
-pip install -e .
-# OU, com dependencias travadas (reprodutibilidade das rodadas de hardware):
-pip install -r requirements-lock.txt && pip install -e .
-```
-
-**Dependências e versões suportadas** (declaradas em
-[requirements-lock.txt](requirements-lock.txt), testadas por CI em cada release):
-
-* Python 3.11
-* `qiskit==2.6.0` (compatível com Qiskit 2.x; circuits ISA no SamplerV2)
-* `qiskit-ibm-runtime==0.50.0` (acesso IBM Quantum: `experiments/*.py`
-  constroem os circuitos Qiskit e submetem via `QiskitRuntimeService`)
-
-O acesso IBM (`IBM_QUANTUM_TOKEN`) vive só nos scripts de experimento:
-`experiments/round_*.py` transpilam nível 2 e submetem via `SamplerV2`.
-Sem token, o núcleo roda em simulação local — nenhuma funcionalidade
-de decisão depende de hardware.
-
-## Quickstart
-
-```bash
-pip install -e .
-python -c "from zyql_quantum_gate import ZYQLQuantumGate; \
-g = ZYQLQuantumGate(3, lambda x: 1); print(g.run_quantum())"
-```
-
-(No install? `PYTHONPATH=src` works too. The old `from src.zyql_quantum_gate`
-quickstart was broken — fixed in v1.6.0, see docs/AUDIT.md.)
-
+- **13 test suites** (`tests/`): canonical rational battery, certified decisions,
+  frontiers, KEM, Lisp regression, meta, multiple-testing correction,
+  runtime, shot auditor, Z-QEA verifier, hardware rounds.
+- **CI matrix**: Python 3.10 and 3.11 on every push and pull request, with
+  `PYTHONHASHSEED=0` for reproducible runs; **CodeQL** static analysis;
+  **signed releases with build provenance** (SLSA attestation); a dedicated
+  **ZQ-GATE self-test** workflow.
+- **Statistical discipline**: multiple-comparison correction is part of the test
+  battery — verdicts are not claimed on uncorrected p-values.
+- **Verifiable by construction**: every hardware claim above points to a sealed
+  receipt and a job ID; receipts are re-verifiable with
+  `.github/actions/zqea-verify/zqea_verify.py`.
+- Published testing roadmap (fuzzing the front-end, unitary-equivalence
+  assertions, executed notebooks, coverage gate): tracked in issues.
 
 ## Learn
 
-- `docs/LEARN.md` — progressive tutorial: first decision to sealed hardware receipts
-- `docs/COOKBOOK.md` — copy-paste recipes, every one executed and recorded
-- `docs/MIGRATION.md` — embedding Zephirum in Python, C and CI pipelines
+- [docs/LEARN.md](docs/LEARN.md) — progressive tutorial: first decision to sealed hardware receipts
+- [docs/COOKBOOK.md](docs/COOKBOOK.md) — copy-paste recipes, every one executed and recorded
+- [docs/MIGRATION.md](docs/MIGRATION.md) — embedding Zephirum in Python, C and CI pipelines
+- [docs/PROOFS.md](docs/PROOFS.md) — hardware proofs, figures and receipts
+- [docs/MATURITY.md](docs/MATURITY.md) — component-by-component maturity
 
 ## Layout
 
-- `src/` - kernel (state-vector), OpenQASM 3 transpiler, trivalent gate,
-  quantum types (no-cloning enforced), neural RAG layer
-- `examples/` - `bell.zph`, `grover.zph`, `dj_constant.zph`
-- `tests/` - canonical rational test battery
-- `docs/` - language reference, receipt specification
+- `src/` — kernel (state-vector), OpenQASM 3 transpiler, trivalent gate,
+  quantum types (no-cloning enforced), neural RAG layer, runtime (`zyql_runtime`)
+- `tests/` — 13 suites (see above)
+- `examples/` — `hello_world.zph`, `bell.zph`, `grover.zph`, `dj_constant.zph`, `s3_qutrit.zph`
+- `benchmarks/` — public comparative benchmark suite
+- `notebooks/` — scientific presentation layer
+- `experiments/` — hardware rounds and sealed receipts (job IDs)
+- `docs/` — language reference, receipt specification, proofs, maturity, dossier
+- `playground/` — browser playground assets · `site/` — docs site · `paper/` — preprint sources
+- `zephirum-vscode/` — VS Code extension for `.zph`
+- `docker/` — reproducible container
 
 ## Technical Dossier
 
@@ -148,16 +192,6 @@ bootloader, installer, or activation keys. Simulations are labeled as
 simulations; without error correction, useful executions are bounded well
 under 20 qubits.
 
-## Citation
-
-See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23632019
-(code MIT, companion thesis CC BY-NC-ND 4.0), (c) Serena Solutions.
-
-## License
-
-MIT - see [LICENSE](LICENSE).
-
-
 ## Runtime de produção (v1.8.0)
 
 ```python
@@ -166,8 +200,6 @@ r = decide(lambda x: x & 1, n=3, shots=512)   # -> Verdict.REFUSED
 r.error_bound                                 # limite de erro Hoeffding declarado
 ```
 CLI: `zyql-decide --oracle balanced --shots 512`
-Maturidade componente a componente: [docs/MATURITY.md](docs/MATURITY.md)
-
 
 ## ⚠️ Desambiguação / Disambiguation — no PyPI package exists
 
@@ -176,19 +208,11 @@ repositório `SerenaSolutions/zephirum`. **Nenhum dos dois existe.** Este
 (`zephirum-lang`) é o único repositório oficial. Nenhum pacote da ZEPHIRUM está
 publicado no PyPI — qualquer instrução citando esse pacote não vem da casa.
 
-## Real quick start (a API real, verificada no código)
+## Citation
 
-```bash
-PYTHONPATH=src python3
-```
+See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23632019
+(code MIT, companion thesis CC BY-NC-ND 4.0), (c) Serena Solutions.
 
-```python
-from zyql_quantum_gate import ZYQLQuantumGate
+## License
 
-gate = ZYQLQuantumGate(3, lambda x: x ^ 1)   # oráculo balanceado
-r = gate.run_quantum(shots=2048)
-print(r["decision"], r.get("refusal_reason", ""))   # REFUSED, BALANCED_ORACLE
-```
-
-Vereditos: **1 / 0 / REFUSED** (nunca "Z"), com `refusal_reason` legível por
-máquina. Cada decisão pode ser selada na cadeia Z-QEA (SHA3-256 + ML-DSA-44).
+MIT — see [LICENSE](LICENSE).
