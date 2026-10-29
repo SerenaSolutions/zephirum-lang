@@ -200,6 +200,21 @@ A decisão trivalente agora roda **na QPU** com a própria QPU certificando a ex
 
 Especificação completa: **[docs/SELFVERIFIED.md](docs/SELFVERIFIED.md)** · recibos em `experiments/selfcheck_ibm_fez_20261029/`.
 
+
+## Refusal witness — abstenção com prova (new, 2026-10-29)
+
+`REFUSED` deixa de ser "não sei" e vira "não sei **porque** a evidência não fecha":
+a TVD entre a distribuição ideal (referência exata) e a medida no dispositivo tem
+intervalo de confiança declarado **antes** da execução.
+
+| Dispositivo | Shots | TVD | Janela | ε | Veredito | job_id |
+|---|---|---|---|---|---|---|
+| ibm_fez | 4096 | 0.0317 | [0.000, 0.104] | 0.10 | **REFUSED** | `dbhn296ne4hc73bd7u1g` |
+| ibm_marrakesh | 8192 | 0.0198 | [0.000, 0.071] | 0.10 | **1 CERTIFICADO** | `dbhn8hs2d77s739d32lg` |
+
+O primeiro voo absteve; com o dobro de evidência, certificou. Especificação:
+**[docs/WITNESS.md](docs/WITNESS.md)** · recibos em `experiments/witness_20261029/`.
+
 ## Honest scope
 
 This repository contains the language heart only: kernel, types, gate, receipts.

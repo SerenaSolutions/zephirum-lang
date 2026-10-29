@@ -1,0 +1,34 @@
+{
+ "protocolo": {
+  "primitiva": "refusal_witness",
+  "oraculo": "balanced",
+  "n": 3,
+  "epsilon": 0.1,
+  "alpha": 0.01,
+  "shots": 8192,
+  "limite": "sqrt(K*ln(2/alpha)/(2N)); veredito por [lower,upper] vs epsilon",
+  "K": 8,
+  "semantica": "1=certificado, 0=reprovado, REFUSED=insuficiente"
+ },
+ "referencia_ideal_sha3": "ec5bd768cb4562d851108262f121276c4d54573ddafc74c598733ec442112b37",
+ "execucao": {
+  "dispositivo": "ibm_marrakesh",
+  "job_id": "dbhn8hs2d77s739d32lg",
+  "counts": {
+   "001": 8030,
+   "000": 133,
+   "101": 17,
+   "011": 11,
+   "010": 1
+  }
+ },
+ "resultado": {
+  "tvd": 0.019775,
+  "delta": 0.050863,
+  "lower": 0.0,
+  "upper": 0.070639,
+  "veredito": "1",
+  "modo": "CERTIFICADO"
+ },
+ "receipt_sha3_256": "c5efd2181179de12b1cd495e6d1c796094669df32b28645d0c1a2c9a5f69f740"
+}
