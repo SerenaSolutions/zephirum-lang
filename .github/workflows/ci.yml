@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install numpy lark scipy pqcrypto cryptography qiskit qiskit-aer
+      - run: pip install numpy lark scipy pqcrypto cryptography qiskit qiskit-aer cirq
       - run: python tests/test_canonical.py
         env:
           PYTHONHASHSEED: "0"
@@ -25,3 +25,4 @@ jobs:
       - run: python tests/test_selfverified.py
       - run: python tests/test_witness.py
       - run: python tests/test_protocols.py
+      - run: python tests/test_cirq.py
