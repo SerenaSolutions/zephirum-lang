@@ -23,8 +23,8 @@ de shots explícito e recibo selado no fim.
 | P-08 | ZNE vs C† no mesmo circuito | 1 job, ~8k shots | **rodar hoje** |
 | P-09 | KCBS contextual com REFUSED | 5 qubits, 25 contextos | issue |
 | P-10 | Fronteira MPS (n=12 local) vs hardware (n=3..5) | 1 job, ~12k shots | **rodar hoje** |
-| P-11 | T-state com verificação C† | pequeno, mas exige |T⟩ estável | issue |
-| P-12 | Blind DJ (delegação verificável, toy n=3) | 1 job pequeno | issue |
+| P-11 | T-state com verificação C† | — | **DECLINADO (direção, 29/10)** |
+| P-12 | Blind DJ (deleg. verificável, toy n=3) | — | **DECLINADO (direção, 29/10)** |
 
 ## Orçamento
 
