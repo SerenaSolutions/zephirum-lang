@@ -226,6 +226,16 @@ Protocolos pré-declarados, executados no plano Open com recibo selado
 | P-10 fronteira clássica×hardware | TVD vs ideal, n=3..5 | 0.0139 / 0.0188 / 0.0183 | `dbhp6ks2d77s739d692g` |
 | P-08 ZNE vs C† | p0 n=4, com/sem ZNE | 0.0197 → **0.0116** (−41%) | `dbhp6ok2d77s739d6990` |
 
+
+## Apps v1 (2026-10-29)
+
+- **AuditKit (CPA-01)** — certificacao de entropia quantica com recibo: hardware
+  `ibm_marrakesh`, 4096 bits, veredito **1** (job `dbhpaomne4hc73bdbp7g`).
+- **Quantum Regression Seal (QRS-01)** — gate de CI/CD que pega miscompilacao
+  silenciosa por comparacao unitaria; action reutilizavel no repo.
+
+Detalhes: **[docs/APPS.md](docs/APPS.md)**
+
 ## Honest scope
 
 This repository contains the language heart only: kernel, types, gate, receipts.

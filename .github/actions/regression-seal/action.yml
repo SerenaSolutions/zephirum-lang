@@ -1,0 +1,9 @@
+name: Quantum Regression Seal
+description: Detecta miscompilacao silenciosa comparando unitarias (ate fase global)
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        pip install -q qiskit numpy
+        python tools/regression_seal.py

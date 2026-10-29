@@ -1,0 +1,30 @@
+{
+ "protocolo": {
+  "id": "QRS-01",
+  "declarado": {
+   "tolerancia": 1e-08,
+   "fase_global": "ignorada",
+   "n_circuitos": 3
+  }
+ },
+ "execucao": {
+  "circuitos": [
+   {
+    "circuito": "h_cx_h",
+    "equivalente": true
+   },
+   {
+    "circuito": "hhx_cz",
+    "equivalente": true
+   },
+   {
+    "circuito": "ghz_ccx",
+    "equivalente": true
+   }
+  ]
+ },
+ "resultado": {
+  "veredito": "1"
+ },
+ "receipt_sha3_256": "51204382bb6d3310c4742c07db4322ac1e92c3dad04b4413d8a2ba5566995d46"
+}
