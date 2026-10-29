@@ -1,0 +1,48 @@
+{
+ "payload": {
+  "veredito": "0",
+  "p0_final": 0.015625,
+  "selfcheck_p0": 0.992188,
+  "lotes_usados": 1,
+  "shots_usados": 128,
+  "erro_limite": 0.143863,
+  "modo": "SEQUENCIAL_CONSTANTE_FALSE",
+  "qpu": "ibm_fez",
+  "job_id": "dbhm3ik2d77s739d10j0",
+  "hardware_real": true,
+  "n": 3,
+  "oraculo": "balanced",
+  "protocolo": {
+   "regra_de_parada": "sequencial_batelada_alpha_spending_geometrico",
+   "alpha_total": 0.01,
+   "alpha_por_lote": "alpha/2^k (k=indice do lote)",
+   "fronteira": "t_k = sqrt(ln(2/alpha_k)/(2*N_k)); cruzar 0.5+/-t_k decide",
+   "lotes_max": 4,
+   "shots_por_lote": 128,
+   "limiar_selfcheck": 0.8,
+   "inconclusivo": "REFUSED (sem retry silencioso)",
+   "hipotese": "shots i.i.d.; ruido correlacionado fora do escopo"
+  },
+  "contagens_por_lote": [
+   {
+    "001": 126,
+    "000": 2
+   },
+   {
+    "001": 125,
+    "101": 1,
+    "000": 2
+   },
+   {
+    "001": 126,
+    "000": 2
+   },
+   {
+    "001": 127,
+    "000": 1
+   }
+  ],
+  "selado_por": "zyql-selfverified-0.1"
+ },
+ "selo_sha3_256": "256fda773dcb887ed4123ecf098ce291ea9088cbec023422204acd7eb187b27b"
+}

@@ -184,6 +184,22 @@ circuit bell {
 
 A consolidated, receipt-cited dossier of the project — what it is, what has been measured on real quantum hardware, the public m50 commitment, Industry 5.0 applications and the declared honest limits: **[docs/DOSSIER.md](docs/DOSSIER.md)**
 
+
+## Self-verified device decision (new, 2026-10-29)
+
+A decisão trivalente agora roda **na QPU** com a própria QPU certificando a execução:
+
+- **Auto-verificação (espelho C†)** no mesmo job — taxa de zeros medida vira `selfcheck_p0` no recibo; abaixo do limiar ⇒ `REFUSED`.
+- **Evidência sequencial** com regra de parada (alpha-spending) declarada **antes** da execução.
+- **Recibo** com protocolo + contagens por lote + `job_id`, selado SHA3-256.
+
+| Oráculo | Veredito | p0 | selfcheck | Shots | job_id (ibm_fez) |
+|---|---|---|---|---|---|
+| constante | **1** | 0.992 | 0.969 | 128 | `dbhm3ao1h92s73821mm0` |
+| balanceado | **0** | 0.016 | 0.992 | 128 | `dbhm3ik2d77s739d10j0` |
+
+Especificação completa: **[docs/SELFVERIFIED.md](docs/SELFVERIFIED.md)** · recibos em `experiments/selfcheck_ibm_fez_20261029/`.
+
 ## Honest scope
 
 This repository contains the language heart only: kernel, types, gate, receipts.
