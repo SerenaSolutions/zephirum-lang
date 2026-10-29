@@ -1,0 +1,33 @@
+{
+ "protocolo": {
+  "id": "P-10",
+  "declarado": {
+   "dims": [
+    3,
+    4,
+    5
+   ],
+   "shots": 4096,
+   "metrica": "TVD entre ideal clássico e contagens do hardware"
+  }
+ },
+ "execucao": {
+  "dispositivo": "ibm_marrakesh",
+  "job_id": "dbhp6ks2d77s739d692g"
+ },
+ "resultado": [
+  {
+   "n": 3,
+   "tvd": 0.0139
+  },
+  {
+   "n": 4,
+   "tvd": 0.0188
+  },
+  {
+   "n": 5,
+   "tvd": 0.0183
+  }
+ ],
+ "receipt_sha3_256": "f48c96d679b024fa1d28b1c0095020a9e9948bfac808d320d6f537ed201fcbe1"
+}

@@ -215,6 +215,17 @@ intervalo de confiança declarado **antes** da execução.
 O primeiro voo absteve; com o dobro de evidência, certificou. Especificação:
 **[docs/WITNESS.md](docs/WITNESS.md)** · recibos em `experiments/witness_20261029/`.
 
+
+## Hardware protocols (2026-10-29)
+
+Protocolos pré-declarados, executados no plano Open com recibo selado
+(`docs/PROTOCOLS.md`):
+
+| Protocolo | Medida | Resultado | job_id |
+|---|---|---|---|
+| P-10 fronteira clássica×hardware | TVD vs ideal, n=3..5 | 0.0139 / 0.0188 / 0.0183 | `dbhp6ks2d77s739d692g` |
+| P-08 ZNE vs C† | p0 n=4, com/sem ZNE | 0.0197 → **0.0116** (−41%) | `dbhp6ok2d77s739d6990` |
+
 ## Honest scope
 
 This repository contains the language heart only: kernel, types, gate, receipts.

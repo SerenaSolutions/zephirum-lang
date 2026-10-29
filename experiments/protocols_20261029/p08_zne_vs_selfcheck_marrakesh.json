@@ -1,0 +1,30 @@
+{
+ "protocolo": {
+  "id": "P-08",
+  "declarado": {
+   "n": 4,
+   "folds": [
+    1,
+    3,
+    5
+   ],
+   "shots": 2048,
+   "estimador": "p0(fold) em f=0 por regressao linear"
+  }
+ },
+ "execucao": {
+  "dispositivo": "ibm_marrakesh",
+  "job_id": "dbhp6ok2d77s739d6990",
+  "p0_por_fold": [
+   0.01416015625,
+   0.02001953125,
+   0.02490234375
+  ],
+  "selfcheck_p0": 0.98
+ },
+ "resultado": {
+  "p0_zne": 0.0116,
+  "p0_medio_sem_zne": 0.0197
+ },
+ "receipt_sha3_256": "385e48940be3817dfcbfae325e345efa5827da0a6e98ede2ae469857da99f3aa"
+}
