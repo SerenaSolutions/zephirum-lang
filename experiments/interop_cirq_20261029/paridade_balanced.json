@@ -1,0 +1,23 @@
+{
+ "protocolo": {
+  "id": "G-01",
+  "declarado": {
+   "framework": "google-cirq",
+   "experimento": "deutsch-jozsa",
+   "oraculo": "balanced",
+   "n": 3,
+   "shots": 4096,
+   "epsilon": 0.05,
+   "alpha": 0.01
+  }
+ },
+ "execucao": {
+  "veredito_cirq": "0",
+  "p0_cirq": 0.0
+ },
+ "resultado": {
+  "veredito_referencia": "0",
+  "paridade": true
+ },
+ "receipt_sha3_256": "fe0a300ae5d6849d55973f6917c4a7a8356dca3c296ad6f6ff6df9823fcfcc3d"
+}
