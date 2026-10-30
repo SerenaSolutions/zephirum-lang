@@ -191,3 +191,42 @@ def verify_receipt(path: str) -> bool:
     sig = payload.pop("receipt_sha3_256", None)
     raw = json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()
     return sig == hashlib.sha3_256(raw).hexdigest()
+
+
+def witness_from_counts(ideal: dict, counts: dict, epsilon: float = 0.10,
+                        alpha: float = 0.01) -> dict:
+    """Regra de abstencao para QUALQUER distribuicao, nao so a familia DJ.
+
+    Antes, protocolos como HOM e Grover decidiam por bandas ad hoc. Esta funcao
+    aplica o mesmo limite declarado (Hoeffding) que a testemunha DJ:
+
+        delta = sqrt(K*ln(2/alpha)/(2N)),  K = |suporte ideal|
+        certifica se upper <= epsilon; reprova se lower > epsilon; senao REFUSED.
+
+    Assim todo veredito da linguagem usa a mesma regra auditavel.
+    """
+    if not (0 < epsilon < 1):
+        raise ValueError("epsilon fora de (0,1)")
+    if not ideal or not counts:
+        raise ValueError("distribuicoes vazias")
+
+    total = sum(counts.values())
+    obs = {str(k).replace(" ", ""): v / total for k, v in counts.items()}
+    keys = set(ideal) | set(obs)
+    tvd_hat = 0.5 * sum(abs(ideal.get(k, 0.0) - obs.get(k, 0.0)) for k in keys)
+
+    K = max(len([v for v in ideal.values() if v > 0]), 2)
+    delta = math.sqrt(K * math.log(2 / alpha) / (2 * total))
+    upper, lower = tvd_hat + delta, max(0.0, tvd_hat - delta)
+
+    if upper <= epsilon:
+        verdict, mode = "1", "CERTIFICADO"
+    elif lower > epsilon:
+        verdict, mode = "0", "REPROVADO"
+    else:
+        verdict, mode = "REFUSED", "REFUSED_EVIDENCIA_INSUFICIENTE"
+
+    return {"tvd": round(tvd_hat, 6), "delta": round(delta, 6),
+            "lower": round(lower, 6), "upper": round(upper, 6),
+            "epsilon": epsilon, "alpha": alpha, "shots": total, "K": K,
+            "veredito": verdict, "modo": mode}

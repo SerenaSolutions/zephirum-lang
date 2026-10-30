@@ -40,8 +40,17 @@ CORPUS = [
 ]
 
 # ---------------- L2: BM25 retrieval ----------------
+def _texto(doc):
+    """Documento pode vir como str ou como dict com chave 'text'."""
+    if isinstance(doc, str):
+        return doc
+    if isinstance(doc, dict) and "text" in doc:
+        return doc["text"]
+    raise ValueError(f"documento invalido: esperado str ou {{'text': ...}}, veio {type(doc).__name__}")
+
+
 def bm25_rank(query, corpus, k=2, k1=1.5, b=0.75):
-    docs = [d["text"].lower().split() for d in corpus]
+    docs = [_texto(d).lower().split() for d in corpus]
     q = query.lower().split()
     N, avgdl = len(docs), sum(len(d) for d in docs) / len(docs)
     def idf(t):
