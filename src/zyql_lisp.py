@@ -184,6 +184,7 @@ def run(program_path):
             # Q-ROUTE: a linguagem executa a busca quantica de rotas e decide em 1/0/REFUSED
             from qroute import core as _qroute
             nome, mapa, budget, risk, seal_out = (f[1] if len(f) > 1 else "route-lab"), None, None, None, None
+            usa_hw, shots = False, 1024
             for sub in f[2:]:
                 if not isinstance(sub, list):
                     continue
@@ -195,12 +196,16 @@ def run(program_path):
                     risk = float(sub[1])
                 elif sub[0] == "seal":
                     seal_out = sub[1]
+                elif sub[0] == "hardware":
+                    usa_hw = True
+                elif sub[0] == "shots":
+                    shots = int(sub[1])
             print("ZYQL ROUTE LAB:", nome)
             if mapa is None:
                 print("  [route-lab] REFUSED: mapa nao declarado")
                 ctx["results"]["route-lab"] = {"veredito": "REFUSED", "motivo": "mapa nao declarado"}
                 return
-            res = _qroute.executa(mapa, budget, risk, None, seal_out)
+            res = _qroute.executa(mapa, budget, risk, None, seal_out, hardware=usa_hw, shots=shots)
             ctx["results"]["route-lab:" + str(nome)] = {
                 "mapa": mapa, "veredito": res["veredito"], "razao": res["razao"],
                 "melhor_rota": (res["melhor_rota"] or {}).get("trecho"),

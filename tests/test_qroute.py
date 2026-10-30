@@ -60,3 +60,20 @@ def test_encadeamento_usa_selo_anterior(tmp_path):
     b = core.executa(_m("entrega_sp_sem_evidencia.json"), 120, 0.35, None, alvo, silencioso=True)
     assert a["recibo"]["prev_sha3"] is None
     assert b["recibo"]["prev_sha3"] == a["recibo"]["sha3_256"]
+
+
+def test_circuito_de_hardware_reproduz_a_simulacao():
+    from qiskit.quantum_info import Statevector
+    from qroute import hardware
+    r = core.decide(graph.load(_m("entrega_sp_completo.json")), 120, 0.35)
+    marcados = sorted(r["viaveis"])
+    qc = hardware.monta(r["grover"]["n_qubits"], marcados, r["grover"]["iteracoes"])
+    sv = Statevector(qc.remove_final_measurements(inplace=False))
+    p = sum(abs(sv.data[i]) ** 2 for i in marcados)
+    assert round(float(p), 6) == round(r["grover"]["p_sucesso"], 6)
+
+
+def test_ensaio_em_backend_falso_nao_se_disfarca_de_qpu():
+    r = core.executa(_m("entrega_sp_completo.json"), 120, 0.35, dry=True, silencioso=True)
+    assert "NAO e QPU" in r["hardware"]["modo"]
+    assert r["hardware"]["job_id"] is None
