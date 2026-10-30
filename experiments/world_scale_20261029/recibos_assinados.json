@@ -1,0 +1,265 @@
+{
+ "spec": "Z-SIG/1",
+ "algoritmo": "ML-DSA-44 (FIPS 204, Dilithium)",
+ "chave_publica_b64": "FoAMYq5Y+VrtDcF+MQAg8NUNT1LpSGNL+sE/Rp9b8vRZ8FjzcbCs9L9dMW1OEZuFFQtf63t67X/O2B4NSbl2KnLKLyTlOC9Jw7Gb278KMTv4YI80RDpWFndNAdhmrirwFlxa0vmAtXy1UUiOth3PC53lxEtxUQWXRgTngOuAi2KB4cFkATlysuFiBlxvLfEusD7lDdOiJ/nupSqrSrtGYJceERO19NzJHh3bWeoR5jZT9brWPlyefoEJGFQcqvbaQIPQ+BA6d4S+R6rRsB4zh0Mmz4I/hYNuCJWpaLsR+BfpTImhjLjwSAlXVgNmZ9IF6Fh31I3vbKZicUkOpQBWDuJcILNva1a53mBMadndxbEac4FFQWGkOwS5lpPeQ0v0/dfe3tSaNNlwDkVJRMOEqN/wDv5yBDKoLNdLWxumbwBEUPMzX9JU55hK/lnWvo182s4vcmPzq7E60+KOfYhWDBSDAwfi+tXvWoKlgaBk5XT37EbTV0aj3s71dn3P0NqbrkmvavLF1gkNDhBoWT9N6mWqXahK4IWI8KF2mzGrW3I0CXRFYbI/5S4TF10/Af9cT3lQEb0Na0PlcKl2VRRRV/DL9w9NBuE1CeLrRK0Aq5+V4p2xKdufjFWKnUauvgc/eQqq00Rips//HEbFmtbZ17AHPttx10JqSfNVmFd1xqXXw16UITHCuAB/hy/UQITFNZoAtZnVTmXPHfgsymrNAXIO2lzfchD/ER4+wzaTMWClrC471bEkp+R3bRA8GQ3r24jUR3ED90mWa+6pfSkvcZ/ZTPvD9bRmw35J6M3PTjkTUeAbmyLpA3M38/UDxwmjpa+DxaSUHOiGCPTZqu2DYUQWaoiVmZIEOswrnmo59VlbnUtAVWjVfBZmFmQmfWf5g+52OQp/Yx4SU8oLjVjjI+2JW6NjlDKxNmTK4NX+bJI6CDjSDdIlYfr4+P20G9ZBURtfKxN2b34Aecbv/edH5KWkzm4MeecrKZ2fScW4oD/LNLy0LNwSJBv+y86x0DYpLp6jU04a5ZU9iKzH8QSepI0QiqmDYoRfEIltYQ0v+duO3LJuTR/TDWWyqilwUt8tyiusqBmrpFkSDoKcokd00J8BZiUiJm5xdqGrG/kEKy/2cGuKderLS8qFqphBpsmeCsloxGuk+s141RoiDAE4pZhTH6UTsBgSMdunvS9dmCzBIVQu7h0If1nzi2Sw7M+qIiDIFnyWlV32Ii5JBGbsAMAsATo9kVQLiUo48opPhkZE37Y0WMgUEjt7+LxWeBUCp7WDZpyvKdnH6CyoriZ2/GksCFmSvdQJoHiDliFFSzm8ZjVMBC20Xa5gAfVQ6M6exK1hnbWCwMvTmcxJb1xs+Nz2v20QFGBEfSmaISC8D/ieN6mQ65bOEVu2jrNbuvofIpg0iBQd+nTzFOZHUqkVt/92KgwoRKx6kaCW1gaZ28iAGdk7sAYatR6hTgD+OoFXLRKSU0aOdDbnLq7H9QJTAn4kkiTY321gkOjWrtknskb6/oaRAqaT4aKRcq4RXobh7LKY9gffusmo/+qxq5Nujal4TwrGgkz3QFw5YrnA0AeU5x4wBU7/D0VVUh56j42cXxNUX72uC0TOGwVpJhyIG5Bs19mEMO0J8xExi9aROR5e32Fjn/gR3tAUDzTC0fuHYEoRJvjzgVlQ7miS9aCNvvICy7Jypej38Ts/XOCKtGv1WxzutlD60KWO8nkM5r/4v+PB953N5ifUGmAexB4wAQ==",
+ "chave_id": "0fa536226614124b",
+ "aviso": "chave efemera de demonstracao; nao grava a chave privada",
+ "verificacao": {
+  "ok": true,
+  "motivo": "cadeia integra"
+ },
+ "recibos": [
+  {
+   "protocolo": {
+    "shots": 8192,
+    "repeticoes": 3,
+    "bandas": {
+     "W-01_tvd": [
+      0.1,
+      0.2
+     ],
+     "W-02_vis": [
+      0.7,
+      0.4
+     ],
+     "W-03_p": [
+      0.85,
+      0.5
+     ]
+    },
+    "sigma_tvd_teorico": 0.0221,
+    "regra_agregacao": "1 se todas as repeticoes certificam; 0 se todas reprovam; senao REFUSED",
+    "regra_spam": "SPAM > 0.10 em qualquer repeticao => REFUSED global",
+    "auditoria": "Nemotron-3 Nano Omni: APTO COM RESSALVAS (2026-10-29)",
+    "benchmark": "referencia ideal por circuito + lacuna quantificada"
+   },
+   "protocolo_sha3": "9b6eec30d426cd28fbdf286ccfec471a333f4c8840ad4ff34513539a006ff813",
+   "execucao": {
+    "dispositivo": "ibm_marrakesh",
+    "repeticoes": [
+     {
+      "rep": 1,
+      "metricas": {
+       "W-01": {
+        "tvd": 0.1976,
+        "ideal_top": "101"
+       },
+       "W-02": {
+        "coincidencia": 0.0236,
+        "visibilidade": 0.9529
+       },
+       "W-03": {
+        "p_marcado": 0.7816,
+        "classico": 0.125,
+        "ideal": 0.945,
+        "lacuna_vs_ideal": 0.1634
+       },
+       "SPAM": {
+        "p_zeros": 0.9893,
+        "erro_leitura": 0.0107
+       }
+      },
+      "vereditos": {
+       "W-01": "REFUSED",
+       "W-02": "1",
+       "W-03": "REFUSED"
+      },
+      "job_id": "dbhuqlg1h92s7382hn10",
+      "prof": {
+       "depth": [
+        320,
+        16,
+        134,
+        1
+       ],
+       "2q": [
+        85,
+        3,
+        37,
+        0
+       ]
+      }
+     }
+    ]
+   },
+   "resultado": {
+    "W-01": "REFUSED",
+    "W-02": "1",
+    "W-03": "REFUSED"
+   },
+   "receipt_sha3_256": "34ced65f54003cdf2cfa10f1869b195514e623db37bf32689c99f722fb6d3a6b",
+   "prev_sha3": null,
+   "assinatura": "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",
+   "algoritmo": "ML-DSA-44 (FIPS 204, Dilithium)",
+   "chave_id": "0fa536226614124b"
+  },
+  {
+   "protocolo": {
+    "shots": 8192,
+    "repeticoes": 3,
+    "bandas": {
+     "W-01_tvd": [
+      0.1,
+      0.2
+     ],
+     "W-02_vis": [
+      0.7,
+      0.4
+     ],
+     "W-03_p": [
+      0.85,
+      0.5
+     ]
+    },
+    "sigma_tvd_teorico": 0.0221,
+    "regra_agregacao": "1 se todas as repeticoes certificam; 0 se todas reprovam; senao REFUSED",
+    "regra_spam": "SPAM > 0.10 em qualquer repeticao => REFUSED global",
+    "auditoria": "Nemotron-3 Nano Omni: APTO COM RESSALVAS (2026-10-29)",
+    "benchmark": "referencia ideal por circuito + lacuna quantificada"
+   },
+   "protocolo_sha3": "9b6eec30d426cd28fbdf286ccfec471a333f4c8840ad4ff34513539a006ff813",
+   "execucao": {
+    "dispositivo": "ibm_marrakesh",
+    "repeticoes": [
+     {
+      "rep": 1,
+      "metricas": {
+       "W-01": {
+        "tvd": 0.2834,
+        "ideal_top": "101"
+       },
+       "W-02": {
+        "coincidencia": 0.0239,
+        "visibilidade": 0.9521
+       },
+       "W-03": {
+        "p_marcado": 0.7762,
+        "classico": 0.125,
+        "ideal": 0.945,
+        "lacuna_vs_ideal": 0.1688
+       },
+       "SPAM": {
+        "p_zeros": 0.989,
+        "erro_leitura": 0.011
+       }
+      },
+      "vereditos": {
+       "W-01": "0",
+       "W-02": "1",
+       "W-03": "REFUSED"
+      },
+      "job_id": "dbhuqsmne4hc73bdm41g",
+      "prof": {
+       "depth": [
+        354,
+        16,
+        134,
+        1
+       ],
+       "2q": [
+        110,
+        3,
+        37,
+        0
+       ]
+      }
+     }
+    ]
+   },
+   "resultado": {
+    "W-01": "0",
+    "W-02": "1",
+    "W-03": "REFUSED"
+   },
+   "receipt_sha3_256": "7be81183048f6694064d5700c3903a4013b1631fd6c3a4968087daba086cb4fc",
+   "prev_sha3": "42f59015740ac15c532d316f679c39bf1c146a21b52c81accf34659c2595a7dd",
+   "assinatura": "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",
+   "algoritmo": "ML-DSA-44 (FIPS 204, Dilithium)",
+   "chave_id": "0fa536226614124b"
+  },
+  {
+   "protocolo": {
+    "shots": 8192,
+    "repeticoes": 3,
+    "bandas": {
+     "W-01_tvd": [
+      0.1,
+      0.2
+     ],
+     "W-02_vis": [
+      0.7,
+      0.4
+     ],
+     "W-03_p": [
+      0.85,
+      0.5
+     ]
+    },
+    "sigma_tvd_teorico": 0.0221,
+    "regra_agregacao": "1 se todas as repeticoes certificam; 0 se todas reprovam; senao REFUSED",
+    "regra_spam": "SPAM > 0.10 em qualquer repeticao => REFUSED global",
+    "auditoria": "Nemotron-3 Nano Omni: APTO COM RESSALVAS (2026-10-29)",
+    "benchmark": "referencia ideal por circuito + lacuna quantificada"
+   },
+   "protocolo_sha3": "9b6eec30d426cd28fbdf286ccfec471a333f4c8840ad4ff34513539a006ff813",
+   "execucao": {
+    "dispositivo": "ibm_marrakesh",
+    "repeticoes": [
+     {
+      "rep": 1,
+      "metricas": {
+       "W-01": {
+        "tvd": 0.2789,
+        "ideal_top": "101"
+       },
+       "W-02": {
+        "coincidencia": 0.0245,
+        "visibilidade": 0.9509
+       },
+       "W-03": {
+        "p_marcado": 0.76,
+        "classico": 0.125,
+        "ideal": 0.945,
+        "lacuna_vs_ideal": 0.185
+       },
+       "SPAM": {
+        "p_zeros": 0.9911,
+        "erro_leitura": 0.0089
+       }
+      },
+      "vereditos": {
+       "W-01": "0",
+       "W-02": "1",
+       "W-03": "REFUSED"
+      },
+      "job_id": "dbhur1lep8hs73amuin0",
+      "prof": {
+       "depth": [
+        323,
+        16,
+        139,
+        1
+       ],
+       "2q": [
+        85,
+        3,
+        39,
+        0
+       ]
+      }
+     }
+    ]
+   },
+   "resultado": {
+    "W-01": "0",
+    "W-02": "1",
+    "W-03": "REFUSED"
+   },
+   "receipt_sha3_256": "1b137fa3f52daa05d9393d8f08228f21edc13bd7788130dca24e173c76f22ed0",
+   "prev_sha3": "38be7acacf150a1afed3ed0d08a83d0befd480ca0f43367065fe62f5a0d5b0c7",
+   "assinatura": "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",
+   "algoritmo": "ML-DSA-44 (FIPS 204, Dilithium)",
+   "chave_id": "0fa536226614124b"
+  }
+ ]
+}
