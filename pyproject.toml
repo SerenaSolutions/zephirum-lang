@@ -9,8 +9,14 @@ description = "ZEPHIRUM: Lisp-style quantum programming language with the ZYQL t
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
-dependencies = ["numpy", "lark"]
+dependencies = ["numpy", "lark", "qiskit>=2.6"]
 authors = [{name = "Reginaldo Gonçalves", email = "builderquantunxia@gmail.com"}]
+
+[project.optional-dependencies]
+# execucao em hardware real e simulacao ruidosa (Qiskit Runtime / Aer)
+hardware = ["qiskit-aer>=0.17", "qiskit-ibm-runtime>=0.50"]
+# paridade de semantica com o ecossistema Google
+interop = ["cirq>=1.4"]
 
 [project.scripts]
 zqgate = "zqgate.cli:main"
