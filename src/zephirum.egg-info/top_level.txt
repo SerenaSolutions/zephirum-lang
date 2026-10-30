@@ -2,6 +2,7 @@ battery_ci
 oq3
 quantum_types
 shot_auditor
+zephirum
 zkernel
 zqea_kem
 zqea_sig
