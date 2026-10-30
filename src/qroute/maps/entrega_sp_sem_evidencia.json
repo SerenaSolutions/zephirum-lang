@@ -1,0 +1,83 @@
+{
+ "nome": "entrega_sp_sem_evidencia",
+ "origem": "CD",
+ "destino": "DEST",
+ "restricoes": {
+  "orcamento": 120,
+  "risco_max": 0.35
+ },
+ "arestas": [
+  {
+   "de": "CD",
+   "para": "N1",
+   "custo": 30,
+   "risco": 0.1,
+   "status": "aberta",
+   "evidencia": "medida"
+  },
+  {
+   "de": "CD",
+   "para": "N2",
+   "custo": 45,
+   "risco": 0.08,
+   "status": "aberta",
+   "evidencia": "medida"
+  },
+  {
+   "de": "N1",
+   "para": "N3",
+   "custo": 25,
+   "risco": 0.12,
+   "status": "aberta",
+   "evidencia": "medida"
+  },
+  {
+   "de": "N1",
+   "para": "N4",
+   "custo": 20,
+   "risco": 0.4,
+   "status": "aberta",
+   "evidencia": "medida"
+  },
+  {
+   "de": "N2",
+   "para": "N3",
+   "custo": 30,
+   "risco": 0.05,
+   "status": "aberta",
+   "evidencia": "medida"
+  },
+  {
+   "de": "N3",
+   "para": "DEST",
+   "custo": 40,
+   "risco": 0.15,
+   "status": "aberta",
+   "evidencia": "medida"
+  },
+  {
+   "de": "N4",
+   "para": "DEST",
+   "custo": 25,
+   "risco": 0.3,
+   "status": "aberta",
+   "evidencia": "ausente"
+  },
+  {
+   "de": "N2",
+   "para": "DEST",
+   "custo": 70,
+   "risco": 0.05,
+   "status": "aberta",
+   "evidencia": "medida"
+  },
+  {
+   "de": "N1",
+   "para": "N2",
+   "custo": 15,
+   "risco": 0.1,
+   "status": "bloqueada",
+   "evidencia": "medida"
+  }
+ ]
+}

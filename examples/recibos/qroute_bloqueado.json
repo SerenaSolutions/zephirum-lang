@@ -1,0 +1,130 @@
+{
+ "data": "2026-10-30T23:00:25+00:00",
+ "entrada": {
+  "destino": "DEST",
+  "fonte_mapa": "entrega_sp_bloqueado.json",
+  "grover": {
+   "M": 0,
+   "N": 8,
+   "chamadas_classicas": 8,
+   "chamadas_grover": 0,
+   "distribuicao": [],
+   "iteracoes": 0,
+   "marcados": [],
+   "n_qubits": 3,
+   "p_sucesso": 0.0
+  },
+  "incertas": [],
+  "mapa": "entrega_sp_bloqueado",
+  "melhor_rota": null,
+  "nota_comparacao": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
+  "origem": "CD",
+  "razao": "nenhuma rota satisfaz as restricoes com dado medido",
+  "restricoes": {
+   "orcamento": 120,
+   "risco_max": 0.35
+  },
+  "rotas": [
+   {
+    "bloqueada": true,
+    "custo": 95,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 0,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.15,
+    "trecho": "CD→N1→N3→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 75,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 1,
+    "motivos": [
+     "trecho bloqueado",
+     "risco 0.40 > limite 0.35"
+    ],
+    "risco": 0.4,
+    "trecho": "CD→N1→N4→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 2,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.15,
+    "trecho": "CD→N1→N2→N3→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 3,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.1,
+    "trecho": "CD→N1→N2→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 4,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.15,
+    "trecho": "CD→N2→N3→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 5,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.08,
+    "trecho": "CD→N2→DEST",
+    "valida": false
+   }
+  ],
+  "rotas_candidatas": 6,
+  "veredito": "0",
+  "viaveis": []
+ },
+ "modo": "SIMULACAO EXATA EM VETOR DE ESTADO — sem hardware, sem shots",
+ "modulo": "src/qroute (ZYQL 2.2.0)",
+ "nota": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
+ "prev_sha3": null,
+ "sha3_256": "7bb555097841f9d699c5693b27a5e416205a7b294cf9866bb1eb10ed55486d80",
+ "spec": "Q-ROUTE/v1"
+}

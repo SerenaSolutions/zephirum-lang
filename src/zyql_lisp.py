@@ -9,6 +9,8 @@ Forms understood:
   (photon-lab <name> (encoding dual-rail) <test|seal>*)   — lab session
   (test <id> <mode> (expect <k> <v>))                     — run a declared test
   (seal "<path>")                                         — seal Z-QEA receipt
+  (route-lab <name> (map "<path>") (budget <n>) (risk <x>)  — Q-ROUTE: busca de rotas
+     (seal "<path>"))                                          Grover + veredito 1/0/REFUSED
 
 Photonic tests implemented:
   hom-bunching      — two single photons, 50:50 BS: p(1,1) = 0 (HOM effect)
@@ -177,6 +179,35 @@ def run(program_path):
             ctx["results"]["hello"] = r
             return
         if head == "encoding":
+            return
+        if head == "route-lab":
+            # Q-ROUTE: a linguagem executa a busca quantica de rotas e decide em 1/0/REFUSED
+            from qroute import core as _qroute
+            nome, mapa, budget, risk, seal_out = (f[1] if len(f) > 1 else "route-lab"), None, None, None, None
+            for sub in f[2:]:
+                if not isinstance(sub, list):
+                    continue
+                if sub[0] == "map":
+                    mapa = sub[1]
+                elif sub[0] == "budget":
+                    budget = int(sub[1])
+                elif sub[0] == "risk":
+                    risk = float(sub[1])
+                elif sub[0] == "seal":
+                    seal_out = sub[1]
+            print("ZYQL ROUTE LAB:", nome)
+            if mapa is None:
+                print("  [route-lab] REFUSED: mapa nao declarado")
+                ctx["results"]["route-lab"] = {"veredito": "REFUSED", "motivo": "mapa nao declarado"}
+                return
+            res = _qroute.executa(mapa, budget, risk, None, seal_out)
+            ctx["results"]["route-lab:" + str(nome)] = {
+                "mapa": mapa, "veredito": res["veredito"], "razao": res["razao"],
+                "melhor_rota": (res["melhor_rota"] or {}).get("trecho"),
+                "p_sucesso": res["grover"]["p_sucesso"],
+                "iteracoes": res["grover"]["iteracoes"],
+                "qubits": res["grover"]["n_qubits"],
+                "recibo": res.get("recibo")}
             return
         if head == "test":
             tid = f[1]

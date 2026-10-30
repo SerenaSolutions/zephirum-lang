@@ -1,0 +1,171 @@
+{
+ "data": "2026-10-30T23:00:25+00:00",
+ "entrada": {
+  "destino": "DEST",
+  "fonte_mapa": "entrega_sp_sem_evidencia.json",
+  "grover": {
+   "M": 3,
+   "N": 8,
+   "chamadas_classicas": 8,
+   "chamadas_grover": 1,
+   "distribuicao": [
+    {
+     "indice": 4,
+     "p": 0.28125
+    },
+    {
+     "indice": 5,
+     "p": 0.28125
+    },
+    {
+     "indice": 0,
+     "p": 0.28125
+    },
+    {
+     "indice": 6,
+     "p": 0.03125
+    },
+    {
+     "indice": 7,
+     "p": 0.03125
+    },
+    {
+     "indice": 3,
+     "p": 0.03125
+    }
+   ],
+   "iteracoes": 1,
+   "marcados": [
+    0,
+    4,
+    5
+   ],
+   "n_qubits": 3,
+   "p_sucesso": 0.84375
+  },
+  "incertas": [
+   "CD→N1→N4→DEST"
+  ],
+  "mapa": "entrega_sp_sem_evidencia",
+  "melhor_rota": {
+   "bloqueada": false,
+   "custo": 95,
+   "evidencia": [
+    "medida"
+   ],
+   "evidencia_ausente": false,
+   "id": 0,
+   "motivos": [],
+   "risco": 0.15,
+   "trecho": "CD→N1→N3→DEST",
+   "valida": true
+  },
+  "nota_comparacao": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
+  "origem": "CD",
+  "razao": "rota mais barata (CD→N1→N4→DEST, R$ 75) tem trecho sem evidencia",
+  "restricoes": {
+   "orcamento": 120,
+   "risco_max": 0.35
+  },
+  "rotas": [
+   {
+    "bloqueada": false,
+    "custo": 95,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 0,
+    "motivos": [],
+    "risco": 0.15,
+    "trecho": "CD→N1→N3→DEST",
+    "valida": true
+   },
+   {
+    "bloqueada": false,
+    "custo": 75,
+    "evidencia": [
+     "ausente",
+     "medida"
+    ],
+    "evidencia_ausente": true,
+    "id": 1,
+    "motivos": [
+     "risco 0.40 > limite 0.35"
+    ],
+    "risco": 0.4,
+    "trecho": "CD→N1→N4→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 2,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.15,
+    "trecho": "CD→N1→N2→N3→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 3,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.1,
+    "trecho": "CD→N1→N2→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": false,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 4,
+    "motivos": [],
+    "risco": 0.15,
+    "trecho": "CD→N2→N3→DEST",
+    "valida": true
+   },
+   {
+    "bloqueada": false,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 5,
+    "motivos": [],
+    "risco": 0.08,
+    "trecho": "CD→N2→DEST",
+    "valida": true
+   }
+  ],
+  "rotas_candidatas": 6,
+  "veredito": "REFUSED",
+  "viaveis": [
+   0,
+   4,
+   5
+  ]
+ },
+ "modo": "SIMULACAO EXATA EM VETOR DE ESTADO — sem hardware, sem shots",
+ "modulo": "src/qroute (ZYQL 2.2.0)",
+ "nota": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
+ "prev_sha3": null,
+ "sha3_256": "fb6dfdeac6a6e0ebc774afb8977e8af54071849c2c1dc80ad7000dcd45311e31",
+ "spec": "Q-ROUTE/v1"
+}
