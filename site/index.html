@@ -32,7 +32,7 @@ footer{border-top:1px solid #172139;margin-top:40px;padding-top:18px;color:#5362
 </head>
 <body>
 <main>
-  <span class="badge">◈ ZEPHIRUM v1.9.0 · SERENA SOLUTIONS</span>
+  <span class="badge">◈ ZEPHIRUM v2.1.0 · SERENA SOLUTIONS</span>
   <h1>The quantum programming language <span>with receipts.</span></h1>
   <p class="lead">ZEPHIRUM compiles. ZYQL decides: <b>1</b>, <b>0</b> or <b>REFUSED</b> — every decision produced by Deutsch-Jozsa interference, one oracle call, sealed with <b>three-layer cryptography</b>: SHA3-256 integrity, ML-DSA-44 (FIPS 204) authenticity, ML-KEM-768 (FIPS 203) confidentiality. Nothing executes silently. Simulations are labeled as simulations. Hardware runs cite job IDs.</p>
   <div class="stats">
@@ -41,6 +41,21 @@ footer{border-top:1px solid #172139;margin-top:40px;padding-top:18px;color:#5362
     <div class="stat"><strong>3 QPUs</strong><small>same verdicts across ibm_fez, ibm_kingston and ibm_marrakesh (Rodada D, reproducibility matrix)</small></div>
     <div class="stat"><strong>~3.4k/s</strong><small>production runtime decisions per second, verified offline receipts, deterministic by seed</small></div>
   </div>
+  <h2>Latest sealed round — WORLD-3 · 29 Oct 2026 · ibm_marrakesh</h2>
+  <p>Three protocols, one trivalent primitive, three independent jobs at 8192 shots on the IBM free plan (394 s of QPU). Bands declared before execution. Receipts, including the honest refusals, are committed.</p>
+  <div class="stats">
+    <div class="stat"><strong>0.952 ± 0.001</strong><small>W-02 two-photon interference (HOM analogue). Certified in 3/3 jobs, 95% interval [0.947, 0.957] against a 0.70 band. Depth 16, 3 two-qubit gates.</small></div>
+    <div class="stat"><strong>REFUSED</strong><small>W-01 discrete quantum walk. TVD 0.253, interval [0.244, 0.263], above the 0.20 refutation band. Depth 320 and 85 two-qubit gates. The device could not certify it, and the language says so.</small></div>
+    <div class="stat"><strong>0.773</strong><small>W-03 Grover, 3 qubits, 2 iterations: 6.2× the classical 0.125, but below the declared 0.85 band, so it stays provisional — not certified.</small></div>
+    <div class="stat"><strong>1.07 %</strong><small>SPAM control measured with an idle circuit every repetition (0.89–1.10 %), so readout error is not masking the result.</small></div>
+  </div>
+  <p><b>Receipts now carry authorship, not just integrity.</b> Each one is signed with ML-DSA-44 (FIPS 204) and chained to the previous receipt by <code>prev_sha3</code>, so a deleted or reordered receipt breaks verification. SHA3-256 alone could only prove nobody edited the file.</p>
+  <div class="btns">
+    <a class="btn p" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/notebooks/world3-trivalent-verdicts.ipynb">WORLD-3 notebook (executable)</a>
+    <a class="btn" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/experiments/world_scale_20261029/recibos_assinados.json">Signed receipt chain</a>
+    <a class="btn" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/CLAIMS.md">Claims ledger</a>
+  </div>
+  <p style="opacity:.75;font-size:.9rem;margin-top:14px"><b>Status, without gloss:</b> Qiskit Ecosystem listing is under review (PR #1433, open, not merged). PyPI publication is pending. External peer review has not happened yet. Grover stays provisional because the declared band was not met — the band is not moved to fit the result.</p>
   <h2>Proofs of concept — non-Abelian anyons, verified</h2>
   <img src="proofs-figure.png" alt="S3 fusion channels measured on IBM Heron" style="width:100%;border-radius:14px;border:1px solid #1c2740;margin:18px 0">
   <p>The S3 qutrit miniature: fusion space of a non-Abelian anyon pair is 3-dimensional (qutrit-in-qubits), and <b>braiding order is distinguishable on real hardware</b> — 98.1% vs 95.8% on IBM Heron <code>ibm_fez</code>. Full ZYQL trivalent battery on hardware: 3/3 PASS. Noiseless round: exact-zero deviation, canonical rational arithmetic. Every claim carries a Z-QEA receipt with a SHA3-256 seal.</p>
