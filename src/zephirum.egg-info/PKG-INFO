@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: zephirum
-Version: 2.1.0
+Version: 2.1.1
 Summary: ZEPHIRUM: Lisp-style quantum programming language with the ZYQL trivalent decision core (1/0/REFUSED)
 Author-email: Reginaldo Gonçalves <builderquantunxia@gmail.com>
 License-Expression: MIT
