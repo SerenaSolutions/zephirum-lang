@@ -25,6 +25,7 @@ src/zyql_world3.py
 src/zyql_worldscale.py
 src/zyql_zne.py
 src/zyqml_core.py
+src/zephirum/__init__.py
 src/zephirum.egg-info/PKG-INFO
 src/zephirum.egg-info/SOURCES.txt
 src/zephirum.egg-info/dependency_links.txt

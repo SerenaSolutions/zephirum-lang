@@ -1,9 +1,23 @@
 Metadata-Version: 2.4
 Name: zephirum
-Version: 2.1.1
+Version: 2.1.2
 Summary: ZEPHIRUM: Lisp-style quantum programming language with the ZYQL trivalent decision core (1/0/REFUSED)
-Author-email: Reginaldo Gonçalves <builderquantunxia@gmail.com>
+Author: Reginaldo Gonçalves
+Maintainer: Serena Solutions
 License-Expression: MIT
+Project-URL: Homepage, https://serenasolutions.github.io/zephirum-lang/
+Project-URL: Repository, https://github.com/SerenaSolutions/zephirum-lang
+Project-URL: Documentation, https://serenasolutions.github.io/zephirum-lang/
+Project-URL: Changelog, https://github.com/SerenaSolutions/zephirum-lang/blob/main/CHANGELOG.md
+Project-URL: Issues, https://github.com/SerenaSolutions/zephirum-lang/issues
+Project-URL: DOI, https://doi.org/10.5281/zenodo.23632019
+Keywords: quantum,quantum-computing,qasm3,zyql,zephirum,qiskit,openqasm
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Scientific/Engineering :: Physics
 Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 License-File: LICENSE
@@ -19,17 +33,18 @@ Provides-Extra: test
 Requires-Dist: qiskit-qasm3-import>=0.5; extra == "test"
 Dynamic: license-file
 
-<p align="center"><img src="assets/social-preview-1280x640.png" alt="ZYQL: Exact-decision language" width="640"></p>
+<p align="center"><img src="assets/social-preview-1280x640.jpg" alt="ZYQL: Exact-decision language" width="640"></p>
 
 # ZEPHIRUM
 
 **The quantum programming language with receipts.** ZYQL, its decision core, returns one of three verdicts — `1` (permitted), `0` (forbidden) or `REFUSED` (insufficient confidence) — and seals every decision in a verifiable receipt.
 
-![version](https://img.shields.io/badge/version-2.1.0-6e46b8)
+![version](https://img.shields.io/badge/version-2.1.2-6e46b8)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23632019-gold)
 [![CI](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/zephirum?label=pypi)](https://pypi.org/project/zephirum/)
 [![CodeQL](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue)
 
@@ -53,6 +68,9 @@ an explicit error. Simulation mode is labeled as simulation.
 - **Trivalent semantics** — refusal is a first-class verdict, not an exception.
 - **Receipts by construction** — every decision can be sealed (Z-QEA, SHA3-256).
 - **Hardware-verified** — measured on IBM Heron with job IDs published below.
+
+
+**Search:** [`"ZYQL" quantum language`](https://www.google.com/search?q=%22ZYQL%22+quantum+language) · [`Zephirum receipts`](https://www.google.com/search?q=%22Zephirum%22+quantum+recibos+OR+receipts) · [`trivalent REFUSED`](https://www.google.com/search?q=%22trivalent%22+%22REFUSED%22+quantum+decision) · [`zephirum on PyPI`](https://www.google.com/search?q=%22zephirum%22+PyPI)
 
 ## Quickstart
 

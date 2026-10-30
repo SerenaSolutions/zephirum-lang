@@ -1,3 +1,10 @@
+## [2.1.2]
+
+- Metadados do pacote completos: licenca, keywords, classifiers e URLs do projeto
+- `import zephirum` passa a funcionar (shim que expoe a versao e os submodulos)
+- Build com setuptools>=77, que faz a licenca declarada chegar ao PyPI
+- Sem alteracao em resultados cientificos ou recibos
+
 ## [2.1.1] - 2026-10-30
 
 ### Corrigido
