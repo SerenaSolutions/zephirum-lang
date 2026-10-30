@@ -28,3 +28,4 @@ jobs:
       - run: python tests/test_cirq.py
       - run: PYTHONPATH=src:tools python tests/test_auditkit.py
       - run: PYTHONPATH=src:tools python tests/test_regression_seal.py
+      - run: python tests/test_worldscale.py
