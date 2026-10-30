@@ -58,10 +58,20 @@ def _token():
 
 
 def _servico(token=None, crn=None):
+    """Conecta na IBM; se o CRN salvo estiver obsoleto, cai para a instancia automatica.
+
+    CRN velho no ambiente ja quebrou duas execucoes — agora e tratado como aviso,
+    nao como falha: a conta aberta e selecionada sozinha."""
     from qiskit_ibm_runtime import QiskitRuntimeService
+    from qiskit_ibm_runtime.exceptions import IBMInputValueError
     tok = token or _token()[0]
-    return QiskitRuntimeService(channel="ibm_quantum_platform", token=tok,
-                                instance=crn or os.environ.get("IBM_QUANTUM_CRN") or None)
+    inst = crn or os.environ.get("IBM_QUANTUM_CRN") or None
+    if inst:
+        try:
+            return QiskitRuntimeService(channel="ibm_quantum_platform", token=tok, instance=inst)
+        except IBMInputValueError:
+            print("aviso: CRN salvo nao existe mais nesta conta; usando a instancia aberta")
+    return QiskitRuntimeService(channel="ibm_quantum_platform", token=tok)
 
 
 def executa(n_qubits, marcados, iteracoes, shots=1024, backend=None, token=None, crn=None):
