@@ -35,6 +35,17 @@ def main():
     versao_local = projeto["version"]
     print(f"versao no pyproject : {versao_local}")
 
+    # 0. README e CHANGELOG dizem a mesma versao? (mesma regra do tests/test_meta.py)
+    import re
+    try:
+        badge = re.search(r"badge/version-([0-9.]+)", (RAIZ / "README.md").read_text()).group(1)
+        changelog = re.search(r"## \[([0-9.]+)\]", (RAIZ / "CHANGELOG.md").read_text()).group(1)
+        if not (versao_local == badge == changelog):
+            falhas.append(f"versao divergente: pyproject={versao_local} README={badge} CHANGELOG={changelog}")
+        print(f"versao README/CHANGELOG: {badge} / {changelog}")
+    except Exception as e:
+        falhas.append(f"nao foi possivel ler versao em README/CHANGELOG: {type(e).__name__}")
+
     if OFFLINE:
         print("modo offline: pulando checagens de rede")
         return 0

@@ -1,3 +1,28 @@
+## [2.1.1] - 2026-10-30
+
+### Corrigido
+- Empacotamento: `py-modules` no `pyproject.toml` listava 12 modulos e deixava de fora
+  12 outros, incluindo `zyql_witness`, `zqea_sig`, `zqea_kem`, `zyql_worldscale`,
+  `zyql_world3`, `zyql_auditkit`, `zyql_cirq` e `shot_auditor`. O wheel publicado como
+  2.1.0 saiu incompleto; este release publica o conjunto correto (32 arquivos).
+- Divergencia de versionamento: a tag `v2.1.0` (`37fbf74`) continha a lista antiga de
+  modulos e nao estava no historico do `main`. Em vez de reescrever tag publicada,
+  a versao 2.1.1 publica o estado correto e a tag passa a coincidir com o PyPI.
+- `license` migrado para PEP 639 (`license = "MIT"` + `license-files`).
+- `zyql_rag_layer.bm25_rank` aceita documentos como `str` ou `{"text": ...}` e levanta
+  `ValueError` explicito, em vez de `TypeError` opaco.
+
+### Adicionado
+- `src/zqea_sig.py`: autoria pos-quantica de recibos (ML-DSA-44, FIPS 204) e cadeia
+  `prev_sha3` com deteccao de elo alterado ou removido.
+- `src/zyql_witness.witness_from_counts`: regra unica de abstencao (Hoeffding) para
+  qualquer distribuicao, nao so a familia Deutsch-Jozsa.
+- `tests/test_modulos_orfaos.py` (16 assercoes), `tests/test_qasm3.py` (24),
+  `tests/test_zqea_sig.py` (8).
+- `tools/verificar_publicacao.py` e workflow de verificacao de publicacao.
+- `notebooks/world3-trivalent-verdicts.ipynb`: rodada WORLD-3 executavel, com
+  verificacao de selo, intervalos de 95% e veredito trivalente.
+
 ## [2.1.0] - 2026-10-24
 
 ### Adicionado (RODADA H: bateria adversarial de alta complexidade, pensada
