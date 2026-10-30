@@ -41,6 +41,7 @@ footer{border-top:1px solid #172139;margin-top:40px;padding-top:18px;color:#5362
     <div class="stat"><strong>3 QPUs</strong><small>same verdicts across ibm_fez, ibm_kingston and ibm_marrakesh (Rodada D, reproducibility matrix)</small></div>
     <div class="stat"><strong>~3.4k/s</strong><small>production runtime decisions per second, verified offline receipts, deterministic by seed</small></div>
   </div>
+  <img src="hero-quantum.jpg" alt="Quantum processor with trivalent decision and chained sealed receipts" style="width:100%;border-radius:16px;border:1px solid #1c2740;margin:22px 0 8px">
   <h2>Latest sealed round — WORLD-3 · 29 Oct 2026 · ibm_marrakesh</h2>
   <p>Three protocols, one trivalent primitive, three independent jobs at 8192 shots on the IBM free plan (394 s of QPU). Bands declared before execution. Receipts, including the honest refusals, are committed.</p>
   <div class="stats">
@@ -49,6 +50,8 @@ footer{border-top:1px solid #172139;margin-top:40px;padding-top:18px;color:#5362
     <div class="stat"><strong>0.773</strong><small>W-03 Grover, 3 qubits, 2 iterations: 6.2× the classical 0.125, but below the declared 0.85 band, so it stays provisional — not certified.</small></div>
     <div class="stat"><strong>1.07 %</strong><small>SPAM control measured with an idle circuit every repetition (0.89–1.10 %), so readout error is not masking the result.</small></div>
   </div>
+  <img src="world3-art.jpg" alt="Three protocols: Hong-Ou-Mandel interference, discrete quantum walk spreading, Grover amplification" style="width:100%;border-radius:14px;border:1px solid #1c2740;margin:16px 0 6px">
+  <p style="opacity:.72;font-size:.86rem;margin-top:0">Illustration of the three protocols in this round. It is art, not data: the measured curves are in the receipts and in the notebook.</p>
   <p><b>Receipts now carry authorship, not just integrity.</b> Each one is signed with ML-DSA-44 (FIPS 204) and chained to the previous receipt by <code>prev_sha3</code>, so a deleted or reordered receipt breaks verification. SHA3-256 alone could only prove nobody edited the file.</p>
   <div class="btns">
     <a class="btn p" href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/notebooks/world3-trivalent-verdicts.ipynb">WORLD-3 notebook (executable)</a>
@@ -72,6 +75,15 @@ footer{border-top:1px solid #172139;margin-top:40px;padding-top:18px;color:#5362
   </div>
   <h2>Frontiers under test (Rodada F, live)</h2>
   <p>CHSH non-locality gate (the device must violate Bell's inequality, S &gt; 2.20), a 3-qubit repetition error-correcting code (logical error vs physical error, PROTEGIDO verdict) and Grover scaled to n=4 — three certificates no toy prototype passes. Receipts chain round by round: each seal carries the previous one.</p>
+  <h2>Find Zephirum on Google</h2>
+  <p>The project is young enough that search results are still thin. These queries are the ones that surface it today.</p>
+  <div class="btns">
+    <a class="btn p" href="https://www.google.com/search?q=%22ZYQL%22+quantum+language" target="_blank" rel="noopener">"ZYQL" quantum language</a>
+    <a class="btn" href="https://www.google.com/search?q=%22Zephirum%22+%22remote+receipt%22+OR+%22recibo%22+quantum" target="_blank" rel="noopener">Zephirum + receipts</a>
+    <a class="btn" href="https://www.google.com/search?q=%22trivalent%22+%22REFUSED%22+quantum+decision" target="_blank" rel="noopener">trivalent / REFUSED</a>
+    <a class="btn" href="https://www.google.com/search?q=site%3Agithub.com+%22zephirum-lang%22" target="_blank" rel="noopener">site:github.com</a>
+    <a class="btn" href="https://www.google.com/search?q=%22zephirum%22+PyPI" target="_blank" rel="noopener">zephirum on PyPI</a>
+  </div>
   <h2>Quickstart</h2>
   <pre>pip install -e .
 python -c "from zyql_quantum_gate import ZYQLQuantumGate; \
