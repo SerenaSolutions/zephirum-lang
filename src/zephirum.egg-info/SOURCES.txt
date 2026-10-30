@@ -42,6 +42,7 @@ tests/test_kem.py
 tests/test_lisp_regression.py
 tests/test_llm_compress.py
 tests/test_meta.py
+tests/test_modulos_orfaos.py
 tests/test_multiple_testing.py
 tests/test_protocols.py
 tests/test_qasm3.py
