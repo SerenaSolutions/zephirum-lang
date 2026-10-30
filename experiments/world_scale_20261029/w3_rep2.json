@@ -1,0 +1,80 @@
+{
+ "protocolo": {
+  "shots": 8192,
+  "repeticoes": 3,
+  "bandas": {
+   "W-01_tvd": [
+    0.1,
+    0.2
+   ],
+   "W-02_vis": [
+    0.7,
+    0.4
+   ],
+   "W-03_p": [
+    0.85,
+    0.5
+   ]
+  },
+  "sigma_tvd_teorico": 0.0221,
+  "regra_agregacao": "1 se todas as repeticoes certificam; 0 se todas reprovam; senao REFUSED",
+  "regra_spam": "SPAM > 0.10 em qualquer repeticao => REFUSED global",
+  "auditoria": "Nemotron-3 Nano Omni: APTO COM RESSALVAS (2026-10-29)",
+  "benchmark": "referencia ideal por circuito + lacuna quantificada"
+ },
+ "protocolo_sha3": "9b6eec30d426cd28fbdf286ccfec471a333f4c8840ad4ff34513539a006ff813",
+ "execucao": {
+  "dispositivo": "ibm_marrakesh",
+  "repeticoes": [
+   {
+    "rep": 1,
+    "metricas": {
+     "W-01": {
+      "tvd": 0.2834,
+      "ideal_top": "101"
+     },
+     "W-02": {
+      "coincidencia": 0.0239,
+      "visibilidade": 0.9521
+     },
+     "W-03": {
+      "p_marcado": 0.7762,
+      "classico": 0.125,
+      "ideal": 0.945,
+      "lacuna_vs_ideal": 0.1688
+     },
+     "SPAM": {
+      "p_zeros": 0.989,
+      "erro_leitura": 0.011
+     }
+    },
+    "vereditos": {
+     "W-01": "0",
+     "W-02": "1",
+     "W-03": "REFUSED"
+    },
+    "job_id": "dbhuqsmne4hc73bdm41g",
+    "prof": {
+     "depth": [
+      354,
+      16,
+      134,
+      1
+     ],
+     "2q": [
+      110,
+      3,
+      37,
+      0
+     ]
+    }
+   }
+  ]
+ },
+ "resultado": {
+  "W-01": "0",
+  "W-02": "1",
+  "W-03": "REFUSED"
+ },
+ "receipt_sha3_256": "7be81183048f6694064d5700c3903a4013b1631fd6c3a4968087daba086cb4fc"
+}

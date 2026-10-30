@@ -1,0 +1,171 @@
+{
+ "protocolo": {
+  "shots": 8192,
+  "repeticoes": 3,
+  "bandas": {
+   "W-01_tvd": [
+    0.1,
+    0.2
+   ],
+   "W-02_vis": [
+    0.7,
+    0.4
+   ],
+   "W-03_p": [
+    0.85,
+    0.5
+   ]
+  },
+  "sigma_tvd_teorico": 0.0221,
+  "regra_agregacao": "1 se todas as repeticoes certificam; 0 se todas reprovam; senao REFUSED",
+  "regra_spam": "SPAM > 0.10 em qualquer repeticao => REFUSED global",
+  "auditoria": "Nemotron-3 Nano Omni: APTO COM RESSALVAS (2026-10-29)",
+  "benchmark": "referencia ideal por circuito + lacuna quantificada"
+ },
+ "protocolo_sha3": "9b6eec30d426cd28fbdf286ccfec471a333f4c8840ad4ff34513539a006ff813",
+ "execucao": {
+  "dispositivo": "ibm_marrakesh",
+  "repeticoes": [
+   {
+    "rep": 1,
+    "job_id": "dbhuqlg1h92s7382hn10",
+    "metricas": {
+     "W-01": {
+      "tvd": 0.1976,
+      "ideal_top": "101"
+     },
+     "W-02": {
+      "coincidencia": 0.0236,
+      "visibilidade": 0.9529
+     },
+     "W-03": {
+      "p_marcado": 0.7816,
+      "classico": 0.125,
+      "ideal": 0.945,
+      "lacuna_vs_ideal": 0.1634
+     },
+     "SPAM": {
+      "p_zeros": 0.9893,
+      "erro_leitura": 0.0107
+     }
+    },
+    "vereditos": {
+     "W-01": "REFUSED",
+     "W-02": "1",
+     "W-03": "REFUSED"
+    },
+    "prof": {
+     "depth": [
+      320,
+      16,
+      134,
+      1
+     ],
+     "2q": [
+      85,
+      3,
+      37,
+      0
+     ]
+    }
+   },
+   {
+    "rep": 2,
+    "job_id": "dbhuqsmne4hc73bdm41g",
+    "metricas": {
+     "W-01": {
+      "tvd": 0.2834,
+      "ideal_top": "101"
+     },
+     "W-02": {
+      "coincidencia": 0.0239,
+      "visibilidade": 0.9521
+     },
+     "W-03": {
+      "p_marcado": 0.7762,
+      "classico": 0.125,
+      "ideal": 0.945,
+      "lacuna_vs_ideal": 0.1688
+     },
+     "SPAM": {
+      "p_zeros": 0.989,
+      "erro_leitura": 0.011
+     }
+    },
+    "vereditos": {
+     "W-01": "0",
+     "W-02": "1",
+     "W-03": "REFUSED"
+    },
+    "prof": {
+     "depth": [
+      354,
+      16,
+      134,
+      1
+     ],
+     "2q": [
+      110,
+      3,
+      37,
+      0
+     ]
+    }
+   },
+   {
+    "rep": 3,
+    "job_id": "dbhur1lep8hs73amuin0",
+    "metricas": {
+     "W-01": {
+      "tvd": 0.2789,
+      "ideal_top": "101"
+     },
+     "W-02": {
+      "coincidencia": 0.0245,
+      "visibilidade": 0.9509
+     },
+     "W-03": {
+      "p_marcado": 0.76,
+      "classico": 0.125,
+      "ideal": 0.945,
+      "lacuna_vs_ideal": 0.185
+     },
+     "SPAM": {
+      "p_zeros": 0.9911,
+      "erro_leitura": 0.0089
+     }
+    },
+    "vereditos": {
+     "W-01": "0",
+     "W-02": "1",
+     "W-03": "REFUSED"
+    },
+    "prof": {
+     "depth": [
+      323,
+      16,
+      139,
+      1
+     ],
+     "2q": [
+      85,
+      3,
+      39,
+      0
+     ]
+    }
+   }
+  ]
+ },
+ "resultado": {
+  "W-01": "REFUSED",
+  "W-02": "1",
+  "W-03": "REFUSED",
+  "_expl": {
+   "W-01": "TVD 0.198-0.283; profundidade 320 / 85 portas 2q => fora da coerencia",
+   "W-02": "visibilidade 0.951+-0.001 nas 3 reps; 16 de profundidade / 3 portas 2q",
+   "W-03": "p=0.760-0.782 (6x classico) mas fora da banda de certificacao 0.85"
+  }
+ },
+ "receipt_sha3_256": "1e9833c6933a72e0f71919b3ea054d6f54ede61e3464867b69d16ca54016597e"
+}
