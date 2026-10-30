@@ -257,12 +257,21 @@ r.error_bound                                 # limite de erro Hoeffding declara
 ```
 CLI: `zyql-decide --oracle balanced --shots 512`
 
-## ⚠️ Desambiguação / Disambiguation — no PyPI package exists
+## PyPI — estado verificado (30/10/2026)
 
-Instruções circulando na web citam `pip install zephirum-quantum-plugin` e um
-repositório `SerenaSolutions/zephirum`. **Nenhum dos dois existe.** Este
-(`zephirum-lang`) é o único repositório oficial. Nenhum pacote da ZEPHIRUM está
-publicado no PyPI — qualquer instrução citando esse pacote não vem da casa.
+O pacote oficial **existe e está publicado**: `pip install zephirum`.
+Versões no índice: 2.1.0, 2.1.1, 2.1.2 e 2.2.0 (esta, com o módulo Q-ROUTE).
+Procedência verificável em https://pypi.org/pypi/zephirum/json — autor do
+registro no PyPI: Reginaldo Gonçalves (mantenedor), projeto Serena Solutions.
+
+O que **não** é da casa: pacotes de terceiros com nome parecido, como
+`zephirum-quantum-plugin`, e o repositório `SerenaSolutions/zephirum`. O único
+repositório oficial é `SerenaSolutions/zephirum-lang`, este. Instrução que cite
+aqueles nomes não vem da ZEPHIRUM.
+
+Correção registrada: até 30/10/2026 esta seção afirmava que nenhum pacote estava
+no PyPI. Era falso, e a checagem passou a ser feita contra a API do índice, não
+contra a memória de quem escreveu.
 
 ## Citation
 

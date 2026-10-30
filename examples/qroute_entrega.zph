@@ -1,0 +1,21 @@
+; Q-ROUTE — busca e decisao quantica de rotas, escrito em ZEPHIRUM (.zph)
+; executa com: python -m zyql_lisp examples/qroute_entrega.zph
+; o veredito segue o nucleo trivalente: 1 aprovada, 0 rejeitada, REFUSED sem evidencia
+
+(route-lab "entrega-sp-completo"
+  (map    "src/qroute/maps/entrega_sp_completo.json")
+  (budget 120)
+  (risk   0.35)
+  (seal   "examples/recibos/qroute_completo.json"))
+
+(route-lab "entrega-sp-sem-evidencia"
+  (map    "src/qroute/maps/entrega_sp_sem_evidencia.json")
+  (budget 120)
+  (risk   0.35)
+  (seal   "examples/recibos/qroute_sem_evidencia.json"))
+
+(route-lab "entrega-sp-bloqueado"
+  (map    "src/qroute/maps/entrega_sp_bloqueado.json")
+  (budget 120)
+  (risk   0.35)
+  (seal   "examples/recibos/qroute_bloqueado.json"))
