@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/social-preview-1280x640.png" alt="ZYQL: Exact-decision language" width="640"></p>
+<p align="center"><img src="assets/social-preview-1280x640.jpg" alt="ZYQL: Exact-decision language" width="640"></p>
 
 # ZEPHIRUM
 
@@ -9,6 +9,7 @@
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23632019-gold)
 [![CI](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/zephirum?label=pypi)](https://pypi.org/project/zephirum/)
 [![CodeQL](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue)
 
@@ -32,6 +33,9 @@ an explicit error. Simulation mode is labeled as simulation.
 - **Trivalent semantics** — refusal is a first-class verdict, not an exception.
 - **Receipts by construction** — every decision can be sealed (Z-QEA, SHA3-256).
 - **Hardware-verified** — measured on IBM Heron with job IDs published below.
+
+
+**Search:** [`"ZYQL" quantum language`](https://www.google.com/search?q=%22ZYQL%22+quantum+language) · [`Zephirum receipts`](https://www.google.com/search?q=%22Zephirum%22+quantum+recibos+OR+receipts) · [`trivalent REFUSED`](https://www.google.com/search?q=%22trivalent%22+%22REFUSED%22+quantum+decision) · [`zephirum on PyPI`](https://www.google.com/search?q=%22zephirum%22+PyPI)
 
 ## Quickstart
 
