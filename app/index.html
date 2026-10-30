@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>ZYQL Quantum Console — Q-ROUTE</title>
+<style>
+:root{--bg:#0b0e14;--card:#141a24;--line:#243040;--txt:#e8eef7;--dim:#8ea1b8;--ok:#35d07f;--no:#ef5b6b;--warn:#f2b544;--acc:#5aa9ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.5 ui-sans-serif,system-ui,"Segoe UI",Roboto}
+header{padding:18px 26px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px}
+h1{font-size:16px;margin:0;letter-spacing:.5px;font-weight:600}
+.tag{font-size:11px;color:var(--dim);border:1px solid var(--line);padding:3px 8px;border-radius:999px}
+button{margin-left:auto;background:var(--acc);color:#06101f;border:0;padding:9px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+button.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);margin-left:8px;font-weight:600}
+main{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;padding:18px 26px 30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);margin:0 0 12px}
+.verdict{display:flex;align-items:center;gap:14px}
+.badge{font-size:30px;font-weight:800;padding:6px 18px;border-radius:12px;letter-spacing:1px}
+.b1{background:rgba(53,208,127,.15);color:var(--ok);border:1px solid rgba(53,208,127,.5)}
+.b0{background:rgba(239,91,107,.15);color:var(--no);border:1px solid rgba(239,91,107,.5)}
+.bR{background:rgba(242,181,68,.15);color:var(--warn);border:1px solid rgba(242,181,68,.5)}
+.reason{color:var(--dim);font-size:13px}
+.rows{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.kv{background:#0f151e;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.kv b{display:block;font-size:11px;color:var(--dim);font-weight:600;letter-spacing:.6px;text-transform:uppercase}
+.kv span{font-size:16px;font-variant-numeric:tabular-nums}
+.bars{display:flex;align-items:flex-end;gap:10px;height:150px;margin-top:6px}
+.bar{flex:1;background:#1d2836;border-radius:6px 6px 0 0;position:relative;transition:height .5s}
+.bar i{display:block;width:100%;background:linear-gradient(180deg,var(--acc),#2f6fb5);border-radius:6px 6px 0 0}
+.bar.mark i{background:linear-gradient(180deg,var(--ok),#1f8a54)}
+.bar em{position:absolute;top:-18px;width:100%;text-align:center;font-style:normal;font-size:11px;color:var(--dim)}
+.bar u{position:absolute;bottom:-20px;width:100%;text-align:center;text-decoration:none;font-size:11px;color:var(--dim)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;word-break:break-all}
+.rec{border-left:2px solid var(--acc);padding-left:12px;margin-top:8px}
+svg text{font-size:11px;fill:var(--dim)}svg .node{fill:#1b2532;stroke:#2d3d52}
+svg .best{stroke:var(--ok);stroke-width:3}svg .blocked{stroke:var(--no);stroke-dasharray:5 5}
+footer{color:var(--dim);font-size:12px;padding:0 26px 24px}
+</style></head><body>
+<header><h1>ZYQL QUANTUM CONSOLE</h1><span class="tag">Q-ROUTE · decisão trivalente</span>
+<span class="tag" id="modo">—</span>
+<button id="run-hw">Executar na QPU</button><button class="ghost" id="run-sim">Simular</button></header>
+<main>
+  <section class="card"><h2>Malha de rotas · CD → destino</h2><svg id="grafo" viewBox="0 0 700 400" width="100%" height="330"></svg>
+    <div style="color:var(--dim);font-size:12px">verde: trecho da rota aprovada · vermelho tracejado: trecho bloqueado</div></section>
+  <section class="card"><h2>Decisão</h2>
+    <div class="verdict"><div class="badge" id="badge">—</div><div class="reason" id="razao">aguardando execução</div></div>
+    <div class="rows" id="rows"></div></section>
+  <section class="card"><h2>Amplitudes do Grover (3 qubits)</h2><div class="bars" id="bars"></div>
+    <div style="margin-top:26px;color:var(--dim);font-size:12px" id="grover-nota"></div></section>
+  <section class="card"><h2>Recibo e hardware</h2><div id="recibo" class="mono">—</div></section>
+</main>
+<footer id="rodape"></footer>
+<script>
+const COR={"1":"b1","0":"b0","REFUSED":"bR"};
+function desenhaGrafo(v){
+  const s=document.getElementById('grafo'); s.innerHTML='';
+  v.arestas.forEach(a=>{
+    const o=v.nos.find(n=>n.id===a.de), d=v.nos.find(n=>n.id===a.para);
+    const l=document.createElementNS("http://www.w3.org/2000/svg","line");
+    l.setAttribute("x1",o.x);l.setAttribute("y1",o.y);l.setAttribute("x2",d.x);l.setAttribute("y2",d.y);
+    l.setAttribute("stroke", a.status==="bloqueada"?"#ef5b6b":(a.na_melhor?"#35d07f":"#2d3d52"));
+    l.setAttribute("stroke-width", a.na_melhor?4:2);
+    if(a.status==="bloqueada")l.setAttribute("stroke-dasharray","6 6");
+    s.appendChild(l);
+    const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+    t.setAttribute("x",(o.x+d.x)/2);t.setAttribute("y",(o.y+d.y)/2-6);t.setAttribute("text-anchor","middle");
+    t.textContent="R$"+a.custo+" · "+a.risco.toFixed(2); s.appendChild(t);
+  });
+  v.nos.forEach(n=>{
+    const c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx",n.x);c.setAttribute("cy",n.y);c.setAttribute("r",22);c.setAttribute("class","node");
+    s.appendChild(c);
+    const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+    t.setAttribute("x",n.x);t.setAttribute("y",n.y+4);t.setAttribute("text-anchor","middle");
+    t.setAttribute("style","fill:#e8eef7;font-weight:600");t.textContent=n.id; s.appendChild(t);
+  });
+}
+function renderiza(v){
+  const r=v.resultado;
+  document.getElementById('modo').textContent = v.modo==='hardware' ? 'QPU IBM' : 'simulação local';
+  const b=document.getElementById('badge'); b.textContent=r.veredito; b.className='badge '+COR[r.veredito];
+  document.getElementById('razao').textContent=r.razao;
+  const rows=[["Rota aprovada",(r.melhor_rota||{}).trecho||"—"],["Custo","R$ "+((r.melhor_rota||{}).custo??"—")],
+    ["Candidatas",r.rotas_candidatas],["Viáveis",r.grover.M],
+    ["Chamadas ao oráculo","clássico "+r.grover.chamadas_classicas+" · Grover "+r.grover.chamadas_grover],
+    ["p(marcadas)", r.hardware? r.hardware.p_medido.toFixed(4) : r.grover.p_sucesso.toFixed(4)]];
+  document.getElementById('rows').innerHTML=rows.map(([k,val])=>`<div class="kv"><b>${k}</b><span>${val}</span></div>`).join('');
+  const dist=r.grover.distribuicao.slice(0,8);
+  document.getElementById('bars').innerHTML=dist.map(d=>{
+    const h=Math.max(4,d.p*150);
+    return `<div class="bar ${r.grover.marcados.includes(d.indice)?'mark':''}"><em>${(d.p*100).toFixed(1)}%</em><i style="height:${h}px"></i><u>${d.indice}</u></div>`;}).join('');
+  document.getElementById('grover-nota').textContent=`N=${r.grover.N} · ${r.grover.iteracoes} iteração(ões) · simulação exata ${r.grover.p_sucesso.toFixed(4)}`;
+  const hw=r.hardware;
+  document.getElementById('recibo').innerHTML = hw ? `
+    <div><b>backend</b> ${hw.backend} · <b>job_id</b> ${hw.job_id ?? "—"}</div>
+    <div><b>shots</b> ${hw.shots} · <b>profundidade</b> ${hw.profundidade_transpilada} · <b>portas 2q</b> ${hw.portas_2q}</div>
+    <div><b>p medido</b> ${hw.p_medido} · <b>IC95</b> [${hw.ic95[0]}, ${hw.ic95[1]}]</div>
+    <div class="rec"><b>selo SHA3-256</b><br>${(r.recibo||{}).sha3_256||"—"}</div>` : `<div>execução simulada — sem job_id</div>`;
+  document.getElementById('rodape').textContent = `Q-ROUTE · ${r.fonte_mapa} · orçamento R$ ${r.restricoes.orcamento} · risco máx ${r.restricoes.risco_max}`;
+  desenhaGrafo(v);
+}
+async function roda(modo){
+  const alvo=document.getElementById('razao'); alvo.textContent='executando…';
+  const res=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({modo})});
+  const v=await res.json();
+  if(v.erro){alvo.textContent='erro: '+v.erro;return;}
+  renderiza(v);
+}
+document.getElementById('run-hw').onclick=()=>roda('hardware');
+document.getElementById('run-sim').onclick=()=>roda('simulacao');
+fetch('/api/last').then(r=>r.json()).then(v=>{if(!v.vazio)renderiza(v);});
+</script></body></html>
