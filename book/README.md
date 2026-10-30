@@ -1,6 +1,6 @@
 # Livro — 2ª edição (outubro de 2026)
 
-*ZEPHIRUM: A Computação Antes da Execução*, de Reginaldo Gonçalves. Edição revista e ampliada.
+*ZEPHIRUM: A Computação Antes da Execução*. Edição revista e ampliada. Autoria: Serena Quantum Solutions.
 
 ## O que mudou em relação à 1ª edição
 
