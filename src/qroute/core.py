@@ -56,13 +56,31 @@ def decide(mapa, budget, risk_max, iteracoes=None):
     }
 
 
-def executa(mapa_path, budget=None, risk_max=None, iteracoes=None, seal_path=None, silencioso=False):
+def executa(mapa_path, budget=None, risk_max=None, iteracoes=None, seal_path=None, silencioso=False,
+            hardware=False, backend=None, dry=False, shots=1024):
     mapa = graph.load(mapa_path)
     rest = mapa.get("restricoes", {})
     budget = rest.get("orcamento", 120) if budget is None else budget
     risk_max = rest.get("risco_max", 0.35) if risk_max is None else risk_max
     r = decide(mapa, budget, risk_max, iteracoes)
     r["fonte_mapa"] = os.path.basename(mapa_path)
+    if hardware or dry:
+        from . import hardware as _hw
+        g = r["grover"]
+        marcados = [m for m in r["viaveis"]]
+        res = (_hw.dry_run(g["n_qubits"], marcados, g["iteracoes"], shots) if dry
+               else _hw.executa(g["n_qubits"], marcados, g["iteracoes"], shots, backend))
+        r["hardware"] = res
+        confirmado = res["ic95"][0] > 0.5
+        r["confirmacao_hardware"] = "confirmado" if confirmado else "refutado"
+        if not confirmado and r["veredito"] == "1":
+            r["veredito"] = "REFUSED"
+            r["razao"] = "hardware nao confirmou a amplificacao (IC95 inferior %.3f <= 0.5)" % res["ic95"][0]
+        if not silencioso:
+            print("hw      : %s | p_medido=%.4f IC95=[%.3f, %.3f] | shots=%d | profundidade=%d | job=%s" % (
+                res["modo"], res["p_medido"], res["ic95"][0], res["ic95"][1], res["shots"],
+                res["profundidade_transpilada"], res["job_id"]))
+            print("veredito: %s (%s)" % (r["veredito"], r["razao"]))
     if not silencioso:
         g, m = r["grover"], r["melhor_rota"]
         print("Q-ROUTE | mapa: %s | candidatas: %d | qubits: %d" % (r["fonte_mapa"], r["rotas_candidatas"], g["n_qubits"]))
@@ -74,7 +92,9 @@ def executa(mapa_path, budget=None, risk_max=None, iteracoes=None, seal_path=Non
     if seal_path:
         anterior = receipt.le_anterior(seal_path)
         corpo = {"spec": "Q-ROUTE/v1", "modulo": "src/qroute (ZYQL 2.2.0)",
-                 "modo": "SIMULACAO EXATA EM VETOR DE ESTADO — sem hardware, sem shots",
+                 "modo": ("HARDWARE IBM QUANTUM" if hardware else
+                          "ENSAIO EM BACKEND FALSO (nao e QPU)" if dry else
+                          "SIMULACAO EXATA EM VETOR DE ESTADO — sem hardware, sem shots"),
                  "entrada": r, "nota": NOTA_COMPARACAO}
         rec = receipt.sela(corpo, seal_path, anterior)
         r["recibo"] = {"arquivo": seal_path, "sha3_256": rec["sha3_256"], "prev_sha3": anterior}
