@@ -45,10 +45,22 @@ def p_marcados(counts, marcados, shots=None):
             "ic95": [round(max(0.0, p - erro), 6), round(min(1.0, p + erro), 6)]}
 
 
+ORDEM_TOKEN = ("IBM_QUANTUM_TOKEN", "IBM_QUANTUM_TOKEN_2", "IBM_QUANTUM_TOKEN_3",
+               "IBM_QUANTUM_TOKEN_4", "IBM_QUANTUM_TOKEN_5")
+
+
+def _token():
+    """Usa a chave mais recente disponivel: o ambiente ganha sufixo _N a cada rotacao."""
+    for nome in reversed(ORDEM_TOKEN):
+        if os.environ.get(nome):
+            return os.environ[nome], nome
+    return None, None
+
+
 def _servico(token=None, crn=None):
     from qiskit_ibm_runtime import QiskitRuntimeService
-    return QiskitRuntimeService(channel="ibm_quantum_platform",
-                                token=token or os.environ.get("IBM_QUANTUM_TOKEN"),
+    tok = token or _token()[0]
+    return QiskitRuntimeService(channel="ibm_quantum_platform", token=tok,
                                 instance=crn or os.environ.get("IBM_QUANTUM_CRN") or None)
 
 
