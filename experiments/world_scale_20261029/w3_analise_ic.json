@@ -1,0 +1,48 @@
+{
+ "protocolo": {
+  "id": "WORLD-3-ANALISE-POSTHOC",
+  "nota": "analise apos auditoria Ultra-550B; IC aproximado por proporcao binomial; nao substitui o pre-registro"
+ },
+ "resultado": {
+  "W-01": {
+   "media": 0.2533,
+   "desvio": 0.0483,
+   "ic95_aprox": [
+    0.2439,
+    0.2627
+   ],
+   "reps": [
+    0.1976,
+    0.2834,
+    0.2789
+   ]
+  },
+  "W-02": {
+   "media": 0.952,
+   "desvio": 0.001,
+   "ic95_aprox": [
+    0.9473,
+    0.9566
+   ],
+   "reps": [
+    0.9529,
+    0.9521,
+    0.9509
+   ]
+  },
+  "W-03": {
+   "media": 0.7726,
+   "desvio": 0.0112,
+   "ic95_aprox": [
+    0.7635,
+    0.7817
+   ],
+   "reps": [
+    0.7816,
+    0.7762,
+    0.76
+   ]
+  }
+ },
+ "receipt_sha3_256": "1261771151f35d6f716bfeb983fdca8fbc646c10b4269f52435232dbcac38525"
+}
