@@ -1,2 +1,13 @@
 numpy
 lark
+qiskit>=2.6
+
+[hardware]
+qiskit-aer>=0.17
+qiskit-ibm-runtime>=0.50
+
+[interop]
+cirq>=1.4
+
+[test]
+qiskit-qasm3-import>=0.5
