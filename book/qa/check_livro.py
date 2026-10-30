@@ -81,6 +81,17 @@ def main():
             r = PdfReader(PDF)
             paginas = len(r.pages)
             corpo = "\n".join((p.extract_text() or "") for p in r.pages)
+            # 7a: a capa precisa abrir o PDF e conter imagem
+            p1 = r.pages[0]
+            t1 = p1.extract_text() or ""
+            if "ZEPHIRUM" not in t1:
+                falhas.append("PDF: pagina 1 nao e a capa (falta o titulo)")
+            if len(p1.images) == 0:
+                falhas.append("PDF: pagina 1 sem imagem — capa invisivel")
+            # 7b: nenhuma pagina cega entre as tres primeiras
+            for i in range(min(3, len(r.pages))):
+                if len(" ".join((r.pages[i].extract_text() or "").split())) < 20:
+                    falhas.append(f"PDF: pagina {i+1} em branco")
             for marca in ("![", "$$"):
                 if marca in corpo:
                     falhas.append(f"PDF: marcador cru '{marca}' no texto final")
