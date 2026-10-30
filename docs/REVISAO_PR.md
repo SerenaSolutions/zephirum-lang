@@ -35,3 +35,25 @@ Cada regra abaixo responde a um erro concreto, nao a uma boa pratica abstrata.
 python tools/verificar_publicacao.py          # pyproject x PyPI x DOI x recibos x links
 python tools/verificar_publicacao.py --offline  # so checagens locais
 ```
+
+## Registro: validacao do arquivo publico da listagem (30/10/2026)
+
+Suspeitei de tres inconsistencias no toml publico do PR #1433. Validei contra
+`resources/members-schema.json` e `resources/classifications-schema.json` do
+repositorio Qiskit/ecosystem. Resultado: **nenhuma das tres se sustenta**.
+
+| Suspeita | Verificacao | Conclusao |
+|---|---|---|
+| `submission_number = 1432` divergente do PR #1433 | issue #1432 e `[Submission]: ZEPHIRUM`, fechada | correto: submissao e PR sao numeros distintos |
+| `packages = []` com pacote publicado no PyPI | schema aceita array vazio; pacote consta em `[[python]]` com `version = "2.1.0"` | valido, nao e erro |
+| label `"research"` em vez de `"openqasm"` | `classifications-schema.json` nao enumera labels | nao e violacao; e sugestao do mantenedor, aplicavel so por ele |
+
+A validacao apontou tres avisos de tipo (`github/created_at`, `github/last_commit`,
+`github/last_activity` como data TOML em vez de string). Sao campos gerados pelo
+proprio bot do ecossistema, nao dados nossos.
+
+**Nao corrigivel por nos:** `maintainer_can_modify = false` e head em
+`Qiskit/ecosystem:submission-b2b5fe46`. Escrita no arquivo e exclusiva deles.
+
+**Licao aplicada:** antes de chamar algo de inconsistentcia, validar contra o
+schema do dono do arquivo. Sem isso, o relatorio acusa defeito que nao existe.
