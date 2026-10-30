@@ -11,6 +11,12 @@ from qiskit.quantum_info import Statevector
 import numpy as np
 
 try:
+    import qiskit_qasm3_import  # noqa: F401
+    TEM_IMPORTADOR = True
+except ImportError:
+    TEM_IMPORTADOR = False
+
+try:
     from zyql_worldscale import walk, hom, grover
 except Exception as e:
     print(f"RESULTADO QASM3: SKIP ({e})")
@@ -45,6 +51,10 @@ def confere(nome, build):
     checa("importa stdgates.inc", "stdgates.inc" in texto)
     checa("sem sintaxe legada (qreg/creg)", "qreg" not in texto and "creg" not in texto)
     checa("declara qubits com bit[n]", "qubit[" in texto)
+
+    if not TEM_IMPORTADOR:
+        print("  SKIP ida e volta: qiskit_qasm3_import ausente (pip install qiskit-qasm3-import)")
+        return
 
     back = qasm3.loads(texto)
     checa("reimporta com mesmo numero de qubits", back.num_qubits == qc_ideal.num_qubits,

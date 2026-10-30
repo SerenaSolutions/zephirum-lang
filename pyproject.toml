@@ -17,6 +17,8 @@ authors = [{name = "Reginaldo Gonçalves", email = "builderquantunxia@gmail.com"
 hardware = ["qiskit-aer>=0.17", "qiskit-ibm-runtime>=0.50"]
 # paridade de semantica com o ecossistema Google
 interop = ["cirq>=1.4"]
+# verificacao de ida e volta OpenQASM 3 (usada apenas pelos testes)
+test = ["qiskit-qasm3-import>=0.5"]
 
 [project.scripts]
 zqgate = "zqgate.cli:main"
