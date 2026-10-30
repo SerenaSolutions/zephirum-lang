@@ -1,0 +1,194 @@
+{
+ "data": "2026-10-30T23:27:06+00:00",
+ "entrada": {
+  "confirmacao_hardware": "confirmado",
+  "destino": "DEST",
+  "fonte_mapa": "entrega_sp_completo.json",
+  "grover": {
+   "M": 3,
+   "N": 8,
+   "chamadas_classicas": 8,
+   "chamadas_grover": 1,
+   "distribuicao": [
+    {
+     "indice": 4,
+     "p": 0.28125
+    },
+    {
+     "indice": 5,
+     "p": 0.28125
+    },
+    {
+     "indice": 0,
+     "p": 0.28125
+    },
+    {
+     "indice": 6,
+     "p": 0.03125
+    },
+    {
+     "indice": 7,
+     "p": 0.03125
+    },
+    {
+     "indice": 3,
+     "p": 0.03125
+    }
+   ],
+   "iteracoes": 1,
+   "marcados": [
+    0,
+    4,
+    5
+   ],
+   "n_qubits": 3,
+   "p_sucesso": 0.84375
+  },
+  "hardware": {
+   "backend": "ibm_kingston",
+   "contagens": {
+    "000": 220,
+    "001": 62,
+    "010": 30,
+    "011": 39,
+    "100": 324,
+    "101": 251,
+    "110": 56,
+    "111": 42
+   },
+   "ic95": [
+    0.750846,
+    0.801889
+   ],
+   "job_id": "dbiifh0hoj4c73b69qt0",
+   "modo": "HARDWARE IBM QUANTUM",
+   "p_medido": 0.776367,
+   "portas_2q": 37,
+   "profundidade_transpilada": 136,
+   "qubits_fisicos_trabalho": 3,
+   "shots": 1024,
+   "shots_pedidos": 1024
+  },
+  "incertas": [],
+  "mapa": "entrega_sp_completo",
+  "melhor_rota": {
+   "bloqueada": false,
+   "custo": 95,
+   "evidencia": [
+    "medida"
+   ],
+   "evidencia_ausente": false,
+   "id": 0,
+   "motivos": [],
+   "risco": 0.15,
+   "trecho": "CD→N1→N3→DEST",
+   "valida": true
+  },
+  "nota_comparacao": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
+  "origem": "CD",
+  "razao": "melhor rota CD→N1→N3→DEST com evidencia completa; Grover amplificou as 3 rotas viaveis",
+  "restricoes": {
+   "orcamento": 120,
+   "risco_max": 0.35
+  },
+  "rotas": [
+   {
+    "bloqueada": false,
+    "custo": 95,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 0,
+    "motivos": [],
+    "risco": 0.15,
+    "trecho": "CD→N1→N3→DEST",
+    "valida": true
+   },
+   {
+    "bloqueada": false,
+    "custo": 75,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 1,
+    "motivos": [
+     "risco 0.40 > limite 0.35"
+    ],
+    "risco": 0.4,
+    "trecho": "CD→N1→N4→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 2,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.15,
+    "trecho": "CD→N1→N2→N3→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": true,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 3,
+    "motivos": [
+     "trecho bloqueado"
+    ],
+    "risco": 0.1,
+    "trecho": "CD→N1→N2→DEST",
+    "valida": false
+   },
+   {
+    "bloqueada": false,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 4,
+    "motivos": [],
+    "risco": 0.15,
+    "trecho": "CD→N2→N3→DEST",
+    "valida": true
+   },
+   {
+    "bloqueada": false,
+    "custo": 115,
+    "evidencia": [
+     "medida"
+    ],
+    "evidencia_ausente": false,
+    "id": 5,
+    "motivos": [],
+    "risco": 0.08,
+    "trecho": "CD→N2→DEST",
+    "valida": true
+   }
+  ],
+  "rotas_candidatas": 6,
+  "veredito": "1",
+  "viaveis": [
+   0,
+   4,
+   5
+  ]
+ },
+ "modo": "HARDWARE IBM QUANTUM",
+ "modulo": "src/qroute (ZYQL 2.2.0)",
+ "nota": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
+ "prev_sha3": null,
+ "sha3_256": "5db7211e79dac1daffe99e1b49f7b911fd866d0b260b4112a6a30a0e0f4cdc52",
+ "spec": "Q-ROUTE/v1"
+}
