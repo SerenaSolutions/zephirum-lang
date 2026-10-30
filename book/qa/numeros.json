@@ -1,0 +1,202 @@
+{
+  "nota": "Registro canonico: todo numero citado no livro deve aparecer aqui com a fonte. Checado por check_livro.py.",
+  "numeros": [
+    {
+      "valor": "0,952",
+      "metrica": "W-02 visibilidade HOM",
+      "incerteza": "± 0,001",
+      "ic": "[0,947; 0,957]",
+      "fonte": "experiments/world_scale_20261029/AUDITORIA_ULTRA.md"
+    },
+    {
+      "valor": "0,773",
+      "metrica": "W-03 p(marcado) Grover",
+      "incerteza": "± 0,011",
+      "ic": "[0,764; 0,782]",
+      "fonte": "AUDITORIA_ULTRA.md"
+    },
+    {
+      "valor": "0,253",
+      "metrica": "W-01 TVD caminhada",
+      "incerteza": "± 0,048",
+      "ic": "[0,244; 0,263]",
+      "fonte": "AUDITORIA_ULTRA.md"
+    },
+    {
+      "valor": "12%",
+      "metrica": "certificacao indevida na borda (regra pontual)",
+      "fonte": "docs/POWER_ANALYSIS.md"
+    },
+    {
+      "valor": "0,0150",
+      "metrica": "delta minimo K=1",
+      "fonte": "docs/POWER_ANALYSIS.md"
+    },
+    {
+      "valor": "0,0212",
+      "metrica": "delta minimo K=2",
+      "fonte": "docs/POWER_ANALYSIS.md"
+    },
+    {
+      "valor": "11,147",
+      "metrica": "fator de sobrecarga do laco de controle",
+      "fonte": "recibo do ledger"
+    },
+    {
+      "valor": "2,07",
+      "metrica": "CHSH hardware",
+      "incerteza": "± 0,12",
+      "fonte": "recibo #25"
+    },
+    {
+      "valor": "2,76",
+      "metrica": "CHSH simulacao sem ruido",
+      "fonte": "recibo #25"
+    },
+    {
+      "valor": "500",
+      "metrica": "problemas do experimento de falsificacao",
+      "fonte": "stress_test.py, semente 42"
+    },
+    {
+      "valor": "471",
+      "metrica": "decididos",
+      "fonte": "cap06"
+    },
+    {
+      "valor": "29",
+      "metrica": "recusas declaradas",
+      "fonte": "cap06"
+    },
+    {
+      "valor": "79,2%",
+      "metrica": "computacao eliminada com certificado",
+      "fonte": "cap06 (2995/3784)"
+    },
+    {
+      "valor": "2.946,23",
+      "metrica": "NetBenefit agregado",
+      "fonte": "cap06"
+    },
+    {
+      "valor": "8192",
+      "metrica": "shots por job WORLD-3",
+      "fonte": "world3"
+    },
+    {
+      "valor": "24",
+      "metrica": "circuitos conformes OpenQASM 3 (de 24)",
+      "fonte": "CI do repositorio"
+    },
+    {
+      "valor": "13",
+      "metrica": "casos PASS na suite adversarial",
+      "fonte": "suite_report.json"
+    },
+    {
+      "valor": "58",
+      "metrica": "testes de regressao do nucleo",
+      "fonte": "CI"
+    },
+    {
+      "valor": "25",
+      "metrica": "modulos de topo no pacote 2.1.2",
+      "fonte": "PyPI metadata"
+    },
+    {
+      "valor": "94,2",
+      "metrica": "taxa de decisao 471/500",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "79,2",
+      "metrica": "fracao eliminada 2995/3784",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "3.784",
+      "metrica": "unidades demandadas",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "2.995",
+      "metrica": "unidades eliminadas",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "91,8",
+      "metrica": "limite inferior IC taxa de decisao",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "96,0",
+      "metrica": "limite superior IC taxa de decisao",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "5,8",
+      "metrica": "taxa de recusa 29/500",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "4,0",
+      "metrica": "limite inferior IC recusa",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "8,2",
+      "metrica": "limite superior IC recusa",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "77,9",
+      "metrica": "limite inferior IC eliminacao",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "80,4",
+      "metrica": "limite superior IC eliminacao",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "40%",
+      "metrica": "peso da familia 1 no protocolo",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "30%",
+      "metrica": "peso da familia 2",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "20%",
+      "metrica": "peso da familia 3",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "10%",
+      "metrica": "peso da familia 4",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "95%",
+      "metrica": "nivel de confianca",
+      "fonte": "cap06 / protocolo pre-registrado"
+    },
+    {
+      "valor": "8.192",
+      "metrica": "shots por job WORLD-3",
+      "fonte": "cap11 exemplo / world3"
+    },
+    {
+      "valor": "1,0",
+      "metrica": "custo relativo unitario no exemplo da escada",
+      "fonte": "cap11 exemplo / world3"
+    },
+    {
+      "valor": "0,5",
+      "metrica": "erro percentual da amostragem no exemplo",
+      "fonte": "cap11 exemplo / world3"
+    }
+  ]
+}
