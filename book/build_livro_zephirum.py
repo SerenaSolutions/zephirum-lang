@@ -133,37 +133,57 @@ class Livro(BaseDocTemplate):
         c.restoreState()
 
     def pag_capa(self, c, doc):
-        img = Image.open(f"{BASE}/caminho_suave/art/cover.png").convert("RGB")
-        w, h = img.size
-        scale = A4[0] / w
-        img2 = img.resize((int(w * scale), int(h * scale)))
-        p = f"{TMP}/_capa_full.png"
-        img2.save(p)
-        c.drawImage(p, 0, A4[1] - img2.size[1], width=img2.size[0], height=img2.size[1])
+        """Capa: arte oficial do peixe beta em pagina cheia, sem painel que cubra a arte."""
+        from PIL import Image, ImageDraw
+        ART = f"{BASE}/dexia/zephirum/assets/brand/logo_zyql_betta_oficial_11out2026.jpg"
+        DPI = 200
+        W, H = int(A4[0] / 72 * DPI), int(A4[1] / 72 * DPI)
+        art = Image.open(ART).convert("RGB")
+        aw, ah = art.size
+        # cor de fundo amostrada nos quatro cantos, para emendar a arte no papel
+        amostras = [art.getpixel((3, 3)), art.getpixel((aw - 4, 3)),
+                    art.getpixel((3, ah - 4)), art.getpixel((aw - 4, ah - 4))]
+        bg = tuple(sum(v[i] for v in amostras) // 4 for i in range(3))
+        tela = Image.new("RGB", (W, H), bg)
+        a2 = art.resize((W, int(ah * W / aw)), Image.LANCZOS)
+        tela.paste(a2, (0, 0))
+        # transicao suave entre a arte e o papel, para nao cortar o peixe com uma tarja
+        alt = a2.size[1]
+        gh = min(int(0.16 * alt), max(0, H - alt))
+        if gh > 0:
+            borda = a2.crop((0, alt - 1, W, alt)).resize((1, 1)).getpixel((0, 0))
+            grad = Image.new("RGB", (W, gh))
+            gd = ImageDraw.Draw(grad)
+            for y in range(gh):
+                t = y / max(1, gh - 1)
+                gd.line([(0, y), (W, y)], fill=tuple(int(borda[i] * (1 - t) + bg[i] * t) for i in range(3)))
+            tela.paste(grad, (0, alt - 1))
+        p = f"{TMP}/_capa_bg.png"
+        tela.save(p)
+        c.drawImage(p, 0, 0, width=A4[0], height=A4[1])
         c.setTitle("ZEPHIRUM: A Computação Antes da Execução (2ª edição)")
         c.setAuthor("Serena Quantum Solutions")
         c.setSubject("ZYQL — a linguagem quântica | the quantum language")
         c.setCreator("MGN Science Editions")
-        # painel de título
-        y0 = A4[1] - img2.size[1]
-        c.setFillColor(NAVY)
-        c.rect(0, 0, A4[0], max(y0, 7.2 * cm), fill=1, stroke=0)
-        cy = max(y0 - 0.2 * cm, 6.6 * cm)
+        # bloco de titulo sobre o papel escuro, abaixo da arte
         c.setFillColor(HexColor("#d4af37"))
         c.setFont("DVSB", 27)
-        c.drawCentredString(A4[0] / 2, cy, "ZEPHIRUM")
+        c.drawCentredString(A4[0] / 2, 7.0 * cm, "ZEPHIRUM")
+        c.setFillColor(HexColor("#ffffff"))
         c.setFont("DVS", 13.5)
-        c.setFillColor(HexColor("#ffffff"))
-        c.drawCentredString(A4[0] / 2, cy - 24, "A Computação Antes da Execução")
+        c.drawCentredString(A4[0] / 2, 5.9 * cm, "A Computação Antes da Execução")
         c.setFillColor(HexColor("#5eead4"))
-        c.setFont("DVS", 11)
-        c.drawCentredString(A4[0] / 2, cy - 46, "ZYQL — a linguagem quântica | the quantum language")
-        c.setFillColor(HexColor("#ffffff"))
-        c.setFont("DVSB", 13)
-        c.drawCentredString(A4[0] / 2, cy - 78, "SERENA QUANTUM SOLUTIONS")
         c.setFont("DVS", 10)
+        c.drawCentredString(A4[0] / 2, 5.1 * cm, "ZYQL — a linguagem quântica | the quantum language")
+        c.setStrokeColor(HexColor("#d4af37"))
+        c.setLineWidth(0.8)
+        c.line(5.2 * cm, 4.3 * cm, A4[0] - 5.2 * cm, 4.3 * cm)
+        c.setFillColor(HexColor("#ffffff"))
+        c.setFont("DVSB", 12)
+        c.drawCentredString(A4[0] / 2, 3.4 * cm, "SERENA QUANTUM SOLUTIONS")
         c.setFillColor(HexColor("#b8b8c8"))
-        c.drawCentredString(A4[0] / 2, cy - 96, "MGN Science Editions · 2ª edição · 2026")
+        c.setFont("DVS", 9.5)
+        c.drawCentredString(A4[0] / 2, 2.6 * cm, "MGN Science Editions · 2ª edição · 2026")
 
     def pag_arte(self, c, doc):
         pass  # imagem desenhada como flowable full-page no template
