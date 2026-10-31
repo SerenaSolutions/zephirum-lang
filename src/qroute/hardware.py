@@ -49,11 +49,29 @@ ORDEM_TOKEN = ("IBM_QUANTUM_TOKEN", "IBM_QUANTUM_TOKEN_2", "IBM_QUANTUM_TOKEN_3"
                "IBM_QUANTUM_TOKEN_4", "IBM_QUANTUM_TOKEN_5")
 
 
+_ESCOLHIDO = {}
+
+
 def _token():
-    """Usa a chave mais recente disponivel: o ambiente ganha sufixo _N a cada rotacao."""
-    for nome in reversed(ORDEM_TOKEN):
-        if os.environ.get(nome):
-            return os.environ[nome], nome
+    """Escolhe a chave mais recente que REALMENTE autentica.
+
+    O ambiente ganha sufixo _N a cada rotacao, e nem toda chave nova e valida
+    (chave revogada, copia truncada). Testar por numero quebra a execucao sem aviso."""
+    if _ESCOLHIDO:
+        return _ESCOLHIDO["tok"], _ESCOLHIDO["nome"]
+    nomes = [n for n in reversed(ORDEM_TOKEN) if os.environ.get(n)]
+    if not nomes:
+        return None, None
+    from qiskit_ibm_runtime import QiskitRuntimeService
+    for nome in nomes:
+        try:
+            QiskitRuntimeService(channel="ibm_quantum_platform",
+                                 token=os.environ[nome]).usage()
+        except Exception as e:
+            print("aviso: %s nao autentica (%s); tentando a anterior" % (nome, type(e).__name__))
+            continue
+        _ESCOLHIDO.update(tok=os.environ[nome], nome=nome)
+        return _ESCOLHIDO["tok"], nome
     return None, None
 
 
