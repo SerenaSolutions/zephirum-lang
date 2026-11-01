@@ -1,3 +1,24 @@
+## [2.2.0] - 2026-10-31
+
+### Adicionado
+- `Q-ROUTE`: busca quantica de rotas dentro da linguagem, executada em QPU real
+  (`ibm_kingston`, job `dbiiogdep8hs73anus4g`) com recibo de hardware.
+- `ZYQL Quantum Console`: interface do Q-ROUTE com execucao em QPU.
+
+### Experimentos (rodadas seladas)
+- Rodada D (matriz de reprodutibilidade em 3 QPUs): fechada, 6 jobs DONE
+  (`ibm_fez` + `ibm_marrakesh`), vereditos identicos entre as QPUs.
+- Rodada I (gate de memoria do ruido, medida BLP): protocolo pre-registrado antes
+  do disparo; revival de distancia de traco na variante com memoria
+  (0.2382 vs banda 0.0520, 4.6x a banda) e ausencia de revival no controle sem
+  memoria (0.0209 <= banda). Veredito `1: MEMORIA DETECTADA` em `ibm_marrakesh`
+  (job `dbj9bl9kdqps73904jh0`), com a consequencia declarada: a banda Hoeffding
+  nao e automaticamente valida nessa profundidade de dispositivo.
+
+### Corrigido
+- Alinhamento de versao: `pyproject.toml` estava em 2.2.0 enquanto README e
+  CHANGELOG seguiam em 2.1.1 (guard `test_meta` acusava CI vermelho no `main`).
+
 ## [2.1.1] - 2026-10-30
 
 ### Corrigido
