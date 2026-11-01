@@ -1,3 +1,24 @@
+## [2.3.0] - 2026-11-01
+
+### Adicionado
+- **Gate de memoria do ruido no runtime** (`require_memory_check`). Antes de gastar
+  oraculo, o runtime roda a medida BLP em modelo de colisao (ancora reaproveitada vs
+  ancoras frescas). Revival de distancia de traco acima da banda => `REFUSED` com motivo
+  `NOISE_HAS_MEMORY`, porque a independencia das amostras — axioma de toda banda
+  Hoeffding da casa — deixou de valer. A recusa tambem sai selada (SHA3-256) e o recibo
+  carrega o gate inteiro.
+- `memory_revival_gate()` no nucleo (`zyql_quantum_gate`): D(k), deltas, banda,
+  `noise_has_memory`, `control_anomaly` e validacao de instrumento por D(0).
+- Protocolo de auditoria passa a declarar a hipotese de independencia como **testada**
+  quando o gate roda, em vez de apenas assumida.
+- `tests/test_memory_gate.py`: 6 testes falsificaveis (deteccao, determinismo por seed,
+  recusa sem gasto de oraculo, compatibilidade com o comportamento antigo, recibo
+  selado e declaracao no protocolo).
+
+### Base empirica
+Rodada I (ibm_marrakesh, job `dbj9bl9kdqps73904jh0`): revival 0.2382 contra banda 0.0520
+(4.6x), controle sem revival (0.0209) — memoria detectada em silicio real.
+
 ## [2.2.1] - 2026-10-31
 
 ### Alterado
