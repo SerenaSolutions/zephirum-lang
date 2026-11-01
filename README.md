@@ -4,8 +4,8 @@
 
 **The quantum programming language with receipts.** ZYQL, its decision core, returns one of three verdicts — `1` (permitted), `0` (forbidden) or `REFUSED` (insufficient confidence) — and seals every decision in a verifiable receipt.
 
-![version](https://img.shields.io/badge/version-2.2.0-6e46b8)
-![license](https://img.shields.io/badge/license-MIT-blue)
+![version](https://img.shields.io/badge/version-2.2.1-6e46b8)
+![license](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23632019-gold)
 [![CI](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml)
@@ -276,8 +276,9 @@ contra a memória de quem escreveu.
 ## Citation
 
 See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23632019
-(code MIT, companion thesis CC BY-NC-ND 4.0), (c) Serena Solutions.
+(code Apache-2.0, companion thesis CC BY-NC-ND 4.0), (c) Serena Solutions.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Apache-2.0 — see [LICENSE](LICENSE). A licença inclui concessão explícita de patentes,
+necessária em computação quântica; a tese companheira permanece CC BY-NC-ND 4.0.
