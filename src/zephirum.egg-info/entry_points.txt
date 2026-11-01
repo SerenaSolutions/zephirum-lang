@@ -1,3 +1,4 @@
 [console_scripts]
+qroute = qroute.cli:main
 zqgate = zqgate.cli:main
 zyql-decide = zyql_runtime:main
