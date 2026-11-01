@@ -1,3 +1,11 @@
+## [2.2.1] - 2026-10-31
+
+### Alterado
+- **Relicenciamento para Apache-2.0.** O código passa de MIT para Apache-2.0, que concede
+  licença explícita de patentes — requisito prático em computação quântica, onde circuitos
+  e algoritmos são densos em patentes. A tese companheira permanece CC BY-NC-ND 4.0.
+  Autoria preservada em `NOTICE`. Decisão do detentor do copyright (SerenaSolutions).
+
 ## [2.2.0] - 2026-10-31
 
 ### Adicionado
