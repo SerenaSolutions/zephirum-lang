@@ -1,0 +1,337 @@
+{
+ "rodada": "I",
+ "protocolo": "gate de memoria do ruido (BLP)",
+ "backend": "ibm_marrakesh",
+ "job_id": "dbj9bl9kdqps73904jh0",
+ "shots": 2048,
+ "eps": 0.05,
+ "band": 0.051979,
+ "n_circuits": 54,
+ "cells": [
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "X",
+   "k": 0
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 0
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 0
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 0
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 0
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 0
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "X",
+   "k": 1
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 1
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 1
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 1
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 1
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 1
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "X",
+   "k": 2
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 2
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 2
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 2
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 2
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 2
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "X",
+   "k": 3
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 3
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 3
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 3
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 3
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 3
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "X",
+   "k": 4
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 4
+  },
+  {
+   "variant": "memory",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 4
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 4
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 4
+  },
+  {
+   "variant": "memory",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 4
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "X",
+   "k": 1
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 1
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 1
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 1
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 1
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 1
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "X",
+   "k": 2
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 2
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 2
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 2
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 2
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 2
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "X",
+   "k": 3
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 3
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 3
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 3
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 3
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 3
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "X",
+   "k": 4
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Y",
+   "k": 4
+  },
+  {
+   "variant": "memoryless",
+   "state": "ket0",
+   "basis": "Z",
+   "k": 4
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "X",
+   "k": 4
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Y",
+   "k": 4
+  },
+  {
+   "variant": "memoryless",
+   "state": "ketplus",
+   "basis": "Z",
+   "k": 4
+  }
+ ],
+ "status": "QUEUED"
+}
