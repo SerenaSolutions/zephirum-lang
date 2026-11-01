@@ -19,7 +19,8 @@ decisões com oráculo caro devem usar backend IBM (via Serena Quantum API).
 import hashlib, json, logging, time
 from dataclasses import dataclass, field, asdict
 from enum import Enum
-from zyql_quantum_gate import ZYQLQuantumGate, ghz_integrity, adaptive_margin
+from zyql_quantum_gate import (ZYQLQuantumGate, ghz_integrity, adaptive_margin,
+                               memory_revival_gate)
 
 log = logging.getLogger("zyql")
 
@@ -56,7 +57,8 @@ def _validate(f, n, shots, seed):
 
 def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
            epsilon=None, require_device_trust=False, device_shots=2048,
-           previous_seal=None, family=1) -> Decision:
+           previous_seal=None, family=1,
+           require_memory_check=False, memory_steps=3) -> Decision:
     """Decisão trivalente 1/0/REFUSED por interferência Deutsch-Jozsa.
 
     v1.9.0 — upgrades:
@@ -64,6 +66,10 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
       require_device_trust: porta GHZ primeiro; dispositivo inconfiável =>
         REFUSED por decoerência, SEM gastar oráculo (semântica inédita).
       previous_seal: cadeia de proveniência — o recibo sela o selo do anterior.
+      require_memory_check (v2.3.0): roda o gate de memória do ruído (BLP) antes
+        do oráculo. Se o ambiente tiver memória, a independência das amostras
+        (axioma da banda Hoeffding) é falsa e o veredito vira REFUSED com motivo
+        NOISE_HAS_MEMORY — sem gastar oráculo.
     """
     _validate(f, n, shots, seed)
     t0 = time.perf_counter()
@@ -77,6 +83,35 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
                             error_bound=1.0, oracle_calls=0, shots=0, n=n,
                             latency_ms=round((time.perf_counter()-t0)*1000, 3),
                             receipt=None)
+    memory_result = None
+    if require_memory_check:
+        memory_result = memory_revival_gate(steps=memory_steps,
+                                            shots=min(shots, 4096),
+                                            seed=seed if seed is not None else 1701,
+                                            epsilon=epsilon if epsilon is not None else 0.05)
+        if memory_result["noise_has_memory"] or memory_result["control_anomaly"]:
+            motivo = ("NOISE_HAS_MEMORY" if memory_result["noise_has_memory"]
+                      else "MEMORY_GATE_INCONCLUSIVE")
+            mode = ("REFUSED_%s (revival max %.4f, banda %.4f)"
+                    % (motivo, max(memory_result["revivals_memoria"]),
+                       memory_result["band"]))
+            receipt = None
+            if seal_path:
+                payload = {"verdict": "REFUSED", "p0": 0.0, "shots": 0, "n": n,
+                           "seed": seed, "mode": mode, "error_bound": 1.0,
+                           "epsilon_declared": epsilon, "refusal_reason": motivo,
+                           "memory_gate": memory_result, "oracle_calls": 0,
+                           "previous_seal": previous_seal,
+                           "sealed_by": "zyql-runtime-2.3.0"}
+                receipt = {"payload": payload,
+                           "selo_sha3_256": hashlib.sha3_256(
+                               json.dumps(payload, sort_keys=True).encode()).hexdigest()}
+                with open(seal_path, "w") as fh:
+                    json.dump(receipt, fh, indent=1)
+            return Decision(verdict=Verdict.REFUSED, p0=0.0, mode=mode,
+                            error_bound=1.0, oracle_calls=0, shots=0, n=n,
+                            latency_ms=round((time.perf_counter()-t0)*1000, 3),
+                            refusal_reason=motivo, receipt=receipt)
     if not isinstance(family, int) or family < 1:
         raise ValueError("family precisa ser inteiro >= 1; recebido %r" % family)
     # REGISTRO DE PROTOCOLO (auditoria v1.9.1): declarado ANTES da execucao.
@@ -88,8 +123,11 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
         "stopping_rule": "fixed_shots_no_peeking (nada adaptado pos-observacao)",
         "comparisons_in_family": family,
         "inconclusive_treatment": "REFUSED; sem retry silencioso",
-        "independence_hypothesis": "shots assumidos i.i.d.; regimes de "
-                                   "ruido correlacionado declarados fora do escopo",
+        "independence_hypothesis": ("TESTADA pelo gate de memoria (BLP): regime markoviano"
+                                    if require_memory_check else
+                                    "shots assumidos i.i.d.; regimes de ruido correlacionado "
+                                    "declarados fora do escopo"),
+        "memory_gate": memory_result,
         "multiple_testing": "Bonferroni: epsilon/family por veredito" if family > 1
                             else "decisao unica",
     }
@@ -107,8 +145,9 @@ def decide(f, n=3, shots=2048, seed=1701, seal_path=None,
                    "refusal_reason": r.get("refusal_reason"),
                    "protocol": protocol,
                    "device_gate": gate_result,
+                   "memory_gate": memory_result,
                    "previous_seal": previous_seal,
-                   "oracle_calls": g.oracle_calls, "sealed_by": "zyql-runtime-1.9.1"}
+                   "oracle_calls": g.oracle_calls, "sealed_by": "zyql-runtime-2.3.0"}
         selo = hashlib.sha3_256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
         receipt = {"payload": payload, "selo_sha3_256": selo}
         with open(seal_path, "w") as fh:

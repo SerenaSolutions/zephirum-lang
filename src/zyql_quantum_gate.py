@@ -87,6 +87,74 @@ def ghz_integrity(n=3, shots=2048, seed=1701, threshold=0.80):
     f = (counts.get(zk, 0) + counts.get(ok, 0)) / shots
     return {"fidelity_ghz": round(f, 4), "threshold": threshold,
             "device_trusted": f >= threshold, "mode": "GHZ_INTEGRITY_GATE"}
+
+def memory_revival_gate(steps=3, shots=2048, seed=1701, epsilon=0.05):
+    """v2.3.0 — GATE DE MEMORIA DO RUIDO (medida BLP de nao-markovianidade).
+
+    Testa o axioma escondido de toda banda Hoeffding da casa: amostras
+    independentes. Duas construcoes do mesmo modelo de colisao U=CX(S->ancora):
+
+      MEMORIA    - ancora unica reaproveitada; correlacoes S-E persistem
+      CONTROLE   - ancoras frescas por passo; ambiente descartado (markoviano)
+
+    Revival de distancia de traco acima da banda na variante MEMORIA, com
+    controle limpo, => o ambiente devolve informacao ao sistema: a banda
+    Hoeffding NAO e automaticamente valida. Sem revival => regime markoviano
+    nesta profundidade (dentro do escopo testado).
+
+    Retorna dict com D(k), deltas, banda, deteccao e o motivo declarado.
+    """
+    revivals_mem, revivals_ctl = [], []
+    d_mem, d_ctl = [], []
+    band_pending = 0.0
+    for variant in ("memory", "control"):
+        ds = []
+        for k in range(0, steps + 1):
+            pa, pb = {}, {}
+            for state, store in (("zero", pa), ("plus", pb)):
+                for basis in ("X", "Y", "Z"):
+                    nq = 2 if variant == "memory" else 1 + steps
+                    qc = QCircuit(nq)
+                    if state == "plus":
+                        qc.h(0)
+                    for step in range(k):
+                        anc = 1 if variant == "memory" else 1 + step
+                        qc.cnot(0, anc)
+                    if basis == "X":
+                        qc.h(0)
+                    elif basis == "Y":
+                        # medir <Y>: Sdg seguido de H (Sdg = S^3)
+                        qc.s(0); qc.s(0); qc.s(0); qc.h(0)
+                    counts = qc.measure_all(shots=shots, seed=seed)
+                    tot = sum(counts.values())
+                    # zquantum devolve chaves no formato "|00>": qubit 0 e o bit
+                    # mais a direita depois de retirar os delimitadores.
+                    p0 = sum(v for b, v in counts.items()
+                             if b.strip("|>")[-1] == "0") / tot
+                    store[basis] = 2.0 * p0 - 1.0
+            d = 0.5 * ((pa["X"] - pb["X"]) ** 2 + (pa["Y"] - pb["Y"]) ** 2 +
+                       (pa["Z"] - pb["Z"]) ** 2) ** 0.5
+            ds.append(round(d, 6))
+        deltas = [round(ds[i + 1] - ds[i], 6) for i in range(len(ds) - 1)]
+        if variant == "memory":
+            d_mem, revivals_mem = ds, deltas
+        else:
+            d_ctl, revivals_ctl = ds, deltas
+
+    m_exp = math.sqrt(math.log(2.0 / epsilon) / (2.0 * shots))
+    band = round(math.sqrt(3.0) * m_exp, 6)
+    detected = (max(revivals_mem) > band) and not (max(revivals_ctl) > band)
+    anomaly = (max(revivals_ctl) > band)
+    return {"mode": "MEMORY_REVIVAL_GATE", "steps": steps, "shots": shots,
+            "band": band, "epsilon": epsilon,
+            "D_memoria": d_mem, "D_controle": d_ctl,
+            "revivals_memoria": revivals_mem, "revivals_controle": revivals_ctl,
+            "noise_has_memory": bool(detected), "control_anomaly": bool(anomaly),
+            "reason": ("NOISE_HAS_MEMORY" if detected else
+                       ("CONTROL_ANOMALY" if anomaly else "MARKOVIAN_REGIME")),
+            "D0_esperado": 0.7071,
+            "D0_ok": abs(d_mem[0] - 0.7071) <= band}
+
 class ZYQLQuantumGate:
     """Deutsch-Jozsa trivalent gate. One oracle call per decision."""
 
