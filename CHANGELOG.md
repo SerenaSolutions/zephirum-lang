@@ -1,3 +1,11 @@
+## [2.3.1] - 2026-11-01
+
+### Corrigido
+- **Cap do Qiskit declarado** (`qiskit>=2.6,<3`), atendendo ao checkup Q03 do Qiskit
+  Ecosystem (revisão do PR #1433). Extras de hardware também receberam teto
+  (`qiskit-aer>=0.17,<0.19`). Sem teto, uma futura 3.x poderia quebrar o pacote
+  sem que o metadata avisasse; o cap torna o limite explícito e auditável.
+
 ## [2.3.0] - 2026-11-01
 
 ### Adicionado
