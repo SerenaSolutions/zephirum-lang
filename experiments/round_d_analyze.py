@@ -97,7 +97,10 @@ rec = {"spec": "Z-QEA/2.2", "modulo": "RODADA D",
        "entropia": entropy_provenance()}
 prev = json.load(open(os.path.join(HERE, "round_c_receipt.json")))
 rec["previous_seal"] = prev["selo_sha3_256"]
-rec["assinatura_pq"] = sign_receipt({k: v for k, v in rec.items() if k not in ("selo_sha3_256", "assinatura_pq")})
+# sign_receipt anexa o bloco 'assinatura_pq' DENTRO do recibo e o devolve;
+# atribuir ao campo aninhava o recibo inteiro dentro de si (bug de embalagem,
+# achado na verificacao da cadeia em 2026-11-01). Mescla, nao atribue:
+rec = sign_receipt(rec)
 rec["selo_sha3_256"] = sha3_seal({k: v for k, v in rec.items() if k != "selo_sha3_256"})
 out = os.path.join(HERE, "round_d_receipt.json")
 json.dump(rec, open(out, "w"), indent=2, ensure_ascii=False)
