@@ -1,3 +1,5 @@
+import pytest
+pytest.importorskip("pqcrypto", reason="extra 'pq' nao instalado (pqcrypto)")
 # -*- coding: utf-8 -*-
 """Bateria Z-KEM: confidencialidade pos-quantica (camada 3 do Z-QEA).
 6 casos: roundtrip, chave errada, tamper no ciphertext KEM, tamper no

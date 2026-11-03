@@ -2,6 +2,11 @@
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 try:
+    import cirq
+except Exception:
+    print("RESULTADO CIRQ: SKIP (cirq ausente)"); sys.exit(0)
+
+try:
     from zyql_cirq import paridade, veredito_cirq
 except Exception as e:
     print(f"RESULTADO CIRQ: SKIP ({e})"); sys.exit(0)
