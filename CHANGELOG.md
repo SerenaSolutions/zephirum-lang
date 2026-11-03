@@ -1,3 +1,34 @@
+## [2.5.0] - 2026-11-03
+
+### Adicionado — API REST com a matemática exposta
+`api/server.py` reescrito: antes era um wrapper que executava programa e devolvia
+"executed". Agora devolve veredito trivalente com a conta junto.
+
+- `POST /decide` — veredito 1 / 0 / REFUSED com `p0`, banda de Hoeffding usada, shots,
+  epsilon, família e recibo SHA3-256 (assinatura ML-DSA-44 opcional com `sign=true`).
+- `POST /bound` — a álgebra separada do veredito: banda para S shots **ou** shots
+  necessários para uma banda-alvo (`S = ln(2/(ε/k)) / 2m²`).
+- `POST /verify` — verificação offline: recomputa o selo, denuncia `SEAL_MISMATCH`.
+- `POST /oracle/reveal` e `POST /oracle/promise` — modos v2.4.0 pela rede.
+- `GET /limits` — o que o sistema **não** faz, declarado em produção.
+
+### Duas honestidades embutidas (e testadas)
+1. `hardware=true` devolve **409**, não uma simulação disfarçada. Execução em QPU exige
+   job ID verificável e vive no script de hardware do repositório.
+2. Família de testes maior **encolhe** a banda (Bonferroni na direção correta). Um teste
+   verifica a monotonicidade em vez de assumi-la — foi exatamente aqui que a primeira
+   implementação errou no passado.
+
+### Corrigido durante a implementação
+- A banda não aparecia no recibo porque o kernel devolve `error_bound` e não `margin`;
+  o campo agora é derivado explicitamente de `adaptive_margin_family`.
+- Um teste meu afirmava que família 500 com 64 shots seria "insolúvel" — falso pela
+  fórmula. O teste foi corrigido para verificar a propriedade real (monotonicidade),
+  não uma suposição.
+
+Testes: `tests/test_api.py` — 18 verificações, incluindo banda conferida contra a conta
+feita à mão (tolerância 1e-12).
+
 ## [2.4.0] - 2026-11-03
 
 ### Adicionado — modos de DESCOBERTA do oráculo
