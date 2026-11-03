@@ -14,6 +14,7 @@ src/zyql_cirq.py
 src/zyql_lisp.py
 src/zyql_llm_compress.py
 src/zyql_mps.py
+src/zyql_oracle_id.py
 src/zyql_protocols.py
 src/zyql_quantum_gate.py
 src/zyql_rag_layer.py
@@ -32,6 +33,9 @@ src/qroute/graph.py
 src/qroute/grover.py
 src/qroute/hardware.py
 src/qroute/receipt.py
+src/qroute/maps/entrega_sp_bloqueado.json
+src/qroute/maps/entrega_sp_completo.json
+src/qroute/maps/entrega_sp_sem_evidencia.json
 src/zephirum.egg-info/PKG-INFO
 src/zephirum.egg-info/SOURCES.txt
 src/zephirum.egg-info/dependency_links.txt
@@ -52,6 +56,7 @@ tests/test_memory_gate.py
 tests/test_meta.py
 tests/test_modulos_orfaos.py
 tests/test_multiple_testing.py
+tests/test_oracle_id.py
 tests/test_protocols.py
 tests/test_qasm3.py
 tests/test_qroute.py

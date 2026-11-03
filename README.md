@@ -260,7 +260,7 @@ CLI: `zyql-decide --oracle balanced --shots 512`
 ## PyPI — estado verificado (30/10/2026)
 
 O pacote oficial **existe e está publicado**: `pip install zephirum`.
-Versões no índice: 2.1.0, 2.1.1, 2.1.2 e 2.2.0 (esta, com o módulo Q-ROUTE).
+Versões no índice do PyPI: 2.1.0, 2.1.1, 2.1.2. A linha 2.3 e 2.4 do repositório sai do build desta árvore.
 Procedência verificável em https://pypi.org/pypi/zephirum/json — autor do
 registro no PyPI: Reginaldo Gonçalves (mantenedor), projeto Serena Solutions.
 

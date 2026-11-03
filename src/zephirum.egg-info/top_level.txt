@@ -13,6 +13,7 @@ zyql_cirq
 zyql_lisp
 zyql_llm_compress
 zyql_mps
+zyql_oracle_id
 zyql_protocols
 zyql_quantum_gate
 zyql_rag_layer
