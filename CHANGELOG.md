@@ -1,3 +1,33 @@
+## [2.4.0] - 2026-11-03
+
+### Adicionado — modos de DESCOBERTA do oráculo
+O núcleo já respondia "que classe é este oráculo?". Este módulo responde "qual é o oráculo?",
+identificando a função escondida com a mesma semântica trivalente.
+
+- `reveal_linear(mask, n)` — Bernstein–Vazirani: recupera a máscara s de f(x) = (s·x) mod 2 em
+  **uma única consulta** (clássico: n consultas). Verificado para todas as máscaras de 2 e 3 bits.
+- `find_period(table, n)` — Simon: recupera o período s escondido resolvendo o espaço nulo sobre
+  GF(2) dos y medidos. Afirma s só quando a dimensão é 1; caso contrário REFUSED com candidatos.
+  Função injetora devolve veredito 0 (sem período inventado).
+- `identify_2bit(table)` — identifica os **16** booleanos de 2 variáveis, com flag de promessa.
+- `audit_promise(table)` — a promessa de Deutsch–Jozsa (constante OU balanceado) raramente é
+  testada: oráculo de peso 1 ou 3 parece "ruído" e some num REFUSED. Aqui ele é acusado como
+  NO_PROMISE com **testemunha** (entradas que provam a violação).
+
+### Bugs encontrados e corrigidos durante a implementação (registro honesto)
+1. **Oráculo BV com CZ**: com âncilla em |−⟩ e porta CZ o âncilla NÃO se fatora e a
+   interferência cai pela metade (p = 0,5 em vez de 1,0). Troca para CX produz o chute de fase
+   correto.
+2. **Ordem de leitura do registrador**: `probabilities_dict` lista o qubit mais alto primeiro;
+   ler os primeiros n caracteres devolvia o âncilla e metade da entrada. A entrada são os
+   **últimos** n caracteres.
+3. **Oráculo de Simon controlando só os bits em 1**: o caso x=10 disparava também em x=11 e
+   anulava o MCX de x=11, quebrando o período (só s=11, palíndromo, passava). Correção:
+   inverter os zeros e controlar em TODOS os n qubits.
+
+Testes: `tests/test_oracle_id.py` cobre 8 máscaras BV, 3 períodos Simon + caso injetor,
+16 funções identificadas e 4 casos de auditoria de promessa. Todos falsificáveis.
+
 ## [2.3.2] - 2026-11-03
 
 ### Corrigido (check-up estático)

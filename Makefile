@@ -2,6 +2,7 @@
 .PHONY: test lint clean
 
 test:
+	@python3 tests/test_oracle_id.py
 	python3 tests/test_canonical.py
 	python3 tests/test_zqea_verify.py
 	python3 tests/test_meta.py
