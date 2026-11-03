@@ -21,6 +21,9 @@ interop = ["cirq>=1.4"]
 # verificacao de ida e volta OpenQASM 3 (usada apenas pelos testes)
 test = ["qiskit-qasm3-import>=0.5"]
 
+[tool.setuptools.package-data]
+qroute = ["maps/*.json"]
+
 [project.scripts]
 zqgate = "zqgate.cli:main"
 qroute = "qroute.cli:main"
