@@ -1,3 +1,15 @@
+## [2.5.3] - 2026-11-03
+
+### Corrigido — `docs/ENTIRE.md` descrevia o mecanismo errado
+A versão anterior mandava empurrar direto para `https://entire.com/et/<namespace>/<repo>.git`.
+A documentação oficial diz outra coisa, e a diferença explica por que a tela de repositórios
+aparece vazia: **o Entire GitHub App precisa ter acesso ao repositório antes de qualquer mirror
+existir**. Sem o app instalado não há o que listar — não é interface incompleta.
+
+O documento agora separa os dois modelos (mirror × hospedagem nativa), lista as regiões
+disponíveis (incluindo São Paulo), registra o que muda e o que não muda, e declara o limite
+conhecido: mirrors não suportam Git LFS.
+
 ## [2.5.2] - 2026-11-03
 
 ### Adicionado — espelhamento para o Entire
