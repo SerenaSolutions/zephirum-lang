@@ -64,7 +64,7 @@ def zne_verdict(gammas, values, guard_tol=0.5):
                 "estimate": est, "guard_relative_error": rel_err,
                 "rule": "leave-one-out: decaimento nao e polinomial local; "
                         "extrapolar aqui e vender chute com manto de formula"}
-    residual = abs(est - v[0])  # honesto: quanto a mitigacao moveu o numero
+    _residual = abs(est - v[0])  # informativo: quanto a mitigacao moveu o numero
     return {"decision": 1, "mode": "MITIGATED", "estimate": est,
             "noisy_value": float(v[0]), "guard_relative_error": rel_err,
             "disclaimer": "estimativa assume ruido ~polinomial em γ ate γ=0; "

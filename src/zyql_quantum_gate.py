@@ -106,7 +106,6 @@ def memory_revival_gate(steps=3, shots=2048, seed=1701, epsilon=0.05):
     """
     revivals_mem, revivals_ctl = [], []
     d_mem, d_ctl = [], []
-    band_pending = 0.0
     for variant in ("memory", "control"):
         ds = []
         for k in range(0, steps + 1):
