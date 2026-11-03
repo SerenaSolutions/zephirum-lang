@@ -1,0 +1,48 @@
+# Recipe conda-forge (rascunho pronto para submissão em conda-forge/staged-recipes).
+# Diferença competitiva: Qiskit e PennyLane estão no conda-forge; nós ainda não.
+{% set version = "2.5.0" %}
+
+package:
+  name: zephirum
+  version: {{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/z/zephirum/zephirum-{{ version }}.tar.gz
+  # sha256: preencher com o hash publicado no PyPI antes de submeter
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  entry_points:
+    - zyql-decide = zyql_runtime:main
+
+requirements:
+  host:
+    - python >=3.10
+    - pip
+    - setuptools
+  run:
+    - python >=3.10
+    - numpy
+    - lark
+    - scipy
+    - qiskit >=2.6,<3
+
+test:
+  imports:
+    - zyql_runtime
+    - zyql_oracle_id
+  commands:
+    - zyql-decide --help
+
+about:
+  home: https://github.com/SerenaSolutions/zephirum-lang
+  summary: Trivalent quantum decision language (1 / 0 / REFUSED) with sealed receipts
+  license: Apache-2.0
+  license_file: LICENSE
+  dev_url: https://github.com/SerenaSolutions/zephirum-lang
+
+extra:
+  recipe-maintainers:
+    - SerenaSolutions
