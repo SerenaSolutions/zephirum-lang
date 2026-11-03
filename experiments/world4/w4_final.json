@@ -1,0 +1,130 @@
+{
+ "protocolo": {
+  "id": "WORLD-4",
+  "data": "2026-11-03T17:41:08Z",
+  "reps": 3,
+  "shots": 8192,
+  "circuitos": [
+   "W-03a_level1",
+   "W-03b_otimizado",
+   "SPAM_idle",
+   "SPAM_x0",
+   "SPAM_x1",
+   "SPAM_x2"
+  ],
+  "bandas": {
+   "W-03_p": [
+    0.85,
+    0.7
+   ],
+   "W-03_tvd": [
+    0.15,
+    0.3
+   ],
+   "SPAM": [
+    0.05,
+    0.1
+   ]
+  },
+  "agregacao": "1 se as 3 reps certificam; 0 se todas reprovam; senao REFUSED",
+  "analise_de_poder": {
+   "banda": 0.85,
+   "n": 8192,
+   "erro_tipo_I_em_0.845": 0.0012,
+   "ponto_cego": "entre 0.83 e 0.85 o poder e ~0: dispositivo quase bom nunca certifica"
+  },
+  "nao_cobre": "ablacao de W-01 e SPAM resolvido por qubit-pais; ficam para WORLD-5",
+  "sha3_protocolo": "2998ff05c9d9068a9b04ddd3834d713ce9e3529cdecd11fd6950844fbd777e3c"
+ },
+ "execucao": {
+  "dispositivo": "ibm_marrakesh",
+  "chave": "IBM_QUANTUM_TOKEN_3",
+  "depth_level1": 169,
+  "depth_otimizado": 134,
+  "portas2q_level1": 45,
+  "portas2q_otimizado": 37,
+  "reps": [
+   {
+    "rep": 1,
+    "job_id": "dbl1pfd6p51s73cnk1bg",
+    "p_level1": 0.8274,
+    "p_otimizado": 0.8208,
+    "tvd": 0.1245,
+    "spam_por_qubit": {
+     "q0": 0.0042,
+     "q1": 0.0283,
+     "q2": 0.0059
+    },
+    "distribuicao": {
+     "000": 0.0183,
+     "001": 0.0353,
+     "010": 0.0176,
+     "011": 0.0236,
+     "100": 0.0319,
+     "101": 0.8208,
+     "110": 0.0205,
+     "111": 0.0321
+    }
+   },
+   {
+    "rep": 2,
+    "job_id": "dbl1pl56p51s73cnk1k0",
+    "p_level1": 0.8092,
+    "p_otimizado": 0.8278,
+    "tvd": 0.1175,
+    "spam_por_qubit": {
+     "q0": 0.0039,
+     "q1": 0.0281,
+     "q2": 0.0051
+    },
+    "distribuicao": {
+     "000": 0.0217,
+     "001": 0.0323,
+     "010": 0.0184,
+     "011": 0.0228,
+     "100": 0.0297,
+     "101": 0.8278,
+     "110": 0.0187,
+     "111": 0.0286
+    }
+   },
+   {
+    "rep": 3,
+    "job_id": "dbl1rdlgg49c73djsmv0",
+    "p_level1": 0.8223,
+    "p_otimizado": 0.8336,
+    "tvd": 0.1117,
+    "spam_por_qubit": {
+     "q0": 0.0065,
+     "q1": 0.0282,
+     "q2": 0.0062
+    },
+    "distribuicao": {
+     "000": 0.0195,
+     "001": 0.0312,
+     "010": 0.0154,
+     "011": 0.0229,
+     "100": 0.0309,
+     "101": 0.8336,
+     "110": 0.0164,
+     "111": 0.03
+    }
+   }
+  ],
+  "jobs": [
+   "dbl1pfd6p51s73cnk1bg",
+   "dbl1pl56p51s73cnk1k0",
+   "dbl1rdlgg49c73djsmv0"
+  ]
+ },
+ "vereditos": {
+  "W-03_otimizado": "REFUSED",
+  "W-03_level1": "REFUSED",
+  "W-03_tvd": "1",
+  "SPAM": "1"
+ },
+ "p_medio_otimizado": 0.8274,
+ "p_medio_level1": 0.8196,
+ "ideal": 1.9453,
+ "sha3_resultado": "e50fbc3dd46d57f4daf9cfc306d0ca266693b93f33eea1bdd6eae2961ad4b43a"
+}
