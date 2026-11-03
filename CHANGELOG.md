@@ -1,3 +1,16 @@
+## [2.5.2] - 2026-11-03
+
+### Adicionado — espelhamento para o Entire
+- `scripts/mirror_to_entire.sh`: espelha os 32 repositórios da conta para a forge do Entire,
+  com `--dry-run`, token por header HTTP (nunca na URL) e contagem explícita de falhas.
+- `docs/ENTIRE.md`: o que é o Entire (fundada por Thomas Dohmke, ex-CEO do GitHub), por que
+  encaixa com a nossa tese de recibo de decisão, e o estado verificado: a página do namespace
+  responde com **Login**, e `ENTIRE_TOKEN` não está no ambiente.
+
+Correção de rota durante a implementação: a listagem usava `/orgs/`, que devolve erro para
+conta pessoal; trocada por `/users/`, e erro de API agora falha alto em vez de virar lista
+vazia silenciosa.
+
 ## [2.5.1] - 2026-11-03
 
 ### Adicionado — sinais de maturidade e protocolo de difusão global
