@@ -18,6 +18,8 @@ authors = [{name = "Reginaldo Gonçalves", email = "builderquantunxia@gmail.com"
 hardware = ["qiskit-aer>=0.17,<0.19", "qiskit-ibm-runtime>=0.50"]
 # paridade de semantica com o ecossistema Google
 interop = ["cirq>=1.4"]
+# assinatura e KEM pos-quanticos (ML-KEM/ML-DSA)
+pq = ["pqcrypto>=0.3"]
 # verificacao de ida e volta OpenQASM 3 (usada apenas pelos testes)
 test = ["qiskit-qasm3-import>=0.5", "fastapi>=0.110", "httpx>=0.27"]
 
