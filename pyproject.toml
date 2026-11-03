@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zephirum"
-version = "2.4.0"
+version = "2.5.0"
 description = "ZEPHIRUM: Lisp-style quantum programming language with the ZYQL trivalent decision core (1/0/REFUSED)"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -19,7 +19,7 @@ hardware = ["qiskit-aer>=0.17,<0.19", "qiskit-ibm-runtime>=0.50"]
 # paridade de semantica com o ecossistema Google
 interop = ["cirq>=1.4"]
 # verificacao de ida e volta OpenQASM 3 (usada apenas pelos testes)
-test = ["qiskit-qasm3-import>=0.5"]
+test = ["qiskit-qasm3-import>=0.5", "fastapi>=0.110", "httpx>=0.27"]
 
 [project.scripts]
 zqgate = "zqgate.cli:main"
