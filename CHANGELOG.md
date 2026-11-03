@@ -1,3 +1,22 @@
+## [2.5.1] - 2026-11-03
+
+### Adicionado — sinais de maturidade e protocolo de difusão global
+Auditoria contra o padrão de Qiskit, PennyLane, Cirq e Q#: faltavam seis marcadores que
+revisor técnico procura em 30 segundos.
+
+- `src/py.typed` — consumidor Python sabe que há tipos declarados;
+- `.pre-commit-config.yaml` — ruff e checagens de arquivo antes do commit;
+- `.github/workflows/coverage.yml` — CI de cobertura com piso (não regride);
+- `docs/DEPRECATION.md` — semver como contrato, aviso de 2 MINOR ou 90 dias, recibos nunca
+  invalidados;
+- `GOVERNANCE.md` — como uma mudança entra; recusa não pode virar alegação automática;
+- `packaging/conda/meta.yaml` — recipe conda-forge pronta para `staged-recipes`;
+- `docs/DIFUSAO_GLOBAL.md` — protocolo em 4 fases com estado real de cada canal e bloqueios.
+
+Nada aqui alega vantagem técnica: é infraestrutura de credibilidade. Suite inalterada e verde.
+**Nota de erro próprio:** a tag v2.5.1 chegou a ser criada antes do bump de versão no
+`pyproject.toml`; o `test_meta.py` acusou a inconsistência e o bump foi feito em seguida.
+
 ## [2.5.0] - 2026-11-03
 
 ### Adicionado — API REST com a matemática exposta
