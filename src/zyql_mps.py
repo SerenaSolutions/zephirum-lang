@@ -56,7 +56,6 @@ class MPSSim:
         M = T.reshape(Dl * 2, 2 * Dr)
         Us, S, Vh = np.linalg.svd(M, full_matrices=False)
         k = min(self.chi, len(S))
-        keep = S[:k] / S[:k].sum() if S[:k].sum() > 0 else S[:k]
         self.sites[i] = Us[:, :k].reshape(Dl, 2, k)
         self.sites[j] = (S[:k, None] * Vh[:k]).reshape(k, 2, Dr)
         self.truncation_error = float(np.sqrt((S[k:] ** 2).sum())) if len(S) > k else 0.0

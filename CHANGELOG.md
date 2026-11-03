@@ -1,3 +1,22 @@
+## [2.3.2] - 2026-11-03
+
+### Corrigido (check-up estático)
+- **Bug latente em `qroute/hardware.py`**: a função `p_marcados` carregava a expressão
+  morta `{...for m in marcados} if False else None`, que referenciava `n` indefinido
+  (ruff F821) e alocava uma variável sem uso. Não quebrava em execução porque o ramo
+  nunca era avaliado — mas código que mente sobre o que faz é dívida. Removida.
+- Código morto removido em `zyql_quantum_gate` (`band_pending`) e em `zyql_mps`
+  (cálculo de `keep` nunca lido: uma soma de array por passo a menos).
+- `zyql_zne`: resíduo da extrapolação renomeado para `_residual`, preservando a
+  intenção informativa sem enganar o lint.
+- Ruff F821/F841/F811: de 6 ocorrências para 2 (ambas de variável de efeito colateral
+  em `quantum_types`, declaradas como tal).
+
+### Validado
+- Bateria de 1000 execuções por app (8 apps, 8.000 no total): 0 erros.
+- Rodada no silício (ibm_marrakesh, 256 shots, n=2): const-1 → 1, const-0 → 0,
+  paridade → REFUSED. 3/3 conforme esperado, 6s de QPU.
+
 ## [2.3.1] - 2026-11-01
 
 ### Corrigido

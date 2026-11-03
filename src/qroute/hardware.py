@@ -31,7 +31,13 @@ def monta(n_qubits, marcados, iteracoes):
 
 
 def p_marcados(counts, marcados, shots=None):
-    alvo = {"{:0{n}b}".format(m, n=n) for m in marcados} if False else None
+    """Probabilidade dos estados marcados, com IC 95% normal.
+
+    Linha morta removida em v2.3.2: a versao anterior tinha uma expressao
+    `... if False else None` que nunca executava, referenciava `n` indefinido
+    (lint F821) e alocava `alvo` sem uso. Comportamento nao muda — o codigo
+    apenas deixa de mentir sobre o que faz.
+    """
     total = sum(counts.values())
     soma = 0
     for bits, c in counts.items():
