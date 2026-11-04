@@ -1,5 +1,8 @@
-import pytest
-pytest.importorskip("pqcrypto", reason="extra 'pq' nao instalado (pqcrypto)")
+try:
+    import pqcrypto  # noqa: F401
+except ImportError:  # extra 'pq' nao instalado: pular a bateria inteira
+    print("SKIP: extra 'pq' nao instalado (pqcrypto)")
+    raise SystemExit(0)
 # -*- coding: utf-8 -*-
 """Bateria Z-KEM: confidencialidade pos-quantica (camada 3 do Z-QEA).
 6 casos: roundtrip, chave errada, tamper no ciphertext KEM, tamper no
