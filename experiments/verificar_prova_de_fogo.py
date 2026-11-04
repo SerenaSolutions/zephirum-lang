@@ -16,8 +16,9 @@ N = 3
 
 
 def selo(obj) -> str:
-    canon = json.dumps(obj, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha3_256(canon.encode()).hexdigest()
+    # identico a src/battery_ci.py: canon (sort_keys + ensure_ascii + default=str)
+    payload = json.dumps(obj, sort_keys=True, ensure_ascii=True, default=str)
+    return hashlib.sha3_256(payload.encode()).hexdigest()
 
 
 def p_zero(counts):

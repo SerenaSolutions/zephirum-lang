@@ -19,7 +19,7 @@ qualquer terceiro recompute tudo.
 | oracle balanceado | **REFUSED · BALANCED_ORACLE** (p_zero 0.0010) |
 | porta GHZ n=3 | fidelidade **0.9131**, dispositivo aprovado |
 | confere com o esperado | **true** |
-| selo SHA3-256 | `e31b32953d2bd0a0e2ed85570d70efcd3975e195ed53749181498c0f2ac8af7f` |
+| selo SHA3-256 | `84abc306017b0573d20e39a3d6479326b4fecd5adf8327ea5a88058c33d7fff3` |
 
 Recibo completo: `experiments/prova_de_fogo_receipt.json`.
 
