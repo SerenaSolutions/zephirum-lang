@@ -1,5 +1,21 @@
 ## [2.5.3] - 2026-11-03
 
+### Corrigido — conformidade v1.1.0 (cerca fechada)
+1. `SPEC.md` §3 reescrita conforme o código: `p0 <= banda` recusa como
+   `BALANCED_ORACLE` e **não** produz veredito `0`; veredito `0` só existe no
+   ramo de interferência com `f(0) == 0`. A v1.0.0 declarava o contrário.
+2. Canon único: `src/qroute/receipt.py` passou a importar `canon` de
+   `src/battery_ci.py`. Os 7 recibos de `examples/recibos/` foram reselados sob
+   a regra única, com o conteúdo intacto (mudou apenas o hash).
+3. `run_conformance.py` reprova recibo sem selo em vez de pular, e varre
+   `experiments/**/*_receipt.json`, `examples/recibos/*.json` e a raiz.
+4. Cobertura de regra por `p0` sintético: zona cinzenta (`INSIDE_NOISE_BAND`),
+   fronteiras exatas e `BALANCED_ORACLE` no limiar inferior, mais a porta de
+   dispositivo exigindo `REFUSED` com zero chamadas de oráculo.
+5. `src/battery_ci.py` passou a rodar sob `__main__`: importar o módulo para
+   reusar `canon` não executa a bateria nem chama `sys.exit`.
+Suíte: 57 verificações, CONFORMANTE local.
+
 ### Adicionado — suíte de conformidade ZYQL (spec 1.0.0)
 `conformance/SPEC.md` fixa o contrato: banda Hoeffding, banda de família Bonferroni,
 regra de decisão, taxonomia fechada de recusa, canonicalização do selo SHA3-256,

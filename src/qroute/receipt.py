@@ -8,7 +8,15 @@ CHAVE = "sha3_256"
 
 
 def canonical(obj):
-    return json.dumps(obj, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    """Canon unico da casa (battery_ci.canon).
+
+    Antes esta funcao usava separadores compactos e ensure_ascii=False, o que
+    gerava um SEGUNDO canon no repositorio: o mesmo conteudo selado pela regra
+    da casa nao conferia por aqui, e vice-versa. Agora ha uma unica regra,
+    importada do validador oficial (src/battery_ci.py).
+    """
+    from battery_ci import canon as _house_canon
+    return _house_canon(obj)
 
 
 def sela(corpo, caminho, anterior=None):

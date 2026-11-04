@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Suíte de conformidade ZYQL.
 
-Testa três coisas contra a especificação conformance/SPEC.md:
+Testa quatro coisas contra a especificação conformance/SPEC.md:
   1. vereditos e recusas dos casos dourados, no núcleo de referência;
-  2. selo SHA3-256 de todo recibo do repositório, pela canonicalização da casa;
-  3. presença de OpenQASM 3 nos artefatos quânticos.
+  2. as regras de decisão em p0 sintético, inclusive as faixas que o simulador
+     ideal nunca alcança (zona cinzenta e recusa por decoerência);
+  3. selo SHA3-256 de TODO recibo do repositório, sob um único canon, com
+     recibo sem selo reprovando em vez de passar em silêncio;
+  4. presença de OpenQASM 3 nos artefatos quânticos.
 
 Uso:
     python conformance/run_conformance.py            # tabela legível
@@ -22,24 +25,48 @@ import sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SPEC = os.path.join(RAIZ, "conformance", "cases.json")
+sys.path.insert(0, os.path.join(RAIZ, "src"))
 
+# Canon único da casa: o validador oficial (src/battery_ci.py) é a fonte.
+try:
+    from battery_ci import canon  # noqa: E402
+except Exception as e:  # pragma: no cover
+    print("erro: canon da casa indisponivel (%s)" % e, file=sys.stderr)
+    sys.exit(2)
 
-def canon(payload):
-    """Canonicalização normativa (SPEC §5)."""
-    return json.dumps(payload, sort_keys=True, ensure_ascii=True, default=str)
-
-
-def carregar_nucleo():
-    sys.path.insert(0, os.path.join(RAIZ, "src"))
-    from zyql_quantum_gate import ZYQLQuantumGate, adaptive_margin  # noqa: E402
-    return ZYQLQuantumGate, adaptive_margin
-
+# Chaves de selo aceitas, com a regra de payload de cada formato.
+# selo_sha3_256: formato da casa (Rodada G em diante), selo sobre rec["payload"].
+# sha3_256:      formato q-route legado, selo sobre o corpo sem a própria chave.
+CHAVES_SELO = ("selo_sha3_256", "sha3_256")
 
 ORACULOS = {
     "const0": lambda x: 0,
     "const1": lambda x: 1,
     "balanced": lambda x: bin(x).count("1") % 2,
 }
+
+
+def payload_do_recibo(rec, chave):
+    if chave == "selo_sha3_256" and isinstance(rec.get("payload"), dict):
+        return rec["payload"]
+    return {k: v for k, v in rec.items() if k != chave}
+
+
+def selo_valido(rec):
+    """(ok, detalhe). Recibo sem selo é NÃO CONFORMIDADE, não é skip."""
+    chave = next((c for c in CHAVES_SELO if rec.get(c)), None)
+    if chave is None:
+        return False, "recibo sem selo (%s ausente)" % " / ".join(CHAVES_SELO)
+    payload = payload_do_recibo(rec, chave)
+    recomputado = hashlib.sha3_256(canon(payload).encode()).hexdigest()
+    if rec[chave] != recomputado:
+        return False, "selo %s nao bate" % chave
+    return True, "selo integro (%s)" % chave
+
+
+def carregar_nucleo():
+    from zyql_quantum_gate import ZYQLQuantumGate, adaptive_margin  # noqa: E402
+    return ZYQLQuantumGate, adaptive_margin
 
 
 def testar_casos(dados, gate_cls):
@@ -64,6 +91,54 @@ def testar_casos(dados, gate_cls):
     return resultados
 
 
+def testar_regras(dados, gate_cls):
+    """Regras de decisão em p0 sintético (SPEC §3).
+
+    O simulador ideal só produz p0 = 0 ou 1, então a zona cinzenta e o limiar
+    inferior nunca aparecem pelos casos dourados. Aqui a regra é exercitada
+    direto na função de decisão do núcleo, sem inventar portão paralelo.
+    """
+    resultados = []
+    for caso in dados.get("regras", []):
+        f = ORACULOS[caso["oraculo"]]
+        g = gate_cls(caso["n"], f)
+        r = g._trivalent(caso["p0"], caso["shots"], margin=caso["banda"])
+        veredito = str(r.get("decision"))
+        motivo = r.get("refusal_reason")
+        ok = veredito == caso["esperado"]["verdict"] and motivo == caso["esperado"]["refusal_reason"]
+        resultados.append({"id": caso["id"], "ok": ok, "veredito": veredito,
+                           "motivo": motivo, "p0": caso["p0"]})
+    return resultados
+
+
+def testar_porta_dispositivo():
+    """A recusa por decoerência dispara e NÃO gasta oráculo (SPEC §6).
+
+    O dublê substitui a medição GHZ por um dispositivo inconfiável declarado:
+    o que se testa aqui é o caminho de recusa do runtime, não a física.
+    """
+    import zyql_runtime
+
+    original = zyql_runtime.ghz_integrity
+    resultados = []
+    try:
+        zyql_runtime.ghz_integrity = lambda **kw: {
+            "fidelity_ghz": 0.4210, "threshold": 0.80,
+            "device_trusted": False, "mode": "GHZ_INTEGRITY_GATE"}
+        d = zyql_runtime.decide(ORACULOS["const1"], n=3, shots=256,
+                                require_device_trust=True, device_shots=256)
+        motivo = str(d.refusal_reason) if getattr(d, "refusal_reason", None) else str(d.mode)
+        ok = d.verdict.name == "REFUSED" and "DECOHERED" in (motivo + str(d.mode)).upper() \
+            and d.oracle_calls == 0
+        resultados.append({"id": "porta-dispositivo: recusa sem oraculo", "ok": ok,
+                           "detalhe": "%s, oraculo=%d" % (d.verdict.name, d.oracle_calls)})
+    except Exception as e:
+        resultados.append({"id": "porta-dispositivo", "ok": False, "detalhe": str(e)[:80]})
+    finally:
+        zyql_runtime.ghz_integrity = original
+    return resultados
+
+
 def testar_determinismo(dados, gate_cls):
     d = dados["determinismo"]
     f = ORACULOS[d["oraculo"]]
@@ -72,8 +147,7 @@ def testar_determinismo(dados, gate_cls):
         g = gate_cls(d["n"], f)
         r = g.run_quantum(shots=d["shots"], epsilon=d["epsilon"], family=d["family"])
         vereditos.append(str(r.get("decision")))
-    ok = len(set(vereditos)) == 1
-    return {"id": d["id"], "ok": ok, "vereditos": vereditos}
+    return {"id": d["id"], "ok": len(set(vereditos)) == 1, "vereditos": vereditos}
 
 
 def testar_bandas(dados, adaptive_margin):
@@ -86,28 +160,33 @@ def testar_bandas(dados, adaptive_margin):
     return resultados
 
 
+def recibos_do_repositorio():
+    """Todo recibo do repositório, inclusive fora de experiments/."""
+    padroes = [
+        "experiments/**/*_receipt.json",
+        "examples/recibos/*.json",
+        "*_receipt.json",
+    ]
+    achados = []
+    for padrao in padroes:
+        achados.extend(glob.glob(os.path.join(RAIZ, padrao), recursive=True))
+    return sorted(set(achados))
+
+
 def testar_recibos():
     resultados = []
-    caminhos = sorted(glob.glob(os.path.join(RAIZ, "experiments", "**", "*.json"), recursive=True))
-    for p in caminhos:
-        if "job_meta" in os.path.basename(p):
-            continue
+    for p in recibos_do_repositorio():
+        nome = os.path.relpath(p, RAIZ)
         try:
-            rec = json.load(open(p))
+            rec = json.load(open(p, encoding="utf-8"))
         except Exception as e:
-            resultados.append({"id": os.path.basename(p), "ok": False, "detalhe": "json invalido: %s" % e})
+            resultados.append({"id": nome, "ok": False, "detalhe": "json invalido: %s" % str(e)[:50]})
             continue
-        if not isinstance(rec, dict) or not rec.get("selo_sha3_256"):
-            continue  # não é recibo selado
-        declared = rec["selo_sha3_256"]
-        if isinstance(rec.get("payload"), dict):
-            payload = rec["payload"]
-        else:
-            payload = {k: v for k, v in rec.items() if k != "selo_sha3_256"}
-        recomputado = hashlib.sha3_256(canon(payload).encode()).hexdigest()
-        ok = declared == recomputado
-        resultados.append({"id": os.path.basename(p), "ok": ok,
-                           "detalhe": "selo integro" if ok else "selo nao bate"})
+        if not isinstance(rec, dict):
+            resultados.append({"id": nome, "ok": False, "detalhe": "recibo nao e objeto json"})
+            continue
+        ok, detalhe = selo_valido(rec)
+        resultados.append({"id": nome, "ok": ok, "detalhe": detalhe})
     return resultados
 
 
@@ -121,15 +200,14 @@ def testar_openqasm3():
             continue
         if "qasm3" in texto:
             com_qasm3.append(os.path.basename(p))
-    ok = len(com_qasm3) > 0
-    return [{"id": "openqasm3", "ok": ok, "arquivos": com_qasm3,
+    return [{"id": "openqasm3", "ok": bool(com_qasm3), "arquivos": com_qasm3,
              "detalhe": "%d artefato(s) com qasm3" % len(com_qasm3)}]
 
 
 def main():
     json_out = "--json" in sys.argv
     try:
-        dados = json.load(open(SPEC))
+        dados = json.load(open(SPEC, encoding="utf-8"))
         gate_cls, adaptive_margin = carregar_nucleo()
     except Exception as e:
         print("erro ao carregar spec ou nucleo: %s" % e, file=sys.stderr)
@@ -137,6 +215,8 @@ def main():
 
     grupos = {
         "vereditos": testar_casos(dados, gate_cls),
+        "regras": testar_regras(dados, gate_cls),
+        "porta_dispositivo": testar_porta_dispositivo(),
         "determinismo": [testar_determinismo(dados, gate_cls)],
         "bandas": testar_bandas(dados, adaptive_margin),
         "recibos": testar_recibos(),
@@ -160,7 +240,8 @@ def main():
             for i in g:
                 marca = "PASS" if i["ok"] else "FAIL"
                 extra = i.get("veredito") or i.get("detalhe") or i.get("obtido") or ""
-                print("  [%s] %s %s" % (marca, i["id"], extra))
+                motivo = " (%s)" % i["motivo"] if i.get("motivo") else ""
+                print("  [%s] %s %s%s" % (marca, i["id"], extra, motivo))
         print("\n%s — %d/%d" % ("CONFORMANTE" if not falhas else "NAO CONFORMANTE",
                                 len(itens) - len(falhas), len(itens)))
 

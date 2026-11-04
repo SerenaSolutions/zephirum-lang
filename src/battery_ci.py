@@ -83,13 +83,25 @@ def run_verify():
         print("(no sealed receipts found in experiments/ — nothing to verify)")
 
 
-if MODE in ("all", "battery"):
-    run_battery()
-if MODE in ("all", "verify-receipts"):
-    run_verify()
+def main():
+    """Executa a bateria conforme ZQG_MODE. Retorna o codigo de saida.
 
-print()
-if FAILED:
-    print("ZQ-GATE: FAIL —", len(FAILED), "failure(s). Nothing passes silently.")
-    sys.exit(1)
-print("ZQ-GATE: ALL PASS — decisions sealed, receipts intact.")
+    A execucao fica sob __main__ de proposito: importar este modulo (para
+    reusar `canon`, por exemplo) nao pode rodar bateria nem derrubar o processo
+    com sys.exit.
+    """
+    if MODE in ("all", "battery"):
+        run_battery()
+    if MODE in ("all", "verify-receipts"):
+        run_verify()
+
+    print()
+    if FAILED:
+        print("ZQ-GATE: FAIL —", len(FAILED), "failure(s). Nothing passes silently.")
+        return 1
+    print("ZQ-GATE: ALL PASS — decisions sealed, receipts intact.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
