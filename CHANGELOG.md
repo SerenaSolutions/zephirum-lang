@@ -1,5 +1,14 @@
 ## [2.5.3] - 2026-11-03
 
+### Adicionado — prova de fogo no silício, executável por agente externo
+`experiments/prova_de_fogo.py` + `experiments/verificar_prova_de_fogo.py` + `docs/PROVA_DE_FOGO.md`.
+Duas medidas independentes no hardware (interferência decide a classe, leitura direta
+decide o valor), porta de integridade GHZ vetando o dispositivo, e recusa declarada
+dentro da banda de Hoeffding. Primeira execução em ibm_marrakesh, job dblnbem74qds73dqqmtg,
+1024 shots, eps=0.05: const-0 -> 0, const-1 -> 1, balanceado -> REFUSED(BALANCED_ORACLE),
+GHZ fidelidade 0.9131, recibo selado e31b3295. O verificador recomputa o selo e reconfere
+cada veredito pelos counts crus; recibo adulterado é reprovado.
+
 ### Corrigido — CI vermelho no HEAD (pytest ausente e alvo de cobertura invalido)
 Duas falhas de pipeline que nao tinham relacao com o codigo do nucleo:
 
