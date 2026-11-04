@@ -1,5 +1,15 @@
 ## [2.5.3] - 2026-11-03
 
+### Adicionado — suíte de conformidade ZYQL (spec 1.0.0)
+`conformance/SPEC.md` fixa o contrato: banda Hoeffding, banda de família Bonferroni,
+regra de decisão, taxonomia fechada de recusa, canonicalização do selo SHA3-256,
+porta de dispositivo e exigência de OpenQASM 3 no produto quântico.
+`conformance/run_conformance.py` testa o núcleo de referência contra os casos dourados
+(`conformance/cases.json`), recomputa o selo de todos os recibos do repositório e
+confere a presença de OpenQASM 3; sai 0 quando conformante e 1 quando não.
+Workflow `conformance.yml` roda em push, em PR e semanalmente.
+Estado local: 42/42 CONFORMANTE.
+
 ### Adicionado — prova de fogo no silício, executável por agente externo
 `experiments/prova_de_fogo.py` + `experiments/verificar_prova_de_fogo.py` + `docs/PROVA_DE_FOGO.md`.
 Duas medidas independentes no hardware (interferência decide a classe, leitura direta
