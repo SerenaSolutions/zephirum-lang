@@ -1,5 +1,5 @@
 {
-  "spec_version": "1.0.0",
+  "spec_version": "1.1.0",
   "descricao": "Casos dourados da conformidade ZYQL. Cada caso declara entrada e veredito exigido.",
   "casos": [
     {
@@ -88,6 +88,99 @@
       "epsilon": 0.01,
       "shots": 1024,
       "esperado": 0.0508632385
+    }
+  ],
+  "regras": [
+    {
+      "id": "p0-alto-const0 -> 0",
+      "oraculo": "const0",
+      "n": 3,
+      "p0": 0.95,
+      "shots": 1024,
+      "banda": 0.0848813447,
+      "esperado": {
+        "verdict": "0",
+        "refusal_reason": null
+      },
+      "regra": "p0 >= 1 - banda: branco de interferencia. O valor vem do oraculo f(0), nao do limiar."
+    },
+    {
+      "id": "p0-alto-const1 -> 1",
+      "oraculo": "const1",
+      "n": 3,
+      "p0": 0.95,
+      "shots": 1024,
+      "banda": 0.0848813447,
+      "esperado": {
+        "verdict": "1",
+        "refusal_reason": null
+      },
+      "regra": "mesmo ramo, f(0)=1"
+    },
+    {
+      "id": "p0-alto-const0 limite",
+      "oraculo": "const0",
+      "n": 3,
+      "p0": 0.9151186553,
+      "shots": 1024,
+      "banda": 0.0848813447,
+      "esperado": {
+        "verdict": "0",
+        "refusal_reason": null
+      },
+      "regra": "fronteira exata p0 = 1 - banda ainda decide (comparacao com >=)"
+    },
+    {
+      "id": "zona-cinzenta -> INSIDE_NOISE_BAND",
+      "oraculo": "const0",
+      "n": 3,
+      "p0": 0.5,
+      "shots": 1024,
+      "banda": 0.0848813447,
+      "esperado": {
+        "verdict": "REFUSED",
+        "refusal_reason": "INSIDE_NOISE_BAND"
+      },
+      "regra": "entre as duas bandas nao ha evidencia: recusa declarada, nao palpite"
+    },
+    {
+      "id": "zona-cinzenta proxima do baixo",
+      "oraculo": "const0",
+      "n": 3,
+      "p0": 0.085,
+      "shots": 1024,
+      "banda": 0.0848813447,
+      "esperado": {
+        "verdict": "REFUSED",
+        "refusal_reason": "INSIDE_NOISE_BAND"
+      },
+      "regra": "logo acima da banda inferior continua sendo zona cinzenta"
+    },
+    {
+      "id": "p0-baixo -> BALANCED_ORACLE",
+      "oraculo": "balanced",
+      "n": 3,
+      "p0": 0.05,
+      "shots": 1024,
+      "banda": 0.0848813447,
+      "esperado": {
+        "verdict": "REFUSED",
+        "refusal_reason": "BALANCED_ORACLE"
+      },
+      "regra": "p0 <= banda: a fase nao colapsa o registrador de entrada, oraculo balanceado"
+    },
+    {
+      "id": "p0-baixo limite",
+      "oraculo": "balanced",
+      "n": 3,
+      "p0": 0.0848813447,
+      "shots": 1024,
+      "banda": 0.0848813447,
+      "esperado": {
+        "verdict": "REFUSED",
+        "refusal_reason": "BALANCED_ORACLE"
+      },
+      "regra": "fronteira exata p0 = banda recusa como balanceado (comparacao com <=)"
     }
   ]
 }

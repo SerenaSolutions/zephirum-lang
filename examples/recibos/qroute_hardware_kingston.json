@@ -189,6 +189,6 @@
  "modulo": "src/qroute (ZYQL 2.2.0)",
  "nota": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
  "prev_sha3": null,
- "sha3_256": "5db7211e79dac1daffe99e1b49f7b911fd866d0b260b4112a6a30a0e0f4cdc52",
+ "sha3_256": "3b969a56c91a96297da5657794b1e1076a3945573ce67d0c83e99a68819ea7d9",
  "spec": "Q-ROUTE/v1"
 }
