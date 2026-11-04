@@ -107,8 +107,10 @@ def veredito_f0(counts: dict, b: float) -> dict:
 
 
 def selo(obj) -> str:
-    canon = json.dumps(obj, sort_keys=True, separators=(",", ":"))
-    return hashlib.sha3_256(canon.encode()).hexdigest()
+    # mesma canonicalizacao do verificador da casa (src/battery_ci.py: canon),
+    # senao o receipt e reprovado na varredura de recibos do repositorio.
+    payload = json.dumps(obj, sort_keys=True, ensure_ascii=True, default=str)
+    return hashlib.sha3_256(payload.encode()).hexdigest()
 
 
 def montar_recibo(nome, job_id, shots, counts, b, qasms) -> dict:
