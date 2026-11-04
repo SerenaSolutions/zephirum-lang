@@ -1,0 +1,93 @@
+{
+  "spec_version": "1.0.0",
+  "descricao": "Casos dourados da conformidade ZYQL. Cada caso declara entrada e veredito exigido.",
+  "casos": [
+    {
+      "id": "const0-n3-256",
+      "oraculo": "const0",
+      "n": 3,
+      "shots": 256,
+      "epsilon": 0.05,
+      "family": 1,
+      "esperado": {
+        "verdict": "0",
+        "refusal_reason": null
+      },
+      "regra": "oraculo constante 0 -> p0 proximo de 1 -> veredito 0"
+    },
+    {
+      "id": "const1-n3-256",
+      "oraculo": "const1",
+      "n": 3,
+      "shots": 256,
+      "epsilon": 0.05,
+      "family": 1,
+      "esperado": {
+        "verdict": "1",
+        "refusal_reason": null
+      },
+      "regra": "oraculo constante 1 -> fase global -> p0 proximo de 1 -> veredito 1"
+    },
+    {
+      "id": "balanced-n3-256",
+      "oraculo": "balanced",
+      "n": 3,
+      "shots": 256,
+      "epsilon": 0.05,
+      "family": 1,
+      "esperado": {
+        "verdict": "REFUSED",
+        "refusal_reason": "BALANCED_ORACLE"
+      },
+      "regra": "oraculo balanceado colapsa em estado nao zerado -> recusa honesta"
+    },
+    {
+      "id": "balanced-n4-1024-eps001",
+      "oraculo": "balanced",
+      "n": 4,
+      "shots": 1024,
+      "epsilon": 0.01,
+      "family": 1,
+      "esperado": {
+        "verdict": "REFUSED",
+        "refusal_reason": "BALANCED_ORACLE"
+      },
+      "regra": "mesma semantica em n maior e erro menor: recusa nao vira palpite"
+    },
+    {
+      "id": "familia-excede-shots",
+      "oraculo": "const1",
+      "n": 3,
+      "shots": 64,
+      "epsilon": 0.05,
+      "family": 100000,
+      "esperado": {
+        "verdict": "REFUSED",
+        "refusal_reason": "FAMILY_EXCEEDS_SHOTS"
+      },
+      "regra": "banda Bonferroni <= 0: recusa tudo em vez de afrouxar o erro"
+    }
+  ],
+  "determinismo": {
+    "id": "determinismo-seed",
+    "oraculo": "const1",
+    "n": 3,
+    "shots": 256,
+    "epsilon": 0.05,
+    "family": 1,
+    "repeticoes": 2,
+    "regra": "mesma semente e mesmos parametros produzem o mesmo veredito"
+  },
+  "banda": [
+    {
+      "epsilon": 0.05,
+      "shots": 256,
+      "esperado": 0.0848813447
+    },
+    {
+      "epsilon": 0.01,
+      "shots": 1024,
+      "esperado": 0.0508632385
+    }
+  ]
+}
