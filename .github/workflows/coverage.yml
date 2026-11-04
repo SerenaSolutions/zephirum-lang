@@ -10,8 +10,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - run: pip install numpy lark scipy qiskit pytest pytest-cov
+      - run: pip install numpy lark scipy qiskit pytest pytest-cov pqcrypto cryptography
       - name: cobertura do núcleo
         run: python -m pytest tests/ -q --cov=src --cov-report=term-missing --cov-fail-under=0 || true
       - name: piso de cobertura (não regride)
-        run: python -m pytest tests/test_runtime.py -q --cov=src/zyql_runtime.py --cov-fail-under=70
+        run: python -m pytest tests/test_runtime.py -q --cov=zyql_runtime --cov-fail-under=70
+        env:
+          PYTHONPATH: src

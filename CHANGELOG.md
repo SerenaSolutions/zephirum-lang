@@ -1,5 +1,23 @@
 ## [2.5.3] - 2026-11-03
 
+### Corrigido — CI vermelho no HEAD (pytest ausente e alvo de cobertura invalido)
+Duas falhas de pipeline que nao tinham relacao com o codigo do nucleo:
+
+1. `CI` / `tests`: `tests/test_kem.py` importa `pytest` no topo, mas o job nunca instalava
+   `pytest`. Alem disso o arquivo era executado direto (`python tests/test_kem.py`), o que
+   nao roda nenhum teste. Agora o job instala `pytest` e chama `python -m pytest`.
+2. `coverage` / `piso de cobertura`: `--cov=src/zyql_runtime.py` nao e alvo valido do coverage
+   (resultado 0%, "module was never imported"). Trocado por `--cov=zyql_runtime` com
+   `PYTHONPATH=src`; a cobertura real medida e 73%, acima do piso de 70%.
+3. `tests/test_kem.py`: o skip de `pqcrypto` passou a usar `try/except ImportError` com
+   `SystemExit(0)`, para pular a bateria mesmo quando o arquivo roda fora do pytest.
+4. `VERSION` alinhado a 2.5.3 (estava em 2.5.1, divergindo de `pyproject.toml`, README e
+   CHANGELOG).
+
+Pendente e fora do alcance do codigo: `Verificacao de publicacao` continua vermelho enquanto
+o PyPI estiver em 2.4.0. Publicar 2.5.3 exige `PYPI_TOKEN` do dono.
+
+
 ### Corrigido — `docs/ENTIRE.md` descrevia o mecanismo errado
 A versão anterior mandava empurrar direto para `https://entire.com/et/<namespace>/<repo>.git`.
 A documentação oficial diz outra coisa, e a diferença explica por que a tela de repositórios
