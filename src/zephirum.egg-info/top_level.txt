@@ -1,6 +1,7 @@
 battery_ci
 oq3
 qroute
+quantum_safe_readiness
 quantum_types
 shot_auditor
 zkernel

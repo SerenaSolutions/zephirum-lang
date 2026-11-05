@@ -40,6 +40,20 @@ PADROES = {
 }
 EXTENSOES = {".py", ".js", ".ts", ".yaml", ".yml", ".json", ".toml", ".conf", ".ini",
              ".cfg", ".pem", ".crt", ".key", ".md", ".tf", ".env", ".sh", ".service"}
+FONTES = {
+    "FIPS 203 (2024-08-13)": "parametros e tamanhos do ML-KEM",
+    "FIPS 204 (2024-08-13)": "parametros e tamanhos do ML-DSA",
+    "FIPS 205 (2024-08-13)": "alternativa SLH-DSA (hash)",
+    "NIST IR 8547 final (2026-10-27)": "plano de transicao; substitui o rascunho de 2024-11-12",
+    "SP 800-57": "criptoperiodo e ciclo de vida de chave",
+    "CNSA 2.0 (2022)": "teto conservador para defesa e infraestrutura critica",
+    "SP 1800-38": "fases de inventario e prova de migracao",
+    "Mosca": "criterio X + Y > Z com Z declarado, nunca afirmado",
+}
+TAMANHOS_PADRAO = {
+    "ml_kem_768": {"chave_publica": 1184, "texto_cifrado": 1088, "segredo": 32},
+    "ml_dsa_44": {"chave_publica": 1312, "assinatura": 2420},
+}
 IGNORAR = {".git", "node_modules", "__pycache__", "dist", "build", ".venv", "venv"}
 
 
@@ -182,8 +196,13 @@ def interop_mlkem_mldsa(rodadas: int = 3) -> dict[str, Any]:
         except Exception as e:
             return {"veredito": "REFUSED", "motivo": f"falha na rodada: {type(e).__name__}: {e}"[:120]}
     veredito = "1" if (ok_kem == ok_sig == rodadas) else ("0" if ok_kem + ok_sig == 0 else "REFUSED")
+    conf = (tam["kem_pk"] == TAMANHOS_PADRAO["ml_kem_768"]["chave_publica"] and
+            tam["sig_pk"] == TAMANHOS_PADRAO["ml_dsa_44"]["chave_publica"])
     return {"veredito": veredito, "rodadas": rodadas, "kem_ok": ok_kem, "dsa_ok": ok_sig,
-            "tamanhos_bytes": tam}
+            "tamanhos_bytes": tam, "tamanhos_padrao": TAMANHOS_PADRAO,
+            "confere_padrao_fips": conf,
+            "nota": "chaves publicas identicas ao padrao provam que o algoritmo e o declarado; "
+                    "envelopes maiores sao base64 e JSON nossos"}
 
 
 # ------------------------------------------------------------- recibo
@@ -236,7 +255,7 @@ def avaliar(caminho: str | Path, ano_crqc: float = 2035, ativos: list[Ativo] | N
     return {"modulo": "quantum_safe_readiness", "versao": "0.1.0",
             "alvo": str(caminho), "ano_crqc_hipotese": ano_crqc, "perfil": perfil,
             "inventario": inv, "risco": risco, "agilidade": ag, "interop_pqc": io,
-            "veredito_final": final,
+            "veredito_final": final, "fontes": FONTES,
             "ressalva": "nao e atestado de conformidade regulatoria; e evidencia de prontidao"}
 
 
