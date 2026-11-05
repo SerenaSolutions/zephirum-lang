@@ -1,3 +1,8 @@
+## [2.5.4] - 2026-11-05
+- `qroute.__version__` passa a ler o metadado do pacote em vez de repetir
+  a versao escrita a mao; a 2.5.3 publicada reportava 2.4.0 internamente.
+- Metadados do PyPI alinhados (licenca Apache-2.0, dependencia Qiskit com teto).
+
 ## [2.5.3] - 2026-11-03
 
 ### Corrigido — conformidade v1.1.0 (cerca fechada)
