@@ -1,5 +1,5 @@
 {
- "data": "2026-11-03T17:34:46+00:00",
+ "data": "2026-11-05T20:01:11+00:00",
  "entrada": {
   "destino": "DEST",
   "fonte_mapa": "entrega_sp_bloqueado.json",
@@ -124,7 +124,7 @@
  "modo": "SIMULACAO EXATA EM VETOR DE ESTADO — sem hardware, sem shots",
  "modulo": "src/qroute (ZYQL 2.2.0)",
  "nota": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
- "prev_sha3": "7bb555097841f9d699c5693b27a5e416205a7b294cf9866bb1eb10ed55486d80",
- "sha3_256": "db0efc2e978a773682cfd7271842954e3b9568f6524be3186ca1709a283f18e3",
+ "prev_sha3": "db0efc2e978a773682cfd7271842954e3b9568f6524be3186ca1709a283f18e3",
+ "sha3_256": "5ebe15b4abd7f6a058bde102b6f48dd2b9a2c9e9acf6a4b0b7d0c9e7466ff33f",
  "spec": "Q-ROUTE/v1"
 }

@@ -1,0 +1,246 @@
+{
+ "total": 25,
+ "ok": 25,
+ "falhas": [],
+ "detalhe": {
+  "battery_ci": {
+   "status": "ok",
+   "funcoes": 5,
+   "amostra": [
+    "canon",
+    "main",
+    "run_battery",
+    "run_verify"
+   ]
+  },
+  "oq3": {
+   "status": "ok",
+   "funcoes": 2,
+   "amostra": [
+    "from_openqasm3",
+    "to_openqasm3"
+   ]
+  },
+  "quantum_types": {
+   "status": "ok",
+   "funcoes": 5,
+   "amostra": [
+    "CompileError",
+    "QCircuit",
+    "QType",
+    "QuantumLang"
+   ]
+  },
+  "shot_auditor": {
+   "status": "ok",
+   "funcoes": 3,
+   "amostra": [
+    "audit_step",
+    "gradiente_band",
+    "stopping_rule_check"
+   ]
+  },
+  "zkernel": {
+   "status": "ok",
+   "funcoes": 3,
+   "amostra": [
+    "AuditLog",
+    "Backend",
+    "Kernel"
+   ]
+  },
+  "zqea_kem": {
+   "status": "ok",
+   "funcoes": 4,
+   "amostra": [
+    "AESGCM",
+    "keypair",
+    "open_",
+    "seal"
+   ]
+  },
+  "zqea_sig": {
+   "status": "ok",
+   "funcoes": 7,
+   "amostra": [
+    "assinar",
+    "cadeia",
+    "key_id",
+    "keypair"
+   ]
+  },
+  "zquantum": {
+   "status": "ok",
+   "funcoes": 2,
+   "amostra": [
+    "Counter",
+    "QCircuit"
+   ]
+  },
+  "zyql_auditkit": {
+   "status": "ok",
+   "funcoes": 6,
+   "amostra": [
+    "ClassicalRegister",
+    "QuantumCircuit",
+    "QuantumRegister",
+    "certificar"
+   ]
+  },
+  "zyql_cirq": {
+   "status": "ok",
+   "funcoes": 2,
+   "amostra": [
+    "paridade",
+    "veredito_cirq"
+   ]
+  },
+  "zyql_lisp": {
+   "status": "ok",
+   "funcoes": 13,
+   "amostra": [
+    "beam_splitter",
+    "dual_rail_hadamard",
+    "expm",
+    "fock_state"
+   ]
+  },
+  "zyql_llm_compress": {
+   "status": "ok",
+   "funcoes": 5,
+   "amostra": [
+    "compress_verdict",
+    "compression_ratio",
+    "relative_error",
+    "tt_decompose"
+   ]
+  },
+  "zyql_mps": {
+   "status": "ok",
+   "funcoes": 2,
+   "amostra": [
+    "MPSSim",
+    "ry"
+   ]
+  },
+  "zyql_protocols": {
+   "status": "ok",
+   "funcoes": 6,
+   "amostra": [
+    "ClassicalRegister",
+    "QuantumCircuit",
+    "QuantumRegister",
+    "protocolo_p08"
+   ]
+  },
+  "zyql_quantum_gate": {
+   "status": "ok",
+   "funcoes": 9,
+   "amostra": [
+    "Counter",
+    "QCircuit",
+    "ZYQLQuantumGate",
+    "adaptive_margin"
+   ]
+  },
+  "zyql_rag_layer": {
+   "status": "ok",
+   "funcoes": 5,
+   "amostra": [
+    "ZYQLQuantumGate",
+    "bm25_rank",
+    "decide",
+    "llm_formulate"
+   ]
+  },
+  "zyql_robust": {
+   "status": "ok",
+   "funcoes": 9,
+   "amostra": [
+    "correlation_verdict",
+    "depolarized_kernel",
+    "kernel_concentration_verdict",
+    "lag1_autocorr"
+   ]
+  },
+  "zyql_runtime": {
+   "status": "ok",
+   "funcoes": 15,
+   "amostra": [
+    "ConfigError",
+    "Decision",
+    "Enum",
+    "Verdict"
+   ]
+  },
+  "zyql_oracle_id": {
+   "status": "ok",
+   "funcoes": 8,
+   "amostra": [
+    "MCXGate",
+    "QuantumCircuit",
+    "Statevector",
+    "audit_promise"
+   ]
+  },
+  "zyql_selfverified": {
+   "status": "ok",
+   "funcoes": 5,
+   "amostra": [
+    "SelfVerifiedDecision",
+    "dataclass",
+    "decide_selfverified",
+    "field"
+   ]
+  },
+  "zyql_witness": {
+   "status": "ok",
+   "funcoes": 7,
+   "amostra": [
+    "Witness",
+    "asdict",
+    "dataclass",
+    "field"
+   ]
+  },
+  "zyql_world3": {
+   "status": "ok",
+   "funcoes": 8,
+   "amostra": [
+    "ClassicalRegister",
+    "QuantumCircuit",
+    "QuantumRegister",
+    "grover"
+   ]
+  },
+  "zyql_worldscale": {
+   "status": "ok",
+   "funcoes": 11,
+   "amostra": [
+    "ClassicalRegister",
+    "Operator",
+    "QuantumCircuit",
+    "QuantumRegister"
+   ]
+  },
+  "zyql_zne": {
+   "status": "ok",
+   "funcoes": 3,
+   "amostra": [
+    "fold_expectation",
+    "richardson_at_zero",
+    "zne_verdict"
+   ]
+  },
+  "zyqml_core": {
+   "status": "ok",
+   "funcoes": 15,
+   "amostra": [
+    "ansatz_state",
+    "apply_1q",
+    "apply_2q",
+    "energy"
+   ]
+  }
+ }
+}
