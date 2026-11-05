@@ -3,6 +3,7 @@ README.md
 pyproject.toml
 src/battery_ci.py
 src/oq3.py
+src/quantum_safe_readiness.py
 src/quantum_types.py
 src/shot_auditor.py
 src/zkernel.py
@@ -62,6 +63,7 @@ tests/test_oracle_id.py
 tests/test_protocols.py
 tests/test_qasm3.py
 tests/test_qroute.py
+tests/test_quantum_safe_readiness.py
 tests/test_regression_seal.py
 tests/test_rodada_h.py
 tests/test_rodada_h2.py

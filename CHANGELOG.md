@@ -1,3 +1,15 @@
+## [2.5.6] - 2026-11-05
+- `zyql_worldscale`: banda do W-03 unificada em 0.85, a mesma do protocolo
+  pre-registrado. Antes o codigo certificava com 0.70 enquanto o protocolo recusava
+  o mesmo resultado, o que tornava o recibo ambiguo.
+- `rodada_mundial` passa a aceitar `bandas` explicito.
+
+## [2.5.5] - 2026-11-05
+- Modulo `quantum_safe_readiness` (QSR): inventario criptografico, criterio de Mosca,
+  agilidade, interop ML-KEM-768/ML-DSA-44 e recibo SHA3 selado.
+- `docs/QSR_FONTES.md` com a fundamentacao em FIPS 203/204/205, IR 8547 final,
+  SP 800-57, CNSA 2.0 e SP 1800-38; chaves publicas conferem com o padrao.
+
 ## [2.5.4] - 2026-11-05
 - `qroute.__version__` passa a ler o metadado do pacote em vez de repetir
   a versao escrita a mao; a 2.5.3 publicada reportava 2.4.0 internamente.

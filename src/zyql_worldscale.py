@@ -75,7 +75,13 @@ def _tvd(ideal, counts, n):
     return 0.5 * sum(abs(ideal.get(k, 0.0) - obs.get(k, 0.0)) for k in keys)
 
 
-def rodada_mundial(shots=1024, qpu=None, seal_path=None):
+BANDAS_PADRAO = {"W-01_tvd": [0.20, 0.35], "W-02_vis": [0.80, 0.50], "W-03_p": [0.85, 0.70]}
+
+
+def rodada_mundial(shots=1024, qpu=None, seal_path=None, bandas=None):
+    """Banda do W-03 foi unificada em 0.85 (pre-registrada). Ate a 2.5.4 o codigo
+    usava 0.70, o que certificava o mesmo resultado que o protocolo recusava."""
+    bandas = {**BANDAS_PADRAO, **(bandas or {})}
     circs = {"W-01": walk(), "W-02": hom(), "W-03": grover()}
     if qpu is None:
         from qiskit_aer import AerSimulator
@@ -98,22 +104,20 @@ def rodada_mundial(shots=1024, qpu=None, seal_path=None):
     r = {}
     tvd = _tvd(_ideal(circs["W-01"]), counts["W-01"], 3)
     r["W-01"] = {"tvd": round(tvd, 4),
-                 "veredito": "1" if tvd <= 0.20 else ("0" if tvd > 0.35 else "REFUSED")}
+                 "veredito": "1" if tvd <= bandas["W-01_tvd"][0] else ("0" if tvd > bandas["W-01_tvd"][1] else "REFUSED")}
     c2 = counts["W-02"]
     coinc = sum(v for k, v in c2.items() if k in ("01", "10")) / sum(c2.values())
     vis = 1 - 2 * coinc
     r["W-02"] = {"coincidencia": round(coinc, 4), "visibilidade": round(vis, 4),
-                 "veredito": "1" if vis >= 0.8 else ("0" if vis < 0.5 else "REFUSED")}
+                 "veredito": "1" if vis >= bandas["W-02_vis"][0] else ("0" if vis < bandas["W-02_vis"][1] else "REFUSED")}
     c3 = counts["W-03"]
     pm = c3.get("101", 0) / sum(c3.values())
     r["W-03"] = {"p_marcado": round(pm, 4), "classico": 0.125, "ideal_2iter": 0.945,
-                 "veredito": "1" if pm >= 0.70 else ("0" if pm <= 0.30 else "REFUSED")}
+                 "veredito": "1" if pm >= bandas["W-03_p"][0] else ("0" if pm < bandas["W-03_p"][1] else "REFUSED")}
 
     rec = _seal({"protocolo": {"id": "WORLD-20261029",
                                "declarado": {"shots": shots, "alpha": 0.01,
-                                             "bandas": {"W-01_tvd": [0.20, 0.35],
-                                                        "W-02_vis": [0.8, 0.5],
-                                                        "W-03_p": [0.70, 0.30]},
+                                             "bandas": bandas,
                                              "fotonica": "analogo em qubits supercondutores, nao fotonica real"}},
                  "execucao": {"dispositivo": dev, "job_id": jid, "counts": counts},
                  "resultado": r})
