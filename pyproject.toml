@@ -11,7 +11,7 @@ requires-python = ">=3.10"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 dependencies = ["numpy", "lark", "qiskit>=2.6,<3"]
-authors = [{name = "Reginaldo Gonçalves", email = "builderquantunxia@gmail.com"}]
+authors = [{name = "Reginaldo Gonçalves", email = "serena.aigronovatech@gmail.com"}]
 
 [project.optional-dependencies]
 # execucao em hardware real e simulacao ruidosa (Qiskit Runtime / Aer)
