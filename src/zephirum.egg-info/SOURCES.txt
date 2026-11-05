@@ -44,7 +44,9 @@ src/zephirum.egg-info/requires.txt
 src/zephirum.egg-info/top_level.txt
 src/zqgate/__init__.py
 src/zqgate/cli.py
+tests/test_api.py
 tests/test_auditkit.py
+tests/test_baterias_script.py
 tests/test_canonical.py
 tests/test_cirq.py
 tests/test_decisoes_certificadas.py
