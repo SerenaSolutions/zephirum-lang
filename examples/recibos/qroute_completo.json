@@ -1,5 +1,5 @@
 {
- "data": "2026-11-03T17:34:46+00:00",
+ "data": "2026-11-05T20:01:11+00:00",
  "entrada": {
   "destino": "DEST",
   "fonte_mapa": "entrega_sp_completo.json",
@@ -162,7 +162,7 @@
  "modo": "SIMULACAO EXATA EM VETOR DE ESTADO — sem hardware, sem shots",
  "modulo": "src/qroute (ZYQL 2.2.0)",
  "nota": "comparacao algoritmica de chamadas ao oraculo; nao e ganho de tempo medido, nao ha execucao em hardware nesta rodada",
- "prev_sha3": "73e3e464a3b2cfe4b6886f29f6bbde8339ca9a61ff591b72da5a0ad751665d1d",
- "sha3_256": "ad322763de666e4b72e09a9f1dcdd4cf95db869a48d952f45f1287d65af5206e",
+ "prev_sha3": "ad322763de666e4b72e09a9f1dcdd4cf95db869a48d952f45f1287d65af5206e",
+ "sha3_256": "1a27ce58b1c9763c9614150b16bfb7c3bec67dc1a8696bdca9137fabcee48a63",
  "spec": "Q-ROUTE/v1"
 }

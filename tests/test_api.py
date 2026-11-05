@@ -4,6 +4,8 @@ matemática esperada por construção, não com "não explodiu"."""
 import os, sys, math
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "api"))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import pytest
+pytest.importorskip("fastapi", reason="extra 'api' nao instalado (fastapi)")
 from fastapi.testclient import TestClient
 import server
 
