@@ -1,3 +1,11 @@
+<p align="center">
+  <a href="assets/demos/zyql_decision_sphere_30s.mp4">
+    <img src="assets/demos/zyql_decision_sphere_poster.jpg" width="640" alt="ZYQL trivalent decision sphere — 30 s animation with sound">
+  </a>
+  <br>
+  <sub><b>▶ 30 s animation (with sound)</b> — the trivalent decision sphere: verdict <code>0</code> for the constant oracle, then <code>REFUSED</code> (BALANCED_ORACLE). Declared simulation; hardware reference IBM Heron <code>ibm_fez</code>, job <code>db6ded84qg6s73c4jvug</code>, measured p(000) = 0.9844</sub>
+</p>
+
 <p align="center"><img src="assets/social-preview-1280x640.jpg" alt="ZYQL: Exact-decision language" width="640"></p>
 
 # ZEPHIRUM
