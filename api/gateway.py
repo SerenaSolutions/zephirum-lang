@@ -20,6 +20,7 @@ import hashlib
 import json
 import os
 import secrets
+import string
 import time
 from pathlib import Path
 from typing import Any
@@ -47,6 +48,15 @@ FRONTS = {
 }
 
 
+ALFABETO = string.ascii_letters + string.digits  # A-Z, a-z, 0-9: sem simbolo nenhum
+
+
+def gerar_chave(prefixo: str = "ZYQL", tamanho: int = 44) -> str:
+    """Chave so com letras e numeros. secrets.choice usa o gerador do sistema."""
+    corpo = "".join(secrets.choice(ALFABETO) for _ in range(tamanho))
+    return f"{prefixo}{corpo}"
+
+
 def _hash(chave: str) -> str:
     return hashlib.sha3_256(chave.encode()).hexdigest()
 
@@ -66,7 +76,7 @@ def issue(nome: str, escopos: list[str]) -> dict[str, Any]:
     if invalidos:
         raise ValueError(f"escopo invalido: {sorted(invalidos)}")
     dados = _carregar()
-    chave = "zyql_" + secrets.token_urlsafe(32)
+    chave = gerar_chave()
     dados.setdefault("tokens", {})[_hash(chave)] = {
         "nome": nome, "escopos": sorted(set(escopos)),
         "criado_em": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "revogado": False,

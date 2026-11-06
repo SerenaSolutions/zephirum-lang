@@ -50,7 +50,9 @@ def test_chave_mestra_abre_catalogo(gw):
 def test_chave_emitida_respeita_escopo(gw):
     r = gw.issue("teste", ["read"])
     chave = r["chave"]
-    assert chave.startswith("zyql_")
+    import re
+    assert re.fullmatch(r"[A-Za-z0-9]+", chave), f"chave fora do padrao alfanumerico: {chave}"
+    assert chave.startswith("ZYQL") and len(chave) == 48
     c = TestClient(gw.app)
     assert c.get("/v1/catalog", headers={"X-API-Key": chave}).status_code == 200
     # sem escopo 'qsr' precisa recusar
