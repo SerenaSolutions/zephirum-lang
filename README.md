@@ -1,4 +1,12 @@
 <p align="center">
+  <a href="assets/demos/zyql_birth_ibm_heron_30s.mp4">
+    <img src="assets/demos/zyql_birth_ibm_heron_poster.jpg" width="640" alt="The birth of ZYQL on IBM Quantum - 30 s animation with sound">
+  </a>
+  <br>
+  <sub><b>▶ The birth of the language (30 s, with sound)</b> — the first run on IBM Quantum, <code>ibm_fez</code>, 2026-10-13: Deutsch-Jozsa constant <code>p1=0.000 → 0</code>, balanced <code>p1=0.953 → 1</code>, Bell Z <code>0.975</code>, Bell X <code>0.986</code> — 4 PASS / 0 FLAGGED, each with a SHA3-256 receipt (<a href="tests/ibm_quantum/zca_conformidade_live.json">receipts</a>). Declared simulation over real results.</sub>
+</p>
+
+<p align="center">
   <a href="assets/demos/zyql_decision_sphere_30s.mp4">
     <img src="assets/demos/zyql_decision_sphere_poster.jpg" width="640" alt="ZYQL trivalent decision sphere — 30 s animation with sound">
   </a>
