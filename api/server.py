@@ -38,7 +38,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))) +
 from zyql_oracle_id import audit_promise, identify_2bit, reveal_linear
 from zyql_quantum_gate import ZYQLQuantumGate, adaptive_margin, adaptive_margin_family
 
-APP_VERSION = "2.5.0"
+APP_VERSION = "2.5.6"
 MAX_N = 8                    # fase-oráculo simulada: 2^n amplitudes
 MAX_SHOTS = 100_000
 
@@ -46,6 +46,10 @@ app = FastAPI(
     title="ZYQL Decision API",
     version=APP_VERSION,
     description="Decisão trivalente com banda derivada e recibo verificável offline.",
+    servers=[
+        {"url": "http://localhost:8000", "description": "desenvolvimento local"},
+        {"url": "https://zyql-api.replit.app", "description": "produção (trocar pela URL real do serviço)"},
+    ],
 )
 
 ORACLES = {
