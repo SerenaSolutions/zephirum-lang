@@ -248,6 +248,21 @@ Protocolos pré-declarados, executados no plano Open com recibo selado
 
 Detalhes: **[docs/APPS.md](docs/APPS.md)**
 
+### App animations (30 s, with sound)
+
+<p align="center">
+  <a href="assets/demos/cpa01_auditkit_30s.mp4"><img src="assets/demos/cpa01_auditkit_poster.jpg" width="270" alt="CPA-01 AuditKit"></a>
+  <a href="assets/demos/qrs01_regression_seal_30s.mp4"><img src="assets/demos/qrs01_regression_seal_poster.jpg" width="270" alt="QRS-01 Regression Seal"></a>
+  <a href="assets/demos/zyql_qroute_console_30s.mp4"><img src="assets/demos/zyql_qroute_console_poster.jpg" width="270" alt="ZYQL Q-ROUTE console"></a>
+</p>
+
+<p align="center"><sub>
+<b>CPA-01 AuditKit</b> — quantum entropy certification (4096 bits, ibm_marrakesh, job <code>dbhpaomne4hc73bdbp7g</code>, verdict <code>1</code>) ·
+<b>QRS-01 Regression Seal</b> — CI/CD gate: identity <code>1</code>, phase bug 0.37 rad <code>0</code>, gate bug rx(0.9) <code>0</code> ·
+<b>ZYQL Q-ROUTE</b> — live trivalent routing <code>1</code> / <code>0</code> / <code>REFUSED</code>
+<br>Declared simulations; every hardware claim points to a sealed receipt and a job ID.
+</sub></p>
+
 ## Honest scope
 
 This repository contains the language heart only: kernel, types, gate, receipts.
