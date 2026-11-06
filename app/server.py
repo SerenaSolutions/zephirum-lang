@@ -30,7 +30,21 @@ def monta_visao(res, mapa):
     return {"nos": nos, "arestas": arestas, "resultado": res}
 
 
+class SemCredencialIBM(RuntimeError):
+    """Hardware pedido, mas nenhum token IBM no ambiente do servico."""
+
+
+def credencial_ibm():
+    from qroute import hardware as hw
+    return hw.tem_token()
+
+
 def executa(modo):
+    if modo == "hardware" and not credencial_ibm():
+        raise SemCredencialIBM(
+            "nenhum token IBM Quantum no ambiente do servico (QISKIT_IBM_TOKEN ou "
+            "IBM_QUANTUM_TOKEN). A simulacao continua disponivel; para rodar na QPU "
+            "o token precisa chegar ao servico como segredo do app.")
     mapa = graph.load(MAPA)
     res = core.executa(MAPA, silencioso=True, seal_path=RECIBO,
                        hardware=(modo == "hardware"), shots=1024)
@@ -51,7 +65,9 @@ class H(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path.startswith("/api/last"):
-            return self._envia(ULTIMO["dados"] or {"vazio": True})
+            corpo = dict(ULTIMO["dados"] or {"vazio": True})
+            corpo["credencial_ibm"] = credencial_ibm()
+            return self._envia(corpo)
         caminho = os.path.join(os.path.dirname(os.path.abspath(__file__)), "index.html")
         self._envia(open(caminho, "rb").read(), tipo="text/html")
 
@@ -60,6 +76,8 @@ class H(BaseHTTPRequestHandler):
         corpo = json.loads(self.rfile.read(n) or b"{}")
         try:
             self._envia(executa(corpo.get("modo", "simulacao")))
+        except SemCredencialIBM as e:
+            self._envia({"erro": str(e)}, code=409)
         except Exception as e:
             self._envia({"erro": f"{type(e).__name__}: {e}"}, code=500)
 

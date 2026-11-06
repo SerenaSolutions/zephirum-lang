@@ -105,5 +105,10 @@ async function roda(modo){
 }
 document.getElementById('run-hw').onclick=()=>roda('hardware');
 document.getElementById('run-sim').onclick=()=>roda('simulacao');
-fetch('/api/last').then(r=>r.json()).then(v=>{if(!v.vazio)renderiza(v);});
+fetch('/api/last').then(r=>r.json()).then(v=>{
+  if(!v.vazio){renderiza(v);return;}
+  document.getElementById('razao').textContent = v.credencial_ibm
+    ? 'pronta — QPU IBM disponível'
+    : 'aguardando execução · QPU sem token IBM';
+});
 </script></body></html>
