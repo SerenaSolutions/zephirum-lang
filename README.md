@@ -256,19 +256,31 @@ Protocolos pré-declarados, executados no plano Open com recibo selado
 
 Detalhes: **[docs/APPS.md](docs/APPS.md)**
 
-### App animations (30 s, with sound)
+### App animations (30 s / 38 s, with sound)
 
 <p align="center">
-  <a href="assets/demos/cpa01_auditkit_30s.mp4"><img src="assets/demos/cpa01_auditkit_poster.jpg" width="270" alt="CPA-01 AuditKit"></a>
-  <a href="assets/demos/qrs01_regression_seal_30s.mp4"><img src="assets/demos/qrs01_regression_seal_poster.jpg" width="270" alt="QRS-01 Regression Seal"></a>
-  <a href="assets/demos/zyql_qroute_console_30s.mp4"><img src="assets/demos/zyql_qroute_console_poster.jpg" width="270" alt="ZYQL Q-ROUTE console"></a>
+  <a href="assets/demos/cpa01_auditkit_30s.mp4"><img src="assets/demos/cpa01_auditkit_poster.jpg" width="200" alt="CPA-01 AuditKit"></a>
+  <a href="assets/demos/qrs01_regression_seal_30s.mp4"><img src="assets/demos/qrs01_regression_seal_poster.jpg" width="200" alt="QRS-01 Regression Seal"></a>
+  <a href="assets/demos/zyql_qroute_console_30s.mp4"><img src="assets/demos/zyql_qroute_console_poster.jpg" width="200" alt="ZYQL Q-ROUTE console"></a>
+  <a href="assets/demos/qsr01_readiness_38s.mp4"><img src="assets/demos/qsr01_readiness_poster.jpg" width="200" alt="QSR-01 readiness"></a>
+  <a href="assets/demos/zyql_selfverified_38s.mp4"><img src="assets/demos/zyql_selfverified_poster.jpg" width="200" alt="ZYQL self-verified"></a>
+</p>
+<p align="center">
+  <a href="assets/demos/zkem_envelope_38s.mp4"><img src="assets/demos/zkem_envelope_poster.jpg" width="200" alt="Z-KEM envelope"></a>
+  <a href="assets/demos/s3_anyon_braids_38s.mp4"><img src="assets/demos/s3_anyon_braids_poster.jpg" width="200" alt="S3 anyon braids"></a>
+  <a href="assets/demos/zyql_decision_core_30s.mp4"><img src="assets/demos/zyql_decision_core_poster.jpg" width="200" alt="ZYQL decision core"></a>
+  <a href="assets/demos/zyql_birth_ibm_heron_38s.mp4"><img src="assets/demos/zyql_birth_ibm_heron_poster.jpg" width="300" alt="Birth of ZYQL"></a>
 </p>
 
 <p align="center"><sub>
-<b>CPA-01 AuditKit</b> — quantum entropy certification (4096 bits, ibm_marrakesh, job <code>dbhpaomne4hc73bdbp7g</code>, verdict <code>1</code>) ·
-<b>QRS-01 Regression Seal</b> — CI/CD gate: identity <code>1</code>, phase bug 0.37 rad <code>0</code>, gate bug rx(0.9) <code>0</code> ·
-<b>ZYQL Q-ROUTE</b> — live trivalent routing <code>1</code> / <code>0</code> / <code>REFUSED</code>
-<br>Declared simulations; every hardware claim points to a sealed receipt and a job ID.
+<b>CPA-01 AuditKit</b> — entropy certification, 4096 bits on ibm_marrakesh (job <code>dbhpaomne4hc73bdbp7g</code>), verdict <code>1</code> ·
+<b>QRS-01 Regression Seal</b> — CI/CD gate, identity <code>1</code> / phase bug <code>0</code> / gate bug <code>0</code> ·
+<b>Q-ROUTE</b> — live trivalent routing ·
+<b>QSR-01</b> — Mosca inequality: RSA-2048 <code>0</code>, X25519 <code>1</code>, ML-KEM-768 <code>1</code> ·
+<b>Self-verified (C&#8224;)</b> — the QPU certifies its own run, selfcheck_p0 0.969 ·
+<b>Z-KEM</b> — ML-KEM-768 + AES-256-GCM envelope ·
+<b>S3 anyons</b> — braiding measured on ibm_fez, 98.1% vs 95.8%
+<br>All animations are declared simulations built over real receipts and job IDs.
 </sub></p>
 
 ## Honest scope
