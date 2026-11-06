@@ -5,11 +5,11 @@ intervalo de confianca da probabilidade medida — sem esses campos nao ha alega
 import math
 import os
 
-from qiskit import QuantumCircuit, transpile
-from qiskit.circuit.library import MCPhaseGate
-
 
 def monta(n_qubits, marcados, iteracoes):
+    # Import tardio: o console consulta a credencial antes de carregar o qiskit.
+    from qiskit import QuantumCircuit
+    from qiskit.circuit.library import MCPhaseGate
     qc = QuantumCircuit(n_qubits, n_qubits)
     qc.h(range(n_qubits))
     for _ in range(iteracoes):
@@ -51,11 +51,16 @@ def p_marcados(counts, marcados, shots=None):
             "ic95": [round(max(0.0, p - erro), 6), round(min(1.0, p + erro), 6)]}
 
 
-ORDEM_TOKEN = ("IBM_QUANTUM_TOKEN", "IBM_QUANTUM_TOKEN_2", "IBM_QUANTUM_TOKEN_3",
-               "IBM_QUANTUM_TOKEN_4", "IBM_QUANTUM_TOKEN_5")
+ORDEM_TOKEN = ("QISKIT_IBM_TOKEN", "IBM_QUANTUM_TOKEN", "IBM_QUANTUM_TOKEN_2",
+               "IBM_QUANTUM_TOKEN_3", "IBM_QUANTUM_TOKEN_4", "IBM_QUANTUM_TOKEN_5")
 
 
 _ESCOLHIDO = {}
+
+
+def tem_token():
+    """Ha credencial IBM no ambiente? Chamado ANTES de carregar qiskit/conectar."""
+    return any(os.environ.get(n) for n in ORDEM_TOKEN)
 
 
 def _token():
@@ -99,6 +104,7 @@ def _servico(token=None, crn=None):
 
 
 def executa(n_qubits, marcados, iteracoes, shots=1024, backend=None, token=None, crn=None):
+    from qiskit import transpile
     from qiskit_ibm_runtime import SamplerV2
     svc = _servico(token, crn)
     if backend:
@@ -130,6 +136,7 @@ def executa(n_qubits, marcados, iteracoes, shots=1024, backend=None, token=None,
 
 def dry_run(n_qubits, marcados, iteracoes, shots=1024):
     """Ensaio sem credencial: backend falso com ruido real de calibracao da IBM."""
+    from qiskit import transpile
     from qiskit_ibm_runtime.fake_provider import FakeMarrakesh
     bk = FakeMarrakesh()
     qc = monta(n_qubits, marcados, iteracoes)
