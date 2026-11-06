@@ -1,0 +1,14 @@
+modules = ["python-3.11"]
+run = "bash start.sh"
+entrypoint = "api/gateway.py"
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+ZYQL_API_TOKEN = ""
+ZYQL_TOKENS_FILE = ".tokens.json"
+
+[deployment]
+run = ["bash", "start.sh"]
+deploymentTarget = "cloudrun"
