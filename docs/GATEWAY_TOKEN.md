@@ -44,3 +44,31 @@ Repl, nunca no código e nunca no repositório. `.tokens.json` e `.replit-env` e
 Não há autenticação de usuário final, rate limit por IP nem cota por chave. Para
 exposição pública, essas camadas vão no Replit ou num gateway de borda. Está declarado
 em `/v1/limits` para ninguém supor proteção que não existe.
+
+## Estado atual da chave
+
+A chave mestra vive como segredo de ambiente, `$ZYQL_API_TOKEN`, e não está no
+repositório. As chaves nomeadas emitidas por CLI ficam em `.tokens.json` apenas como
+hash SHA3. A chave de produção emitida antes da migração para o segredo foi **revogada**.
+
+Comandos:
+
+```bash
+python -m api.gateway issue --name <nome> --scopes read,decide,qsr,lang
+python -m api.gateway list
+python -m api.gateway revoke <chave>
+```
+
+`list` mostra hash curto, nome, escopos, data e se está ativa ou revogada. Nunca
+imprime a chave.
+
+## Verificação de ponta a ponta (medida)
+
+| Chamada | Resultado |
+|---|---|
+| `GET /health` sem chave | 200 |
+| `GET /v1/catalog` sem chave | 401 |
+| `GET /v1/catalog` com a chave | 200, quatro fronts |
+| `POST /v1/qsr/assess` | veredito 0: um ativo precisa migrar, o outro está pronto |
+| `POST /v1/lang/run` com `(hello zyql)` | saída `Hello, zyql! | decisao = 1` |
+| `POST /v1/core/decide` com `const1` | veredito 1 com recibo selado |

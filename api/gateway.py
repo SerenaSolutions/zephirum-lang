@@ -213,21 +213,38 @@ def lang_run(req: LangRequest):
 def main(argv: list[str] | None = None) -> int:
     import sys
     argv = argv if argv is not None else sys.argv[1:]
-    if not argv or argv[0] != "issue":
+    if not argv:
         print(__doc__)
         return 2
-    nome = "padrao"
-    escopos = ["read"]
-    if "--name" in argv:
-        nome = argv[argv.index("--name") + 1]
-    if "--scopes" in argv:
-        escopos = [e.strip() for e in argv[argv.index("--scopes") + 1].split(",") if e.strip()]
-    r = issue(nome, escopos)
-    print("chave emitida (guarde agora, nao aparece de novo):")
-    print(r["chave"])
-    print("escopos:", r["escopos"])
-    return 0
-
+    cmd = argv[0]
+    if cmd == "issue":
+        nome, escopos = "padrao", ["read"]
+        if "--name" in argv:
+            nome = argv[argv.index("--name") + 1]
+        if "--scopes" in argv:
+            escopos = [e.strip() for e in argv[argv.index("--scopes") + 1].split(",") if e.strip()]
+        r = issue(nome, escopos)
+        print("chave emitida (guarde agora, nao aparece de novo):")
+        print(r["chave"])
+        print("escopos:", r["escopos"])
+        return 0
+    if cmd == "revoke":
+        if len(argv) < 2:
+            print("uso: python -m api.gateway revoke <chave>")
+            return 2
+        ok = revogar(argv[1])
+        print("revogada" if ok else "chave nao encontrada")
+        return 0 if ok else 1
+    if cmd == "list":
+        dados = _carregar().get("tokens", {})
+        for h, reg in dados.items():
+            print(f"{h[:16]}... | {reg['nome']:20} | {','.join(reg['escopos']):28} | "
+                  f"{reg['criado_em']} | {'REVOGADA' if reg.get('revogado') else 'ativa'}")
+        if not dados:
+            print("nenhuma chave nomeada emitida")
+        return 0
+    print(f"comando desconhecido: {cmd}")
+    return 2
 
 if __name__ == "__main__":
     raise SystemExit(main())
