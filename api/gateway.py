@@ -29,6 +29,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
+from api.billing import router as _billing_router
 from api.server import app as _core_app
 
 VERSAO = "1.0.0"
@@ -120,6 +121,8 @@ app = FastAPI(title="ZYQL Gateway", version=VERSAO,
 
 # monta o nucleo: todas as rotas de decisao ficam sob /v1/core
 app.mount("/v1/core", _core_app)
+# checkout e medicao: autenticacao propria (chave de compra), nao a chave do gateway
+app.include_router(_billing_router, prefix="/v1/billing")
 
 
 def _escopo_do_caminho(caminho: str) -> str:
@@ -135,7 +138,9 @@ def _escopo_do_caminho(caminho: str) -> str:
 @app.middleware("http")
 async def exigir_chave(request: Request, call_next):
     caminho = request.url.path
-    if caminho in ("/health", "/docs", "/openapi.json") or caminho.startswith("/docs"):
+    if (caminho in ("/health", "/docs", "/openapi.json") or caminho.startswith("/docs")
+            or caminho.startswith("/v1/billing")):
+        # billing autentica por chave de compra dentro de cada rota
         return await call_next(request)
     chave = request.headers.get("X-API-Key")
     escopo = _escopo_do_caminho(caminho)
