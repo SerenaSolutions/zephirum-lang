@@ -99,6 +99,32 @@ def _seal(receipt: dict) -> str:
     ).hexdigest()
 
 
+ARQ_CORRENTE = os.environ.get("ZYQL_CHAIN_FILE", ".chain.json")
+
+
+def _ler_corrente() -> dict:
+    try:
+        with open(ARQ_CORRENTE) as fh:
+            return json.load(fh)
+    except Exception:
+        return {"elo": 0, "ultimo": "genesis"}
+
+
+def _correntear(recibo: dict) -> str:
+    """Encadeia o recibo ao anterior antes de selar: prova ordem e ausencia de remocao."""
+    est = _ler_corrente()
+    recibo["prev"] = est.get("ultimo", "genesis")
+    recibo["elo"] = int(est.get("elo", 0)) + 1
+    selo = _seal(recibo)
+    recibo["selo_sha3_256"] = selo
+    try:
+        with open(ARQ_CORRENTE, "w") as fh:
+            json.dump({"elo": recibo["elo"], "ultimo": selo}, fh)
+    except Exception:
+        pass
+    return selo
+
+
 def _shots_necessarios(epsilon: float, margin: float, family: int = 1) -> int:
     """Hoeffding inverso: quantos shots para garantir banda <= margin.
 
@@ -196,7 +222,7 @@ def decide(req: DecideRequest):
         "fisica": "statevector_exato",
         "hipoteses": ["amostras independentes", "erro amostral <= epsilon"],
     }
-    recibo["selo_sha3_256"] = _seal(recibo)
+    recibo["selo_sha3_256"] = _correntear(recibo)
     if req.sign:
         try:
             from zqea_pq import sign_receipt
