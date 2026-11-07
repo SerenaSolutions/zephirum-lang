@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 */
 /* zephirum.h - C API of the ZYQL trivalent decision core (v1.4.3).
  *
  * Three layers: languages (Zephyron and bindings) -> THIS C API -> core.
