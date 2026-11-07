@@ -1,0 +1,85 @@
+{
+ "suite": "QV-ZYQL",
+ "nivel": 0,
+ "data": "2026-11-07T01:52:23Z",
+ "hardware": {
+  "backend": "ibm_marrakesh",
+  "job_id": "dbn88ns4148s7390g750",
+  "shots": 4096,
+  "p_marcado": 0.7392578125,
+  "p_falso_positivo": 0.138671875,
+  "distribuicoes": {
+   "grover_101": {
+    "101": 0.7392578125,
+    "001": 0.048828125,
+    "100": 0.0556640625,
+    "111": 0.0439453125,
+    "011": 0.03662109375,
+    "010": 0.0263671875,
+    "110": 0.021240234375,
+    "000": 0.028076171875
+   },
+   "oraculo_vazio": {
+    "000": 0.137939453125,
+    "011": 0.113525390625,
+    "001": 0.1337890625,
+    "100": 0.136962890625,
+    "101": 0.138671875,
+    "010": 0.109130859375,
+    "110": 0.122314453125,
+    "111": 0.107666015625
+   }
+  }
+ },
+ "achados": [
+  {
+   "id": "A1",
+   "classe": "injecao de codigo",
+   "severidade": "critica",
+   "resultado": "PASS",
+   "detalhe": "5 tentativas, vazamentos: nenhum"
+  },
+  {
+   "id": "A2",
+   "classe": "exaustao de recurso",
+   "severidade": "alta",
+   "resultado": "PASS",
+   "detalhe": "entrada de 200 kB processada em 0.02s"
+  },
+  {
+   "id": "A3",
+   "classe": "integridade de recibo",
+   "severidade": "critica",
+   "resultado": "PASS",
+   "detalhe": "veredito 1 -> 0 muda o selo"
+  },
+  {
+   "id": "A4",
+   "classe": "escalada de privilegio",
+   "severidade": "critica",
+   "resultado": "PASS",
+   "detalhe": "chave 'read' nao autoriza 'decide'"
+  },
+  {
+   "id": "B1",
+   "classe": "certificacao sem evidencia",
+   "severidade": "critica",
+   "resultado": "PASS",
+   "detalhe": "oraculo vazio mediu p(101)=0.1387; acima de 0.30 seria falso positivo"
+  },
+  {
+   "id": "B2",
+   "classe": "amplificacao real",
+   "severidade": "alta",
+   "resultado": "PASS",
+   "detalhe": "grover 101 mediu p(101)=0.7393 contra 0.125 classico"
+  }
+ ],
+ "veredito": "1",
+ "resumo": {
+  "total": 6,
+  "falhas": 0,
+  "criticas": 0
+ },
+ "selo_sha3_256": "8a184a38f947b67b72a502c9856e77a3972f1df51143bd06ecddee95697f1da2"
+}

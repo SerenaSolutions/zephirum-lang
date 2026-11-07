@@ -1,3 +1,18 @@
+## [2.5.7] - 2026-11-07
+
+### Segurança (auditoria integrada de 06/11)
+- Rate limit por chave: janela deslizante de 60 s, `ZYQL_RATE_LIMIT` (padrão 120/min), 429 com `Retry-After`.
+- CORS restrito por `ZYQL_CORS_ORIGINS`, sem curinga, com métodos e cabeçalhos declarados.
+- Recibos encadeados: `prev` e `elo` em toda rota da API; corrente em `ZYQL_CHAIN_FILE`.
+- Webhook Stripe com verificação de assinatura HMAC-SHA256 sobre `timestamp.corpo`, tolerância de 300 s.
+- `ZYQL_ENV=production` exige `STRIPE_WEBHOOK_SECRET`: modo degradado recusado com 503.
+
+### Comercial
+- `api/billing.py`: checkout, emissão de chave com saldo, medição por verificação, idempotência e 402 no saldo esgotado.
+- Gateway com token: fronts `read`, `decide`, `qsr`, `lang`; chaves alfanuméricas de 48 caracteres, guardadas em SHA3.
+
+### Pacote
+- `uvicorn` declarado no extra `api` (antes o `uvicorn` faltava e o servidor não subia).
 ## [2.5.6] - 2026-11-05
 - `zyql_worldscale`: banda do W-03 unificada em 0.85, a mesma do protocolo
   pre-registrado. Antes o codigo certificava com 0.70 enquanto o protocolo recusava
