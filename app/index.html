@@ -81,7 +81,7 @@ function desenhaGrafo(v){
 }
 function renderiza(v){
   const r=v.resultado;
-  document.getElementById('modo').textContent = v.modo==='hardware' ? 'QPU IBM' : 'simulação local';
+  document.getElementById('modo').textContent = v.modo==='hardware' ? 'QPU física' : 'simulação local';
   const b=document.getElementById('badge'); b.textContent=r.veredito; b.className='badge '+COR[r.veredito];
   document.getElementById('razao').textContent=r.razao;
   const rows=[["Rota aprovada",(r.melhor_rota||{}).trecho||"—"],["Custo","R$ "+((r.melhor_rota||{}).custo??"—")],
