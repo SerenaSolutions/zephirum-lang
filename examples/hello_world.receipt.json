@@ -1,7 +1,7 @@
 {
  "spec": "Z-QEA",
  "modulo": "src/zyql_lisp.py (interpretador ZEPHIRUM v2) + hello_world.zph",
- "data": "2026-11-06T17:12:43+00:00",
+ "data": "2026-11-07T01:30:09+00:00",
  "modo": "SIMULACAO FOTONICA LOCAL (espaco de Fock exato, numpy/scipy, cutoff 10) \u2014 sem hardware, sem shots, sem endosso",
  "linguagem": "programa de teste escrito em ZEPHIRUM v2 (Lisp) e executado pelo interpretador da casa \u2014 o recibo e gerado PELA linguagem",
  "laboratorio": null,
@@ -13,5 +13,5 @@
   }
  },
  "selo_regra": "selo = SHA3-256 sobre json.dumps(recibo, sort_keys=True, ensure_ascii=True, default=str) com o campo selo_sha3_256 REMOVIDO da entrada",
- "selo_sha3_256": "4180f5ce309420e87d61fc8ad17f5063529321dd26ca12bce518579faccfda1c"
+ "selo_sha3_256": "6770991a89d7a153edec2ba46c733c6870784762cf2c33d47a99d8c2fddaeff0"
 }

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verificação de recibo ZYQL</title>
+<style>
+  :root { --bg:#faf9f7; --card:#fff; --ink:#1c2430; --muted:#5b6675; --line:#e3e0da; --accent:#2d4155; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14181d; --card:#1b2027; --ink:#e8eaed; --muted:#9aa4b2; --line:#2b333d; --accent:#8fb4d9; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 48px 20px 72px; }
+  h1 { font-size: 1.7rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: 0 0 32px; max-width: 62ch; }
+  .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px; }
+  .card h2 { font-size:1rem; margin:0 0 4px; }
+  .price { font-size:1.5rem; font-weight:600; margin:10px 0 2px; }
+  .unit { color:var(--muted); font-size:.85rem; }
+  ul { padding-left: 18px; margin: 14px 0 18px; color:var(--muted); font-size:.9rem; }
+  button { width:100%; padding:10px 14px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:var(--bg); font-weight:600; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  label { display:block; font-size:.85rem; color:var(--muted); margin:28px 0 6px; }
+  input { width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); font-size:1rem; }
+  .status { margin-top:16px; padding:12px 14px; border-radius:8px; font-size:.9rem; border:1px solid var(--line); background:var(--card); }
+  .status.err { border-color:#c81e1e; color:#c81e1e; }
+  .foot { margin-top:36px; color:var(--muted); font-size:.82rem; max-width:70ch; }
+  code { background:color-mix(in srgb, var(--muted) 14%, transparent); padding:1px 5px; border-radius:4px; font-size:.85em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Verificação de recibo ZYQL</h1>
+  <p class="sub">Verificação independente de recibo selado em SHA3-256. Você recebe uma chave com
+  saldo; cada verificação debita um crédito e devolve o resultado com selo recalculado no servidor.
+  A conta não é feita no seu navegador.</p>
+
+  <div class="grid" id="planos"></div>
+
+  <label for="email">E-mail para receber a chave</label>
+  <input id="email" type="email" placeholder="voce@empresa.com" autocomplete="email">
+  <div class="status" id="status">Escolha um pacote para continuar.</div>
+
+  <p class="foot">Pagamento processado por provedor externo. A chave é emitida somente após a
+  confirmação do pagamento e não é exibida novamente. Sem saldo, a verificação é recusada com
+  código 402 em vez de ser concedida de graça.</p>
+</main>
+<script>
+const API = window.ZYQL_API || 'http://localhost:8000';
+let escolhido = null;
+const brl = n => new Intl.NumberFormat('pt-BR').format(n);
+
+async function carregar() {
+  const alvo = document.getElementById('planos');
+  try {
+    const r = await fetch(`${API}/v1/billing/planos`);
+    const d = await r.json();
+    alvo.innerHTML = Object.entries(d.pacotes).map(([id, p]) => `
+      <div class="card">
+        <h2>${id.replace('verify-', '')}</h2>
+        <div class="price">US$ ${p.preco_usd.toFixed(0)}</div>
+        <div class="unit">${brl(p.creditos)} verificações · US$ ${(p.preco_usd / p.creditos).toFixed(4)} cada</div>
+        <ul><li>${p.descricao}</li><li>recibo selado por verificação</li><li>saldo consultável por API</li></ul>
+        <button onclick="escolher('${id}')">Comprar</button>
+      </div>`).join('');
+    if (d.provedor_configurado === 'nenhum') {
+      document.getElementById('status').textContent =
+        'Checkout ainda não ativado neste ambiente: nenhum provedor de pagamento configurado no servidor.';
+    }
+  } catch (e) {
+    alvo.innerHTML = '';
+    const s = document.getElementById('status');
+    s.className = 'status err';
+    s.textContent = `Não foi possível consultar a API em ${API}: ${e.message}`;
+  }
+}
+
+async function escolher(plano) {
+  escolhido = plano;
+  const email = document.getElementById('email').value.trim();
+  const s = document.getElementById('status');
+  s.className = 'status';
+  if (!email) { s.className = 'status err'; s.textContent = 'Informe o e-mail antes de comprar.'; return; }
+  try {
+    const r = await fetch(`${API}/v1/billing/checkout`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plano, email })
+    });
+    const d = await r.json();
+    if (!r.ok) { s.className = 'status err'; s.textContent = `HTTP ${r.status} · ${d.detail || 'falha no checkout'}`; return; }
+    window.location.href = d.url;
+  } catch (e) {
+    s.className = 'status err';
+    s.textContent = `Falha ao abrir o checkout: ${e.message}`;
+  }
+}
+
+carregar();
+</script>
+</body>
+</html>
