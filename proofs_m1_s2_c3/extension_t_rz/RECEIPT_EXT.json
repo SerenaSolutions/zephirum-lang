@@ -1,0 +1,44 @@
+{
+ "extensao": "C3-EXT T/Rz",
+ "kernel": "ZEPHYRUM 1.12",
+ "casos": 6,
+ "passes": 6,
+ "resultado": {
+  "T^2 = S (a fase global)": {
+   "pass": true,
+   "detail": ""
+  },
+  "T^4 = Z": {
+   "pass": true,
+   "detail": ""
+  },
+  "T^8 = I": {
+   "pass": true,
+   "detail": ""
+  },
+  "Rz(k*pi/4) exata por T^k (k=1..7)": {
+   "pass": true,
+   "detail": ""
+  },
+  "ZYZ exata em 200 unitarias": {
+   "pass": true,
+   "detail": "pior 7.0e-16"
+  },
+  "busca bruta NAO basta (limitacao medida)": {
+   "pass": true,
+   "detail": "melhor erro em <=12 geradores: 0.218"
+  }
+ },
+ "estado": {
+  "sintese_exata_pi_4": "IMPLEMENTADO",
+  "zyz": "IMPLEMENTADO",
+  "aprox_arbitraria": "ESPECIFICACAO — requer Solovay-Kitaev",
+  "limitacao_medida": "busca bruta: erro 0.218 em 12 geradores"
+ },
+ "aursa": {
+  "exato": "FATO (tolerancia 1e-12)",
+  "limitacao": "FATO medido",
+  "aprox_arbitraria": "ESPECIFICACAO"
+ },
+ "RECEIPT_HASH": "daf19257c3fb6097502275e8936769e3"
+}
