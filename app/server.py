@@ -2,7 +2,7 @@
 
 Servidor local que roda o nucleo qroute e devolve JSON para a tela.
 Modo hardware submete o Grover a QPU IBM; modo simulacao usa vetor de estado."""
-import json, os, sys
+import json, os, subprocess, sys
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,17 +39,45 @@ def credencial_ibm():
     return hw.tem_token()
 
 
+def _roda(modo):
+    mapa = graph.load(MAPA)
+    res = core.executa(MAPA, silencioso=True, seal_path=RECIBO,
+                       hardware=(modo == "hardware"), shots=1024)
+    visao = monta_visao(res, mapa)
+    visao["modo"] = modo
+    return visao
+
+
+def _roda_isolado(timeout=900):
+    """QPU em processo proprio: reusado na thread do servidor, o cliente do IBM
+    Runtime trava ou derruba o processo na segunda submissao. O console nao pode
+    morrer por causa de um job — o filho devolve a visao em JSON e sai."""
+    codigo = (
+        "import importlib.util, json, sys\n"
+        "spec = importlib.util.spec_from_file_location('zyql_app', %r)\n"
+        "mod = importlib.util.module_from_spec(spec)\n"
+        "sys.modules['zyql_app'] = mod\n"
+        "spec.loader.exec_module(mod)\n"
+        "print(json.dumps(mod._roda('hardware'), ensure_ascii=False, default=str))\n"
+    ) % os.path.join(os.path.dirname(os.path.abspath(__file__)), "server.py")
+    try:
+        p = subprocess.run([sys.executable, "-c", codigo],
+                           capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        raise RuntimeError("a QPU nao devolveu resultado em %d s; o job pode seguir na fila IBM" % timeout)
+    if p.returncode != 0:
+        erro = (p.stderr or "sem saida do filho").strip().splitlines()[-1]
+        raise RuntimeError("execucao na QPU falhou (codigo %d): %s" % (p.returncode, erro))
+    return json.loads(p.stdout.strip().splitlines()[-1])
+
+
 def executa(modo):
     if modo == "hardware" and not credencial_ibm():
         raise SemCredencialIBM(
             "nenhum token IBM Quantum no ambiente do servico (QISKIT_IBM_TOKEN ou "
             "IBM_QUANTUM_TOKEN). A simulacao continua disponivel; para rodar na QPU "
             "o token precisa chegar ao servico como segredo do app.")
-    mapa = graph.load(MAPA)
-    res = core.executa(MAPA, silencioso=True, seal_path=RECIBO,
-                       hardware=(modo == "hardware"), shots=1024)
-    visao = monta_visao(res, mapa)
-    visao["modo"] = modo
+    visao = _roda_isolado() if modo == "hardware" else _roda(modo)
     ULTIMO["dados"] = visao
     return visao
 
