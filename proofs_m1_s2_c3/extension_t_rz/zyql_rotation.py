@@ -69,3 +69,37 @@ def mitm_approx(target, depth=5):
         if d[k] < melhor_e:
             melhor_e = float(d[k]); melhor_w = list(wa) + list(Bw[k])
     return melhor_e, melhor_w
+
+# ---------- SOLOVAY-KITAEV (refinamento multiplicativo, Dawson-Nielsen) ----------
+def build_net(L=18, N=120000, seed=9):
+    """biblioteca de palavras aleatorias de H,T com L geradores: cobertura grosseira."""
+    rng = np.random.default_rng(seed)
+    gens = np.array([H, T, T.conj().T])
+    W = np.tile(np.eye(2, dtype=complex), (N,1,1))
+    escolhas = rng.integers(0, 3, size=(L, N))
+    for step in range(L):
+        W = gens[escolhas[step]] @ W
+    return W
+
+def nearest(U, W):
+    """indice e distancia (invariante a fase) da palavra mais proxima."""
+    inner = np.einsum('nij,ij->n', W.conj(), U)
+    d = np.sqrt(np.maximum(0.0, 4.0 - 2.0*np.abs(inner)))
+    k = int(np.argmin(d))
+    return k, float(d[k])
+
+def sk_synthesize(U, Wnet, rounds=4):
+    """refinamento: erro final ~ produto dos erros de cada rodada."""
+    V = np.eye(2, dtype=complex)
+    alvo = U.copy()
+    erros = []
+    for _ in range(rounds):
+        k, e = nearest(alvo, Wnet)
+        Wk = Wnet[k]
+        V = Wk @ V
+        erros.append(e)
+        # fase: alinha Wk a alvo antes de compor o resto
+        inner = np.einsum('ij,ij->', Wk.conj(), alvo)
+        ph = inner/abs(inner) if abs(inner) > 1e-15 else 1.0
+        alvo = (Wk*ph).conj().T @ alvo
+    return V, float(dist(V, U)), erros
