@@ -214,6 +214,9 @@ async def webhook(request: Request):
     corpo = await request.body()
     seg_stripe = os.environ.get("STRIPE_WEBHOOK_SECRET")
     seg_proprio = os.environ.get("ZYQL_WEBHOOK_SECRET")
+    # em producao, modo degradado nao e permitido
+    if not seg_stripe and os.environ.get("ZYQL_ENV", "").lower() == "production":
+        raise HTTPException(503, "producao exige STRIPE_WEBHOOK_SECRET: assinatura obrigatoria")
     if seg_stripe:
         ok, motivo = validar_assinatura_stripe(corpo, request.headers.get("Stripe-Signature"), seg_stripe)
         if not ok:

@@ -21,6 +21,7 @@ import json
 import os
 import secrets
 import string
+import threading
 import time
 from pathlib import Path
 from typing import Any
@@ -121,6 +122,37 @@ app = FastAPI(title="ZYQL Gateway", version=VERSAO,
 
 # monta o nucleo: todas as rotas de decisao ficam sob /v1/core
 app.mount("/v1/core", _core_app)
+
+# ---------------- limite de taxa e CORS ----------------
+LIMITE_POR_MINUTO = int(os.environ.get("ZYQL_RATE_LIMIT", "120"))
+_COTA: dict[str, list[float]] = {}
+_COTA_LOCK = threading.Lock()
+
+
+def _estourou(quem: str) -> tuple[bool, int]:
+    """Janela deslizante de 60 s por chave (ou IP quando nao ha chave)."""
+    agora = time.time()
+    with _COTA_LOCK:
+        marcas = [t for t in _COTA.get(quem, []) if agora - t < 60]
+        if len(marcas) >= LIMITE_POR_MINUTO:
+            _COTA[quem] = marcas
+            return True, int(60 - (agora - marcas[0])) + 1
+        marcas.append(agora)
+        _COTA[quem] = marcas
+    return False, 0
+
+
+def _origens() -> list[str]:
+    bruto = os.environ.get("ZYQL_CORS_ORIGINS", "")
+    return [o.strip() for o in bruto.split(",") if o.strip()]
+
+
+_ORIGENS = _origens()
+if _ORIGENS:
+    from fastapi.middleware.cors import CORSMiddleware
+    app.add_middleware(CORSMiddleware, allow_origins=_ORIGENS, allow_methods=["GET", "POST"],
+                       allow_headers=["X-API-Key", "Content-Type"], max_age=600)
+
 # checkout e medicao: autenticacao propria (chave de compra), nao a chave do gateway
 app.include_router(_billing_router, prefix="/v1/billing")
 
@@ -143,6 +175,13 @@ async def exigir_chave(request: Request, call_next):
         # billing autentica por chave de compra dentro de cada rota
         return await call_next(request)
     chave = request.headers.get("X-API-Key")
+    quem = chave or (request.client.host if request.client else "anon")
+    estourou, esperar = _estourou(quem)
+    if estourou:
+        return JSONResponse(status_code=429, content={"erro": "limite_de_taxa",
+                                                      "motivo": f"maximo {LIMITE_POR_MINUTO}/min por chave",
+                                                      "tente_em_segundos": esperar},
+                            headers={"Retry-After": str(esperar)})
     escopo = _escopo_do_caminho(caminho)
     if not autorizar(chave, escopo):
         motivo = "chave ausente" if not chave else f"chave sem escopo '{escopo}'"

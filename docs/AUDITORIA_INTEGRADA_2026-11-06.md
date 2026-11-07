@@ -74,3 +74,15 @@ público.
 
 Depois disso, contratar auditoria externa com escopo escrito. Sem esse passo, o material
 serve para parceiro técnico, não para instituição que exige parecer independente.
+
+## Remediação aplicada (mesma data)
+
+| Achado | Estado | Evidência |
+|---|---|---|
+| A1 rate limit | CORRIGIDO | janela deslizante de 60 s por chave em `api/gateway.py`, `ZYQL_RATE_LIMIT` (padrão 120/min), resposta 429 com `Retry-After` |
+| A2 CORS | CORRIGIDO | `ZYQL_CORS_ORIGINS` restrito, sem curinga, métodos e cabeçalhos declarados |
+| A3 encadeamento | CORRIGIDO | `prev` e `elo` em todo recibo da API via `_correntear`, estado em `ZYQL_CHAIN_FILE` |
+| A4 webhook degradado | CORRIGIDO | com `ZYQL_ENV=production`, ausência de `STRIPE_WEBHOOK_SECRET` responde 503 |
+
+Testes: `tests/test_auditoria.py` cobre elo seguinte apontando para o selo anterior, 429 na
+terceira chamada com limite 2, e 503 em produção sem assinatura.
