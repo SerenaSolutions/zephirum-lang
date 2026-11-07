@@ -12,14 +12,14 @@ de secret scanning da conta exigem permissão de administrador e não puderam se
 ### C1 — CRÍTICO — credencial de QPU em repositório público
 
 `SerenaSolutions/AigroQuantumFintech` é **público** e versiona um arquivo `.env` com uma
-variável `IBM_QUANTUM_API_KEY` de 46 caracteres, sem placeholder. Não é a mesma chave que
+variável `CHAVE_DE_NUVEM` de 46 caracteres, sem placeholder. Não é a mesma chave que
 usamos hoje, mas é uma credencial de nuvem real, exposta desde que o arquivo entrou no
 repositório.
 
 Agravante: apagar o arquivo **não resolve**. Ele continua no histórico do Git, acessível
 por qualquer clone. Remediação, nesta ordem:
 
-1. Revogar a chave na IBM Cloud hoje. Rotação é a única ação que fecha o risco.
+1. Revogar a chave na o provedor de nuvem hoje. Rotação é a única ação que fecha o risco.
 2. Remover o `.env` da árvore e adicionar `.env` ao `.gitignore`.
 3. Purificar o histórico (`git filter-repo` ou BFG) e forçar push, ciente de que reescreve
    o histórico do repositório.
@@ -69,7 +69,7 @@ produto e dois médios de esteira.
 
 ## O que fazer, em ordem
 
-1. Revogar a chave IBM exposta (C1). Nada mais importa antes disso.
+1. Revogar a chave exposta (C1). Nada mais importa antes disso.
 2. Proteger `main` nos cinco repositórios de produto com PR obrigatório e checks (G1, G3).
 3. Parar de usar token com bypass nos pushes de automação (G1).
 4. Licença Apache-2.0 no `zyql-audit-ui` (G6).
