@@ -1,0 +1,13 @@
+programa "h1_c6_trivalente_em_hardware" versao "1.0"
+ASK:
+    question: o oraculo e constante zero (veredito 0) ou balanceado (REFUSED)?
+CONTRACT:
+    entrada: 3 qubits, 512 tiros por circuito
+    proposito: decidir por interferencia com uma unica chamada de oraculo
+    criterio: p(000) >= 1 - eps  -> 0 ; p(000) <= eps -> REFUSED ; senao INCONCLUSIVE
+    politica: P1-2026-11
+    evidencia: contagens brutas, recibo SHA3-256, cadeia de recibos
+MODEL:
+    shots: 512
+    delta: 0.05
+    qubits: 3
