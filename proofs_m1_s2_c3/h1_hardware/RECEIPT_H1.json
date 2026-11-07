@@ -1,0 +1,66 @@
+{
+ "identity": {
+  "receipt_version": "1",
+  "program_hash": "34255e5774de000290c5f6b9672c3b95d5820ea005e471179318c2ee639a6c20",
+  "language_version": "2.5.6",
+  "compiler_version": "c2-v0.1",
+  "policy_version": "P1-2026-11"
+ },
+ "execution": {
+  "execution_id": "h1-hardware-5a9143147c2a",
+  "sequence": 1,
+  "input_commitment": "20d06a20e4620b61d0aba5f9359dc93f99ff9fcc25400c26171e24f5fc2954c9",
+  "environment": {
+   "python": "3.11.16",
+   "kernel": "ZEPHYRUM 1.12"
+  },
+  "backend": "qpu-production (vendor-neutral)",
+  "backend_fingerprint": "84e3bd98b3bc4451",
+  "parameters": {
+   "shots": 512,
+   "delta": 0.05,
+   "qubits": 3
+  },
+  "start_time": "2026-11-07T13:41:07Z",
+  "end_time": "2026-11-07T13:41:07Z"
+ },
+ "evidence": {
+  "evidence_hashes": [
+   "0f4c9154acfca919ed89ecd381cbadfdf1cf4c2542fdd9d0f158e5675050a7c7",
+   "c27684ba2544b1886333a9e225cf16c5924fcc64fde8181477f4044184f8e635"
+  ],
+  "decision_rule": "proporcao-v1",
+  "verdict": "0",
+  "execution_state": "EXECUTED",
+  "uncertainty": {
+   "epsilon_hoeffding": 0.06002,
+   "p0_constante": 0.972656,
+   "p0_balanceado": 0.0
+  },
+  "limitations": [
+   "plano aberto: ruido de leitura e de porta nao corrigidos",
+   "identificadores de job e de dispositivo mantidos em registro interno (politica de sigilo)"
+  ]
+ },
+ "authenticity": {
+  "previous_receipt_hash": null,
+  "signer_key_id": "INTERNAL-HASH-ONLY",
+  "signature_algorithm": "sha256-chain (assinatura por chave: M4)",
+  "signature": null
+ },
+ "trip": {
+  "exato_local": {
+   "constante_zero": 1.0,
+   "balanceado": 0.0
+  },
+  "hardware": {
+   "p0_constante": 0.972656,
+   "p0_balanceado": 0.0
+  },
+  "vereditos": {
+   "constante": "0",
+   "balanceado": "REFUSED"
+  },
+  "divergencia_exato_vs_hw_constante": 0.027344
+ }
+}

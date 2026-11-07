@@ -1,0 +1,21 @@
+{
+ "policy_version": "P1-2026-11",
+ "default_effect": "deny",
+ "valid_until": "2027-12-31T23:59:59Z",
+ "limits": {
+  "max_seconds": 120
+ },
+ "grants": [
+  {
+   "grant_id": "G-H1-C6",
+   "program_sha256": "34255e5774de000290c5f6b9672c3b95d5820ea005e471179318c2ee639a6c20",
+   "capabilities": [
+    "compute",
+    "qpu"
+   ],
+   "max_seconds": 120,
+   "expires_at": "2027-06-30T00:00:00Z",
+   "revoked": false
+  }
+ ]
+}
