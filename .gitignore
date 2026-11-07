@@ -10,3 +10,11 @@ __pycache__/
 build/
 dist/
 experiments/.prova_job
+
+# ambiente virtual nao versionado (politica L7: zero dependencia)
+lib/
+bin/
+lib64/
+include/
+pyvenv.cfg
+*.egg-info/
