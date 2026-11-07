@@ -1,0 +1,18 @@
+{
+ "componente": "ZYSDK",
+ "versao": "0.1.0",
+ "casos": 9,
+ "passes": 9,
+ "detalhe": {
+  "recusa transporte sem TLS": true,
+  "instancia sem SDK externo": true,
+  "envia trabalho e recebe id": true,
+  "estado do trabalho": true,
+  "le contagens": true,
+  "proporcao calculada": true,
+  "erro nao vaza token": true,
+  "nenhum SDK de fornecedor em memoria": true,
+  "provedor local simula com mesma interface": true
+ },
+ "RECEIPT_HASH": "f7748324bd78e29a2b78fb3e24299ebb"
+}
