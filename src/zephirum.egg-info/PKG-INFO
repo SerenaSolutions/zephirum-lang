@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: zephirum
-Version: 2.5.6
+Version: 2.5.7
 Summary: ZEPHIRUM: Lisp-style quantum programming language with the ZYQL trivalent decision core (1/0/REFUSED)
 Author-email: Reginaldo Gonçalves <builderquantunxia@gmail.com>
 License-Expression: Apache-2.0
@@ -18,6 +18,7 @@ Requires-Dist: cirq>=1.4; extra == "interop"
 Provides-Extra: api
 Requires-Dist: fastapi>=0.110; extra == "api"
 Requires-Dist: httpx>=0.27; extra == "api"
+Requires-Dist: uvicorn>=0.30; extra == "api"
 Provides-Extra: pq
 Requires-Dist: pqcrypto>=0.3; extra == "pq"
 Provides-Extra: test
@@ -25,6 +26,22 @@ Requires-Dist: qiskit-qasm3-import>=0.5; extra == "test"
 Requires-Dist: fastapi>=0.110; extra == "test"
 Requires-Dist: httpx>=0.27; extra == "test"
 Dynamic: license-file
+
+<p align="center">
+  <a href="assets/demos/zyql_birth_lab_38s.mp4">
+    <img src="assets/demos/zyql_birth_lab_poster.jpg" width="640" alt="The birth of ZYQL on a production superconducting QPU - 30 s animation with sound">
+  </a>
+  <br>
+  <sub><b>▶ The birth of the language (38 s, with sound)</b> — the first run on a production superconducting QPU, 2026-10-13: Deutsch-Jozsa constant <code>p1=0.000 → 0</code>, balanced <code>p1=0.953 → 1</code>, Bell Z <code>0.975</code>, Bell X <code>0.986</code> — 4 PASS / 0 FLAGGED, each with a SHA3-256 receipt (<a href="tests/hardware_live/zca_conformidade_live.json">receipts</a>). Declared simulation over real results.</sub>
+</p>
+
+<p align="center">
+  <a href="assets/demos/zyql_decision_sphere_30s.mp4">
+    <img src="assets/demos/zyql_decision_sphere_poster.jpg" width="640" alt="ZYQL trivalent decision sphere — 30 s animation with sound">
+  </a>
+  <br>
+  <sub><b>▶ 30 s animation (with sound)</b> — the trivalent decision sphere: verdict <code>0</code> for the constant oracle, then <code>REFUSED</code> (BALANCED_ORACLE). Declared simulation; hardware reference on a production superconducting QPU (device and job identifiers in internal evidence), measured p(000) = 0.9844</sub>
+</p>
 
 <p align="center"><img src="assets/social-preview-1280x640.jpg" alt="ZYQL: Exact-decision language" width="640"></p>
 
@@ -60,7 +77,7 @@ an explicit error. Simulation mode is labeled as simulation.
 
 - **Trivalent semantics** — refusal is a first-class verdict, not an exception.
 - **Receipts by construction** — every decision can be sealed (Z-QEA, SHA3-256).
-- **Hardware-verified** — measured on IBM Heron with job IDs published below.
+- **Hardware-verified** — measured on a production superconducting QPU with job IDs published below.
 
 
 **Search:** [`"ZYQL" quantum language`](https://www.google.com/search?q=%22ZYQL%22+quantum+language) · [`Zephirum receipts`](https://www.google.com/search?q=%22Zephirum%22+quantum+recibos+OR+receipts) · [`trivalent REFUSED`](https://www.google.com/search?q=%22trivalent%22+%22REFUSED%22+quantum+decision) · [`zephirum on PyPI`](https://www.google.com/search?q=%22zephirum%22+PyPI)
@@ -106,10 +123,10 @@ as every decision in this house does. Source: [`examples/hello_world.zph`](examp
 
 ## Evidence
 
-![S3 fusion channels measured on IBM Heron](assets/proofs/s3-fusion-hardware.png)
+![S3 fusion channels measured on a production superconducting QPU](assets/proofs/s3-fusion-hardware.png)
 
 *Real-data figure: theoretical braid curves (gold: B_R∘B_S, violet: B_S∘B_R) and the
-points measured on IBM Heron `ibm_fez` — 98.1% vs 95.8%. The braid order is
+points measured on a production superconducting QPU (vendor-neutral) — 98.1% vs 95.8%. The braid order is
 distinguishable on silicon. Full detail: [docs/PROOFS.md](docs/PROOFS.md).*
 
 ![Non-Abelian anyon braiding — AI art](assets/proofs/non-abelian-braids-art.png)
@@ -124,23 +141,23 @@ converging into three fusion channels, the geometry the experiments probe.*
 | Fusion space is 3-dimensional (qutrit in 2 qubits) | noiseless | exact 1/3+1/3+1/3, forbidden channel vetoed | [sealed receipt](experiments/s3_qutrit_final_receipt.json) |
 | Braiding is non-Abelian (order matters) | noiseless | commutator L1 = 6 exact; B_R∘B_S → ch2, B_S∘B_R → ch1 | same |
 | Noiseless round | noiseless | exact-zero deviation vs theory (canonical rationals) | same |
-| ZYQL trivalent decisions 1 / 0 / REFUSED | **IBM Heron** | **3/3 PASS** (job `dbbugbk24mrc73cif420`) | [battery receipt](experiments/zyql_hardware_battery.json) |
-| Braid order measured on real hardware | **IBM Heron** | **98.1% vs 95.8%** (job `dbbueufi0auc73dtp7og`) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
-| **Shots-to-verdict efficiency** | **IBM Heron** | **256 shots** to a first-step verdict — **96.88% savings vs 8192** | receipt `28f406202e9d125a` (issue #40) |
+| ZYQL trivalent decisions 1 / 0 / REFUSED | **a production superconducting QPU** | **3/3 PASS** (job identifiers kept in internal evidence records;) | [battery receipt](experiments/zyql_hardware_battery.json) |
+| Braid order measured on real hardware | **a production superconducting QPU** | **98.1% vs 95.8%** (job identifiers kept in internal evidence records;) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
+| **Shots-to-verdict efficiency** | **a production superconducting QPU** | **256 shots** to a first-step verdict — **96.88% savings vs 8192** | receipt `28f406202e9d125a` (issue #40) |
 
 Receipt seal (SHA3-256): `a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a` — verify it yourself: `python3 .github/actions/zqea-verify/zqea_verify.py experiments/s3_qutrit_final_receipt.json`
 In language: [`examples/s3_qutrit.zph`](examples/s3_qutrit.zph).
 
-Verified on real hardware (IBM Heron `ibm_fez`, cited as test laboratory with
+Verified on real hardware (a production superconducting QPU (vendor-neutral), cited as test laboratory, vendor-neutral, with
 verifiable job IDs; no endorsement claimed):
 
-- Constant purpose: measured p(000)=0.9844 (job `db6ded84qg6s73c4jvug`)
+- Constant purpose: measured p(000)=0.9844 (job identifiers kept in internal evidence records;)
 - S3 qutrit miniature: fusion channels (qutrit-in-qubits) + braiding non-commutativity,
   noiseless with exact-zero deviation and on hardware: ch2=98.1% (RS) vs ch1=95.8% (SR),
-  full ZYQL battery 3/3 PASS on `ibm_fez` (jobs `dbbueufi0auc73dtp7og`, `dbbugbk24mrc73cif420`;
+  full ZYQL battery 3/3 PASS on the lab device (job identifiers kept in internal evidence records;
   Z-QEA receipt sealed, see `experiments/`)
 - Balanced purpose: p(000)=0.0000, orthogonal outcome 93.9%
-- Same-task confrontation vs textbook Qiskit (job `db6dklcvf2bc73d122t0`):
+- Same-task confrontation against an industry-standard quantum SDK (identifiers in internal evidence):
   Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
 
 Benchmark suite: [`benchmarks/`](benchmarks/) (public comparative benchmark, issue #28).
@@ -225,12 +242,12 @@ A decisão trivalente agora roda **na QPU** com a própria QPU certificando a ex
 - **Evidência sequencial** com regra de parada (alpha-spending) declarada **antes** da execução.
 - **Recibo** com protocolo + contagens por lote + `job_id`, selado SHA3-256.
 
-| Oráculo | Veredito | p0 | selfcheck | Shots | job_id (ibm_fez) |
+| Oráculo | Veredito | p0 | selfcheck | Shots | job (internal) |
 |---|---|---|---|---|---|
-| constante | **1** | 0.992 | 0.969 | 128 | `dbhm3ao1h92s73821mm0` |
-| balanceado | **0** | 0.016 | 0.992 | 128 | `dbhm3ik2d77s739d10j0` |
+| constante | **1** | 0.992 | 0.969 | 128 | `internal` |
+| balanceado | **0** | 0.016 | 0.992 | 128 | `internal` |
 
-Especificação completa: **[docs/SELFVERIFIED.md](docs/SELFVERIFIED.md)** · recibos em `experiments/selfcheck_ibm_fez_20261029/`.
+Especificação completa: **[docs/SELFVERIFIED.md](docs/SELFVERIFIED.md)** · recibos em `experiments/selfcheck_hw_20261029/`.
 
 
 ## Refusal witness — abstenção com prova (new, 2026-10-29)
@@ -241,8 +258,8 @@ intervalo de confiança declarado **antes** da execução.
 
 | Dispositivo | Shots | TVD | Janela | ε | Veredito | job_id |
 |---|---|---|---|---|---|---|
-| ibm_fez | 4096 | 0.0317 | [0.000, 0.104] | 0.10 | **REFUSED** | `dbhn296ne4hc73bd7u1g` |
-| ibm_marrakesh | 8192 | 0.0198 | [0.000, 0.071] | 0.10 | **1 CERTIFICADO** | `dbhn8hs2d77s739d32lg` |
+| lab device A | 4096 | 0.0317 | [0.000, 0.104] | 0.10 | **REFUSED** | internal |
+| lab device B | 8192 | 0.0198 | [0.000, 0.071] | 0.10 | **1 CERTIFICADO** | internal |
 
 O primeiro voo absteve; com o dobro de evidência, certificou. Especificação:
 **[docs/WITNESS.md](docs/WITNESS.md)** · recibos em `experiments/witness_20261029/`.
@@ -255,18 +272,45 @@ Protocolos pré-declarados, executados no plano Open com recibo selado
 
 | Protocolo | Medida | Resultado | job_id |
 |---|---|---|---|
-| P-10 fronteira clássica×hardware | TVD vs ideal, n=3..5 | 0.0139 / 0.0188 / 0.0183 | `dbhp6ks2d77s739d692g` |
-| P-08 ZNE vs C† | p0 n=4, com/sem ZNE | 0.0197 → **0.0116** (−41%) | `dbhp6ok2d77s739d6990` |
+| P-10 fronteira clássica×hardware | TVD vs ideal, n=3..5 | 0.0139 / 0.0188 / 0.0183 | `internal` |
+| P-08 ZNE vs C† | p0 n=4, com/sem ZNE | 0.0197 → **0.0116** (−41%) | `internal` |
 
 
 ## Apps v1 (2026-10-29)
 
 - **AuditKit (CPA-01)** — certificacao de entropia quantica com recibo: hardware
-  `ibm_marrakesh`, 4096 bits, veredito **1** (job `dbhpaomne4hc73bdbp7g`).
+  a second lab device, 4096 bits, veredito **1** (identifiers in internal evidence).
 - **Quantum Regression Seal (QRS-01)** — gate de CI/CD que pega miscompilacao
   silenciosa por comparacao unitaria; action reutilizavel no repo.
 
 Detalhes: **[docs/APPS.md](docs/APPS.md)**
+
+### App animations (30 s / 38 s, with sound)
+
+<p align="center">
+  <a href="assets/demos/cpa01_auditkit_30s.mp4"><img src="assets/demos/cpa01_auditkit_poster.jpg" width="200" alt="CPA-01 AuditKit"></a>
+  <a href="assets/demos/qrs01_regression_seal_30s.mp4"><img src="assets/demos/qrs01_regression_seal_poster.jpg" width="200" alt="QRS-01 Regression Seal"></a>
+  <a href="assets/demos/zyql_qroute_console_30s.mp4"><img src="assets/demos/zyql_qroute_console_poster.jpg" width="200" alt="ZYQL Q-ROUTE console"></a>
+  <a href="assets/demos/qsr01_readiness_38s.mp4"><img src="assets/demos/qsr01_readiness_poster.jpg" width="200" alt="QSR-01 readiness"></a>
+  <a href="assets/demos/zyql_selfverified_38s.mp4"><img src="assets/demos/zyql_selfverified_poster.jpg" width="200" alt="ZYQL self-verified"></a>
+</p>
+<p align="center">
+  <a href="assets/demos/zkem_envelope_38s.mp4"><img src="assets/demos/zkem_envelope_poster.jpg" width="200" alt="Z-KEM envelope"></a>
+  <a href="assets/demos/s3_anyon_braids_38s.mp4"><img src="assets/demos/s3_anyon_braids_poster.jpg" width="200" alt="S3 anyon braids"></a>
+  <a href="assets/demos/zyql_decision_core_30s.mp4"><img src="assets/demos/zyql_decision_core_poster.jpg" width="200" alt="ZYQL decision core"></a>
+  <a href="assets/demos/zyql_birth_lab_38s.mp4"><img src="assets/demos/zyql_birth_lab_poster.jpg" width="300" alt="Birth of ZYQL"></a>
+</p>
+
+<p align="center"><sub>
+<b>CPA-01 AuditKit</b> — entropy certification, 4096 bits on a second lab device (job in internal evidence), verdict <code>1</code> ·
+<b>QRS-01 Regression Seal</b> — CI/CD gate, identity <code>1</code> / phase bug <code>0</code> / gate bug <code>0</code> ·
+<b>Q-ROUTE</b> — live trivalent routing ·
+<b>QSR-01</b> — Mosca inequality: RSA-2048 <code>0</code>, X25519 <code>1</code>, ML-KEM-768 <code>1</code> ·
+<b>Self-verified (C&#8224;)</b> — the QPU certifies its own run, selfcheck_p0 0.969 ·
+<b>Z-KEM</b> — ML-KEM-768 + AES-256-GCM envelope ·
+<b>S3 anyons</b> — braiding measured on a production QPU, 98.1% vs 95.8%
+<br>All animations are declared simulations built over real receipts and job IDs.
+</sub></p>
 
 ## Honest scope
 

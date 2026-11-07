@@ -1,0 +1,50 @@
+{
+ "adaptador": "QASM 3 <-> ZYQL",
+ "casos": 10,
+ "passes": 10,
+ "resultado": {
+  "ida e volta: bell": {
+   "pass": true,
+   "detail": "6 linhas QASM"
+  },
+  "ida e volta: ghz3": {
+   "pass": true,
+   "detail": "7 linhas QASM"
+  },
+  "ida e volta: dj3_constante": {
+   "pass": true,
+   "detail": "7 linhas QASM"
+  },
+  "ida e volta: dj3_balanceado": {
+   "pass": true,
+   "detail": "13 linhas QASM"
+  },
+  "ida e volta: rotacao_T": {
+   "pass": true,
+   "detail": "8 linhas QASM"
+  },
+  "ida e volta: medida": {
+   "pass": true,
+   "detail": "8 linhas QASM"
+  },
+  "recusa: porta desconhecida": {
+   "pass": true,
+   "detail": ""
+  },
+  "recusa: sem cabecalho": {
+   "pass": true,
+   "detail": ""
+  },
+  "recusa: indice fora": {
+   "pass": true,
+   "detail": ""
+  },
+  "recusa: sem declaracao": {
+   "pass": true,
+   "detail": ""
+  }
+ },
+ "escopo": "h,x,y,z,s,sdg,t,tdg,cx,rz,measure",
+ "sem_dependencia_de_fornecedor": true,
+ "RECEIPT_HASH": "37d20cfa24f71138f445eebf8f5c6a99"
+}
