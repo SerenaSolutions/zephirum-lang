@@ -10,7 +10,7 @@ e será registrada em `docs/AUDIT.md`, verbatim.
 1. **Trivalent decisions on real hardware.** ZQ-GATE battery (verdicts `1` /
    `0` / `REFUSED`) and sealed Z-QEA receipts, reproducible in CI — the
    receipts carry their own rule (`selo_regra`).
-2. **26-circuit sweep, IBM Heron `ibm_fez`** (job `dbbuh17i0auc73dtpaeg`):
+2. **26-circuit sweep, a production superconducting QPU `the provider_fez`** (job `internal`):
    dominant channel 10/10, braid-word period 6/6, chi-square at 4096 shots
    detecting sub-1% readout bias, TV distance ≤ 4.5%.
 3. **Gottesman–Knill as a classical certificate.** The labeling discipline
@@ -19,7 +19,7 @@ e será registrada em `docs/AUDIT.md`, verbatim.
    quantum advantage.
 4. **DJ statistical protocol** (`docs/ZYQL_STATISTICAL_PROTOCOL.md`): noise
    band δ=0.15, binomial error bounds, minimum shots n_min = ln(α)/ln(1−δ),
-   calibration against the observed noise floor (q≈0.016 on `ibm_fez`).
+   calibration against the observed noise floor (q≈0.016 on `the provider_fez`).
 5. **Chemistry battery vs PySCF FCI** (`experiments/chemistry/`): H2, H2O,
    LiH, NH3 with declared error figures.
 

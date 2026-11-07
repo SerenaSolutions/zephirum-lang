@@ -25,7 +25,7 @@ Cada regra abaixo responde a um erro concreto, nao a uma boa pratica abstrata.
    verificada no arquivo e na linha, e a refutacao e registrada com referencia.
 5. **Antes de responder no PR, ler os checks.** `mergeable`, estado dos workflows e o ultimo
    commit do head. Resposta em cima de build vermelho e ruido.
-6. **Formatacao e do dono do repositorio.** No `qiskit/ecosystem`, o toml de membro e gerado e
+6. **Formatacao e do dono do repositorio.** No `an industry-standard quantum SDK/ecosystem`, o toml de membro e gerado e
    formatado por eles; nosso papel e garantir que os DADOS estejam certos (versao, licenca,
    dependencia declarada, label) e nao reescrever o arquivo deles.
 
@@ -40,7 +40,7 @@ python tools/verificar_publicacao.py --offline  # so checagens locais
 
 Suspeitei de tres inconsistencias no toml publico do PR #1433. Validei contra
 `resources/members-schema.json` e `resources/classifications-schema.json` do
-repositorio Qiskit/ecosystem. Resultado: **nenhuma das tres se sustenta**.
+repositorio an industry-standard quantum SDK/ecosystem. Resultado: **nenhuma das tres se sustenta**.
 
 | Suspeita | Verificacao | Conclusao |
 |---|---|---|
@@ -53,7 +53,7 @@ A validacao apontou tres avisos de tipo (`github/created_at`, `github/last_commi
 proprio bot do ecossistema, nao dados nossos.
 
 **Nao corrigivel por nos:** `maintainer_can_modify = false` e head em
-`Qiskit/ecosystem:submission-b2b5fe46`. Escrita no arquivo e exclusiva deles.
+`an industry-standard quantum SDK/ecosystem:submission-b2b5fe46`. Escrita no arquivo e exclusiva deles.
 
 **Licao aplicada:** antes de chamar algo de inconsistentcia, validar contra o
 schema do dono do arquivo. Sem isso, o relatorio acusa defeito que nao existe.

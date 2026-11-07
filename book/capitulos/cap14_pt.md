@@ -7,7 +7,7 @@ Um livro que só publica vitórias é panfleto. Este capítulo abre os números,
 
 ## 14.2 Nível 2 — O que rodou em hardware real
 
-**CHSH em `ibm_marrakesh`.** $S = 2{,}07 \pm 0{,}12$ em 200 shots; simulação sem ruído: 2,76; veredito emitido: REFUSED. O hardware revelou, de passagem, um defeito de gramática na leitura de números negativos, que 58 testes de bancada não haviam detectado — corrigido em campo.
+**CHSH em `the provider_marrakesh`.** $S = 2{,}07 \pm 0{,}12$ em 200 shots; simulação sem ruído: 2,76; veredito emitido: REFUSED. O hardware revelou, de passagem, um defeito de gramática na leitura de números negativos, que 58 testes de bancada não haviam detectado — corrigido em campo.
 
 **WORLD-3.** Três protocolos independentes, 8.192 shots por job, bandas declaradas antes da execução.
 

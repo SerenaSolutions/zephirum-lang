@@ -28,12 +28,12 @@ if r["decision"] == "REFUSED":
 Tamper-evidence for anything that must arrive exactly as sealed:
 benchmark results, model cards, audit records.
 
-## M3 — From Qiskit / OpenQASM 3 projects
+## M3 — From an industry-standard quantum SDK / OpenQASM 3 projects
 
 - Out: `oq3.to_openqasm3(circuit.gates_applied, n)` — feed the output to
-  Qiskit Runtime / any OpenQASM 3 consumer.
+  an industry-standard quantum SDK Runtime / any OpenQASM 3 consumer.
 - In: `oq3.from_openqasm3(src)` — ingest existing OpenQASM 3.
-- Round-trip is verified. Honest note: IBM ingests the compiled output;
+- Round-trip is verified. Honest note: the provider ingests the compiled output;
   it does not run Zephyron natively.
 
 ## M4 — Into C projects

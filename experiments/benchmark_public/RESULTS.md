@@ -2,7 +2,7 @@
 
 **Casa ZEPHIRUM — Registro de Execução Oficial (POC 4 & 5)**  
 **Data da Execução:** 20 de Outubro de 2026  
-**Ambiente:** Python 3.10.12, PySCF 2.14.0, Qiskit 2.6.0, Qiskit-Nature 0.8.0, NumPy 2.4.6
+**Ambiente:** Python 3.10.12, PySCF 2.14.0, an industry-standard quantum SDK 2.6.0, an industry-standard quantum SDK-Nature 0.8.0, NumPy 2.4.6
 
 ---
 
@@ -81,4 +81,4 @@ BENCHMARK CANONICAL HASH (SHA-256): b79ed17e46752823839d3a501c465b61149a1016b217
 2. **Profundidade do Ansatz Variacional:**
    O VQE foi configurado com um ansatz raso (`EfficientSU2`, `reps=1`) e um limite de 120 iterações do otimizador COBYLA para viabilizar a execução em ambiente de sandbox. O desvio entre o VQE e o FCI reflete a limitação expressiva deste ansatz raso para moléculas maiores ($H_2O$ e $NH_3$), e não um erro de simulação.
 3. **Ausência de Execução em Hardware Físico:**
-   Nenhum trecho desta prova alega execução em hardware quântico real. A transição para QPUs físicas da IBM permanece dependente da aprovação de créditos quânticos (IBM Quantum Credits).
+   Nenhum trecho desta prova alega execução em hardware quântico real. A transição para QPUs físicas da the provider permanece dependente da aprovação de créditos quânticos (a production superconducting QPU Credits).

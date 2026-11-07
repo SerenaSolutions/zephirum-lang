@@ -1,6 +1,6 @@
 # Chemistry battery — nature-derived molecules
 
-FCI reference (PySCF) x Jordan-Wigner mapping (Qiskit) x variational pipeline.
+FCI reference (PySCF) x Jordan-Wigner mapping (an industry-standard quantum SDK) x variational pipeline.
 STO-3G basis. Simulation labeled DECLARED_CLASSICAL (statevector).
 
 | Molecule | Qubits (JW) | FCI (Ha) | Mapped (Ha) | Mapping error |

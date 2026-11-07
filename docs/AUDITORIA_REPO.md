@@ -8,7 +8,7 @@ o registro mostra o que ficou de pe e o que caiu.
 
 | Achado | Verificacao | Situacao |
 |---|---|---|
-| "Em hardware o TVD nao e calculado; a prova so vale no simulador" | `zyql_witness.witness()` calcula `ideal = _ideal_probs(...)` e `tvd_hat = _tvd(ideal, counts, n)` **depois** de qualquer rota (`_run_local` ou `_run_ibm`). Mesmo codigo, mesmos numeros. | **REFUTADO** |
+| "Em hardware o TVD nao e calculado; a prova so vale no simulador" | `zyql_witness.witness()` calcula `ideal = _ideal_probs(...)` e `tvd_hat = _tvd(ideal, counts, n)` **depois** de qualquer rota (`_run_local` ou `_run_the provider`). Mesmo codigo, mesmos numeros. | **REFUTADO** |
 | "`adaptive_margin` usa constante magica `gate_penalty=0.001`" | `grep -rn gate_penalty src/` nao retorna nada. `adaptive_margin` e derivada de Hoeffding: `sqrt(ln(2/eps)/(2*shots))`. | **REFUTADO** |
 | "`zyql_witness` decide por heuristica em hardware" | O veredito em `witness()` usa `delta = sqrt(K*ln(2/alpha)/(2N))` e compara `[lower, upper]` com `epsilon`. Limite declarado no recibo. | **REFUTADO** |
 

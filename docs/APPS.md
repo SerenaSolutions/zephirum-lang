@@ -11,7 +11,7 @@ Dois apps sobreviveram ao filtro da direcao (PUF e Policy Engine declinados em 2
 - Veredito trivalente: **1** certificado · **0** vies provado · **REFUSED** bits < 2048.
 - Recibo selado SHA3-256 com counts + estatisticas + job_id.
 
-**Hardware (2026-10-29, ibm_marrakesh, job `dbhpaomne4hc73bdbp7g`)**: 4096 bits,
+**Hardware (2026-10-29, the provider_marrakesh, job `internal`)**: 4096 bits,
 z_monobit=-1,000, z_runs=-0,672, chi2=1,000 -> **1 certificado**.
 
 ## Quantum Regression Seal — gate de CI/CD (QRS-01)

@@ -1,6 +1,6 @@
-# RODADA H — especificacao dos jobs de QPU (confronto em silicio IBM)
+# RODADA H — especificacao dos jobs de QPU (confronto em silicio the provider)
 
-Pre-requisito: credenciais IBM Quantum ativas na sessao de execucao.
+Pre-requisito: credenciais a production superconducting QPU ativas na sessao de execucao.
 Cada job deve registrar: backend, base de medida, shots, job ID e recibo
 Z-QEA encadeado na Rodada G. Protocolo selado ANTES do envio (zyql_robust.protocol_seal).
 

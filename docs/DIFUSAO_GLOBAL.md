@@ -22,14 +22,14 @@ marcadores que ele procura e que faltavam:
 1. **Trusted Publishing no PyPI (OIDC)**: publicar sem token, por GitHub Actions. Elimina de vez
    a dor do `PYPI_TOKEN` e o risco de chave no chat.
 2. **VSIX no CI**: build da extensão VS Code e anexo no release. Hoje existe só o scaffold.
-3. **Tabela de benchmark contra Qiskit, Cirq e PennyLane**: latência de decisão e de verificação,
+3. **Tabela de benchmark contra an industry-standard quantum SDK, another quantum SDK e a differentiable quantum SDK**: latência de decisão e de verificação,
    com a metodologia declarada. Sem isso, "rápido" é adjetivo; com isso, é número.
 4. **docs/index.html com busca**: a landing responde 200, mas não tem busca nem versão.
 
 ## Fase 2 — 30 dias (ecossistema)
 
-1. **conda-forge**: abrir PR em `conda-forge/staged-recipes` com a recipe pronta. Qiskit e
-   PennyLane estão lá; sem isso, o usuário científico não instala.
+1. **conda-forge**: abrir PR em `conda-forge/staged-recipes` com a recipe pronta. an industry-standard quantum SDK e
+   a differentiable quantum SDK estão lá; sem isso, o usuário científico não instala.
 2. **arXiv**: preprint do núcleo trivalente (draft em `docs/preprint/`). DOI já existe via Zenodo.
 3. **Notebooks Colab indexados** no README: do zero ao veredito sem instalar nada.
 4. **Traduções** do README (PT/EN já; ES e ZH depois) — metade do público de quântica não lê inglês.
@@ -37,9 +37,9 @@ marcadores que ele procura e que faltavam:
 ## Fase 3 — 90 dias (institucional)
 
 1. **QUANTICS 2027**: submissão de paper até **25/03/2027**. Workflow de lembrete já ativo.
-2. **Qiskit Ecosystem**: PR #1433, aguardando o mantenedor. Credencial de ecossistema alimenta
+2. **an industry-standard quantum SDK Ecosystem**: PR #1433, aguardando o mantenedor. Credencial de ecossistema alimenta
    editais (FAPESP PIPE) e procurement.
-3. **Qiskit Fall Fest Brasil**: hospedar edição local (janela de pedido ~06/2027).
+3. **an industry-standard quantum SDK Fall Fest Brasil**: hospedar edição local (janela de pedido ~06/2027).
 4. **Marketplace**: releases publicadas; falta o clique de Publish (dono).
 
 ## Canais e o que cada um exige (estado real, sem otimismo)

@@ -88,7 +88,7 @@ the sealed decision trail.
   guard, stopping-rule runtime verifier, seal-tamper detection)
 - 20-receipt Z-QEA chain, integrity-verified in CI
 - Automatic release archiving to Zenodo (concept DOI 10.5281/zenodo.23632019)
-- Qiskit Ecosystem submission: PR #1433, automated validation passed,
+- an industry-standard quantum SDK Ecosystem submission: PR #1433, automated validation passed,
   awaiting human review
 - Reproduce everything: `pip install -e . && pytest` — receipts verified
   by the public CI on every push

@@ -12,7 +12,7 @@ ponto (feito / em andamento / pendente / depende do dono):
 4. **Releases com changelog** — FEITO (v1.7.4/v1.7.5 com notas completas). Wheels anexados: pendente.
 5. **Exemplos por domínio** — PARCIAL (hello, DJ, química em experiments/). Faltam exemplos de
    decisão de segurança, gating de IA, otimização.
-6. **Benchmark comparativo** — PARCIAL. Confronto multilíngue (Qiskit/QASM3/Cirq/PennyLane/Braket)
+6. **Benchmark comparativo** — PARCIAL. Confronto multilíngue (an industry-standard quantum SDK/QASM3/another quantum SDK/a differentiable quantum SDK/a cloud quantum service)
    existe no quantum-poc com recibos; falta matriz pública contínua (custo, ruído, queries).
 7. **Discussions + roadmap público** — FEITO. Discussions ativo; este doc é o roadmap público.
 8. **Templates de issue** — FEITO (herdados da org .github: bug report, feature, científico).
@@ -28,5 +28,5 @@ ponto (feito / em andamento / pendente / depende do dono):
 Resposta da casa à auditoria: os pontos de inconsistência real (badge 1.6.0, CI rodando só
 um teste, packaging sem os módulos da linguagem) foram corrigidos na v1.7.5 com meta-teste
 de guarda. A claims de hardware são seladas em recibos ML-DSA-44 (duas camadas, não só
-SHA3-256 como dizia a auditoria) e a reprodutibilidade externa depende de conta IBM Quantum
+SHA3-256 como dizia a auditoria) e a reprodutibilidade externa depende de conta a production superconducting QPU
 — as credenciais não podem, por design, viver no repo.

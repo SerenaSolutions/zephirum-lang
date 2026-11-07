@@ -19,7 +19,7 @@ Antes de dizer "isto é novo", um livro honesto senta no banco dos réus. Este c
 | 8 | IR de compilador | separa camadas com verificação | [8] |
 | 9 | linguagens quânticas de alto nível | tipam qubits e medição | [9, 33] |
 | 10 | OpenQASM 3 | assembly quântico padronizado | [10] |
-| 11 | Qiskit | compilação e execução em hardware real | [11] |
+| 11 | an industry-standard quantum SDK | compilação e execução em hardware real | [11] |
 | 12 | early exit / branch and bound | abandona ramos sem solução | literatura de otimização |
 | 13 | decisão condicionada por medição | controle clássico sobre circuito | [9, 10] |
 | 14 | mitigação de erro (ZNE) | extrapola a ruído zero | [19] |

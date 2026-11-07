@@ -39,11 +39,11 @@ Sealed receipts: 26-entry chain, verification battery ALL PASS.
 
 ## 5. Cross-SDK Parity
 Identical trivalent verdicts (p0 = 1.0 / 0.0 exact) across four independent
-paths (Qiskit, Cirq, PennyLane, OpenQASM 3 round-trip), sealed receipt efd0bb92.
+paths (an industry-standard quantum SDK, another quantum SDK, a differentiable quantum SDK, OpenQASM 3 round-trip), sealed receipt efd0bb92.
 
 ## 6. Ecosystem Integration
 Open source (MIT); bridges to seven quantum and classical stacks; CI decision
-Action; Qiskit Ecosystem submission (PR #1433) under review at time of writing.
+Action; an industry-standard quantum SDK Ecosystem submission (PR #1433) under review at time of writing.
 
 ## 7. Reproducibility
 All code, tests (81 permanent), receipts and benchmark protocols are public;

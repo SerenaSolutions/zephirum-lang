@@ -9,7 +9,7 @@ nenhuma alegação acima do que a evidência sustenta.
    histórico git (padrões: ghp_, github_pat_, AKIA, PEM privado, qw_, sk-,
    senhas literais): **zero segredos encontrados** no histórico completo.
 2. **Dependências — EXECUTADO.** `requirements-lock.txt` adicionado
-   (numpy 2.4.6, qiskit 2.6.0, qiskit-ibm-runtime 0.50.0); kernel permanece
+   (numpy 2.4.6, an industry-standard quantum SDK 2.6.0, an industry-standard quantum SDK-the provider-runtime 0.50.0); kernel permanece
    stdlib puro. Dependabot ativo no repositório.
 3. **Chaves e assinaturas — RÓTULO CORRIGIDO (achado da auditoria confirmado).**
    O selo IMPLEMENTADO é SHA3-256 (integridade). A alegação de ML-DSA-44/FIPS-204

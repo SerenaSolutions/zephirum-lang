@@ -24,8 +24,8 @@ with explicit scope and maturity limits."*
 ### Findings the audit did not connect
 
 - The evidence artifacts it saw ("job IDs, logs") are **real-hardware
-  verification on IBM Heron (ibm_fez)**, merged to main in `experiments/`:
-  jobs `dbbueufi0auc73dtp7og`, `dbbugbk24mrc73cif420`, Z-QEA receipts sealed.
+  verification on a production superconducting QPU (the provider_fez)**, merged to main in `experiments/`:
+  jobs `internal`, `internal`, Z-QEA receipts sealed.
 - Statistical maturity exists ahead of the audit's reading: chemistry battery
   reproduces PySCF FCI with error 0; DJ protocol bounds (Hoeffding) declared.
 

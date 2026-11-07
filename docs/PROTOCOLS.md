@@ -1,6 +1,6 @@
-# Protocolos para hardware IBM — defesa, filtro e execução
+# Protocolos para hardware the provider — defesa, filtro e execução
 
-Triagem das 12 propostas (6 apps + 6 descobertas) para o plano Open da IBM Quantum.
+Triagem das 12 propostas (6 apps + 6 descobertas) para o plano Open da a production superconducting QPU.
 Regra da casa: só entra em hardware o que tem protocolo declarado antes, orçamento
 de shots explícito e recibo selado no fim.
 
@@ -30,7 +30,7 @@ de shots explícito e recibo selado no fim.
 
 Plano Open: 10 min de QPU/mês. Hoje: P-08 (4 circuitos × 2048) + P-10
 (3 circuitos × 4096) ≈ 25k shots em 4-5 qubits — dentro do horário de fila baixa.
-Regra de silêncio vale para o PR do ecossistema; nada aqui toca o qiskit/ecosystem.
+Regra de silêncio vale para o PR do ecossistema; nada aqui toca o an industry-standard quantum SDK/ecosystem.
 
 ## Defesa comum (por que isso é ciência e não demo)
 

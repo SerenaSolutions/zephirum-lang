@@ -82,8 +82,8 @@ O verificador standalone (`receipt_verifier.py`) foi projetado sem dependências
 
 | Arquivo Auditado | Tipo de Registro | Recibos Checados | Válidos | Rejeitados / Incompletos | Observações |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| `tests/ibm_quantum/zca_conformidade_sim.json` | Conformidade ZCA (Simulação) | 4 | **4** | 0 | Selos SHA3-256 e coerência $p_hat$ 100% validados. |
-| `tests/ibm_quantum/zca_conformidade_live.json` | Conformidade ZCA (IBM `ibm_fez`) | 4 | **4** | 0 | Validade criptográfica e estatística confirmada. |
+| `tests/the provider_quantum/zca_conformidade_sim.json` | Conformidade ZCA (Simulação) | 4 | **4** | 0 | Selos SHA3-256 e coerência $p_hat$ 100% validados. |
+| `tests/the provider_quantum/zca_conformidade_live.json` | Conformidade ZCA (the provider `the provider_fez`) | 4 | **4** | 0 | Validade criptográfica e estatística confirmada. |
 | `experiments/chemistry/chemistry_battery_20261020.json` | Bateria Química H2/LiH | 1 | 0 | 1 | Marcado como não selado (payload bruto sem campo de selo criptográfico e veredito formal). |
 | `dexia_receipts.jsonl` | Telemetria de Aplicação Dexia | 26 | 0 | 26 | Identificado como log bruto de telemetria (não atende ao schema de recibo selado ZYQL). |
 

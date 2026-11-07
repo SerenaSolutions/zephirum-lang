@@ -23,7 +23,7 @@ upper <= epsilon -> 1   |   lower > epsilon -> 0   |   senão -> REFUSED
 
 ```python
 from zyql_witness import witness, verify_receipt
-r = witness("balanced", shots=8192, qpu="ibm_marrakesh", seal_path="selo.json")
+r = witness("balanced", shots=8192, qpu="the provider_marrakesh", seal_path="selo.json")
 # Witness(verdict='1', mode='CERTIFICADO', tvd=0.0198, delta=0.0509, ...)
 verify_receipt("selo.json")  # -> True
 ```
@@ -32,8 +32,8 @@ verify_receipt("selo.json")  # -> True
 
 | Dispositivo | Shots | TVD | delta | Janela | ε | Veredito | job_id |
 |---|---|---|---|---|---|---|---|
-| ibm_fez | 4096 | 0.0317 | 0.0719 | [0.000, 0.104] | 0.10 | **REFUSED** | `dbhn296ne4hc73bd7u1g` |
-| ibm_marrakesh | 8192 | 0.0198 | 0.0509 | [0.000, 0.071] | 0.10 | **1 CERTIFICADO** | `dbhn8hs2d77s739d32lg` |
+| the provider_fez | 4096 | 0.0317 | 0.0719 | [0.000, 0.104] | 0.10 | **REFUSED** | `internal` |
+| the provider_marrakesh | 8192 | 0.0198 | 0.0509 | [0.000, 0.071] | 0.10 | **1 CERTIFICADO** | `internal` |
 
 O primeiro voo **absteve-se** com a evidência disponível; o segundo, com o dobro de shots,
 certificou. Esse é o desenho funcionando: recusar quando não sabe, e não adivinhar.

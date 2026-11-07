@@ -12,7 +12,7 @@ Na versão 1.9.0, lançada hoje, o núcleo ganhou três semânticas que nenhuma 
 2. Porta de integridade GHZ: antes de confiar num veredito, o runtime testa o PRÓPRIO processador quântico em coerência (estado GHZ₃). Dispositivo decoerido = REFUSED sem gastar uma única chamada ao oráculo. É a primeira linguagem que desconfia do próprio QPU.
 3. Cadeia de proveniência: cada recibo sela o selo do anterior — um ledger tamper-evidente de experimentos.
 
-Tudo validado em silício real: IBM Heron de 156 qubits, com fidelidade GHZ de 0.977 e vereditos trivalentes exatos em todos os níveis de shots testados (64 a 16.384). Cada rodada é selada em recibo de duas camadas: SHA3-256 + assinatura pós-quântica ML-DSA-44 (FIPS 204), com entropia medida em computador quântico.
+Tudo validado em silício real: a production superconducting QPU de 156 qubits, com fidelidade GHZ de 0.977 e vereditos trivalentes exatos em todos os níveis de shots testados (64 a 16.384). Cada rodada é selada em recibo de duas camadas: SHA3-256 + assinatura pós-quântica ML-DSA-44 (FIPS 204), com entropia medida em computador quântico.
 
 Código aberto, reproduzível, documentado:
 https://github.com/SerenaSolutions/zephirum-lang

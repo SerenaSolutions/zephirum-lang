@@ -1,7 +1,7 @@
 # Auditoria integrada — 06/11/2026
 
 Escopo: segurança comercial, integridade dos recibos e interoperabilidade com o
-Qiskit Ecosystem. Método: medição no código e nos serviços, não inspeção visual.
+an industry-standard quantum SDK Ecosystem. Método: medição no código e nos serviços, não inspeção visual.
 Cada achado traz a evidência que o sustenta e o comando que a reproduz.
 
 **Limite declarado:** auditoria interna, feita pelo autor. Não substitui pentest
@@ -14,7 +14,7 @@ atestado de conformidade.
 |---|---|---|
 | Segurança comercial | PARCIAL | 141 testes; HMAC e replay ok; falta limitação de taxa e CORS |
 | Integridade dos recibos | PARCIAL | selo SHA3 em 11 módulos; encadeamento não é universal |
-| Interoperabilidade Qiskit | PRONTO PARA REVISÃO | PR aberto e mergeável, cap declarado, versões alinhadas |
+| Interoperabilidade an industry-standard quantum SDK | PRONTO PARA REVISÃO | PR aberto e mergeável, cap declarado, versões alinhadas |
 
 ## Achados
 
@@ -58,7 +58,7 @@ público.
 - Webhook idempotente: recebimento repetido não emite segunda chave.
 - Chaves de compra guardadas como hash e comparação em tempo constante.
 - Adulteração de um único campo muda o selo, verificado por cálculo direto.
-- Teto `qiskit>=2.6,<3` declarado; repositório e PyPI em 2.5.6.
+- Teto `an industry-standard quantum SDK>=2.6,<3` declarado; repositório e PyPI em 2.5.6.
 
 ## O que NÃO está provado
 

@@ -66,7 +66,7 @@ Propagação declarada (conservadora): erro por componente de Bloch `≤ 2·m_ex
 
 ## Escopo declarado e limites (sem maquiagem)
 
-- Duas QPUs bastam; rodada disparada em `ibm_marrakesh` (fila menor no disparo).
+- Duas QPUs bastam; rodada disparada em `the provider_marrakesh` (fila menor no disparo).
 - O resultado vale para a profundidade k ≤ 4 e para este modelo de colisão; **não** se
   extrapola para outros canais, outras profundidades ou ruído correlacionado espacial.
 - Revival ausente **não prova** ausência de memória em geral: só que não foi detectada

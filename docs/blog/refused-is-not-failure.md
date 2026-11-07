@@ -8,7 +8,7 @@ A REFUSED verdict means: the interference pattern did not reach statistical domi
 decision core refuses to lie about it. In our Deutsch-Jozsa battery, the balanced oracle produces
 exactly this: no dominant amplitude, so the core says REFUSED.
 
-Hardware made this concrete. On IBM Heron processors we ran the trivalent battery from 64 to
+Hardware made this concrete. On a production superconducting QPU processors we ran the trivalent battery from 64 to
 16384 shots ([protocol](../ZYQL_STATISTICAL_PROTOCOL.md)): exact verdicts at every level, and the
 theory-predicted threshold (~29-82 shots for n=3) held with zero spurious refusals. Refusal has
 a *measured* boundary, which is what makes it engineering rather than a safety blanket.

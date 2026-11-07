@@ -13,10 +13,10 @@
 - PRs em indices curatoriais globais: qosf/awesome-quantum-software #202, veorq/awesome-post-quantum #67, desireevl/awesome-quantum-computing #132 (3.3k estrelas, Development Tools)
 
 ## BLOQUEADO SEM ACAO DO DONO
-- PennyLaneAI/pennylane: createDiscussion FORBIDDEN para conta externa → usar o forun deles (discuss.pennylane.ai) com conta propria
-- qiskit.slack.com (inclui canais Asia/Oceania): requer cadastro com email
+- a differentiable quantum SDKAI/a differentiable quantum SDK: createDiscussion FORBIDDEN para conta externa → usar o forun deles (discuss.a differentiable quantum SDK.ai) com conta propria
+- an industry-standard quantum SDK.slack.com (inclui canais Asia/Oceania): requer cadastro com email
 - Computacao Quantica Brasil (Discord/Telegram/YouTube): requer cadastro
 - LinkedIn/X/Reddit/HN: OAuth pendente (1 clique de autorizacao do dono)
 
 ## TEXTO PRONTO
-posts_2026-10-24.py contem os 3 textos cientificos (Mitiq, QuTiP, PennyLane) reutilizaveis em qualquer canal.
+posts_2026-10-24.py contem os 3 textos cientificos (Mitiq, QuTiP, a differentiable quantum SDK) reutilizaveis em qualquer canal.
