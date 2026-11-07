@@ -11,6 +11,7 @@ pagamento recebido.
 from __future__ import annotations
 
 import hashlib
+import hmac
 import json
 import os
 import secrets
@@ -177,12 +178,67 @@ def checkout(req: CheckoutIn):
     return criar_sessao(req.plano, req.email, req.sucesso_url)
 
 
+def _assinar(segredo: str, t: str, corpo: bytes) -> str:
+    return hmac.new(segredo.encode(), t.encode() + b"." + corpo, hashlib.sha256).hexdigest()
+
+
+def validar_assinatura_stripe(corpo: bytes, cabecalho: str | None, segredo: str,
+                              tolerancia_s: int = 300) -> tuple[bool, str]:
+    """Valida Stripe-Signature: t=<ts>,v1=<hmac>. Rejeita fora da tolerancia."""
+    if not cabecalho:
+        return False, "cabecalho Stripe-Signature ausente"
+    partes: dict[str, list[str]] = {}
+    for item in cabecalho.split(","):
+        if "=" in item:
+            k, v = item.split("=", 1)
+            partes.setdefault(k.strip(), []).append(v.strip())
+    t = (partes.get("t") or [None])[0]
+    v1 = partes.get("v1") or []
+    if not t or not v1:
+        return False, "prefixos t e v1 obrigatorios"
+    try:
+        idade = abs(time.time() - float(t))
+    except ValueError:
+        return False, "timestamp nao numerico"
+    if idade > tolerancia_s:
+        return False, f"timestamp fora da tolerancia ({int(idade)}s)"
+    esperado = _assinar(segredo, t, corpo)
+    if not any(secrets.compare_digest(esperado, v) for v in v1):
+        return False, "hmac nao confere"
+    return True, "ok"
+
+
 @router.post("/webhook")
-def webhook(req: WebhookIn):
-    exigido = os.environ.get("ZYQL_WEBHOOK_SECRET")
-    if exigido and not (req.segredo and secrets.compare_digest(req.segredo, exigido)):
-        raise HTTPException(401, "segredo de webhook invalido")
-    r = confirmar(req.sessao, req.email)
+async def webhook(request: Request):
+    """Confirma pagamento. Sem verificacao configurada, recusa em vez de aceitar."""
+    corpo = await request.body()
+    seg_stripe = os.environ.get("STRIPE_WEBHOOK_SECRET")
+    seg_proprio = os.environ.get("ZYQL_WEBHOOK_SECRET")
+    if seg_stripe:
+        ok, motivo = validar_assinatura_stripe(corpo, request.headers.get("Stripe-Signature"), seg_stripe)
+        if not ok:
+            raise HTTPException(401, f"assinatura invalida: {motivo}")
+    elif seg_proprio:
+        try:
+            dado_ = json.loads(corpo or b"{}")
+        except Exception:
+            raise HTTPException(400, "corpo nao e json")
+        if not secrets.compare_digest(str(dado_.get("segredo") or ""), seg_proprio):
+            raise HTTPException(401, "segredo de webhook invalido")
+    else:
+        raise HTTPException(503, "webhook sem verificacao: configure STRIPE_WEBHOOK_SECRET")
+    try:
+        dado = json.loads(corpo or b"{}")
+    except Exception:
+        raise HTTPException(400, "corpo nao e json")
+    sessao, email = dado.get("sessao"), dado.get("email")
+    if str(dado.get("type", "")).startswith("checkout.session"):
+        obj = (dado.get("data") or {}).get("object") or {}
+        sessao = obj.get("id") or sessao
+        email = ((obj.get("customer_details") or {}).get("email")) or email
+    if not sessao:
+        raise HTTPException(422, "sessao ausente no evento")
+    r = confirmar(sessao, email)
     if not r.get("ja_emitida"):
         r["aviso"] = "guarde a chave: ela nao e exibida novamente"
     return r
