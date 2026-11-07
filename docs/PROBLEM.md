@@ -15,9 +15,9 @@ O protocolo estatístico formal da casa (`docs/ZYQL_STATISTICAL_PROTOCOL.md`) es
   $$n_{\min}(\alpha) = \frac{\ln(\alpha)}{\ln(1 - \delta)}$$
   (para $\alpha = 0.01$ e $\delta = 0.15$, resulta teoricamente em $n_{\min} = 29$ shots, enquanto o protocolo de referência utiliza $n = 2048$).
 
-**A lacuna empírica:** Essa fórmula teórica e a banda de ruído de decisão jamais foram validadas sistematicamente em função da variação contínua de shots em hardware quântico real (QPU física como o IBM Heron `ibm_fez`).
+**A lacuna empírica:** Essa fórmula teórica e a banda de ruído de decisão jamais foram validadas sistematicamente em função da variação contínua de shots em hardware quântico real (QPU física como o a production superconducting QPU `the provider_fez`).
 
-Além disso, a varredura científica v1 (job `dbbuh17i0auc73dtpaeg`) revelou que o teste de aderência estatística de qui-quadrado ($\chi^2$) foi reprovado em todos os pontos devido a um viés de leitura não calibrado (sub-1% readout bias), embora a variância total ($TV \le 4.5\%$) estivesse contida. Apenas na varredura v2 (job `dbcfn70c77vs73866mdg`), mediante mitigação de leitura, o $\chi^2$ aprovou em 18 de 20 circuitos.
+Além disso, a varredura científica v1 (job `internal`) revelou que o teste de aderência estatística de qui-quadrado ($\chi^2$) foi reprovado em todos os pontos devido a um viés de leitura não calibrado (sub-1% readout bias), embora a variância total ($TV \le 4.5\%$) estivesse contida. Apenas na varredura v2 (job `internal`), mediante mitigação de leitura, o $\chi^2$ aprovou em 18 de 20 circuitos.
 
 **Questão Científica Central:** Quantos shots um computador quântico real necessita empiricamente para tomar uma decisão trivalente ZYQL com acurácia estatística $\ge 95\%$, e sob quais condições a recusa honesta (`REFUSED`) deve ser calibrada em hardware real?
 
@@ -55,6 +55,6 @@ Além disso, a varredura científica v1 (job `dbbuh17i0auc73dtpaeg`) revelou que
 
 ## 5. Honestidade da Casa e Transparência
 
-- ** HARDWARE REAL:** Todos os dados coletados na expedição são categorizados e rotulados explicitamente como **HARDWARE REAL** (QPU física IBM Heron `ibm_fez`).
-- **Isenção de Endosso:** A plataforma IBM Quantum é utilizada estritamente como ambiente e laboratório de teste físico, sem qualquer implicação de endosso, suporte ou parceria institucional pela IBM.
+- ** HARDWARE REAL:** Todos os dados coletados na expedição são categorizados e rotulados explicitamente como **HARDWARE REAL** (QPU física a production superconducting QPU `the provider_fez`).
+- **Isenção de Endosso:** A plataforma a production superconducting QPU é utilizada estritamente como ambiente e laboratório de teste físico, sem qualquer implicação de endosso, suporte ou parceria institucional pela the provider.
 - **Recibo Z-QEA Selado:** Todas as evidências, matrizes de amostragem e conclusões são acompanhadas por um recibo Z-QEA selado via SHA3-256 (regra de selagem limpa sem autorreferência), permitindo verificação pública no GitHub via `.github/actions/zqea-verify`.

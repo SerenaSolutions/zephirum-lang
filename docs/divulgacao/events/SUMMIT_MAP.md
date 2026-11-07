@@ -23,8 +23,8 @@
 
 ## CANAIS QUE EXIGEM CADASTRO PROPRIO (fora do alcance do agente sem login)
 - Discord: Computacao Quantica Brasil, Anthropic/Claude, qBraid, Women in Quantum
-- Slack: qiskit.slack.com (inclui Asia/Oceania), PennyLane
-- Forum: discuss.pennylane.ai (Xanadu/Canada)
+- Slack: an industry-standard quantum SDK.slack.com (inclui Asia/Oceania), a differentiable quantum SDK
+- Forum: discuss.a differentiable quantum SDK.ai (Xanadu/Canada)
 
 ## NOTA HONESTA
 Summit e evento presencial: submeter CFP exige conta/portal do evento e, se aceito,

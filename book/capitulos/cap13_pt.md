@@ -25,7 +25,7 @@ O pacote publicado na versão 2.1.2 [R2] contém 25 módulos de topo. O inventá
 | runtime e sistema | `zkernel`, `zquantum`, `zyql_runtime` | escalonador, camada de sistema, runtime de produção |
 | criptografia do recibo | `zqea_sig`, `zqea_kem` | assinatura ML-DSA-44, sigilo ML-KEM-768 |
 | simulação | `zyql_mps`, `zyql_zne`, `zyql_selfverified` | MPS, ruído zero, dispositivo auto-verificado |
-| interoperabilidade | `zyql_cirq` | paridade de veredito com Cirq |
+| interoperabilidade | `zyql_another quantum SDK` | paridade de veredito com another quantum SDK |
 | camadas aplicadas | `zyqml_core`, `zyql_llm_compress`, `zyql_rag_layer` | aprendizado variacional, compressão, camada neural |
 | robustez | `zyql_robust`, `zyql_auditkit` | guardas adversariais, entropia com recibo |
 | experimentos selados | `zyql_protocols`, `zyql_world3`, `zyql_worldscale` | P-08, P-10, rodadas WORLD |

@@ -11,8 +11,8 @@ are honest, nothing here is a promise of performance.
 ## In progress
 
 - **R0 — Scientific sweep harvest (v1.6.0):** 26-circuit sweep (braid angle,
-  braid word, Pauli error map, chi-square per point) HARVESTED from IBM Heron
-  `ibm_fez`, job `dbbuh17i0auc73dtpaeg`. Dominant channel 10/10, braid-word
+  braid word, Pauli error map, chi-square per point) HARVESTED from a production superconducting QPU
+  `the provider_fez`, job `internal`. Dominant channel 10/10, braid-word
   period 6/6, non-Abelian window measured at theta/pi in [0.3, 0.7].
   chi-square at 4096 shots detects sub-1% uncalibrated readout bias in all
   points — declared honestly; TV distance <= 4.5%. *Status: DONE.*

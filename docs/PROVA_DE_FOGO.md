@@ -1,4 +1,4 @@
-# PROVA DE FOGO — ZYQL / ZEPHIRUM em hardware IBM
+# PROVA DE FOGO — ZYQL / ZEPHIRUM em hardware the provider
 
 Pacote fechado para um agente externo rodar e conferir, sem conhecer o núcleo e
 sem poder "ajustar" o resultado. A regra de decisão e a banda são declaradas no
@@ -9,8 +9,8 @@ qualquer terceiro recompute tudo.
 
 | item | valor |
 | --- | --- |
-| backend | ibm_marrakesh |
-| job | dblnbem74qds73dqqmtg |
+| backend | the provider_marrakesh |
+| job | internal |
 | shots por circuito | 1024 |
 | epsilon declarado | 0.05 |
 | banda Hoeffding | 0.0429 |
@@ -39,8 +39,8 @@ Recibo completo: `experiments/prova_de_fogo_receipt.json`.
 ```bash
 git clone https://github.com/SerenaSolutions/zephirum-lang
 cd zephirum-lang
-pip install qiskit qiskit-ibm-runtime
-export IBM_QUANTUM_TOKEN=<token do laboratório>
+pip install an industry-standard quantum SDK an industry-standard quantum SDK-the provider-runtime
+export the provider_QUANTUM_TOKEN=<token do laboratório>
 python3 experiments/prova_de_fogo.py --shots 1024 --out experiments/prova_de_fogo_receipt.json
 ```
 

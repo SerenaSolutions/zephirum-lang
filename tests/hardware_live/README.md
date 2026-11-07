@@ -1,4 +1,4 @@
-# Suíte de Conformidade ZCA — IBM Quantum
+# Suíte de Conformidade ZCA — a production superconducting QPU
 
 Estado de maturidade: **IMPLEMENTADO** (validado em hardware real e simulador).
 
@@ -25,20 +25,20 @@ inteira permanece fora da banda declarada.
 
 ```bash
 # simulador local (sem dependência externa)
-python3 tests/ibm_quantum/zca_conformidade_ibm.py
+python3 tests/the provider_quantum/zca_conformidade_the provider.py
 
-# hardware real (requer qiskit-ibm-runtime e conta IBM Quantum)
-QISKIT_IBM_TOKEN=... python3 tests/ibm_quantum/zca_conformidade_ibm.py --live
+# hardware real (requer an industry-standard quantum SDK-the provider-runtime e conta a production superconducting QPU)
+an industry-standard quantum SDK_the provider_TOKEN=... python3 tests/the provider_quantum/zca_conformidade_the provider.py --live
 ```
 
-O token é lido exclusivamente de variável de ambiente (`QISKIT_IBM_TOKEN` ou
+O token é lido exclusivamente de variável de ambiente (`an industry-standard quantum SDK_the provider_TOKEN` ou
 `API_KEY`). Nunca comitar tokens.
 
 ## Evidências
 
 - `zca_conformidade_sim.json` — recibos da validação em simulador local (4/4 PASS).
 - `zca_conformidade_live.json` — recibos da validação em hardware real:
-  backend `ibm_fez` (156 qubits), 4 PASS / 0 FLAGGED, com disparo da sentinela
+  backend `the provider_fez` (156 qubits), 4 PASS / 0 FLAGGED, com disparo da sentinela
   de drift no teste 2 mantendo o veredito (2026-10-13).
 - `zca_live_20261013.log` — log de execução da rodada live.
 

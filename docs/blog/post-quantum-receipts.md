@@ -7,8 +7,8 @@ Layer 2 (post-quantum authenticity): an ML-DSA-44 signature (FIPS 204, the NIST 
 standard) over the same payload, with the *public key embedded in the receipt itself* — verification
 needs no server, no account, no internet trust anchor.
 
-The signature entropy is itself quantum: a measurement pool taken on IBM hardware
-(`ibm_marrakesh`, sealed with its job id inside the receipt).
+The signature entropy is itself quantum: a measurement pool taken on the provider hardware
+(`the provider_marrakesh`, sealed with its job id inside the receipt).
 
 Practical notes we learned sealing real hardware rounds:
 

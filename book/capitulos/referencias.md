@@ -24,7 +24,7 @@ Bibliografia organizada por ordem de citação. Onde o identificador não foi co
 
 [10] CROSS, A. W. et al. OpenQASM 3: A Broader and Deeper Quantum Assembly Language. **ACM Transactions on Quantum Computing**, v. 3, n. 3, 2022.
 
-[11] JAVADI-ABHARI, A. et al. Quantum Computing with Qiskit. **arXiv**, 2024.
+[11] JAVADI-ABHARI, A. et al. Quantum Computing with an industry-standard quantum SDK. **arXiv**, 2024.
 
 [12] DEUTSCH, D.; JOZSA, R. Rapid Solution of Problems by Quantum Computation. **Proceedings of the Royal Society A**, v. 439, p. 553–558, 1992.
 

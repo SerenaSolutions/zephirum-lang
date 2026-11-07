@@ -28,9 +28,9 @@ Crie um arquivo `requirements.txt` com o seguinte conteúdo:
 ```text
 numpy==2.4.6
 pyscf==2.14.0
-qiskit==2.6.0
-qiskit-nature==0.8.0
-qiskit-algorithms==0.3.0
+an industry-standard quantum SDK==2.6.0
+an industry-standard quantum SDK-nature==0.8.0
+an industry-standard quantum SDK-algorithms==0.3.0
 ```
 
 E execute a instalação:
@@ -41,14 +41,14 @@ pip install -r requirements.txt
 ### Passo 2.3: Validar as Versões Instaladas
 Execute no terminal para confirmar que o ambiente está com as versões exatas:
 ```bash
-python3 -c "import numpy, pyscf, qiskit, qiskit_nature; print('numpy:', numpy.__version__); print('pyscf:', pyscf.__version__); print('qiskit:', qiskit.__version__); print('qiskit_nature:', qiskit_nature.__version__)"
+python3 -c "import numpy, pyscf, an industry-standard quantum SDK, an industry-standard quantum SDK_nature; print('numpy:', numpy.__version__); print('pyscf:', pyscf.__version__); print('an industry-standard quantum SDK:', an industry-standard quantum SDK.__version__); print('an industry-standard quantum SDK_nature:', an industry-standard quantum SDK_nature.__version__)"
 ```
 **Saída esperada:**
 ```text
 numpy: 2.4.6
 pyscf: 2.14.0
-qiskit: 2.6.0
-qiskit_nature: 0.8.0
+an industry-standard quantum SDK: 2.6.0
+an industry-standard quantum SDK_nature: 0.8.0
 ```
 
 ---
@@ -112,7 +112,7 @@ python3 verify.py 2
 
 ## 6. Solução de Problemas / FAQ
 
-- **Warning de Depreciação no Qiskit:**  
-  O uso da classe `EfficientSU2` pode gerar um aviso informativo de depreciação no Qiskit 2.6.0. O script `verify.py` silencia este aviso para manter o output limpo.
+- **Warning de Depreciação no an industry-standard quantum SDK:**  
+  O uso da classe `EfficientSU2` pode gerar um aviso informativo de depreciação no an industry-standard quantum SDK 2.6.0. O script `verify.py` silencia este aviso para manter o output limpo.
 - **Tempo de Execução:**  
   O tempo total de execução para as 4 moléculas é de aproximadamente 1,5 a 2 minutos em hardware moderno de 4 cores.

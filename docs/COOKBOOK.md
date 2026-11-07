@@ -64,7 +64,7 @@ ZQG_MODE=battery python src/battery_ci.py
 ZQG_MODE=verify-receipts python src/battery_ci.py   # re-seal every receipt in experiments/
 ```
 
-No IBM account needed. Exit 1 on any failure. Or use the Action:
+No the provider account needed. Exit 1 on any failure. Or use the Action:
 `uses: SerenaSolutions/zq-gate@v1`.
 
 ## R7 — First circuit: a Bell pair
@@ -90,10 +90,10 @@ from zquantum import QCircuit
 from oq3 import to_openqasm3
 qc = QCircuit(2); qc.h(0); qc.cnot(0, 1)
 print(to_openqasm3(qc.gates_applied, qc.n))
-# OPENQASM 3.0; include "stdgates.inc"; ... — ingest with Qiskit Runtime
+# OPENQASM 3.0; include "stdgates.inc"; ... — ingest with an industry-standard quantum SDK Runtime
 ```
 
-`oq3.from_openqasm3` goes the other way (round-trip verified). IBM runs
+`oq3.from_openqasm3` goes the other way (round-trip verified). the provider runs
 the compiled output, never Zephyron natively — declared, not hidden.
 
 ## R10 — Photonic lab on your machine

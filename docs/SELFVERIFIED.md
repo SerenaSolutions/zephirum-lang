@@ -30,14 +30,14 @@ Deutsch–Jozsa decide **constante vs balanceado**:
 | `0` | oráculo balanceado |
 | `REFUSED` | selfcheck abaixo do limiar, ou evidência inconclusiva após os lotes |
 
-## Resultado em hardware real (ibm_fez, 2026-10-29)
+## Resultado em hardware real (the provider_fez, 2026-10-29)
 
 | Oráculo | Veredito | p0 | selfcheck | Lotes | Shots | job_id |
 |---|---|---|---|---|---|---|
-| constante | **1** | 0.992 | 0.969 | 1 | 128 | `dbhm3ao1h92s73821mm0` |
-| balanceado | **0** | 0.016 | 0.992 | 1 | 128 | `dbhm3ik2d77s739d10j0` |
+| constante | **1** | 0.992 | 0.969 | 1 | 128 | `internal` |
+| balanceado | **0** | 0.016 | 0.992 | 1 | 128 | `internal` |
 
-Recibos selados em `experiments/selfcheck_ibm_fez_20261029/`. Custo total: 2 jobs × 5 circuitos × 128 shots, ~44 s de QPU.
+Recibos selados em `experiments/selfcheck_the provider_fez_20261029/`. Custo total: 2 jobs × 5 circuitos × 128 shots, ~44 s de QPU.
 
 ## Limites honestos
 
@@ -55,6 +55,6 @@ from zyql_selfverified import decide_selfverified
 r = decide_selfverified(kind="const1", n=3, seal_path="selo.json")
 
 # hardware real
-r = decide_selfverified(kind="balanced", n=3, qpu="ibm_fez", seal_path="selo_hw.json")
+r = decide_selfverified(kind="balanced", n=3, qpu="the provider_fez", seal_path="selo_hw.json")
 print(r.verdict, r.p0, r.selfcheck_p0, r.job_id)
 ```

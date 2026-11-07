@@ -6,7 +6,7 @@ Executable records, not screenshots. Each notebook runs from the repository with
 |---|---|
 | `hello_zephirum.ipynb` | smallest ZYQL program, trivalent verdict and receipt |
 | `shot-auditor-silicon.ipynb` | shot auditor controlling a campaign on real silicon |
-| `world3-trivalent-verdicts.ipynb` | WORLD-3: three protocols on `ibm_marrakesh`, receipt integrity check, 95% intervals and the trivalent verdict per protocol |
+| `world3-trivalent-verdicts.ipynb` | WORLD-3: three protocols on `the provider_marrakesh`, receipt integrity check, 95% intervals and the trivalent verdict per protocol |
 
 Run any of them with:
 

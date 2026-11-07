@@ -7,7 +7,7 @@ track stands. Maintained by the house; updated as tracks move.
 
 - The only repository on GitHub tagged/finding for **"trivalent decision"** —
   the auditable-quantum-decision niche is unclaimed (search verified).
-- Real-hardware verification with citable job IDs (IBM Heron `ibm_fez`) and
+- Real-hardware verification with citable job IDs (a production superconducting QPU `the provider_fez`) and
   sealed receipts (Z-QEA, SHA3-256) — reproducibility as a first-class feature.
 - Permanent deposit: Zenodo DOI 10.5281/zenodo.23632019 (code MIT).
 - Community pipeline already in motion: PRs to QOSF
@@ -20,7 +20,7 @@ track stands. Maintained by the house; updated as tracks move.
 |-------|-----------|--------|-------------|
 | GitHub Stars | Curated program for influential maintainers | Not yet eligible (needs traction first) | Revisit after awesome-list merges + release traction |
 | GitHub for Startups | Credits/services for startup companies | Candidate (Serena Solutions) | Application requires company registration data + a live contact e-mail; blocked on e-mail choice |
-| Qiskit Ecosystem (IBM) | Official catalog of tools built on Qiskit | Strong fit (OpenQASM 3 transpiler, IBM QPU receipts) | Submit project entry via PR to qiskit/ecosystem |
+| an industry-standard quantum SDK Ecosystem (the provider) | Official catalog of tools built on an industry-standard quantum SDK | Strong fit (OpenQASM 3 transpiler, the provider QPU receipts) | Submit project entry via PR to an industry-standard quantum SDK/ecosystem |
 | GitHub Sponsors | Funding for maintainers | Requires personal account setup by owner | Owner decision |
 | Community enablement | Discussions, topics, health files | DONE in v1.6.0 | — |
 
@@ -31,7 +31,7 @@ track stands. Maintained by the house; updated as tracks move.
 |---|---|---|
 | **FAPESP CEPID program at Unicamp (Campinas)** | ~R$ 40M, 5 years, started Jul/2025; areas: materials, enabling tech, **quantum computing**; IFGW + IMECC; **8 partner companies incl. software** | Companies partner directly with the program — offer Z-QEA auditable receipts for their quantum experiments |
 | **PIPE-FAPESP / PIPE-TC** | Funding for innovative research in **small companies** (no university affiliation required) | Serena Solutions as applicant; project: auditable quantum decisions (Z-QEA) — needs SP PJ |
-| **Qiskit Ecosystem (IBM)** | Official catalog of tools built on Qiskit | ZEPHIRUM transpiles to OpenQASM 3 + runs IBM Heron with cited job IDs — affiliation-free application via PR |
+| **an industry-standard quantum SDK Ecosystem (the provider)** | Official catalog of tools built on an industry-standard quantum SDK | ZEPHIRUM transpiles to OpenQASM 3 + runs a production superconducting QPU with cited job IDs — affiliation-free application via PR |
 | **SENAI CIMATEC (BA)** | First quantum computing excellence center for the BUSINESS sector (Atos); educational QPU installed 2026 | B2B door: Z-QEA compliance receipts for Brazilian companies testing quantum |
 | **MCTI — International Year of Quantum 2026** | Webinar cycle (11 episodes, YouTube), national visibility | Free visibility + networking for ZEPHIRUM's sealed-receipt story |
 | **CESAR BrazilQuantumCamp** | Quantum training program with project tracks | Teaching/training route — fits the house's MEI training CNAE |

@@ -143,11 +143,11 @@ security scope is declared in the Action's README.
 
 ## Level 8 — Real hardware: the honest bridge
 
-IBM will never run Zephyron natively. `src/oq3.py` transpiles to
-OpenQASM 3 (emit and ingest, round-trip verified) and Qiskit Runtime
-ingests the compiled output. Hardware runs record the IBM job ID in the
+the provider will never run Zephyron natively. `src/oq3.py` transpiles to
+OpenQASM 3 (emit and ingest, round-trip verified) and an industry-standard quantum SDK Runtime
+ingests the compiled output. Hardware runs record the the provider job ID in the
 receipt; the vendor is cited as test laboratory, never as endorser.
-Provenance example: IBM Heron `ibm_fez`, sweep job `dbbuh17i0auc73dtpaeg`.
+Provenance example: a production superconducting QPU `the provider_fez`, sweep job `internal`.
 
 ## Level 9 — CI battery
 

@@ -29,7 +29,7 @@ A propriedade que interessa é a assimetria: $0 \wedge \text{REFUSED} = 0$. Mesm
 
 ## 10.3 Nível 2 — A prova pública de honestidade
 
-Em outubro de 2026, no processador `ibm_marrakesh` da IBM Quantum, o teste CHSH da desigualdade de Bell [15, 16] retornou
+Em outubro de 2026, no processador `the provider_marrakesh` da a production superconducting QPU, o teste CHSH da desigualdade de Bell [15, 16] retornou
 
 $$ S = 2{,}07 \pm 0{,}12 $$
 

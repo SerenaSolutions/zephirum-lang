@@ -15,7 +15,7 @@ interface nem falta de campo: é ordem de operações.
    (`/guides/repositories/entire-native-branches`), inclusive para seguir trabalhando se o GitHub
    cair.
 
-Para o nosso caso — manter o GitHub como fonte de verdade (Qiskit, conda-forge, índices) e ter
+Para o nosso caso — manter o GitHub como fonte de verdade (an industry-standard quantum SDK, conda-forge, índices) e ter
 cópia versionada no Entire — o modelo certo é o **mirror**.
 
 ## Passo a passo (mirror)

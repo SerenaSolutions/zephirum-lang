@@ -13,7 +13,7 @@
 ## [2.5.4] - 2026-11-05
 - `qroute.__version__` passa a ler o metadado do pacote em vez de repetir
   a versao escrita a mao; a 2.5.3 publicada reportava 2.4.0 internamente.
-- Metadados do PyPI alinhados (licenca Apache-2.0, dependencia Qiskit com teto).
+- Metadados do PyPI alinhados (licenca Apache-2.0, dependencia an industry-standard quantum SDK com teto).
 
 ## [2.5.3] - 2026-11-03
 
@@ -47,7 +47,7 @@ Estado local: 42/42 CONFORMANTE.
 `experiments/prova_de_fogo.py` + `experiments/verificar_prova_de_fogo.py` + `docs/PROVA_DE_FOGO.md`.
 Duas medidas independentes no hardware (interferência decide a classe, leitura direta
 decide o valor), porta de integridade GHZ vetando o dispositivo, e recusa declarada
-dentro da banda de Hoeffding. Primeira execução em ibm_marrakesh, job dblnbem74qds73dqqmtg,
+dentro da banda de Hoeffding. Primeira execução em the provider_marrakesh, job internal,
 1024 shots, eps=0.05: const-0 -> 0, const-1 -> 1, balanceado -> REFUSED(BALANCED_ORACLE),
 GHZ fidelidade 0.9131, recibo selado e31b3295. O verificador recomputa o selo e reconfere
 cada veredito pelos counts crus; recibo adulterado é reprovado.
@@ -96,7 +96,7 @@ vazia silenciosa.
 ## [2.5.1] - 2026-11-03
 
 ### Adicionado — sinais de maturidade e protocolo de difusão global
-Auditoria contra o padrão de Qiskit, PennyLane, Cirq e Q#: faltavam seis marcadores que
+Auditoria contra o padrão de an industry-standard quantum SDK, a differentiable quantum SDK, another quantum SDK e Q#: faltavam seis marcadores que
 revisor técnico procura em 30 segundos.
 
 - `src/py.typed` — consumidor Python sabe que há tipos declarados;
@@ -189,15 +189,15 @@ Testes: `tests/test_oracle_id.py` cobre 8 máscaras BV, 3 períodos Simon + caso
 
 ### Validado
 - Bateria de 1000 execuções por app (8 apps, 8.000 no total): 0 erros.
-- Rodada no silício (ibm_marrakesh, 256 shots, n=2): const-1 → 1, const-0 → 0,
+- Rodada no silício (the provider_marrakesh, 256 shots, n=2): const-1 → 1, const-0 → 0,
   paridade → REFUSED. 3/3 conforme esperado, 6s de QPU.
 
 ## [2.3.1] - 2026-11-01
 
 ### Corrigido
-- **Cap do Qiskit declarado** (`qiskit>=2.6,<3`), atendendo ao checkup Q03 do Qiskit
+- **Cap do an industry-standard quantum SDK declarado** (`an industry-standard quantum SDK>=2.6,<3`), atendendo ao checkup Q03 do an industry-standard quantum SDK
   Ecosystem (revisão do PR #1433). Extras de hardware também receberam teto
-  (`qiskit-aer>=0.17,<0.19`). Sem teto, uma futura 3.x poderia quebrar o pacote
+  (`an industry-standard quantum SDK-aer>=0.17,<0.19`). Sem teto, uma futura 3.x poderia quebrar o pacote
   sem que o metadata avisasse; o cap torna o limite explícito e auditável.
 
 ## [2.3.0] - 2026-11-01
@@ -218,7 +218,7 @@ Testes: `tests/test_oracle_id.py` cobre 8 máscaras BV, 3 períodos Simon + caso
   selado e declaracao no protocolo).
 
 ### Base empirica
-Rodada I (ibm_marrakesh, job `dbj9bl9kdqps73904jh0`): revival 0.2382 contra banda 0.0520
+Rodada I (the provider_marrakesh, job `internal`): revival 0.2382 contra banda 0.0520
 (4.6x), controle sem revival (0.0209) — memoria detectada em silicio real.
 
 ## [2.2.1] - 2026-10-31
@@ -233,17 +233,17 @@ Rodada I (ibm_marrakesh, job `dbj9bl9kdqps73904jh0`): revival 0.2382 contra band
 
 ### Adicionado
 - `Q-ROUTE`: busca quantica de rotas dentro da linguagem, executada em QPU real
-  (`ibm_kingston`, job `dbiiogdep8hs73anus4g`) com recibo de hardware.
+  (`the provider_kingston`, job `internal`) com recibo de hardware.
 - `ZYQL Quantum Console`: interface do Q-ROUTE com execucao em QPU.
 
 ### Experimentos (rodadas seladas)
 - Rodada D (matriz de reprodutibilidade em 3 QPUs): fechada, 6 jobs DONE
-  (`ibm_fez` + `ibm_marrakesh`), vereditos identicos entre as QPUs.
+  (`the provider_fez` + `the provider_marrakesh`), vereditos identicos entre as QPUs.
 - Rodada I (gate de memoria do ruido, medida BLP): protocolo pre-registrado antes
   do disparo; revival de distancia de traco na variante com memoria
   (0.2382 vs banda 0.0520, 4.6x a banda) e ausencia de revival no controle sem
-  memoria (0.0209 <= banda). Veredito `1: MEMORIA DETECTADA` em `ibm_marrakesh`
-  (job `dbj9bl9kdqps73904jh0`), com a consequencia declarada: a banda Hoeffding
+  memoria (0.0209 <= banda). Veredito `1: MEMORIA DETECTADA` em `the provider_marrakesh`
+  (job `internal`), com a consequencia declarada: a banda Hoeffding
   nao e automaticamente valida nessa profundidade de dispositivo.
 
 ### Corrigido
@@ -255,7 +255,7 @@ Rodada I (ibm_marrakesh, job `dbj9bl9kdqps73904jh0`): revival 0.2382 contra band
 ### Corrigido
 - Empacotamento: `py-modules` no `pyproject.toml` listava 12 modulos e deixava de fora
   12 outros, incluindo `zyql_witness`, `zqea_sig`, `zqea_kem`, `zyql_worldscale`,
-  `zyql_world3`, `zyql_auditkit`, `zyql_cirq` e `shot_auditor`. O wheel publicado como
+  `zyql_world3`, `zyql_auditkit`, `zyql_another quantum SDK` e `shot_auditor`. O wheel publicado como
   2.1.0 saiu incompleto; este release publica o conjunto correto (32 arquivos).
 - Divergencia de versionamento: a tag `v2.1.0` (`37fbf74`) continha a lista antiga de
   modulos e nao estava no historico do `main`. Em vez de reescrever tag publicada,
@@ -300,7 +300,7 @@ como o cientista hostil que submetera a linguagem; 15 testes falsificaveis)
   gradiente medida (n=6/8/10 a L fixo, McClean 2018) com veredito
   consistente com o limiar em toda a grade.
 - **experiments/rodada_h_spec.md**: especificacao dos jobs de QPU para o
-  confronto da Rodada H em silicio IBM (pronta para execucao quando as
+  confronto da Rodada H em silicio the provider (pronta para execucao quando as
   credenciais estiverem ativas na sessao).
 
 ### Testes
@@ -381,7 +381,7 @@ All notable changes to the ZEPHIRUM language are documented here.
   dispositivo decoerido => REFUSED SEM gastar oráculo, modo `REFUSED_DEVICE_DECOHERED`.
 - **Cadeia de proveniência**: recibos do runtime selam o selo do anterior
   (`previous_seal`) + `verify_chain([...])`. Ledger tamper-evidente de rodadas.
-- **RODADA C no IBM Heron ibm_kingston** (jobs dbdlb7424mrc739iievg / dbdlbv424mrc739iig60,
+- **RODADA C no a production superconducting QPU the provider_kingston** (jobs internal / internal,
   256 shots, epsilon=0.05): porta GHZ fidelidade **0.977 → dispositivo confiável**;
   DJ adaptativo **EXATO**: const-1 p0=0.9922→1, const-0 p0=1.0000→0, balanceado p0=0.0039→REFUSED.
   Recibo ML-DSA-44 **encadeado** no selo da Rodada B: experiments/round_c_receipt.json.
@@ -413,24 +413,24 @@ All notable changes to the ZEPHIRUM language are documented here.
 
 ## [1.7.4] - 2026-10-23
 ### Added
-- **Rodada B executada — lacuna de shots baixos FECHADA**: bateria Deutsch-Jozsa n=3 trivalente no IBM Heron `ibm_kingston` (conta independente, backend distinto da Rodada A) em 64, 128, 256 e 384 shots. Vereditos trivalentes (1/0/REFUSED) **EXATOS em todos os níveis**, inclusive 64 shots (abaixo da previsão teórica de 82). Protocolo Estatístico ZYQL agora validado em hardware no intervalo completo [64, 16384] shots. Recibo ML-DSA-44 + entropia quântica: `experiments/round_b_receipt.json` (veredito `RODADA_B_VERIFICADA_TRIVALENTE_EXATO`).
+- **Rodada B executada — lacuna de shots baixos FECHADA**: bateria Deutsch-Jozsa n=3 trivalente no a production superconducting QPU `the provider_kingston` (conta independente, backend distinto da Rodada A) em 64, 128, 256 e 384 shots. Vereditos trivalentes (1/0/REFUSED) **EXATOS em todos os níveis**, inclusive 64 shots (abaixo da previsão teórica de 82). Protocolo Estatístico ZYQL agora validado em hardware no intervalo completo [64, 16384] shots. Recibo ML-DSA-44 + entropia quântica: `experiments/round_b_receipt.json` (veredito `RODADA_B_VERIFICADA_TRIVALENTE_EXATO`).
 - Scripts da rodada no repositório: `experiments/round_b_battery.py` (submissão) e `experiments/round_b_analyze.py` (análise + selagem v2).
 - Documentação atualizada: `docs/ZYQL_STATISTICAL_PROTOCOL.md` (seção Rodada B + proposta concluída), `docs/PROOFS.md` (índice de evidências com a lacuna fechada).
 
 ## [1.7.3] - 2026-10-22
 ### Added
-- Validação do Protocolo Estatístico ZYQL em Hardware Real (IBM Heron `ibm_fez`, Rodada A): sweep de 512 a 16384 shots no Deutsch-Jozsa $n=3$ trivalente com 100% de acerto (3/3 casos em todos os 6 níveis), zero recusa espúria e $p(000) \ge 0.9977$ para constantes / $\le 0.0024$ para balanceado. Veredicto **VALIDADO** no intervalo [512, 16384] com recibo selado SHA3-256 (`experiments/refusal_receipt.json`).
+- Validação do Protocolo Estatístico ZYQL em Hardware Real (a production superconducting QPU `the provider_fez`, Rodada A): sweep de 512 a 16384 shots no Deutsch-Jozsa $n=3$ trivalente com 100% de acerto (3/3 casos em todos os 6 níveis), zero recusa espúria e $p(000) \ge 0.9977$ para constantes / $\le 0.0024$ para balanceado. Veredicto **VALIDADO** no intervalo [512, 16384] com recibo selado SHA3-256 (`experiments/refusal_receipt.json`).
 - Documentação da lacuna aberta abaixo de 512 shots em `docs/ZYQL_STATISTICAL_PROTOCOL.md` e proposta da Rodada B (sweep 16..256 shots).
 - Atualização do índice de provas de conceito em `docs/PROOFS.md` (seção do problema com links para `docs/PROBLEM.md` e `experiments/refusal_receipt.json`).
 
 ## [1.7.2] - 2026-10-21
 ### Added
-- Problem solved: minimum shots for reliable trivalent decisions measured on IBM Heron ibm_fez (Rodada A, 18/18 correct at 512..16384, protocol VALIDADO) — docs/PROBLEM.md, docs/ZYQL_STATISTICAL_PROTOCOL.md §6, experiments/refusal_receipt.json (sealed)
+- Problem solved: minimum shots for reliable trivalent decisions measured on a production superconducting QPU the provider_fez (Rodada A, 18/18 correct at 512..16384, protocol VALIDADO) — docs/PROBLEM.md, docs/ZYQL_STATISTICAL_PROTOCOL.md §6, experiments/refusal_receipt.json (sealed)
 - Hello World canônico da linguagem: forma `(hello)` no núcleo Lisp, exemplo `examples/hello_world.zph` selado (Z-QEA).
 
 ## [1.7.2] - 2026-10-21
 ### Added
-- Rodada 6 — HARDWARE REAL (IBM Quantum ibm_marrakesh, job dbclitfi0auc73dv77dg,
+- Rodada 6 — HARDWARE REAL (a production superconducting QPU the provider_marrakesh, job internal,
   512 shots, laboratório próprio): bateria ZYQL completa no silicio — DJ
   trivalente (1/0/REFUSED), palavras de tracado S3 (B_R B_S)^2 -> |01> vs
   (B_S B_R)^2 -> |10> — divergencia nao-abeliana medida no hardware — e Grover
@@ -478,11 +478,11 @@ All notable changes to the ZEPHIRUM language are documented here.
 - docs/PROBLEM.md: dossier da expedição científica sobre a confiabilidade da decisão trivalente ZYQL em hardware quântico real (shots mínimos empíricos, calibração do REFUSED e hipóteses H1/H2).
 - S3 qutrit miniature (experiments/): braiding non-commutativity and 3-channel
   fusion space (qutrit-in-qubits), noiseless with exact-zero deviation vs theory
-  (canonical rational arithmetic) and verified on real hardware: IBM Heron
-  ibm_fez, jobs dbbueufi0auc73dtp7og and dbbugbk24mrc73cif420; full ZYQL
+  (canonical rational arithmetic) and verified on real hardware: a production superconducting QPU
+  the provider_fez, jobs internal and internal; full ZYQL
   trivalent battery 3/3 PASS on hardware (receipt sealed in
   experiments/s3_qutrit_full_receipt.json). Scientific sweep of 26 circuits
-  (job dbbuh17i0auc73dtpaeg) submitted; harvest pending.
+  (job internal) submitted; harvest pending.
 - Packaging: pyproject.toml — `pip install -e .` exposes zkernel, zquantum,
   zyql_quantum_gate, quantum_types, zyql_rag_layer, oq3 as installable modules.
 - docs/AUDIT.md: external audit record (GitHub Copilot audit, 2026-10-21) with
@@ -491,15 +491,15 @@ All notable changes to the ZEPHIRUM language are documented here.
 - docs/PARTNERSHIP.md: GitHub partnership dossier.
 - GitHub Pages deployment via GitHub Actions (site/).
 
-- PennyLane cross-check (experiments/chemistry/pennylane_crosscheck.py):
+- a differentiable quantum SDK cross-check (experiments/chemistry/a differentiable quantum SDK_crosscheck.py):
   H2 VQE reproduces the battery FCI reference -1.13730604 Ha with error
-  4.2e-09 (convention documented: PennyLane default unit is bohr; battery
+  4.2e-09 (convention documented: a differentiable quantum SDK default unit is bohr; battery
   geometry is angstrom). Receipt sealed.
 - New .zph examples: s3_qutrit.zph (fusion-space miniature), chemistry_h2.zph.
 - .gitattributes: honest Linguist stats (receipts generated, assets vendored).
 - docs/PROOFS.md: public index of proofs of concept (S3 non-Abelian
   miniature front and center) + proofs section on the Pages site.
-- Scientific sweep harvested (job dbbuh17i0auc73dtpaeg, 26 circuits): braid
+- Scientific sweep harvested (job internal, 26 circuits): braid
   angle sweep 10/10 dominant channels correct, non-Abelian window measured at
   theta/pi in [0.3,0.7]; braid-word period 6/6; Pauli error map exact.
   chi-square (4096 shots) fails in all points due to sub-1% uncalibrated
@@ -518,7 +518,7 @@ All notable changes to the ZEPHIRUM language are documented here.
 - Sponsor button live: .github/FUNDING.yml (GitHub "Sponsor" on the repo
   points to the tier page); Stripe products/prices created for the three
   tiers ($5/$25/$100 monthly), checkout flow validated in test mode.
-- Scientific sweep v2 HARVESTED (job dbcfn70c77vs73866mdg, 30 circuits with
+- Scientific sweep v2 HARVESTED (job internal, 30 circuits with
   readout calibration): mitigated chi-square passes 18/20 (raw v1: 0/10),
   dominant channels 20/20, measured readout fidelity 94.6-97.6%. Hypothesis
   CONFIRMED: the v1 chi-square failure was readout bias (instrument), not
@@ -549,14 +549,14 @@ All notable changes to the ZEPHIRUM language are documented here.
 - `qif` quantum conditional (controlled-X decomposition, no collapse) - verified: Bell 1/2+1/2.
 - First-class quantum types (`qbit`/`zyqbit`) with static no-cloning rejection.
 - Native neural statement `zyql_rag`: docs -> BM25 -> translator -> interference gate -> receipt.
-- Hardware confrontation vs textbook Qiskit (job db6dklcvf2bc73d122t0, ibm_fez): depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ, both decide correctly.
+- Hardware confrontation vs textbook an industry-standard quantum SDK (job internal, the provider_fez): depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ, both decide correctly.
 
 ## [1.0.0] - 2026-10-11
 ### Added
 - Trivalent Deutsch-Jozsa decision gate with declared noise band (+-0.15).
 - Z-QEA certificates with canonical rational arithmetic.
 - ML-DSA-44 (FIPS 204) receipt sealing.
-- IBM Quantum lab bridge (verified ingestion: job db4oqmcvf2bc73cutcgg).
+- a production superconducting QPU lab bridge (verified ingestion: job internal).
 
 ## [0.3.0] - 2026-10-10
 ### Added

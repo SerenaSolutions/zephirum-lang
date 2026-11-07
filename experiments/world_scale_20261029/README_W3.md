@@ -1,7 +1,7 @@
 # WORLD-3 — rodada revisada pela auditoria Nemotron (2026-10-29)
 
 Pre-registro selado ANTES da execucao (protocolo + bandas + regra de agregacao).
-Backend: ibm_marrakesh. 3 repeticoes independentes, 8192 shots, optimization_level=3,
+Backend: the provider_marrakesh. 3 repeticoes independentes, 8192 shots, optimization_level=3,
 controle SPAM por circuito idle, profundidade e portas 2q no recibo.
 
 | Protocolo | Metricas (3 reps) | Veredito agregado |
@@ -11,7 +11,7 @@ controle SPAM por circuito idle, profundidade e portas 2q no recibo.
 | W-03 Grover 3q | p 0.782 / 0.776 / 0.760 vs 0.125 classico (ideal 0.945) | **REFUSED** |
 | SPAM (controle) | erro de leitura 1.07% / 1.10% / 0.89% | abaixo do limite 10% |
 
-Jobs: dbhuqlg1h92s7382hn10 (rep1), dbhuqsmne4hc73bdm41g (rep2), dbhur1lep8hs73amuin0 (rep3).
+Jobs: internal (rep1), internal (rep2), internal (rep3).
 
 Leitura honesta: W-02 e reprodutivel e certificado; W-01 falha por custo de roteamento
 (85 portas 2q em 4 qubits); W-03 mostra amplificacao ~6x sobre o classico, mas abaixo da

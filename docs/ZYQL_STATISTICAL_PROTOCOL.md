@@ -1,6 +1,6 @@
 # ZYQL Statistical Protocol — formal decision specification
 
-Status: ESPECIFICAÇÃO FORMAL (implemented by `tests/ibm_quantum/zca_conformidade_ibm.py`,
+Status: ESPECIFICAÇÃO FORMAL (implemented by `tests/the provider_quantum/zca_conformidade_the provider.py`,
 receipts archived in `zca_conformidade_live.json` / `zca_conformidade_sim.json` / `experiments/refusal_receipt.json`)
 Date: 2026-10-19 (ISO 8601) · Band: δ = 0.15 (declared) · Reference shots: n = 2048
 
@@ -26,7 +26,7 @@ probability; it decides against a DECLARED noise band δ:
 | p̂ ≥ 1 − δ | 1 (balanced) |
 | δ < p̂ < 1 − δ | REFUSED |
 
-Live receipts (ibm_fez, job db6ded84qg6s73c4jvug, n = 2048):
+Live receipts (the provider_fez, job internal, n = 2048):
 DJ constant: p(000) = 0.9844 ⇒ p̂ ≈ 0.016 ≤ 0.15 ⇒ verdict 0 (PASS);
 DJ balanced: p̂ = 0.9531 ≥ 0.85 ⇒ verdict 1 (PASS).
 
@@ -47,7 +47,7 @@ The reference suite uses n = 2048 ⇒ ≥ 70× the minimum; margins are declared
 ## 4. Band calibration rule
 
 δ must exceed the device noise floor by a declared factor:
-δ ≥ k · q_max, with k = 7.5 observed (q ≈ 0.016–0.02 readout floor on ibm_fez, δ = 0.15).
+δ ≥ k · q_max, with k = 7.5 observed (q ≈ 0.016–0.02 readout floor on the provider_fez, δ = 0.15).
 If calibration shows q_max > δ/3, the suite MUST widen δ (and re-declare it) or REFUSED
 must absorb the difference. The band is a property of the receipt, never of an assumption.
 
@@ -60,15 +60,15 @@ session window; cross-session claims require a fresh calibration receipt.
 
 ## 6. Validação em hardware
 
-Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots no processador quântico **IBM Heron (`ibm_fez`)** (laboratório de teste, sem endosso institucional). O recibo selado em [`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json) (SHA3-256 `92b27f730b79cfd4b732e6c70fb90fd4dbb8dcad52ef1cc1f26d1242ab53e737`) documenta os seguintes resultados medidos:
+Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots no processador quântico **a production superconducting QPU (`the provider_fez`)** (laboratório de teste, sem endosso institucional). O recibo selado em [`experiments/refusal_receipt.json`](../experiments/refusal_receipt.json) (SHA3-256 `92b27f730b79cfd4b732e6c70fb90fd4dbb8dcad52ef1cc1f26d1242ab53e737`) documenta os seguintes resultados medidos:
 
 ### Jobs e níveis de shots testados (Deutsch-Jozsa n=3, 1 chamada de oráculo)
-- **512 shots:** job `dbcjf7ni0auc73dv36ug` — Acerto 3/3 (100%), recusa espúria: 0
-- **1024 shots:** job `dbcjf7pgv2cc73eaft1g` — Acerto 3/3 (100%), recusa espúria: 0
-- **2048 shots:** job `dbcjf7vi0auc73dv36vg` — Acerto 3/3 (100%), recusa espúria: 0
-- **4096 shots:** job `dbcjf81gv2cc73eaft20` — Acerto 3/3 (100%), recusa espúria: 0
-- **8192 shots:** job `dbcjf87i0auc73dv3700` — Acerto 3/3 (100%), recusa espúria: 0
-- **16384 shots:** job `dbcjf8fi0auc73dv370g` — Acerto 3/3 (100%), recusa espúria: 0
+- **512 shots:** job `internal` — Acerto 3/3 (100%), recusa espúria: 0
+- **1024 shots:** job `internal` — Acerto 3/3 (100%), recusa espúria: 0
+- **2048 shots:** job `internal` — Acerto 3/3 (100%), recusa espúria: 0
+- **4096 shots:** job `internal` — Acerto 3/3 (100%), recusa espúria: 0
+- **8192 shots:** job `internal` — Acerto 3/3 (100%), recusa espúria: 0
+- **16384 shots:** job `internal` — Acerto 3/3 (100%), recusa espúria: 0
 
 ### Métricas estatísticas observadas
 - **Conformidade de probabilidade:** $p(000) \ge 0.9977$ para casos constantes (const-1 e const-0) e $p(000) \le 0.0024$ para o caso balanceado em todos os 6 níveis.
@@ -82,10 +82,10 @@ Em 2026-10-22, a Rodada A de testes empíricos executou uma varredura de shots n
 
 ### Limitações honestas e lacunas abertas
 1. **Lacuna no limite inferior real:** Como a varredura da Rodada A iniciou em 512 shots, o ponto exato de inflexão (entre 29 e 512 shots) onde o ruído de hardware começa a degradar a decisão trivalente não foi medido. O limite inferior empírico exato permanece uma **lacuna aberta**.
-2. **Escopo do algoritmo e hardware:** A validação cobre apenas o algoritmo Deutsch-Jozsa $n=3$ em um único backend quântico (**IBM Heron `ibm_fez`**).
+2. **Escopo do algoritmo e hardware:** A validação cobre apenas o algoritmo Deutsch-Jozsa $n=3$ em um único backend quântico (**a production superconducting QPU `the provider_fez`**).
 
 ### Próximos passos (Rodada B — EXECUTADA)
-A Rodada B foi executada (ver seção seguinte) e **fechou a lacuna**: vereditos exatos em 64, 128, 256 e 384 shots no `ibm_kingston`. O limiar empírico de confiabilidade fica abaixo de 64 shots; níveis inferiores (8 a 32) permanecem não medidos — abaixo da previsão teórica de 29 shots, sem relevância operacional.
+A Rodada B foi executada (ver seção seguinte) e **fechou a lacuna**: vereditos exatos em 64, 128, 256 e 384 shots no `the provider_kingston`. O limiar empírico de confiabilidade fica abaixo de 64 shots; níveis inferiores (8 a 32) permanecem não medidos — abaixo da previsão teórica de 29 shots, sem relevância operacional.
 
 ---
 
@@ -93,14 +93,14 @@ A Rodada B foi executada (ver seção seguinte) e **fechou a lacuna**: vereditos
 
 A Rodada A declarou a lacuna abaixo de 512 shots como não verificada. A Rodada B
 fechou a lacuna: a mesma bateria Deutsch-Jozsa n=3 (const-1, const-0, balanceado)
-no **IBM Heron ibm_kingston** (backend distinto do ibm_fez da Rodada A, conta
+no **a production superconducting QPU the provider_kingston** (backend distinto do the provider_fez da Rodada A, conta
 independente) em **64, 128, 256 e 384 shots**.
 
 Resultado: **vereditos trivalentes EXATOS em todos os níveis**, inclusive 64 shots
 (1/0/REFUSED corretos em todos os casos). O protocolo estatístico ZYQL não é
 apenas válido acima de 512 — a decisão trivalente é exata no silício até os
-nível de ruído mais baixo testado. Jobs: `dbdac41gv2cc738hnen0` (64),
-`dbdac47i0auc739521vg` (128), `dbdac4c24mrc73cl3ia0` (256), `dbdac4ni0auc73952200` (384).
+nível de ruído mais baixo testado. Jobs: `internal` (64),
+`internal` (128), `internal` (256), `internal` (384).
 
 Recibo selado (ML-DSA-44 + entropia quântica): `experiments/round_b_receipt.json` —
 veredito `RODADA_B_VERIFICADA_TRIVALENTE_EXATO`.

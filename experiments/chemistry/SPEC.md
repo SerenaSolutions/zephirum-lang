@@ -23,10 +23,10 @@ A bateria estabelece a validação formal em dois níveis de prova:
 |---|---|---|
 | **Python** | `3.10+` | Runtime do benchmark |
 | **PySCF** | `2.14.0` | Driver Hartree-Fock (RHF) e referência quântica exata FCI |
-| **Qiskit** | `2.6.0` | Framework quântico e primitivas de simulação (`StatevectorEstimator`) |
-| **Qiskit-Nature** | `0.8.0` | Construção de Hamiltonianos de segunda quantização e mapeador Jordan-Wigner |
+| **an industry-standard quantum SDK** | `2.6.0` | Framework quântico e primitivas de simulação (`StatevectorEstimator`) |
+| **an industry-standard quantum SDK-Nature** | `0.8.0` | Construção de Hamiltonianos de segunda quantização e mapeador Jordan-Wigner |
 | **NumPy** | `2.4.6` | Computação numérica e diagonalização de matrizes |
-| **Qiskit-Algorithms** | `0.3.0` | Solver exato (`NumPyMinimumEigensolver`), VQE e otimizador `COBYLA` |
+| **an industry-standard quantum SDK-Algorithms** | `0.3.0` | Solver exato (`NumPyMinimumEigensolver`), VQE e otimizador `COBYLA` |
 
 ---
 
@@ -119,4 +119,4 @@ Em conformidade com as diretrizes de integridade científica da Casa ZEPHIRUM:
 2. **Limitação de Profundidade do Ansatz VQE:**  
    O ansatz utilizado (`EfficientSU2`, `reps=1`, 120 iterações COBYLA) é um ansatz heurístico raso configurado para restrições de tempo de execução em sandbox. Ansätze quimicamente precisos (como UCCSD) exigem recursos computacionais adicionais.
 3. **Execução em Hardware Quântico Real:**  
-   A migração destas provas para QPUs físicas da IBM é o objetivo declarado da solicitação de **IBM Quantum Credits**, não constituindo alegação do presente relatório.
+   A migração destas provas para QPUs físicas da the provider é o objetivo declarado da solicitação de **a production superconducting QPU Credits**, não constituindo alegação do presente relatório.
