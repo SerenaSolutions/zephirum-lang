@@ -1,3 +1,6 @@
+<p align="center"><img src="assets/brand/zephirum_logo.jpg" width="320" alt="ZEPHIRUM&trade; &middot; ZYQL&trade;"></p>
+<p align="center"><b>ZEPHIRUM&trade;</b> &middot; <b>ZYQL&trade;</b></p>
+
 <p align="center">
   <a href="assets/demos/zyql_birth_lab_38s.mp4">
     <img src="assets/demos/zyql_birth_lab_poster.jpg" width="640" alt="The birth of ZYQL on a production superconducting QPU - 30 s animation with sound">
@@ -325,3 +328,7 @@ See `CITATION.cff`. Software deposit: Zenodo concept DOI 10.5281/zenodo.23632019
 
 Apache-2.0 — see [LICENSE](LICENSE). A licença inclui concessão explícita de patentes,
 necessária em computação quântica; a tese companheira permanece CC BY-NC-ND 4.0.
+
+---
+
+ZEPHIRUM&trade; e ZYQL&trade; sao marcas de Serena Solutions. O simbolo (betta quantico) e a identidade visual sao de uso reservado. O codigo e licenciado sob Apache-2.0, que **nao concede direito de uso das marcas** (Apache-2.0, secao 6). Veja `NOTICE`.
