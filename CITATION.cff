@@ -5,8 +5,11 @@ type: software
 authors:
   - name: "Reginaldo Pinezi Uhlmann"
     orcid: "https://orcid.org/0009-0005-3212-5179"
+    alias: "Ravimah Anjo; Reginaldo Munsob"
   - name: "Leonardo Henrique Gonçalves"
+  - name: "Maria Clara dos Anjos"
   - name: "Serena Solutions"
+notes: "Reginaldo Pinezi Uhlmann e o idealizador, arquiteto e diretor do projeto, e assina tambem como Ravimah Anjo e Reginaldo Munsob. Leonardo Henrique Goncalves e Maria Clara dos Anjos sao colaboradores. Serena Solutions e a empresa que publica."
 repository-code: "https://github.com/SerenaSolutions/zephirum-lang"
 abstract: "ZEPHIRUM is the language; ZYQL is the trivalent decision algorithm (1/0/REFUSED) with ML-DSA-44 receipts. Decisions by Deutsch-Jozsa interference; every claim carries a recorded receipt."
 keywords:
