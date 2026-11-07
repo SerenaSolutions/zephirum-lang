@@ -1,0 +1,43 @@
+{
+ "modulo": "recibo assinado Ed25519 + verificador independente",
+ "casos": 7,
+ "passes": 7,
+ "resultado": {
+  "assinatura valida aceita": {
+   "pass": true,
+   "detail": "ASSINATURA_VALIDA"
+  },
+  "chave errada rejeitada": {
+   "pass": true,
+   "detail": "ASSINATURA_INVALIDA"
+  },
+  "veredito adulterado rejeitado": {
+   "pass": true,
+   "detail": "ASSINATURA_INVALIDA"
+  },
+  "parametro adulterado rejeitado": {
+   "pass": true,
+   "detail": "ASSINATURA_INVALIDA"
+  },
+  "recibo sem assinatura rejeitado": {
+   "pass": true,
+   "detail": "ASSINATURA_AUSENTE"
+  },
+  "cadeia de 2 recibos valida": {
+   "pass": true,
+   "detail": "[]"
+  },
+  "cadeia quebrada detectada": {
+   "pass": true,
+   "detail": "['[1] ASSINATURA_INVALIDA', '[1] CADEIA_QUEBRADA']"
+  }
+ },
+ "chave_publica": "/jHpzv7Sn8yWHPgzIOw5g1Y/Sfz8N8QwNMvr311x3Pk=",
+ "niveis": [
+  "integridade",
+  "autenticidade",
+  "reprodutibilidade",
+  "correcao"
+ ],
+ "RECEIPT_HASH": "5d2b5a86bd79dfd589fd6cdc09e4e610"
+}
