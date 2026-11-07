@@ -1,5 +1,5 @@
-name: 'zq-gate'
-description: 'ZQ-GATE: verified quantum decision gate — run the trivalent decision battery (1/0/REFUSED) and verify SHA3-256 receipts in your CI.'
+name: 'zephirum-zq-gate'
+description: 'Runs the trivalent decision battery (1/0/REFUSED) and verifies SHA3-256 receipts in CI.'
 author: 'Serena Quantum Solutions'
 branding:
   icon: 'check-circle'
