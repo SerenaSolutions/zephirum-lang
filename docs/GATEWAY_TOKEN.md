@@ -72,3 +72,14 @@ imprime a chave.
 | `POST /v1/qsr/assess` | veredito 0: um ativo precisa migrar, o outro está pronto |
 | `POST /v1/lang/run` com `(hello zyql)` | saída `Hello, zyql! | decisao = 1` |
 | `POST /v1/core/decide` com `const1` | veredito 1 com recibo selado |
+
+## Verificação do webhook de pagamento
+
+Duas camadas, e a primeira manda:
+
+1. `STRIPE_WEBHOOK_SECRET` definido: exige o cabeçalho `Stripe-Signature` com HMAC-SHA256
+   sobre `timestamp.corpo`, tolerância de 300 segundos. Assinatura ausente, inválida ou
+   antiga é recusada com 401.
+2. Só `ZYQL_WEBHOOK_SECRET`: valida segredo compartilhado no corpo. Funciona, mas não
+   protege contra POST forjado com o segredo vazado.
+3. Nenhum dos dois: o webhook responde 503. Nunca emite chave sem verificação.
