@@ -1,0 +1,50 @@
+{
+ "payload": {
+  "spec": "ZYQL-PIPELINE-DEMO/1.0",
+  "timestamp": "2026-11-07T22:39:53.516453+00:00",
+  "problema": {
+   "algoritmo": "bernstein_vazirani",
+   "n": 3,
+   "s_alvo": 5,
+   "promessa": "PROMISE_OK"
+  },
+  "rotas": {
+   "rota": "simulacao",
+   "razao": "QUANTUM_QUERY_ADVANTAGE_REQUIRED",
+   "custo_classico": 3,
+   "orcamento_classico": 1,
+   "consultas_quanticas": 1
+  },
+  "circuito": {
+   "n_qubits": 4,
+   "profundidade_original": 6,
+   "profundidade_transpilada": 5,
+   "cx_portas": 2
+  },
+  "execucao": {
+   "backend": "qiskit_aer.AerSimulator",
+   "shots": 2048,
+   "seed": 1701,
+   "hardware_real": false
+  },
+  "coleta": {
+   "estado_dominante": "101",
+   "p_obs": 1.0,
+   "candidato_s": 5
+  },
+  "verificacao_independente": {
+   "verificado": true,
+   "discrepancias": 0,
+   "bases_testadas": 3
+  },
+  "resultado": {
+   "veredito": "1",
+   "modo": "CERTIFICADO_INDEPENDENTE",
+   "motivo_recusa": null,
+   "latencia_ms": 1239.91
+  },
+  "prev": "f26ae00f76838a06d2369cc30f073ce609204d714e5cc771835fa1eb82890914",
+  "selado_por": "zyql-pipeline-demo-2026"
+ },
+ "selo_sha3_256": "2ae1c9e3bd43611237cd1cc6c404599a5452af508425d819a3b2a9008a132bc2"
+}
