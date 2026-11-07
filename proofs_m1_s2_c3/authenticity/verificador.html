@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<title>ZYQL — Verificador Público de Recibos</title>
+<style>
+:root{color-scheme:dark}
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#060a12;color:#e9f1f7;margin:0;padding:28px;line-height:1.5}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:#7f95a8;font-size:13px;margin-bottom:22px}
+textarea,input{width:100%;background:#0d1522;color:#d9e8f3;border:1px solid #1e2f44;border-radius:8px;padding:10px;font-family:ui-monospace,monospace;font-size:12px;box-sizing:border-box}
+textarea{height:190px;resize:vertical}
+button{background:#2ebad4;color:#04121a;border:0;border-radius:8px;padding:11px 20px;font-weight:700;cursor:pointer;margin-top:12px}
+#out{margin-top:18px;padding:14px;border-radius:8px;background:#0d1522;border:1px solid #1e2f44;white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:12.5px}
+.ok{border-color:#1f7a4d !important} .bad{border-color:#a3323c !important}
+label{display:block;font-size:12px;color:#7f95a8;margin:14px 0 4px}
+.hint{font-size:12px;color:#5f7387;margin-top:16px}
+</style>
+<h1>Verificador Público de Recibos ZYQL</h1>
+<div class="sub">Confira você mesmo: o recibo foi assinado por quem diz, e não foi alterado depois. Nada sai do seu navegador.</div>
+
+<label>Recibo (JSON)</label>
+<textarea id="recibo" placeholder='Cole aqui o recibo assinado...'></textarea>
+
+<label>Chave pública do emissor (base64, Ed25519)</label>
+<input id="chave" placeholder="chave pública em base64">
+
+<button onclick="verificar()">Verificar recibo</button>
+<div id="out">aguardando</div>
+<div class="hint">O que é conferido: (1) integridade do conteúdo por SHA3-256; (2) autenticidade da assinatura Ed25519; (3) presença dos blocos obrigatórios e da regra de decisão. Recibo válido não prova execução segura: prova origem e integridade.</div>
+
+<script>
+/*CORE-START*/
+// SHA3-256 em JavaScript puro (Keccak-f[1600], taxa 136 bytes)
+const ROUND = [
+ 0x0000000000000001n,0x0000000000008082n,0x800000000000808an,0x8000000080008000n,
+ 0x000000000000808bn,0x0000000080000001n,0x8000000080008081n,0x8000000000008009n,
+ 0x000000000000008an,0x0000000000000088n,0x0000000080008009n,0x000000008000000an,
+ 0x000000008000808bn,0x800000000000008bn,0x8000000000008089n,0x8000000000008003n,
+ 0x8000000000008002n,0x8000000000000080n,0x000000000000800an,0x800000008000000an,
+ 0x8000000080008081n,0x8000000000008080n,0x0000000080000001n,0x8000000080008008n];
+const ROT = [[0,36,3,41,18],[1,44,10,45,2],[62,6,43,15,61],[28,55,25,21,56],[27,20,39,8,14]];
+const M64 = (1n<<64n)-1n;
+function rol(x,n){n%=64n;return n===0n?x:((x<<n)|(x>>(64n-n)))&M64;}
+function keccakF(A){
+ for(let r=0;r<24;r++){
+  const C=[0,1,2,3,4].map(i=>A[i]^A[i+5]^A[i+10]^A[i+15]^A[i+20]);
+  for(let i=0;i<5;i++){const D=C[(i+4)%5]^rol(C[(i+1)%5],1n);
+   for(let j=0;j<25;j+=5)A[j+i]^=D;}
+  const B=new Array(25).fill(0n);
+  for(let x=0;x<5;x++)for(let y=0;y<5;y++)B[y+5*((2*x+3*y)%5)]=rol(A[x+5*y],BigInt(ROT[x][y]));
+  for(let x=0;x<5;x++)for(let y=0;y<5;y++){const i=x+5*y;A[i]=B[i]^((~B[(x+1)%5+5*y]&M64)&B[(x+2)%5+5*y]);}
+  A[0]=(A[0]^ROUND[r])&M64;
+ }
+}
+function sha3_256(bytes){
+ const RATE=136;const A=new Array(25).fill(0n);
+ const pad=new Uint8Array(((Math.floor(bytes.length/RATE)+1)*RATE));
+ pad.set(bytes);pad[bytes.length]^=0x06;pad[pad.length-1]^=0x80;
+ for(let off=0;off<pad.length;off+=RATE){
+  for(let i=0;i<RATE/8;i++){let v=0n;for(let b=7;b>=0;b--)v=(v<<8n)|BigInt(pad[off+i*8+b]);A[i]^=v;}
+  keccakF(A);
+ }
+ const out=new Uint8Array(32);
+ for(let i=0;i<4;i++){let v=A[i];for(let b=0;b<8;b++){out[i*8+b]=Number(v&0xffn);v>>=8n;}}
+ return out;
+}
+function hex(u8){return [...u8].map(b=>b.toString(16).padStart(2,'0')).join('');}
+function canon(obj){
+ if(obj===null) return "null";
+ if(Array.isArray(obj)) return "["+obj.map(canon).join(",")+"]";
+ if(typeof obj==="object"){const ks=Object.keys(obj).sort();
+  return "{"+ks.map(k=>JSON.stringify(k)+":"+canon(obj[k])).join(",")+"}";}
+ return JSON.stringify(obj);
+}
+function corpoSemAssinatura(r){const c={};for(const k of Object.keys(r)) if(k!=="_signature") c[k]=r[k];return c;}
+function digestDoRecibo(r){return hex(sha3_256(new TextEncoder().encode(canon(corpoSemAssinatura(r)))));}
+function b64ToBytes(s){const bin=atob(s);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
+async function verificarAssinatura(r, pubB64){
+ const sig=r._signature||{};
+ if(sig.algorithm!=="Ed25519"||!sig.value) return [false,"ASSINATURA_AUSENTE"];
+ const digest=digestDoRecibo(r);
+ const msg=new TextEncoder().encode(canon({hash:digest}));
+ try{
+  const key=await crypto.subtle.importKey("raw", b64ToBytes(pubB64), {name:"Ed25519"}, false, ["verify"]);
+  const ok=await crypto.subtle.verify("Ed25519", key, b64ToBytes(sig.value), msg);
+  return ok?[true,"ASSINATURA_VALIDA"]:[false,"ASSINATURA_INVALIDA"];
+ }catch(e){return [false,"CHAVE_INVALIDA"];}
+}
+/*CORE-END*/
+
+async function verificar(){
+ const out=document.getElementById("out");
+ let r;
+ try{ r=JSON.parse(document.getElementById("recibo").value); }
+ catch(e){ out.className="bad"; out.textContent="Recibo não é JSON válido."; return; }
+ const linhas=[];
+ linhas.push("integridade  : SHA3-256 = "+digestDoRecibo(r));
+ const falta=["identity","execution","evidence","authenticity"].filter(k=>!(k in r));
+ const regra=(r.evidence&&r.evidence.decision_rule)||null;
+ linhas.push("estrutura    : "+(falta.length? "FALTANDO "+falta.join(", ") : "blocos completos"));
+ linhas.push("regra        : "+(regra? regra : "AUSENTE — recibo inválido por construção"));
+ const [ok,motivo]=await verificarAssinatura(r, document.getElementById("chave").value.trim());
+ linhas.push("autenticidade: "+motivo);
+ const veredito = ok && !falta.length && regra;
+ out.className = veredito? "ok":"bad";
+ out.textContent = linhas.join("\n") + "\n\n" + (veredito? "RECIBO VÁLIDO" : "RECIBO INVÁLIDO") +
+   "\n(recibo válido prova origem e integridade, não prova execução segura)";
+}
+</script>
+</html>
