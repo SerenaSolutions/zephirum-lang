@@ -41,7 +41,11 @@ def decidir(payload):
     alvo = payload.get("key", "000")
     limiar = float(payload.get("threshold", 0.5))
     if shots <= 0 or not (0 < delta < 1):
-        return {"verdict": "REFUSED", "reason": "CONTRATO_INVALIDO"}, None
+        rec = {"app": MANIFEST["name"], "verdict": "REFUSED", "reason": "CONTRATO_INVALIDO",
+               "rule": "proporcao-v1", "manifest_sha3_256": MANIFEST_SHA3,
+               "blueprint_sha3_256": MANIFEST["provenance"]["blueprint_sha3_256"]}
+        rec["receipt_hash"] = hashlib.sha3_256(canon(rec).encode()).hexdigest()
+        return rec, "REFUSED"
     p = counts.get(alvo, 0) / shots
     eps = math.sqrt(math.log(2/delta)/(2*shots))
     if p - eps > limiar: v = "1"
