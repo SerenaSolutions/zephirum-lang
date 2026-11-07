@@ -1,0 +1,59 @@
+{
+  "experiment": "zyclotron_round_1",
+  "backend": "local_state_vector_simulator",
+  "hardware_executed": false,
+  "total_trials": 5000,
+  "levels": [
+    {
+      "shots": 1000,
+      "trials": 1000,
+      "correct": 1000,
+      "accuracy": 1.0,
+      "confusion": {
+        "1->1": 500,
+        "REFUSED->REFUSED": 500
+      }
+    },
+    {
+      "shots": 2000,
+      "trials": 1000,
+      "correct": 1000,
+      "accuracy": 1.0,
+      "confusion": {
+        "1->1": 500,
+        "REFUSED->REFUSED": 500
+      }
+    },
+    {
+      "shots": 3000,
+      "trials": 1000,
+      "correct": 1000,
+      "accuracy": 1.0,
+      "confusion": {
+        "1->1": 500,
+        "REFUSED->REFUSED": 500
+      }
+    },
+    {
+      "shots": 4000,
+      "trials": 1000,
+      "correct": 1000,
+      "accuracy": 1.0,
+      "confusion": {
+        "1->1": 500,
+        "REFUSED->REFUSED": 500
+      }
+    },
+    {
+      "shots": 5000,
+      "trials": 1000,
+      "correct": 1000,
+      "accuracy": 1.0,
+      "confusion": {
+        "1->1": 500,
+        "REFUSED->REFUSED": 500
+      }
+    }
+  ],
+  "elapsed_seconds": 28.772
+}
