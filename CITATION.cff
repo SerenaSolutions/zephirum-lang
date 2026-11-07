@@ -3,6 +3,9 @@ title: "ZEPHIRUM / ZYQL: quantum language and trivalent decision core"
 message: "If you use this software, cite it as below."
 type: software
 authors:
+  - name: "Reginaldo Pinezi Uhlmann"
+    orcid: "https://orcid.org/0009-0005-3212-5179"
+  - name: "Leonardo Henrique Gonçalves"
   - name: "Serena Solutions"
 repository-code: "https://github.com/SerenaSolutions/zephirum-lang"
 abstract: "ZEPHIRUM is the language; ZYQL is the trivalent decision algorithm (1/0/REFUSED) with ML-DSA-44 receipts. Decisions by Deutsch-Jozsa interference; every claim carries a recorded receipt."
