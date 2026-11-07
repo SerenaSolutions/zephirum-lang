@@ -1,6 +1,6 @@
 # Política de Privacidade e Tratamento de Dados — ZEPHIRUM / ZYQL
 
-Versão 1.0 · Vigência: 2026-11-07 · Responsável: Serena Solutions
+Versão 1.0 · Vigência: 2026-11-07 · Responsável: Reginaldo Pinezi Uhlmann · Serena Solutions · contato serena.aigronovatech@gmail.com
 
 ## 1. Princípio
 
