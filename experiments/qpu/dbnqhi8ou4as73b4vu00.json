@@ -1,0 +1,49 @@
+{
+ "tipo": "bv_n3_qpu",
+ "job_id": "dbnqhi8ou4as73b4vu00",
+ "backend": "ibm_marrakesh",
+ "shots": 2048,
+ "p_101": 0.9517,
+ "contagens_topo": [
+  [
+   "101",
+   1949
+  ],
+  [
+   "100",
+   36
+  ],
+  [
+   "000",
+   32
+  ],
+  [
+   "001",
+   30
+  ]
+ ],
+ "veredito": "1",
+ "regra_pre_registrada": "p(101) >= 0.50 -> 1; abaixo -> REFUSED",
+ "protocolo_selo": "8f33fc191895cc101d4ecfecf596d9ea8e29775a08d7d570f6b74d38434dd08c",
+ "metricas_sistema": {
+  "qubits_programaveis": 4,
+  "profundidade_transpilada": 9,
+  "portas_cx": 0,
+  "throughput": "nao disponivel na API do plano aberto (tempo de execucao nao exposto)",
+  "portas_por_tipo": {
+   "rz": 10,
+   "sx": 5,
+   "x": 1,
+   "cz": 2,
+   "measure": 3
+  },
+  "nota": "backend usa ECR como porta de dois qubits; CX=0 e esperado"
+ },
+ "qpu_segundos": null,
+ "ts": "2026-11-08T13:42:31Z",
+ "selo_sha3_256": "79f93466dea45e11c91a2e5575c160fd27b42a553c4421032f7accb374653406",
+ "veredito_pre_registrado": "1",
+ "veredito_banda_rigorosa_eps0.05": "REFUSED",
+ "margem_hoe_eps0.05": 0.03,
+ "limiar_1_menos_m": 0.97
+}
