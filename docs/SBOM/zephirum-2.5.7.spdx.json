@@ -1,0 +1,661 @@
+{
+ "spdxVersion": "SPDX-2.3",
+ "dataLicense": "CC0-1.0",
+ "SPDXID": "SPDXRef-DOCUMENT",
+ "name": "com.github.SerenaSolutions/zephirum-lang",
+ "documentNamespace": "https://spdx.org/spdxdocs/protobom/a4daf559-b245-43a4-841d-e5687263abc1",
+ "comment": "Exact versions could not be resolved for some packages. For more information: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-the-dependency-graph#dependencies-included.",
+ "creationInfo": {
+  "creators": [
+   "Tool: protobom-v0.0.0-20261106155048-7c0962b61355+dirty",
+   "Tool: GitHub.com-Dependency-Graph",
+   "Tool: dependabot"
+  ],
+  "created": "2026-11-08T22:26:00Z",
+  "comment": "Exportado do GitHub dependency graph em 2026-11-08"
+ },
+ "packages": [
+  {
+   "name": "pqcrypto",
+   "SPDXID": "SPDXRef-pypi-pqcrypto-63fbda",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/pqcrypto"
+    }
+   ]
+  },
+  {
+   "name": "qiskit-qasm3-import",
+   "SPDXID": "SPDXRef-pypi-qiskit-qasm3-import-c4e7fc",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/qiskit-qasm3-import"
+    }
+   ]
+  },
+  {
+   "name": "cirq",
+   "SPDXID": "SPDXRef-pypi-cirq-0db56b",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/cirq"
+    }
+   ]
+  },
+  {
+   "name": "fastapi",
+   "SPDXID": "SPDXRef-pypi-fastapi-35d1ef",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/fastapi"
+    }
+   ]
+  },
+  {
+   "name": "httpx",
+   "SPDXID": "SPDXRef-pypi-httpx-a2574b",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/httpx"
+    }
+   ]
+  },
+  {
+   "name": "lark",
+   "SPDXID": "SPDXRef-pypi-lark-2d5826",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/lark"
+    }
+   ]
+  },
+  {
+   "name": "qiskit",
+   "SPDXID": "SPDXRef-pypi-qiskit-2.6.0-ea9d70",
+   "versionInfo": "2.6.0",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "licenseConcluded": "Apache-2.0",
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/qiskit@2.6.0"
+    }
+   ]
+  },
+  {
+   "name": "setuptools",
+   "SPDXID": "SPDXRef-pypi-setuptools-462c44",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/setuptools"
+    }
+   ]
+  },
+  {
+   "name": "uvicorn",
+   "SPDXID": "SPDXRef-pypi-uvicorn-8e049f",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/uvicorn"
+    }
+   ]
+  },
+  {
+   "name": "qiskit-ibm-runtime",
+   "SPDXID": "SPDXRef-pypi-qiskit-ibm-runtime-0.50.0-f55c5c",
+   "versionInfo": "0.50.0",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "licenseConcluded": "Apache-2.0",
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/qiskit-ibm-runtime@0.50.0"
+    }
+   ]
+  },
+  {
+   "name": "qiskit-aer",
+   "SPDXID": "SPDXRef-pypi-qiskit-aer-cd0350",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/qiskit-aer"
+    }
+   ]
+  },
+  {
+   "name": "numpy",
+   "SPDXID": "SPDXRef-pypi-numpy-2.4.6-676400",
+   "versionInfo": "2.4.6",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "licenseConcluded": "BSD-3-Clause",
+   "copyrightText": "(c) Jussi Pakkanen, 2020 Intel Corporation, 2022 Intel Corporation, Copyright (c) 1992-2013 The University of Tennessee and The University of Tennessee Research Foundation, Copyright (c) 1993 by Sun Microsystems, Inc., Copyright (c) 1995, 1996, 1997 Jim Hugunin, hugunin@mit.edu, Copyright (c) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura, Copyright (c) 2000-2013 The University of California Berkeley, Copyright (c) 2003-2005, Jean-Sebastien Roy (js@jeannot.org), Copyright (c) 2003, 2007-14 Massachusetts Institute of Technology, Copyright (c) 2003, 2007-14 Matteo Frigo, Copyright (c) 2004-2018 Max-Planck-Society author Martin Reinecke, Copyright (c) 2004, 2006 The Linux Foundation and its contributors, Copyright (c) 2005-2015, NumPy Developers, Copyright (c) 2005-2017, NumPy Developers, Copyright (C) 2005-2018 NVIDIA Corporation, Copyright (c) 2005-2018 NVIDIA Corporation Built, Copyright (c) 2005-2021, NumPy Developers, Copyright (c) 2005-2025, NumPy Developers, Copyright (c) 2006-2013 The University of Colorado Denver, Copyright (c) 2006, University of Georgia and Pierre G.F. Gerard-Marchant, Copyright (c) 2007 Cybozu Labs, Inc., Copyright (c) 2007, 2011 David Schultz <das@FreeBSD.ORG>, Copyright (c) 2008 Ian Bicking and Contributors, Copyright (c) 2008-2009 Bjoern Hoehrmann <bjoern@hoehrmann.de>, Copyright (c) 2009-2017 The MathJax Consortium, Copyright (c) 2009-2019 Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and other contributors, Copyright (c) 2010 - 2019, Copyright (c) 2010 by Mark Wiebe (mwwiebe@gmail.com) The University of British Columbia, Copyright (c) 2010 The Android Open Source Project, Copyright (c) 2010-2011 by Mark Wiebe (mwwiebe@gmail.com) The University of British Columbia, Copyright (c) 2010-2017 The MathJax Consortium, Copyright (c) 2010-2018 Max-Planck-Society, Copyright (c) 2010-2022 Max-Planck-Society, Copyright (c) 2011 by Enthought, Inc., Copyright (c) 2011 by Mark Wiebe (mwwiebe@gmail.com) The University of British Columbia, Copyright (c) 2011 Enthought, Inc, Copyright (c) 2011-2015 The MathJax Consortium, Copyright (c) 2011-2017 The MathJax Consortium, Copyright (c) 2012 Google Inc., Copyright (c) 2012 Stephen Montgomery-Smith <stephen@FreeBSD.ORG>, Copyright (c) 2013 Gabriele Svelto <gabriele.svelto@gmail.com>, Copyright (c) 2013 THE PACKAGE'S, Copyright (c) 2013-2017 The MathJax Consortium, Copyright (c) 2014 Mathjax Consortium, Copyright (c) 2014 Ryan Juckett, Copyright (c) 2014-2017 The MathJax Consortium, Copyright (c) 2015 Melissa E. O'Neill, Copyright (c) 2015 Pauli Virtanen, Copyright (c) 2015-2017 Martin Hensel, Copyright (c) 2015-2017 The MathJax Consortium, Copyright (C) 2015-2021 Matthias Klumpp, Copyright (c) 2015-2021 Matthias Klumpp <matthias@tenstral.net>, Copyright (c) 2016 - 2019 Kim Walisch, <kim.walisch@gmail.com>, Copyright (c) 2016-2017 The MathJax Consortium, Copyright (c) 2017, Copyright (c) 2017 Arseny Maslennikov, Copyright (c) 2017 Dylan Baker, Copyright (c) 2017 Intel Corporation, Copyright (c) 2017-2018 Intel Corporation, Copyright (c) 2017-2023 Intel Corporation, Copyright (c) 2018 Intel Corporation, Copyright (c) 2018 Melissa E. O'Neill, Copyright (c) 2018-2024 Intel Corporation, Copyright (c) 2018, Meson Team, Copyright (c) 2019 Kevin Sheppard, Copyright (c) 2019 NumPy Developers, Copyright (c) 2019 Takao Fujiwara <takao.fujiwara1@gmail.com>, Copyright (c) 2019-2020 Peter Bell, Copyright (c) 2019-2025 Intel Corporation, Copyright (c) 2020-2023 Intel Corporation, Copyright (c) 2020-2024 Intel Corporation, Copyright (c) 2020-2025 Intel Corporation, Copyright (c) 2021 Intel Corporation, Copyright (c) 2021 Intel Corporation project 'existing project, Copyright (c) 2021 Microsoft Corporation, Copyright (C) 2021 Serge Sans Paille, Copyright (c) 2021 Serge Sans Paille SPDX-License-Identifier BSD-3-Clause Authors Raghuveer Devulapalli <raghuveer.devulapalli@intel.com> Serge Sans Paille <serge.guelton@telecom-bretagne.eu>, Copyright (c) 2021 Serge Sans Paille SPDX-License-Identifier BSD-3-Clause Authors Raghuveer Devulapalli <raghuveer.devulapalli@intel.com> Serge Sans Paille <serge.guelton@telecom-bretagne.eu> Liu Zhuan <zhuan.liu@intel.com> Tang Xi <xi.tang@intel.com>, Copyright (c) 2021-2022, Scientific Python project, Copyright (c) 2021-2023 Intel Corporation, Copyright (c) 2021-2024 Intel Corporation, Copyright (c) 2021-2025 Intel Corporation, Copyright (c) 2022 Intel Corporation, Copyright (C) 2022 Intel Corporation, Copyright (c) 2022 Intel Corporation SPDX-License-Identifier BSD-3-Clause Authors Liu Zhuan <zhuan.liu@intel.com> Tang Xi <xi.tang@intel.com>, Copyright (c) 2022 Intel Corporation SPDX-License-Identifier BSD-3-Clause Authors Raghuveer Devulapalli <raghuveer.devulapalli@intel.com>, Copyright (c) 2022 Intel Corporation SPDX-License-Identifier BSD-3-Clause Authors Raghuveer Devulapalli <raghuveer.devulapalli@intel.com> Matthew Sterrett <matthew.sterrett@intel.com>, Copyright (c) 2022-2023 Intel Corporation, Copyright (C) 2022-2023 Intel Corporation, Copyright (c) 2022-2024 Intel Corporation, Copyright (c) 2022, Intel, Copyright (c) 2023 Intel Corporation, Copyright (C) 2023 Intel Corporation, Copyright (c) 2023 Red Hat, Inc, Copyright (c) 2023-2024 Intel Corporation, Copyright (c) 2023-2025 Intel Corporation, Copyright (c) 2023, NumPy Developers, Copyright (c) 2024 Intel Corporation, Copyright (c) 2024 Tan Ping Liang, Peter Bell, Copyright (c) 2024-2025 Intel Corporation, Copyright (c) 2025 Intel Corporation, Copyright (c) Donald Stufft and individual contributors, Copyright (c) The Highway Project Authors, Copyright (c) the JPEG XL Project, Copyright (C) the JPEG XL Project, Copyright (c) the JPEG XL Project Authors, Copyright \u00a9 2017-2023 Intel Corporation, Copyright \u00a9 2020-2025 Intel Corporation, Copyright \u00a9 2021 Intel Corporation, Copyright \u00a9 2021-2023 Intel Corporation, Copyright \u00a9 2021-2024 Intel Corporation, Copyright \u00a9 2021-2025 Intel Corporation, Copyright \u00a9 2022 Intel Corporation, Copyright \u00a9 2022-2023 Intel Corporation, Copyright \u00a9 2022-2024 Intel Corporation, Copyright \u00a9 2023 Intel Corporation, Copyright \u00a9 2023-2024 Intel Corporation, Copyright \u00a9 2023-2025 Intel Corporation, Copyright \u00a9 2024 Intel Corporation, Copyright \u00a9 2024-2025 Intel Corporation, Copyright \u00a9 2025 Intel Corporation, Copyright 1996-2023 Intel Corporation, Copyright 1999 - 2011 Pearu Peterson, Copyright 1999, 2000, 2001 Regents of the University of California, Copyright 2002 Pearu Peterson, Copyright 2007-2018 by the Sphinx team, Copyright 2010-2012, D. E. Shaw Research, Copyright 2011 - present NumPy Developers, Copyright 2011 - present NumPy Developers. https://numpy.org/doc/stable/f2py/index.html, Copyright 2011 by Enthought, Inc, Copyright 2012-2016 The Meson development team, Copyright 2012-2017 The Meson development team, Copyright 2012-2019 The Meson development team, Copyright 2012-2020 Meson development team, Copyright 2012-2020 The Meson development team, Copyright 2012-2021 The Meson development team, Copyright 2012-2022 The Meson development team, Copyright 2012-2023 The Meson development team, Copyright 2012-2023 The Meson development team from, Copyright 2013 The Meson development team, Copyright 2013-2014 The Meson development team, Copyright 2013-2016 The Meson development team, Copyright 2013-2017 The Meson development team, Copyright 2013-2018 The Meson development team, Copyright 2013-2019 The Meson development team, Copyright 2013-2020 The Meson development team, Copyright 2013-2021 The Meson development team, Copyright 2013-2024 Contributors to the The Meson project, Copyright 2013-2025 The Meson development team, Copyright 2014 Jussi Pakkanen, Copyright 2014 Melissa O'Neill <oneill@pcg-random.org>, Copyright 2014-2016 The Meson development team, Copyright 2014-2017 The Meson development team, Copyright 2014-2019 The Meson development team, Copyright 2014-2021 The Meson development team, Copyright 2015 Robert Kern <robert.kern@gmail.com>, Copyright 2015 The Meson development team, Copyright 2015-2016 The Meson development team, Copyright 2015-2022 The Meson development team, Copyright 2016 The Meson development team, Copyright 2016-2017 The Meson development team, Copyright 2016-2018 The Meson development team, Copyright 2016-2021 The Meson development team, Copyright 2016-2022 The Meson development team, Copyright 2016-2023 The Meson Developers, Copyright 2017 Google Inc., Copyright 2017 Niklas Claesson, Copyright 2017 The Meson development team, Copyright 2017-2021 The Meson development team, Copyright 2017, 2019 The Meson development team, Copyright 2018 The Meson development team, Copyright 2019 Google LLC, Copyright 2019 Red Hat, Inc., Copyright 2019 The meson development team, Copyright 2019 The Meson development team, Copyright 2019-2022 The meson development team, Copyright 2020 Google LLC, Copyright 2020 Intel Corporation, Copyright 2020 The Meson development team, Copyright 2021 Google LLC, Copyright 2021 The Meson development team, Copyright 2021 The Meson development team from, Copyright 2021 The Meson development team SPDX-license-identifier, Copyright 2021-2024 The Meson Developers, Copyright 2022 Google LLC, Copyright 2022 Intel Corporation, Copyright 2022 Mark Bolhuis, Copyright 2022 Mark Bolhuis <mark@bolhuis.dev>, Copyright 2022 The Meson development team, copyright 2022, Victor Stinner, Copyright 2023 Arm Limited and/or its affiliates <open-source-office@arm.com>, Copyright 2023 Google LLC, Copyright 2023 Matthew Kolbe, Copyright 2023 The Meson development team, Copyright 2023 The Meson development team from, Copyright 2023,2024 Arm Limited and/or its affiliates <open-source-office@arm.com>, Copyright 2024 Arm Limited and/or its affiliates, Copyright 2024 Arm Limited and/or its affiliates <open-source-office@arm.com>, Copyright 2024 Google LLC, Copyright 2024 Meson project contributors, Copyright 2024 The Meson development team, Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>, Copyright 2025 Google LLC, Copyright 2025 The Meson development team, Copyright Absoft Corporation, Copyright Absoft Corporation 1994-1998 mV2 Cray Research, Inc., Copyright Absoft Corporation 1994-2002 Absoft Pro FORTRAN, Copyright Contributors to the pythoncapi_compat project., Copyright Google LLC 2021 Matthew Kolbe, Copyright Stone Tickle <lattis@mochiro.moe>, copyrighted by all members",
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/numpy@2.4.6"
+    }
+   ]
+  },
+  {
+   "name": "numpy",
+   "SPDXID": "SPDXRef-pypi-numpy-bb58d5",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/numpy"
+    }
+   ]
+  },
+  {
+   "name": "lark",
+   "SPDXID": "SPDXRef-pypi-lark-1c6a14",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/lark"
+    }
+   ]
+  },
+  {
+   "name": "qiskit",
+   "SPDXID": "SPDXRef-pypi-qiskit-c2b559",
+   "versionInfo": ">= 2.6",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:pypi/qiskit"
+    }
+   ]
+  },
+  {
+   "name": "github/codeql-action/analyze",
+   "SPDXID": "SPDXRef-githubactions-githubcodeql-action-analyze-4..-5cce3b",
+   "versionInfo": "4.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/github/codeql-action/analyze@4.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "github/codeql-action/init",
+   "SPDXID": "SPDXRef-githubactions-githubcodeql-action-init-4..-4b59fc",
+   "versionInfo": "4.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/github/codeql-action/init@4.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/checkout",
+   "SPDXID": "SPDXRef-githubactions-actions-checkout-4..-bfd09a",
+   "versionInfo": "4.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/checkout@4.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/upload-artifact",
+   "SPDXID": "SPDXRef-githubactions-actions-upload-artifact-4..-2c6cf8",
+   "versionInfo": "4.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/upload-artifact@4.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/setup-python",
+   "SPDXID": "SPDXRef-githubactions-actions-setup-python-5..-ef8212",
+   "versionInfo": "5.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/setup-python@5.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/deploy-pages",
+   "SPDXID": "SPDXRef-githubactions-actions-deploy-pages-5..-b802ea",
+   "versionInfo": "5.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/deploy-pages@5.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/configure-pages",
+   "SPDXID": "SPDXRef-githubactions-actions-configure-pages-6..-2f1e1e",
+   "versionInfo": "6.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/configure-pages@6.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/upload-pages-artifact",
+   "SPDXID": "SPDXRef-githubactions-actions-upload-pages-artifact-3..-8247ae",
+   "versionInfo": "3.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/upload-pages-artifact@3.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "release-drafter/release-drafter",
+   "SPDXID": "SPDXRef-githubactions-release-drafter-release-drafter-6..-67e02f",
+   "versionInfo": "6.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/release-drafter/release-drafter@6.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "github/codeql-action/upload-sarif",
+   "SPDXID": "SPDXRef-githubactions-githubcodeql-action-upload-sarif-3..-a8f59c",
+   "versionInfo": "3.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/github/codeql-action/upload-sarif@3.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "ossf/scorecard-action",
+   "SPDXID": "SPDXRef-githubactions-ossf-scorecard-action-2.4.4-93e03b",
+   "versionInfo": "2.4.4",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/ossf/scorecard-action@2.4.4"
+    }
+   ]
+  },
+  {
+   "name": "actions/checkout",
+   "SPDXID": "SPDXRef-githubactions-actions-checkout-7..-c5c952",
+   "versionInfo": "7.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/checkout@7.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/setup-python",
+   "SPDXID": "SPDXRef-githubactions-actions-setup-python-7..-900e64",
+   "versionInfo": "7.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/setup-python@7.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/dependency-review-action",
+   "SPDXID": "SPDXRef-githubactions-actions-dependency-review-action-4..-ce8054",
+   "versionInfo": "4.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/dependency-review-action@4.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "pypa/gh-action-pypi-publish",
+   "SPDXID": "SPDXRef-githubactions-pypa-gh-action-pypi-publish-releasev1-cecdad",
+   "versionInfo": "release/v1",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/pypa/gh-action-pypi-publish@release%2Fv1"
+    }
+   ]
+  },
+  {
+   "name": "sigstore/cosign-installer",
+   "SPDXID": "SPDXRef-githubactions-sigstore-cosign-installer-3..-410540",
+   "versionInfo": "3.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/sigstore/cosign-installer@3.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "softprops/action-gh-release",
+   "SPDXID": "SPDXRef-githubactions-softprops-action-gh-release-3..-e8e2e8",
+   "versionInfo": "3.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/softprops/action-gh-release@3.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "actions/attest-build-provenance",
+   "SPDXID": "SPDXRef-githubactions-actions-attest-build-provenance-4..-36e246",
+   "versionInfo": "4.*.*",
+   "downloadLocation": "NOASSERTION",
+   "filesAnalyzed": false,
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:githubactions/actions/attest-build-provenance@4.%2A.%2A"
+    }
+   ]
+  },
+  {
+   "name": "com.github.SerenaSolutions/zephirum-lang",
+   "SPDXID": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "versionInfo": "main",
+   "downloadLocation": "git+https://github.com/SerenaSolutions/zephirum-lang",
+   "filesAnalyzed": false,
+   "licenseDeclared": "Apache-2.0",
+   "externalRefs": [
+    {
+     "referenceCategory": "PACKAGE-MANAGER",
+     "referenceType": "purl",
+     "referenceLocator": "pkg:github/SerenaSolutions/zephirum-lang@main"
+    }
+   ]
+  }
+ ],
+ "relationships": [
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-pqcrypto-63fbda",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-qiskit-qasm3-import-c4e7fc",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-cirq-0db56b",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-fastapi-35d1ef",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-httpx-a2574b",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-lark-2d5826",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-qiskit-2.6.0-ea9d70",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-setuptools-462c44",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-uvicorn-8e049f",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-qiskit-ibm-runtime-0.50.0-f55c5c",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-qiskit-aer-cd0350",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-numpy-2.4.6-676400",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-sigstore-cosign-installer-3..-410540",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-numpy-bb58d5",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-qiskit-c2b559",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-configure-pages-6..-2f1e1e",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-upload-pages-artifact-3..-8247ae",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-githubcodeql-action-upload-sarif-3..-a8f59c",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-setup-python-7..-900e64",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-dependency-review-action-4..-ce8054",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-pypi-lark-1c6a14",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-upload-artifact-4..-2c6cf8",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-setup-python-5..-ef8212",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-deploy-pages-5..-b802ea",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-release-drafter-release-drafter-6..-67e02f",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-pypa-gh-action-pypi-publish-releasev1-cecdad",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-attest-build-provenance-4..-36e246",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-ossf-scorecard-action-2.4.4-93e03b",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-softprops-action-gh-release-3..-e8e2e8",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-githubcodeql-action-analyze-4..-5cce3b",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-githubcodeql-action-init-4..-4b59fc",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-checkout-4..-bfd09a",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relatedSpdxElement": "SPDXRef-githubactions-actions-checkout-7..-c5c952",
+   "relationshipType": "DEPENDS_ON"
+  },
+  {
+   "spdxElementId": "SPDXRef-DOCUMENT",
+   "relatedSpdxElement": "SPDXRef-github-SerenaSolutions-zephirum-lang-main-31efcc",
+   "relationshipType": "DESCRIBES"
+  }
+ ]
+}
