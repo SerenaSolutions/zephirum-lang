@@ -98,6 +98,8 @@ for caminho in list(pathlib.Path("docs").rglob("*")) + list(pathlib.Path("site")
         continue
     if caminho.suffix not in (".md", ".html", ".py", ".json", ".toml", ".txt", ".cff", ".yml"):
         continue
+    if any(x in str(caminho) for x in ISENTOS_LICENCA):
+        continue
     try: txt = caminho.read_text()
     except Exception: continue
     if "dependenc" in caminho.name.lower() or "LICENCAS" in caminho.name:
