@@ -24,8 +24,10 @@ def _cliente(tmp_path, monkeypatch, limite="120", env=None):
         monkeypatch.delenv("ZYQL_ENV", raising=False)
     else:
         monkeypatch.setenv("ZYQL_ENV", env)
+    import api.billing as billing
     import api.server as server
     import api.gateway as gw
+    importlib.reload(billing)   # BILLING_ATIVO e constante de modulo: precisa recarregar
     importlib.reload(server)
     importlib.reload(gw)
     return TestClient(gw.app)
@@ -58,6 +60,8 @@ def test_rate_limit_recusa_com_429(tmp_path, monkeypatch):
 
 
 def test_producao_exige_assinatura(tmp_path, monkeypatch):
+    # 08/11/2026: a cobranca esta desligada por padrao; este teste exercita o webhook ativo
+    monkeypatch.setenv("ZYQL_BILLING", "on")
     c = _cliente(tmp_path, monkeypatch, env="production")
     r = c.post("/v1/billing/webhook", json={"sessao": "cs_x"})
     assert r.status_code == 503
