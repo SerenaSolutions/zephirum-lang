@@ -90,6 +90,9 @@ ISENTOS = {"CHANGELOG.md", "DEPENDENCIAS_LICENCAS.md", "RESPOSTA_AUDITORIA_EXTER
 FALSOS = r"permit|commit|submit|transmit|limit|omit|admit|commission"
 PADROES_MIT = [r"mit[-_ ]?licen", r"\bMIT\b", r'"license"\s*:\s*"mit"', r"code MIT", r"open source, MIT"]
 ofensores = []
+# SBOM e tabela de dependencias citam licencas de TERCEIROS (MIT do lark etc.),
+# nao a nossa: ficam fora desta varredura de proposito.
+ISENTOS_LICENCA = ("SBOM", "spdx.json", "DEPENDENCIAS_LICENCAS", "CHANGELOG")
 for caminho in list(pathlib.Path("docs").rglob("*")) + list(pathlib.Path("site").rglob("*")) + list(pathlib.Path("paper").rglob("*")) + list(pathlib.Path(".").glob("*.md")):
     if not caminho.is_file() or caminho.name in ISENTOS:
         continue
