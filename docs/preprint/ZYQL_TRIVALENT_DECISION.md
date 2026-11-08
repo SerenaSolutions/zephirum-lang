@@ -28,7 +28,7 @@ attestation from an the provider measurement pool (job internal, the provider_ma
 **5. Limitations.** Research prototype; classical-layer parser is minimalist; hardware claims are
 reproducible with any a production superconducting QPU open-plan account (credentials cannot ship with artifacts by design).
 
-**6. Availability.** https://github.com/SerenaSolutions/zephirum-lang (MIT). Future work: formal
+**6. Availability.** https://github.com/SerenaSolutions/zephirum-lang (Apache-2.0). Future work: formal
 semantics of REFUSED composition, continuous public benchmark (issue #28).
 
 *Draft for arXiv (quant-ph / cs.PL) and Zenodo deposit. Data: experiments/ with sealed receipts.*

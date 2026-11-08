@@ -85,12 +85,31 @@ pl = ler("experiments/pipeline_demo/pipeline.py")
 item("pipeline declara consultas clássicas", "consultas_classicas" in pl, "pipeline_demo")
 
 
-# 13. licença coerente (LICENSE é Apache-2.0 e nenhum doc diz MIT)
-lic = ler("LICENSE")[:400]
-docs_md = list(pathlib.Path("docs").glob("*.md"))
-ofensores = [f.name for f in docs_md if "MIT license" in f.read_text()]
-item("licença coerente (Apache-2.0 único)", "Apache License" in lic and not ofensores,
-     "Apache-2.0 em LICENSE e docs" if not ofensores else f"dizem MIT: {ofensores}")
+# 13. licença coerente: varredura ampla com exceções declaradas
+ISENTOS = {"CHANGELOG.md", "DEPENDENCIAS_LICENCAS.md", "RESPOSTA_AUDITORIA_EXTERNA_2026-11-07.md"}
+PADROES_MIT = [r"\(MIT\)", r"\bMIT\b(?! License)", r'"license"\s*:\s*"MIT"', r"code MIT", r"open source, MIT"]
+ofensores = []
+for caminho in list(pathlib.Path("docs").rglob("*")) + list(pathlib.Path("site").rglob("*")) + list(pathlib.Path(".").glob("*.md")):
+    if not caminho.is_file() or caminho.name in ISENTOS:
+        continue
+    if caminho.suffix not in (".md", ".html", ".py", ".json", ".toml", ".txt", ".cff", ".yml"):
+        continue
+    try: txt = caminho.read_text()
+    except Exception: continue
+    if "dependenc" in caminho.name.lower() or "LICENCAS" in caminho.name:
+        continue
+    for pad in PADROES_MIT:
+        if re.search(pad, txt):
+            ofensores.append(str(caminho)); break
+# extensao do VS Code
+try:
+    if re.search(r'"license"\s*:\s*"MIT"', pathlib.Path("zephirum-vscode/package.json").read_text()):
+        ofensores.append("zephirum-vscode/package.json")
+except FileNotFoundError:
+    pass
+item("licença coerente (Apache-2.0 em todo o projeto)",
+     "Apache License" in ler("LICENSE")[:400] and not ofensores,
+     "Apache-2.0 em LICENSE, docs, site e extensão" if not ofensores else f"ainda dizem MIT: {sorted(set(ofensores))[:4]}")
 
 # 14. ML-DSA implementado e não mais anunciado como roadmap
 item("ML-DSA declarado como implementado", "DECLARED ROADMAP" not in ler("README.md") and "def assinar(" in ler("src/zqea_sig.py"),
