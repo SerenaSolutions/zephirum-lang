@@ -18,7 +18,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-      - run: pip install numpy lark scipy pqcrypto cryptography qiskit qiskit-aer cirq qiskit-qasm3-import pytest
+      # a suite completa cobre API (fastapi/httpx) e hardware (qiskit-ibm-runtime)
+      - run: pip install numpy lark scipy pqcrypto cryptography qiskit qiskit-aer qiskit-ibm-runtime cirq qiskit-qasm3-import fastapi httpx uvicorn pytest
       - run: python tests/test_canonical.py
         env:
           PYTHONHASHSEED: "0"
