@@ -14,6 +14,10 @@ import json
 import pathlib
 import sys
 import tomllib
+try:
+    import tomllib  # 3.11+
+except ModuleNotFoundError:  # 3.10
+    import tomli as tomllib
 import urllib.error
 import urllib.request
 

@@ -2,6 +2,10 @@
 # SPDX-License-Identifier: Apache-2.0
 """Portão de conformidade do ZEPHIRUM. Sai com código 1 se qualquer item estiver vermelho."""
 import glob, json, pathlib, re, sys, tomllib
+try:
+    import tomllib  # 3.11+
+except ModuleNotFoundError:  # 3.10
+    import tomli as tomllib
 
 RAIZ = pathlib.Path(__file__).resolve().parents[1]
 ITENS = []
