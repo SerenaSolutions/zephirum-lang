@@ -1,0 +1,291 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Z-QEA v1.0 — Especificação normativa · Serena Quantum Solutions</title>
+<style>
+:root{--fg:#111;--mut:#555;--bd:#ddd;--bg:#fff}
+*{box-sizing:border-box}body{margin:0;font:16px/1.65 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--fg);background:var(--bg)}
+main{max-width:820px;margin:0 auto;padding:48px 24px 96px}
+h1{font-size:1.9rem;line-height:1.25;margin:0 0 8px}h2{margin-top:2.2em;border-bottom:1px solid var(--bd);padding-bottom:.3em}
+h3{margin-top:1.6em}code{background:#f4f4f4;padding:.12em .35em;border-radius:4px;font-size:.9em}
+pre{background:#f7f7f7;border:1px solid var(--bd);border-radius:8px;padding:14px;overflow-x:auto}
+pre code{background:none;padding:0}table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:.95em}
+th,td{border:1px solid var(--bd);padding:7px 10px;text-align:left;vertical-align:top}th{background:#fafafa}
+.volta{display:inline-block;margin-bottom:24px;color:var(--mut);text-decoration:none;font-size:.9rem}
+.meta{color:var(--mut);font-size:.9rem;margin-bottom:32px}
+</style></head><body><main>
+<a class="volta" href="../">← Serena Quantum Solutions</a>
+<h1>Especificação Z-QEA v1.0</h1>
+<p class="meta">Normativa · 08/11/2026 · Apache-2.0 · <a href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/SPEC_Z-QEA_v1.0.md">fonte no repositório</a> · vetores verificados no CI</p>
+<h1 id="especificacao-z-qea-v10-recibos-verificaveis-para-decisao-quantica">Especificação Z-QEA v1.0 — Recibos Verificáveis para Decisão Quântica</h1>
+<p><strong>Status:</strong> rascunho normativo para revisão externa · <strong>Data:</strong> 08/11/2026
+<strong>Referência de implementação:</strong> <code>src/zqea_sig.py</code> (ZEPHIRUM 2.5.7)
+<strong>Autoria:</strong> Serena Quantum Solutions · <strong>Licença deste documento:</strong> Apache-2.0</p>
+<p>Esta especificação descreve o que já existe no código. Onde a implementação e o
+texto divergirem, a implementação está errada e deve ser corrigida — não o texto.
+Os vetores de teste da seção 9 são gerados pela implementação e verificados por
+<code>tools/conformance_zqea.py</code> no CI.</p>
+<hr />
+<h2 id="1-escopo">1. Escopo</h2>
+<p>Z-QEA define como um resultado de execução quântica vira um registro que terceiros
+podem verificar offline, sem confiar em quem o emitiu. Ela cobre quatro coisas e
+nada além delas:</p>
+<ol>
+<li><strong>Selo de conteúdo</strong> (<code>selo_sha3_256</code>): integridade do recibo.</li>
+<li><strong>Assinatura pós-quântica</strong> (<code>assinatura</code>, <code>chave_id</code>, <code>algoritmo</code>): autoria.</li>
+<li><strong>Cadeia</strong> (<code>prev_sha3</code>): ordem e continuidade de uma sequência de recibos.</li>
+<li><strong>Âncora</strong> (<code>Z-QEA-ANCORA</code>): compromisso sobre o tamanho e o topo da cadeia.</li>
+</ol>
+<p><strong>Fora de escopo:</strong> correção do algoritmo quântico, fidelidade do hardware,
+veracidade das medições, identidade civil do assinante e certificação FIPS/CAVP.
+Um recibo verificado prova que aquele conteúdo foi assinado por quem detém a
+chave. Não prova que a experiência foi bem feita.</p>
+<hr />
+<h2 id="2-terminologia-normativa">2. Terminologia normativa</h2>
+<p>MUST, MUST NOT, SHOULD e MAY seguem o uso de RFC 2119.</p>
+<table>
+<thead>
+<tr>
+<th>Termo</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Corpo</td>
+<td>O recibo sem os campos <code>assinatura</code>, <code>chave_id</code> e <code>algoritmo</code>.</td>
+</tr>
+<tr>
+<td>Selo</td>
+<td><code>SHA3-256</code> sobre a forma canônica do corpo (seção 4).</td>
+</tr>
+<tr>
+<td>Cabeça</td>
+<td>O selo do último elo de uma cadeia.</td>
+</tr>
+<tr>
+<td>Elo</td>
+<td>Um recibo dentro de uma cadeia.</td>
+</tr>
+<tr>
+<td>Âncora</td>
+<td>Registro assinado com <code>tipo</code>, <code>n_elos</code> e <code>head_sha3</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-campos-de-um-recibo">3. Campos de um recibo</h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Obrigatório</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>veredito</code></td>
+<td>inteiro ou string</td>
+<td>sim</td>
+<td><code>1</code>, <code>0</code> ou <code>"REFUSED"</code></td>
+</tr>
+<tr>
+<td><code>p0</code></td>
+<td>número finito</td>
+<td>conforme</td>
+<td>Probabilidade observada da hipótese nula</td>
+</tr>
+<tr>
+<td><code>selo_sha3_256</code></td>
+<td>hex de 64 caracteres minúsculos</td>
+<td>sim</td>
+<td>Selo do corpo</td>
+</tr>
+<tr>
+<td><code>prev_sha3</code></td>
+<td>hex de 64 ou <code>null</code></td>
+<td>em cadeia</td>
+<td>Selo do elo anterior</td>
+</tr>
+<tr>
+<td><code>assinatura</code></td>
+<td>base64</td>
+<td>quando assinado</td>
+<td>Assinatura ML-DSA-44 do corpo</td>
+</tr>
+<tr>
+<td><code>chave_id</code></td>
+<td>hex de 16 caracteres</td>
+<td>quando assinado</td>
+<td>Identificador da chave</td>
+</tr>
+<tr>
+<td><code>algoritmo</code></td>
+<td>string</td>
+<td>quando assinado</td>
+<td><code>"ML-DSA-44 (FIPS 204, Dilithium)"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Implementações MUST ignorar campos desconhecidos ao verificar, mas SHOULD
+preservá-los, porque eles entram no corpo assinado.</p>
+<hr />
+<h2 id="4-canonicalizacao-normativa">4. Canonicalização (normativa)</h2>
+<p>A forma canônica de um objeto JSON é o resultado de:</p>
+<ol>
+<li>Ordenar as chaves lexicograficamente por ponto de código Unicode.</li>
+<li>Não emitir espaços entre tokens (<code>separators=(",", ":")</code>).</li>
+<li>Codificar como UTF-8 sem escapar caracteres não-ASCII (<code>ensure_ascii=False</code>).</li>
+<li><strong>Recusar</strong> <code>NaN</code>, <code>Infinity</code> e <code>-Infinity</code> (<code>allow_nan=False</code>).</li>
+</ol>
+<p>Motivo da regra 4: esses valores não existem em JSON e tornariam a serialização
+não determinística entre linguagens. Uma implementação que os aceite MUST ser
+considerada não conforme.</p>
+<p><strong>Limitação declarada:</strong> números em ponto flutuante seguem a formatação da
+linguagem de origem. Para valores que precisam ser idênticos entre implementações,
+use inteiros ou strings decimais, nunca <code>float</code>. Esta especificação não define
+formato binário de ponto flutuante.</p>
+<hr />
+<h2 id="5-selo">5. Selo</h2>
+<pre><code>selo = hex_minúsculo( SHA3-256( canonical(corpo) ) )
+</code></pre>
+<p><code>corpo</code> exclui <code>assinatura</code>, <code>chave_id</code> e <code>algoritmo</code>, e inclui <code>selo_sha3_256</code>
+apenas na forma vazia — ou seja, o campo do selo MUST ser removido antes de
+calcular o selo.</p>
+<p>Verificação: recalcular e comparar em tempo constante quando a comparação for
+sensível a tempo; divergência produz <code>SEAL_MISMATCH</code>.</p>
+<hr />
+<h2 id="6-assinatura">6. Assinatura</h2>
+<ul>
+<li>Algoritmo: <strong>ML-DSA-44</strong> (FIPS 204). O campo <code>algoritmo</code> MUST ser exatamente a
+  string da seção 3.</li>
+<li>A assinatura cobre <code>canonical(corpo)</code>, com <code>chave_publica</code> já presente no corpo
+  quando existir.</li>
+<li>Assinaturas ML-DSA são <strong>randomizadas</strong>: dois recibos com o mesmo corpo têm
+  assinaturas diferentes e ambos MUST verificar. Vetores de teste não podem fixar
+  bytes de assinatura.</li>
+<li><code>chave_id</code> MUST ser <code>hex(SHA3-256(chave_publica))[0:16]</code>.</li>
+</ul>
+<p><strong>Verificação (normativa, nesta ordem):</strong></p>
+<ol>
+<li><code>algoritmo</code>, se presente, MUST ser igual ao esperado; senão recusar.</li>
+<li><code>chave_id</code>, se presente, MUST ser igual a <code>key_id(chave_publica)</code>; senão recusar.</li>
+<li>Verificar a assinatura sobre o corpo.</li>
+<li>Em modo estrito, <code>algoritmo</code> e <code>chave_id</code> MUST estar presentes.</li>
+</ol>
+<p>Os passos 1 e 2 existem porque esses campos ficam fora do corpo assinado. Sem
+eles, trocar o rótulo do algoritmo ou o identificador da chave não invalidaria a
+assinatura. Esta regra foi adicionada em 08/11/2026 após auditoria independente.</p>
+<p><strong>Não alegado:</strong> certificação FIPS 140, CAVP ou CMVP. A implementação usa
+<code>pqcrypto</code> e não foi submetida a laboratório de certificação.</p>
+<hr />
+<h2 id="7-cadeia">7. Cadeia</h2>
+<p>Um elo MUST ter <code>prev_sha3</code> igual ao selo do elo imediatamente anterior, ou
+<code>null</code> no primeiro elo. O elo MUST estar assinado.</p>
+<p>Verificação de cadeia: cada elo assinado corretamente, cada <code>prev_sha3</code> coerente,
+e o selo recalculado encadeando na ordem recebida. Falha produz
+<code>assinatura invalida</code> ou <code>encadeamento quebrado</code> com a posição do elo.</p>
+<p><strong>Limite conhecido:</strong> a cadeia detecta adulteração, reordenação e remoção de elos
+intermediários. Ela <strong>não</strong> detecta a remoção do último elo, porque nada dentro da
+cadeia afirma quantos elos deveriam existir. Para isso existe a âncora.</p>
+<hr />
+<h2 id="8-ancora-externa">8. Âncora externa</h2>
+<pre><code>ancora = assinar({ &quot;tipo&quot;: &quot;Z-QEA-ANCORA&quot;,
+                   &quot;n_elos&quot;: N,
+                   &quot;head_sha3&quot;: cabeca })
+</code></pre>
+<p>Verificação da âncora contra uma cadeia:</p>
+<ol>
+<li>A âncora MUST verificar sua assinatura.</li>
+<li>Se <code>len(cadeia) &lt; n_elos</code>: recusar com <code>truncamento</code>. Truncamento é o ataque que
+   a âncora existe para pegar.</li>
+<li>Se <code>len(cadeia) &gt; n_elos</code>: aceitar com aviso de que existem elos posteriores à
+   âncora, não cobertos por ela.</li>
+<li>O selo do elo de índice <code>n_elos - 1</code> MUST ser igual a <code>head_sha3</code>.</li>
+</ol>
+<p><strong>Regra de utilidade:</strong> uma âncora guardada no mesmo diretório do histórico não
+prova nada, porque quem apaga o último elo apaga a âncora também. A âncora só tem
+valor quando o hash é publicado em local que o operador não controla: tag assinada,
+release, DOI, e-mail selado ou registro público. Sem publicação externa, o nível de
+conformidade máximo é L3.</p>
+<hr />
+<h2 id="9-vetores-de-teste-gerados-pela-implementacao">9. Vetores de teste (gerados pela implementação)</h2>
+<p>Todos verificados por <code>tools/conformance_zqea.py</code>.</p>
+<p><strong>T1 — canonicalização</strong></p>
+<pre><code>entrada : {&quot;b&quot;:&quot;ç&quot;,&quot;a&quot;:1}
+bytes   : {&quot;a&quot;:1,&quot;b&quot;:&quot;ç&quot;}  (UTF-8, sem espaços)
+sha3    : 54cd981318d240636aba047fd3ac8d0e6629f8ac8df137a001033370bd8e7220
+</code></pre>
+<p><strong>T2 — selo de corpo</strong></p>
+<pre><code>entrada : {&quot;veredito&quot;:1,&quot;p0&quot;:0.5,&quot;n&quot;:3}
+canônico: {&quot;n&quot;:3,&quot;p0&quot;:0.5,&quot;veredito&quot;:1}
+selo    : 96debfc868acae29079b4d26d2eb3cbd2bd3f1fe5c4ede2d3e54f4c1376a3a68
+</code></pre>
+<p><strong>T3 — identificador de chave</strong></p>
+<pre><code>chave_publica (bytes): 00 01 02 ... 1f
+chave_id            : 050a48733bd5c275
+</code></pre>
+<p><strong>T4 — cabeça de elo</strong></p>
+<pre><code>entrada : {&quot;veredito&quot;:1,&quot;prev_sha3&quot;:null}
+canônico: {&quot;prev_sha3&quot;:null,&quot;veredito&quot;:1}
+cabeça  : 7000e88884f6d532a3b21224581253b0745438341e2b03b18865a6780ecc6ec8
+</code></pre>
+<p><strong>T5 — recusa de não-finito:</strong> <code>_canon({"x": NaN})</code> MUST levantar erro.</p>
+<hr />
+<h2 id="10-niveis-de-conformidade">10. Níveis de conformidade</h2>
+<table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Requisitos</th>
+<th>O que prova</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1</td>
+<td>Selo correto</td>
+<td>Conteúdo íntegro desde o selo</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>L1 + assinatura verificada e metadados conferidos</td>
+<td>Autoria por quem detém a chave</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>L2 + cadeia coerente</td>
+<td>Ordem e continuidade, sem remoção intermediária</td>
+</tr>
+<tr>
+<td>L4</td>
+<td>L3 + âncora publicada fora do repositório</td>
+<td>Ausência de truncamento do topo</td>
+</tr>
+</tbody>
+</table>
+<p>Um sistema que se declara L4 MUST publicar a âncora de forma verificável. Declarar
+L4 sem publicação externa é alegação falsa.</p>
+<hr />
+<h2 id="11-codigos-de-recusa">11. Códigos de recusa</h2>
+<p><code>SEAL_MISMATCH</code> · <code>assinatura invalida</code> · <code>encadeamento quebrado</code> ·
+<code>truncamento: ancora cobre N elos, recebidos M</code> · <code>cadeia vazia nao pode ser ancorada</code></p>
+<p>Implementações MUST usar o estado de recusa da linguagem quando a evidência for
+insuficiente, em vez de emitir 0 ou 1. Recusar é um resultado válido, não uma
+falha do sistema.</p>
+<hr />
+<h2 id="12-versionamento">12. Versionamento</h2>
+<p>Mudança compatível (campo novo opcional, código de erro novo) incrementa a versão
+menor. Mudança incompatível (canonicalização, algoritmo, regra de cadeia) incrementa
+a maior e exige novo identificador de especificação. Este documento é v1.0.</p>
+<hr />
+<h2 id="13-pendencias-para-revisao-externa">13. Pendências para revisão externa</h2>
+<ol>
+<li>Definir formato numérico interoperável para <code>p0</code> (hoje, <code>float</code> da linguagem).</li>
+<li>Avaliar assinatura sobre o conteúdo bruto original, além do canônico.</li>
+<li>Publicar âncora em registro externo e documentar o procedimento operacional.</li>
+<li>Submeter a um laboratório independente: revisão criptográfica e teste de
+   conformidade por terceiro.</li>
+</ol>
+</main></body></html>
