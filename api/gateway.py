@@ -210,7 +210,7 @@ def limits():
             "decisao trivalente com banda de Hoeffding; sem vantagem quantica alegada",
             "hardware real exige job verificavel e nao e executado por esta API",
             "QSR avalia prontidao, nao emite atestado de conformidade regulatoria",
-            "gateway nao faz autenticacao de usuario final nem rate limit por IP",
+            "gateway aplica rate limit por chave de API e, sem chave, por IP (best-effort)",
         ]}
 
 

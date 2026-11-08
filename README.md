@@ -166,7 +166,7 @@ circuit bell {
 
 ## Tests & reproducibility
 
-- **13 test suites** (`tests/`): canonical rational battery, certified decisions,
+- **33 test suites** (`tests/`): canonical rational battery, certified decisions,
   frontiers, KEM, Lisp regression, meta, multiple-testing correction,
   runtime, shot auditor, Z-QEA verifier, hardware rounds.
 - **CI matrix**: Python 3.10 and 3.11 on every push and pull request, with

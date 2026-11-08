@@ -1,453 +1,453 @@
 {
- "openapi": "3.1.0",
- "info": {
-  "title": "ZYQL Decision API",
-  "description": "Decisão trivalente com banda derivada e recibo verificável offline.",
-  "version": "2.5.6"
- },
- "servers": [
-  {
-   "url": "http://localhost:8000",
-   "description": "desenvolvimento local"
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ZYQL Decision API",
+    "description": "Decisão trivalente com banda derivada e recibo verificável offline.",
+    "version": "2.5.7"
   },
-  {
-   "url": "https://zyql-api.replit.app",
-   "description": "produção (trocar pela URL real do serviço)"
-  }
- ],
- "paths": {
-  "/health": {
-   "get": {
-    "summary": "Health",
-    "operationId": "health_health_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {}
-       }
-      }
-     }
-    }
-   }
-  },
-  "/limits": {
-   "get": {
-    "summary": "Limits",
-    "operationId": "limits_limits_get",
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {}
-       }
-      }
-     }
-    }
-   }
-  },
-  "/bound": {
-   "post": {
-    "summary": "Bound",
-    "description": "Álgebra da banda. Devolve a conta, não só o número.",
-    "operationId": "bound_bound_post",
-    "requestBody": {
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/BoundRequest"
-       }
-      }
-     },
-     "required": true
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "desenvolvimento local"
     },
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {}
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
+    {
+      "url": "https://zyql-api.replit.app",
+      "description": "produção (trocar pela URL real do serviço)"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
         }
-       }
       }
-     }
-    }
-   }
-  },
-  "/decide": {
-   "post": {
-    "summary": "Decide",
-    "description": "Veredito trivalente com recibo selado.",
-    "operationId": "decide_decide_post",
-    "requestBody": {
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/DecideRequest"
-       }
-      }
-     },
-     "required": true
     },
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {}
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
+    "/limits": {
+      "get": {
+        "summary": "Limits",
+        "operationId": "limits_limits_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
         }
-       }
       }
-     }
-    }
-   }
-  },
-  "/verify": {
-   "post": {
-    "summary": "Verify",
-    "description": "Verificação offline: recomputa o selo e denuncia adulteração.",
-    "operationId": "verify_verify_post",
-    "requestBody": {
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/VerifyRequest"
-       }
-      }
-     },
-     "required": true
     },
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {}
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
-  "/oracle/reveal": {
-   "post": {
-    "summary": "Oracle Reveal",
-    "description": "Bernstein–Vazirani: a função escondida, em uma consulta.",
-    "operationId": "oracle_reveal_oracle_reveal_post",
-    "requestBody": {
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/RevealRequest"
-       }
-      }
-     },
-     "required": true
-    },
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {}
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
-  "/oracle/promise": {
-   "post": {
-    "summary": "Oracle Promise",
-    "description": "A promessa vale? Se não, devolve a testemunha da violação.",
-    "operationId": "oracle_promise_oracle_promise_post",
-    "requestBody": {
-     "content": {
-      "application/json": {
-       "schema": {
-        "$ref": "#/components/schemas/PromiseRequest"
-       }
-      }
-     },
-     "required": true
-    },
-    "responses": {
-     "200": {
-      "description": "Successful Response",
-      "content": {
-       "application/json": {
-        "schema": {}
-       }
-      }
-     },
-     "422": {
-      "description": "Validation Error",
-      "content": {
-       "application/json": {
-        "schema": {
-         "$ref": "#/components/schemas/HTTPValidationError"
-        }
-       }
-      }
-     }
-    }
-   }
-  }
- },
- "components": {
-  "schemas": {
-   "BoundRequest": {
-    "properties": {
-     "epsilon": {
-      "type": "number",
-      "exclusiveMaximum": 0.5,
-      "exclusiveMinimum": 0.0,
-      "title": "Epsilon",
-      "description": "erro máximo de família",
-      "default": 0.05
-     },
-     "shots": {
-      "anyOf": [
-       {
-        "type": "integer",
-        "maximum": 100000.0,
-        "exclusiveMinimum": 0.0
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Shots"
-     },
-     "margin": {
-      "anyOf": [
-       {
-        "type": "number",
-        "exclusiveMaximum": 0.5,
-        "exclusiveMinimum": 0.0
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Margin"
-     },
-     "family": {
-      "type": "integer",
-      "maximum": 1000.0,
-      "minimum": 1.0,
-      "title": "Family",
-      "default": 1
-     }
-    },
-    "type": "object",
-    "title": "BoundRequest"
-   },
-   "DecideRequest": {
-    "properties": {
-     "oracle": {
-      "type": "string",
-      "enum": [
-       "const1",
-       "const0",
-       "parity"
-      ],
-      "title": "Oracle",
-      "default": "const1"
-     },
-     "n": {
-      "type": "integer",
-      "maximum": 8.0,
-      "minimum": 1.0,
-      "title": "N",
-      "default": 3
-     },
-     "shots": {
-      "type": "integer",
-      "maximum": 100000.0,
-      "exclusiveMinimum": 0.0,
-      "title": "Shots",
-      "default": 2048
-     },
-     "epsilon": {
-      "type": "number",
-      "exclusiveMaximum": 0.5,
-      "exclusiveMinimum": 0.0,
-      "title": "Epsilon",
-      "default": 0.05
-     },
-     "family": {
-      "type": "integer",
-      "maximum": 1000.0,
-      "minimum": 1.0,
-      "title": "Family",
-      "default": 1
-     },
-     "seed": {
-      "type": "integer",
-      "title": "Seed",
-      "default": 1701
-     },
-     "hardware": {
-      "type": "boolean",
-      "title": "Hardware",
-      "default": false
-     },
-     "sign": {
-      "type": "boolean",
-      "title": "Sign",
-      "default": false
-     }
-    },
-    "type": "object",
-    "title": "DecideRequest"
-   },
-   "HTTPValidationError": {
-    "properties": {
-     "detail": {
-      "items": {
-       "$ref": "#/components/schemas/ValidationError"
-      },
-      "type": "array",
-      "title": "Detail"
-     }
-    },
-    "type": "object",
-    "title": "HTTPValidationError"
-   },
-   "PromiseRequest": {
-    "properties": {
-     "truth_table": {
-      "items": {
-       "type": "integer"
-      },
-      "type": "array",
-      "maxItems": 256,
-      "minItems": 2,
-      "title": "Truth Table"
-     }
-    },
-    "type": "object",
-    "required": [
-     "truth_table"
-    ],
-    "title": "PromiseRequest"
-   },
-   "RevealRequest": {
-    "properties": {
-     "mask": {
-      "type": "integer",
-      "minimum": 0.0,
-      "title": "Mask"
-     },
-     "n": {
-      "type": "integer",
-      "maximum": 8.0,
-      "minimum": 1.0,
-      "title": "N",
-      "default": 3
-     }
-    },
-    "type": "object",
-    "required": [
-     "mask"
-    ],
-    "title": "RevealRequest"
-   },
-   "ValidationError": {
-    "properties": {
-     "loc": {
-      "items": {
-       "anyOf": [
-        {
-         "type": "string"
+    "/bound": {
+      "post": {
+        "summary": "Bound",
+        "description": "Álgebra da banda. Devolve a conta, não só o número.",
+        "operationId": "bound_bound_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BoundRequest"
+              }
+            }
+          },
+          "required": true
         },
-        {
-         "type": "integer"
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
         }
-       ]
+      }
+    },
+    "/decide": {
+      "post": {
+        "summary": "Decide",
+        "description": "Veredito trivalente com recibo selado.",
+        "operationId": "decide_decide_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecideRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verify": {
+      "post": {
+        "summary": "Verify",
+        "description": "Verificação offline: recomputa o selo e denuncia adulteração.",
+        "operationId": "verify_verify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oracle/reveal": {
+      "post": {
+        "summary": "Oracle Reveal",
+        "description": "Bernstein–Vazirani: a função escondida, em uma consulta.",
+        "operationId": "oracle_reveal_oracle_reveal_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevealRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oracle/promise": {
+      "post": {
+        "summary": "Oracle Promise",
+        "description": "A promessa vale? Se não, devolve a testemunha da violação.",
+        "operationId": "oracle_promise_oracle_promise_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromiseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BoundRequest": {
+        "properties": {
+          "epsilon": {
+            "type": "number",
+            "exclusiveMaximum": 0.5,
+            "exclusiveMinimum": 0.0,
+            "title": "Epsilon",
+            "description": "erro máximo de família",
+            "default": 0.05
+          },
+          "shots": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100000.0,
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shots"
+          },
+          "margin": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMaximum": 0.5,
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Margin"
+          },
+          "family": {
+            "type": "integer",
+            "maximum": 1000.0,
+            "minimum": 1.0,
+            "title": "Family",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "title": "BoundRequest"
       },
-      "type": "array",
-      "title": "Location"
-     },
-     "msg": {
-      "type": "string",
-      "title": "Message"
-     },
-     "type": {
-      "type": "string",
-      "title": "Error Type"
-     },
-     "input": {
-      "title": "Input"
-     },
-     "ctx": {
-      "type": "object",
-      "title": "Context"
-     }
-    },
-    "type": "object",
-    "required": [
-     "loc",
-     "msg",
-     "type"
-    ],
-    "title": "ValidationError"
-   },
-   "VerifyRequest": {
-    "properties": {
-     "receipt": {
-      "additionalProperties": true,
-      "type": "object",
-      "title": "Receipt"
-     }
-    },
-    "type": "object",
-    "required": [
-     "receipt"
-    ],
-    "title": "VerifyRequest"
-   }
+      "DecideRequest": {
+        "properties": {
+          "oracle": {
+            "type": "string",
+            "enum": [
+              "const1",
+              "const0",
+              "parity"
+            ],
+            "title": "Oracle",
+            "default": "const1"
+          },
+          "n": {
+            "type": "integer",
+            "maximum": 8.0,
+            "minimum": 1.0,
+            "title": "N",
+            "default": 3
+          },
+          "shots": {
+            "type": "integer",
+            "maximum": 100000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Shots",
+            "default": 2048
+          },
+          "epsilon": {
+            "type": "number",
+            "exclusiveMaximum": 0.5,
+            "exclusiveMinimum": 0.0,
+            "title": "Epsilon",
+            "default": 0.05
+          },
+          "family": {
+            "type": "integer",
+            "maximum": 1000.0,
+            "minimum": 1.0,
+            "title": "Family",
+            "default": 1
+          },
+          "seed": {
+            "type": "integer",
+            "title": "Seed",
+            "default": 1701
+          },
+          "hardware": {
+            "type": "boolean",
+            "title": "Hardware",
+            "default": false
+          },
+          "sign": {
+            "type": "boolean",
+            "title": "Sign",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "DecideRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PromiseRequest": {
+        "properties": {
+          "truth_table": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "maxItems": 256,
+            "minItems": 2,
+            "title": "Truth Table"
+          }
+        },
+        "type": "object",
+        "required": [
+          "truth_table"
+        ],
+        "title": "PromiseRequest"
+      },
+      "RevealRequest": {
+        "properties": {
+          "mask": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Mask"
+          },
+          "n": {
+            "type": "integer",
+            "maximum": 8.0,
+            "minimum": 1.0,
+            "title": "N",
+            "default": 3
+          }
+        },
+        "type": "object",
+        "required": [
+          "mask"
+        ],
+        "title": "RevealRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VerifyRequest": {
+        "properties": {
+          "receipt": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Receipt"
+          }
+        },
+        "type": "object",
+        "required": [
+          "receipt"
+        ],
+        "title": "VerifyRequest"
+      }
+    }
   }
- }
 }
