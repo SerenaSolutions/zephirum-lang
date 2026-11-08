@@ -22,20 +22,27 @@ O recibo carrega protocolo pré-declarado, contagens por lote, selfcheck, veredi
 
 ## Semântica
 
-Deutsch–Jozsa decide **constante vs balanceado**:
+Semântica normativa (Z-QEA §2-A). A proposição decidida é **"existe decisão
+uniforme para toda entrada"**, não "f é constante ou balanceado":
 
-| Veredito | Significado |
-|---|---|
-| `1` | oráculo constante (f = 0 ou f = 1) |
-| `0` | oráculo balanceado |
-| `REFUSED` | selfcheck abaixo do limiar, ou evidência inconclusiva após os lotes |
+| Veredito | Significado | Refusal |
+|---|---|---|
+| `1` | `f(x) = 1` para toda entrada: permissão uniforme | — |
+| `0` | `f(x) = 0` para toda entrada: proibição uniforme | — |
+| `REFUSED` | o resultado **depende da entrada** (oráculo balanceado) | `BALANCED_ORACLE` |
+| `REFUSED` | selfcheck abaixo do limiar, ou evidência inconclusiva | `SELFCHECK_LOW`, `INCONCLUSIVE` |
+
+**Correção de 08/11/2026:** esta tabela antes dizia `0` para oráculo balanceado, o
+que contradizia o núcleo (`BALANCED_ORACLE`). O núcleo estava certo: quando a
+resposta depende da entrada, não há decisão uniforme a emitir, e recusar é o
+resultado honesto. A tabela foi alinhada ao código.
 
 ## Resultado em hardware real (the provider_fez, 2026-10-29)
 
 | Oráculo | Veredito | p0 | selfcheck | Lotes | Shots | job_id |
 |---|---|---|---|---|---|---|
 | constante | **1** | 0.992 | 0.969 | 1 | 128 | `internal` |
-| balanceado | **0** | 0.016 | 0.992 | 1 | 128 | `internal` |
+| balanceado | **REFUSED** (`BALANCED_ORACLE`) | 0.016 | 0.992 | 1 | 128 | `internal` |
 
 Recibos selados em `experiments/selfcheck_the provider_fez_20261029/`. Custo total: 2 jobs × 5 circuitos × 128 shots, ~44 s de QPU.
 

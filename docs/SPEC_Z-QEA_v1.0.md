@@ -43,6 +43,27 @@ MUST, MUST NOT, SHOULD e MAY seguem o uso de RFC 2119.
 
 ---
 
+## 2-A. Semântica dos três resultados (normativa)
+
+A proposição decidida é **P = "existe decisão uniforme para toda entrada"**.
+
+| Resultado | Significado | Quando |
+|---|---|---|
+| `1` | P verdadeira com `f(x)=1` uniforme | evidência acima da banda superior |
+| `0` | P verdadeira com `f(x)=0` uniforme | evidência abaixo da banda inferior |
+| `REFUSED` com `BALANCED_ORACLE` | P falsa: a resposta **depende da entrada** | medição na região balanceada |
+| `REFUSED` com `NOISE_BAND` | evidência insuficiente | `m < p0 < 1-m` |
+| `REFUSED` com `SELFCHECK_LOW` | execução não atingiu o limiar de retorno | auto-verificação falhou |
+| `REFUSED` com `FAMILY_EXCEEDS_SHOTS` | tiros insuficientes para a família | `m_max <= 0` |
+
+Regra obrigatória: **nenhuma implementação pode converter `BALANCED_ORACLE` em `0`.**
+`0` significa "proibido para toda entrada", que é diferente de "depende da entrada".
+Confundir os dois autoriza decisões uniformes onde não existe uniformidade — o erro
+mais perigoso que esta especificação existe para impedir.
+
+Todo `REFUSED` MUST carregar `refusal_reason` da tabela acima. Recusa sem motivo é
+não conforme.
+
 ## 3. Campos de um recibo
 
 | Campo | Tipo | Obrigatório | Significado |

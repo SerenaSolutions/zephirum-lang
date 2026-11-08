@@ -100,6 +100,16 @@ item("ML-DSA declarado como implementado", "DECLARED ROADMAP" not in ler("README
 item("ancoragem externa do último elo", "def verificar_ancora(" in ler("src/zqea_sig.py") and pathlib.Path("tests/test_ancoragem_e_metadados.py").exists(),
      "zqea_sig + testes")
 
+
+# 16. semântica única: nenhum doc pode dizer que balanceado = 0
+sv = ler("docs/SELFVERIFIED.md")
+item("semântica unificada (balanceado != 0)", "BALANCED_ORACLE" in sv and "balanceado | **0**" not in sv,
+     "SELFVERIFIED alinhado ao núcleo")
+
+# 17. bateria criptográfica não pode passar sem testar
+tz = ler("tests/test_zqea_sig.py")
+item("bateria criptográfica exige pqcrypto em CI", "ZYQL_REQUIRE_PQ" in tz, "falha em CI sem pqcrypto")
+
 largura = max(len(n) for n, _, _ in ITENS)
 falhas = 0
 for nome, ok, ev in ITENS:

@@ -6,7 +6,14 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 try:
     import zqea_sig as s
 except Exception as e:
-    print(f"RESULTADO ZSIG: SKIP ({e})"); sys.exit(0)
+    # Auditoria 08/11/2026: sair com 0 sem testar assinatura é falso verde.
+    # Em CI (ou com ZYQL_REQUIRE_PQ=1) a ausência de pqcrypto REPROVA a bateria.
+    obrigatorio = os.environ.get("ZYQL_REQUIRE_PQ") == "1" or os.environ.get("CI") == "true"
+    if obrigatorio:
+        print(f"RESULTADO ZSIG: FALHA — pqcrypto ausente e a bateria é obrigatória ({e})")
+        sys.exit(1)
+    print(f"RESULTADO ZSIG: SKIP ({e}) — declare ZYQL_REQUIRE_PQ=1 para exigir")
+    sys.exit(0)
 
 ok = falhas = 0
 def checa(n, c, x=""):
