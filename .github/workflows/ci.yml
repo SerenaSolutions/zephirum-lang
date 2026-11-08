@@ -31,6 +31,9 @@ jobs:
           PYTHONPATH: src
       - run: python tests/test_selfverified.py
       - run: python -m pytest tests -q --no-header  # P2-3: suite completa no gate
+        env:
+          PYTHONPATH: "src:api:experiments"
+          PYTHONHASHSEED: "0"
       - run: PYTHONPATH=src:api:experiments python tools/check_compliance.py  # portao de conformidade
       - run: PYTHONPATH=src:api python tools/conformance_zqea.py  # vetores normativos Z-QEA v1.0
       - run: python tests/test_witness.py
