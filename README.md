@@ -1,5 +1,4 @@
-<p align="center"><img src="assets/brand/zephirum_logo.jpg" width="320" alt="ZEPHIRUM&trade; &middot; ZYQL&trade;"></p>
-<p align="center"><b>ZEPHIRUM&trade;</b> &middot; <b>ZYQL&trade;</b></p>
+<p align="center"><img src="assets/brand/zephirum-header.png" width="520" alt="ZEPHIRUM&trade; &middot; ZYQL&trade; — computação quântica antes da execução"></p>
 
 <p align="center">
   <a href="assets/demos/zyql_birth_lab_38s.mp4">
