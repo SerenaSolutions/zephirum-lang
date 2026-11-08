@@ -159,6 +159,23 @@ TESTS = {"hom-bunching": lambda a: t_hom(), "mzi-interference": lambda a: t_mzi(
          "braid-order": lambda a: t_braid_order()}
 
 # ---------- evaluator ----------
+
+def _caminho_de_recibo_permitido(pedido):
+    """v2.5.8 (P1-1): escrita apenas no diretorio de recibos, por caminho resolvido.
+
+    Antes: `(seal "/etc/x")` gravava onde o processo pudesse escrever.
+    Agora: o caminho e resolvido (realpath) e precisa ficar DENTRO do diretorio
+    de recibos. Diretorio definido por ZYQL_RECEIPT_DIR (padrao ./recibos).
+    """
+    base = os.environ.get("ZYQL_RECEIPT_DIR") or os.path.join(os.getcwd(), "recibos")
+    base = os.path.realpath(base)
+    alvo = pedido if os.path.isabs(pedido) else os.path.join(base, pedido)
+    alvo = os.path.realpath(alvo)
+    if alvo != base and not alvo.startswith(base + os.sep):
+        raise SystemExit("seal recusado: caminho fora do diretorio de recibos (%s)" % base)
+    return alvo
+
+
 def run(program_path):
     forms = parse(tokenize(open(program_path).read()))
     ctx = {"results": {}, "lab": None}
@@ -224,7 +241,7 @@ def run(program_path):
                 print("  [%s] %s" % (tid, r.get("veredito")))
             ctx["results"][tid + (":" + f[2] if tid == "trivalent" else "")] = r
         elif head == "seal":
-            path = f[1]
+            path = _caminho_de_recibo_permitido(f[1])
             rec = {"spec": "Z-QEA",
                    "modulo": "src/zyql_lisp.py (interpretador ZEPHIRUM v2) + " + os.path.basename(program_path),
                    "data": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),

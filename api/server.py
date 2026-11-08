@@ -27,6 +27,7 @@ import hashlib
 import json
 import math
 import os
+import threading
 import sys
 from typing import Literal
 
@@ -92,6 +93,36 @@ class PromiseRequest(BaseModel):
 
 
 # ------------------------------------------------------------------ util
+def _corpo_sem_assinatura(rec: dict) -> dict:
+    """O selo cobre o conteudo; a assinatura e o identificador da chave ficam de fora."""
+    fora = {"selo_sha3_256", "assinatura", "algoritmo", "chave_id", "chave_publica", "assinatura_pq"}
+    return {k: v for k, v in rec.items() if k not in fora}
+
+
+_CAMINHO_CHAVE = os.environ.get("ZYQL_SIGN_KEY", ".zyql_sig_key.json")
+
+
+def _chave_de_assinatura() -> tuple:
+    """Par ML-DSA persistido (0600). Gera na primeira vez; nao vaza a privada em log."""
+    import base64
+    import json as _json
+    import zqea_sig
+    try:
+        with open(_CAMINHO_CHAVE) as fh:
+            d = _json.load(fh)
+        return base64.b64decode(d["publica"]), base64.b64decode(d["privada"])
+    except Exception:
+        pk, sk = zqea_sig.keypair()
+        try:
+            desc = os.open(_CAMINHO_CHAVE, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+            with os.fdopen(desc, "w") as fh:
+                _json.dump({"publica": base64.b64encode(pk).decode(),
+                            "privada": base64.b64encode(sk).decode()}, fh)
+        except Exception:
+            pass
+        return pk, sk
+
+
 def _seal(receipt: dict) -> str:
     corpo = {k: v for k, v in receipt.items() if k != "selo_sha3_256"}
     return hashlib.sha3_256(
@@ -110,18 +141,23 @@ def _ler_corrente() -> dict:
         return {"elo": 0, "ultimo": "genesis"}
 
 
+_CADEIA_LOCK = threading.Lock()
+
+
 def _correntear(recibo: dict) -> str:
     """Encadeia o recibo ao anterior antes de selar: prova ordem e ausencia de remocao."""
-    est = _ler_corrente()
-    recibo["prev"] = est.get("ultimo", "genesis")
-    recibo["elo"] = int(est.get("elo", 0)) + 1
-    selo = _seal(recibo)
-    recibo["selo_sha3_256"] = selo
-    try:
-        with open(ARQ_CORRENTE, "w") as fh:
+    with _CADEIA_LOCK:  # P2-1: leitura-escrita atomica; sem elo duplicado
+        est = _ler_corrente()
+        recibo["prev"] = est.get("ultimo", "genesis")
+        recibo["elo"] = int(est.get("elo", 0)) + 1
+        selo = _seal(recibo)
+        recibo["selo_sha3_256"] = selo
+        tmp = ARQ_CORRENTE + ".tmp"
+        with open(tmp, "w") as fh:
             json.dump({"elo": recibo["elo"], "ultimo": selo}, fh)
-    except Exception:
-        pass
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, ARQ_CORRENTE)  # troca atomica
     return selo
 
 
@@ -224,12 +260,17 @@ def decide(req: DecideRequest):
     }
     recibo["selo_sha3_256"] = _correntear(recibo)
     if req.sign:
+        # P2-2 (v2.5.8): assinatura ML-DSA real, com a implementacao que existe (zqea_sig).
         try:
-            from zqea_pq import sign_receipt
-            recibo = sign_receipt(recibo)
-            recibo["selo_sha3_256"] = _seal({k: v for k, v in recibo.items()
-                                             if k != "assinatura_pq"})
-        except Exception as e:                     # pqcrypto ausente é declarado, não escondido
+            import base64
+            import zqea_sig
+            pk_b, sk_b = _chave_de_assinatura()
+            # a chave publica entra no corpo ANTES de assinar, senao a assinatura
+            # cobriria um corpo diferente do que o verificador reconstroi (P2-2)
+            recibo["chave_publica"] = base64.b64encode(pk_b).decode()
+            recibo = zqea_sig.assinar(recibo, sk_b, pk_b)
+            recibo["selo_sha3_256"] = _seal(_corpo_sem_assinatura(recibo))
+        except Exception as e:                     # indisponibilidade declarada, nunca escondida
             recibo["assinatura_pq"] = {"erro": f"indisponivel: {type(e).__name__}"}
     return {"verdict": veredito, "p0": res.get("p0"), "margin": recibo["banda"],
             "shots": req.shots, "epsilon": req.epsilon, "family": req.family,
@@ -240,16 +281,32 @@ def decide(req: DecideRequest):
 def verify(req: VerifyRequest):
     """Verificação offline: recomputa o selo e denuncia adulteração."""
     rec = dict(req.receipt)
+    rec_integral = dict(req.receipt)   # a assinatura cobre o recibo COM o selo: verificar sobre o original
     selo = rec.pop("selo_sha3_256", None)
     if not selo:
         return {"ok": False, "reason": "SEAL_MISSING"}
-    corpo = {k: v for k, v in rec.items() if k != "assinatura_pq"}
+    corpo = _corpo_sem_assinatura(rec)  # mesma regra usada ao selar (P2-2)
     esperado = hashlib.sha3_256(
         json.dumps(corpo, sort_keys=True, ensure_ascii=True, default=str).encode()
     ).hexdigest()
     ok = esperado == selo
+    # P2-2 (v2.5.8): integridade do hash NAO e autoria. A assinatura e verificada de fato.
+    autoria = None
+    if rec.get("assinatura"):
+        try:
+            import base64
+            import zqea_sig
+            pk = base64.b64decode(rec_integral.get("chave_publica", ""))
+            autoria = bool(zqea_sig.verificar(rec_integral, pk)) if pk else False
+        except Exception:
+            autoria = False
     return {"ok": ok, "reason": None if ok else "SEAL_MISMATCH",
-            "seal_recomputado": esperado[:16] + "...", "assinatura_pq": "assinatura_pq" in rec}
+            "seal_recomputado": esperado[:16] + "...",
+            "integridade": "hash_ok" if ok else "hash_divergente",
+            "autoria_verificada": autoria,
+            "assinatura_presente": bool(rec.get("assinatura")),
+            "chave_id": rec.get("chave_id"),
+            "assinatura_pq": "assinatura_pq" in rec}
 
 
 @app.post("/oracle/reveal")

@@ -129,6 +129,26 @@ _COTA: dict[str, list[float]] = {}
 _COTA_LOCK = threading.Lock()
 
 
+def _expurgar_cotas() -> None:
+    """P1-2: o dicionario de cotas nao cresce sem limite."""
+    agora = time.time()
+    mortos = [k for k, v in _COTA.items() if not v or agora - v[-1] > 60]
+    for k in mortos:
+        _COTA.pop(k, None)
+    if len(_COTA) > 20000:  # teto duro de seguranca
+        for k in sorted(_COTA, key=lambda k: _COTA[k][-1] if _COTA[k] else 0)[: len(_COTA) - 20000]:
+            _COTA.pop(k, None)
+
+
+def _ip_do_cliente(request) -> str:
+    """P1-2: IP confiavel. X-Forwarded-For so com proxy declarado confiavel."""
+    if os.environ.get("ZYQL_TRUSTED_PROXY") == "1":
+        xff = request.headers.get("x-forwarded-for")
+        if xff:
+            return xff.split(",")[0].strip()
+    return request.client.host if request.client else "anon"
+
+
 def _estourou(quem: str) -> tuple[bool, int]:
     """Janela deslizante de 60 s por chave (ou IP quando nao ha chave)."""
     agora = time.time()
@@ -174,19 +194,31 @@ async def exigir_chave(request: Request, call_next):
             or caminho.startswith("/v1/billing")):
         # billing autentica por chave de compra dentro de cada rota
         return await call_next(request)
+    if not _COTA or len(_COTA) % 512 == 0:
+        _expurgar_cotas()
     chave = request.headers.get("X-API-Key")
-    quem = chave or (request.client.host if request.client else "anon")
-    estourou, esperar = _estourou(quem)
+
+    # P1-2 (v2.5.8): cota por IP ANTES da autenticacao — chave inventada nao fura a cota.
+    estourou, esperar = _estourou("ip:" + _ip_do_cliente(request))
     if estourou:
         return JSONResponse(status_code=429, content={"erro": "limite_de_taxa",
-                                                      "motivo": f"maximo {LIMITE_POR_MINUTO}/min por chave",
+                                                      "motivo": f"maximo {LIMITE_POR_MINUTO}/min por IP",
                                                       "tente_em_segundos": esperar},
                             headers={"Retry-After": str(esperar)})
+
     escopo = _escopo_do_caminho(caminho)
     if not autorizar(chave, escopo):
         motivo = "chave ausente" if not chave else f"chave sem escopo '{escopo}'"
         return JSONResponse(status_code=401, content={"erro": "nao_autorizado", "motivo": motivo,
                                                      "escopo_necessario": escopo})
+
+    # e tambem por identidade autenticada, para uma chave legitima nao herdar a cota do IP
+    estourou, esperar = _estourou("chave:" + hashlib.sha3_256(chave.encode()).hexdigest()[:16])
+    if estourou:
+        return JSONResponse(status_code=429, content={"erro": "limite_de_taxa",
+                                                      "motivo": f"maximo {LIMITE_POR_MINUTO}/min por chave",
+                                                      "tente_em_segundos": esperar},
+                            headers={"Retry-After": str(esperar)})
     return await call_next(request)
 
 
