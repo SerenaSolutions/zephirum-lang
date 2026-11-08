@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
+name: Publicar no PyPI (manual, com trava)
+
+# POR QUE MANUAL: o Qiskit/ecosystem tem um bot ("Daily | Update member data")
+# que rele os dados da entrada de membro. Publicar uma versao nova pode faze-lo
+# reabrir/atualizar a submissao em revisao. Por decisao de 08/11/2026, nenhuma
+# publicacao acontece sem acao humana explicita.
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Digite PUBLICAR para confirmar que a submissao do Qiskit pode receber ruido'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pypi-publicacao
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Verificacoes antes de publicar
+    runs-on: ubuntu-latest
+    outputs:
+      versao: ${{ steps.v.outputs.versao }}
+    steps:
+      - name: Exigir confirmacao textual
+        if: inputs.confirmar != 'PUBLICAR'
+        run: |
+          echo "::error::Confirmacao ausente. Nada foi publicado."
+          exit 1
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          V=$(python3 -c "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          echo "versao=$V" >> "$GITHUB_OUTPUT"
+          echo "Versao a publicar: $V"
+      - name: Recusar se a versao ja existe no PyPI
+        run: |
+          V="${{ steps.v.outputs.versao }}"
+          CODIGO=$(curl -s -o /dev/null -w "%{http_code}" "https://pypi.org/pypi/zephirum/$V/json")
+          if [ "$CODIGO" = "200" ]; then
+            echo "::error::A versao $V ja esta no PyPI. Suba a versao antes de publicar."
+            exit 1
+          fi
+      - name: Verificacoes locais obrigatorias
+        run: |
+          pip install -q build
+          python -m pytest tests -q --no-header || { echo "::error::Suite vermelha: publicacao bloqueada."; exit 1; }
+          PYTHONPATH=src:api:experiments python tools/check_compliance.py
+
+  publicar:
+    name: Publicar (Trusted Publishing por OIDC)
+    needs: preflight
+    runs-on: ubuntu-latest
+    environment: pypi-release          # exige aprovacao humana no painel
+    permissions:
+      id-token: write                  # OIDC: sem token de API guardado
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install build
+      - run: python -m build
+      - name: Publicar
+        uses: pypa/gh-action-pypi-publish@release/v1

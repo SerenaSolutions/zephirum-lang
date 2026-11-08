@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: Apache-2.0
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: 'Segurança'
+    labels: ['security', 'seguranca']
+  - title: 'Conformidade'
+    labels: ['compliance', 'conformidade', 'auditoria']
+  - title: 'Correções'
+    labels: ['bug', 'fix', 'correcao']
+  - title: 'Novidades'
+    labels: ['feature', 'enhancement']
+  - title: 'Documentação'
+    labels: ['docs', 'documentacao']
+  - title: 'Manutenção'
+    labels: ['chore', 'ci', 'deps']
+change-template: '- $TITLE (#$NUMBER) — @$AUTHOR'
+version-resolver:
+  major: { labels: ['major'] }
+  minor: { labels: ['minor', 'feature'] }
+  patch: { labels: ['patch', 'bug', 'fix', 'chore', 'docs'] }
+  default: patch
+template: |
+  ## O que mudou
+
+  $CHANGES
+
+  **Recibos e evidências:** toda alegação deste release aponta para recibo selado em SHA3.
