@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Suíte de conformidade ZYQL.
 
 Testa quatro coisas contra a especificação conformance/SPEC.md:

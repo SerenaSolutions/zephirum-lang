@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 import json, os, urllib.request
 
 T = os.environ['GITHUB_TOKEN']

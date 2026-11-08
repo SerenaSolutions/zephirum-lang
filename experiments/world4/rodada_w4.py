@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """WORLD-4: proximo estagio da rodada mundial.
 
 Declarado ANTES da execucao (selo SHA3 do protocolo gravado antes de qualquer submissao):

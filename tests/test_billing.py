@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Checkout e medicao: pagamento emitido, credito debitado, saldo recusado quando acaba."""
 import json
 import os

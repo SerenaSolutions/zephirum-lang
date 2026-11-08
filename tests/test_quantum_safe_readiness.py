@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Testes do QSR: cada assert compara com a conclusao esperada por construcao."""
 import json
 import os

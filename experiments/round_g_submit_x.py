@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA G — A1 v2: parameter-shift em BASE X (o plateau de verdade).
 CZ e diagonal: em base Z o gradiente so vive no theta do qubit 0. Medindo

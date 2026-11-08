@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA 6 — HARDWARE REAL (IBM Quantum, ibm_marrakesh, 156 qubits Heron-class).
 Job dbclitfi0auc73dv77dg, 512 shots, laboratorio do dono.

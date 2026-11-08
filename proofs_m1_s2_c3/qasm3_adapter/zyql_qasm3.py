@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Adaptador QASM 3 para a ZYQL — exporta e importa, sem SDK de fornecedor.
 Subconjunto: h,x,y,z,s,sdg,t,tdg,cx,rz,measure. Fora disso: QasmRefused (nunca silencio).
 """

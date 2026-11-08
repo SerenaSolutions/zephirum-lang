@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Gateway: uma chave, um ecossistema. Autenticacao e escopos sao o que se testa aqui."""
 import importlib
 import os

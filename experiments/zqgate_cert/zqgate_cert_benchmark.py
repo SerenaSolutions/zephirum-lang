@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 ZQ-GATE ADVERSARIAL BENCHMARK (POC 1)
 ======================================

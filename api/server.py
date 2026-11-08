@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """ZYQL DECISION API — superfície REST do núcleo trivalente (v2.5.0).
 
@@ -39,7 +41,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))) +
 from zyql_oracle_id import audit_promise, identify_2bit, reveal_linear
 from zyql_quantum_gate import ZYQLQuantumGate, adaptive_margin, adaptive_margin_family
 
-APP_VERSION = "2.5.6"
+APP_VERSION = "2.5.7"
 MAX_N = 8                    # fase-oráculo simulada: 2^n amplitudes
 MAX_SHOTS = 100_000
 

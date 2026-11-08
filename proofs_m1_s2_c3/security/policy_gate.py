@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # ZYQL S2 — POLICY GATE (negacao por padrao) — kernel ZEPHYRUM 1.12
 # Escopo HONESTO deste marco:
 #   ENFORCEMENT REAL: autorizacao antes da execucao, recusa com recibo,

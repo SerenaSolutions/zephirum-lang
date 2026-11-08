@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 #!/usr/bin/env python3
 """Sync a GitHub release of zephirum-lang to the Zenodo concept DOI.
 

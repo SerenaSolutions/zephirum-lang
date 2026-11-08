@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Regressoes da auditoria externa de 07/11/2026 (achados P1-1, P1-2, P2-1, P2-2)."""
 import importlib, os, sys, threading
 

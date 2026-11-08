@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 Zephyron → OpenQASM 3 transpiler.
 Zephyron is the circuit language of the Zephyrum ecosystem; OpenQASM 3 is

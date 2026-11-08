@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA G — analise + selagem Z-QEA encadeada (v2.0.0 no silicio).
 

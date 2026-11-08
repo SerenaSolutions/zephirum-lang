@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """CLI do ZQ-GATE: decide antes de executar.
 Uso: zqgate verify <receipt.json>   — verifica integridade SHA3-256 de um recibo
      zqgate version

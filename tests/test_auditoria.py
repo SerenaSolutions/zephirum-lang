@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Testes das tres correcoes da auditoria: corrente, rate limit e producao."""
 import importlib
 import json
