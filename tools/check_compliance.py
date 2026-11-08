@@ -80,6 +80,22 @@ item("margem familiar marcada como não demonstrada", "revisão matemática" in 
 pl = ler("experiments/pipeline_demo/pipeline.py")
 item("pipeline declara consultas clássicas", "consultas_classicas" in pl, "pipeline_demo")
 
+
+# 13. licença coerente (LICENSE é Apache-2.0 e nenhum doc diz MIT)
+lic = ler("LICENSE")[:400]
+docs_md = list(pathlib.Path("docs").glob("*.md"))
+ofensores = [f.name for f in docs_md if "MIT license" in f.read_text()]
+item("licença coerente (Apache-2.0 único)", "Apache License" in lic and not ofensores,
+     "Apache-2.0 em LICENSE e docs" if not ofensores else f"dizem MIT: {ofensores}")
+
+# 14. ML-DSA implementado e não mais anunciado como roadmap
+item("ML-DSA declarado como implementado", "DECLARED ROADMAP" not in ler("README.md") and "def assinar(" in ler("src/zqea_sig.py"),
+     "README + zqea_sig")
+
+# 15. ancoragem externa existe e é testada
+item("ancoragem externa do último elo", "def verificar_ancora(" in ler("src/zqea_sig.py") and pathlib.Path("tests/test_ancoragem_e_metadados.py").exists(),
+     "zqea_sig + testes")
+
 largura = max(len(n) for n, _, _ in ITENS)
 falhas = 0
 for nome, ok, ev in ITENS:
