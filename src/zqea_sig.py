@@ -23,7 +23,13 @@ REFUSED = "REFUSED"
 
 
 def _canon(obj):
-    return json.dumps(obj, sort_keys=True, ensure_ascii=False,
+    """Canonicalizacao Z-QEA v1.0 (normativa).
+
+    Regras: chaves em ordem lexicografica Unicode, sem espacos, UTF-8, sem
+    escapes de caracteres nao-ASCII. NaN e Infinity sao recusados: nao existem
+    em JSON e tornariam a serializacao nao deterministica entre linguagens.
+    """
+    return json.dumps(obj, sort_keys=True, ensure_ascii=False, allow_nan=False,
                       separators=(",", ":")).encode()
 
 
