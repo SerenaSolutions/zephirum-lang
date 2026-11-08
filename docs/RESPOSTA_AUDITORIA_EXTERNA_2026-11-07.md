@@ -55,3 +55,39 @@ Até a aprovação, o limite não deve ser apresentado como garantia estatístic
 
 ## Suíte
 154 aprovados (147 anteriores + 7 regressões novas da auditoria).
+
+---
+
+# Reauditoria (07/11/2026) — resposta
+
+## Por que os achados anteriores "continuam no código"
+
+A reauditoria leu a `main` remota, que está em `54b1051`. As correções dos sete achados estão em commits
+**locais**, não enviados, por instrução expressa do responsável ("gere em sandbox mas não suba nada").
+Não há divergência técnica: a auditoria está correta sobre o remoto. O remoto está desatualizado.
+
+## Achados novos: os dois se confirmam
+
+**P1 — webhook creditava sessão sem confirmar pagamento.** Confirmado e corrigido.
+Aceitava qualquer evento com prefixo `checkout.session`, inclusive `expired` e `async_payment_failed`,
+e `confirmar()` emitia chave sem olhar `payment_status`. Agora:
+- só `checkout.session.completed` credita; `expired` e `async_payment_failed` devolvem 409; outros tipos, 202 sem crédito;
+- `payment_status` precisa ser `paid` (completed de método assíncrono não credita);
+- `amount_total` é conferido contra o preço do plano gravado na criação da sessão, e `currency` contra `usd`.
+Testes novos: evento expirado, evento falho, pagamento pendente, valor divergente, moeda errada. 5 regressões.
+
+**P1 — o pipeline de demonstração consulta o oráculo classicamente antes de simular.** Confirmado.
+Era o meu próprio experimento, e a crítica é justa: a tabela de verdade percorre `2^n` entradas e a
+verificação sonda mais `n`, então o recibo declarava "1 consulta quântica" sem declarar as clássicas.
+Agora o recibo traz `consultas_classicas` com `tabela_verdade`, `verificacao`, `total_oraculo` e a nota
+de que a comparação "1 Q vs n C" vale apenas para a etapa de interferência, não para acesso caixa-preta.
+
+## Continuidade
+Rate limit, CI, `zqea_pq` e `/verify` já estão corrigidos em local (ver seção anterior).
+A alegação de erro familiar segue **não comprovada** e parada para decisão do supervisor, como registrado.
+O teste Monte Carlo existente (`tests/test_multiple_testing.py`, 400 famílias, tolerância `epsilon + 0.10`)
+não demonstra a garantia; concordo com a qualificação da reauditoria: é garantia não demonstrada,
+não prova de fórmula errada.
+
+## Suíte
+159 aprovados (154 anteriores + 5 regressões de cobrança).

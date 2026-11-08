@@ -148,5 +148,285 @@
    "selado_por": "zyql-pipeline-demo-2026"
   },
   "selo_sha3_256": "2ae1c9e3bd43611237cd1cc6c404599a5452af508425d819a3b2a9008a132bc2"
+ },
+ {
+  "payload": {
+   "spec": "ZYQL-PIPELINE-DEMO/1.0",
+   "timestamp": "2026-11-08T02:02:48.397651+00:00",
+   "problema": {
+    "algoritmo": "bernstein_vazirani",
+    "n": 3,
+    "s_alvo": 5,
+    "promessa": "PROMISE_OK"
+   },
+   "rotas": {
+    "rota": "simulacao",
+    "razao": "QUANTUM_QUERY_ADVANTAGE_REQUIRED",
+    "custo_classico": 3,
+    "orcamento_classico": 1,
+    "consultas_quanticas": 1,
+    "consultas_classicas": {
+     "tabela_verdade": 8,
+     "verificacao": 3,
+     "total_oraculo": 12,
+     "nota": "a comparacao 1 Q vs n C vale apenas para a etapa de interferencia; o experimento usa funcao conhecida, nao oraculo caixa-preta"
+    }
+   },
+   "circuito": {
+    "n_qubits": 4,
+    "profundidade_original": 6,
+    "profundidade_transpilada": 5,
+    "cx_portas": 2
+   },
+   "execucao": {
+    "backend": "qiskit_aer.AerSimulator",
+    "shots": 2048,
+    "seed": 11,
+    "hardware_real": false
+   },
+   "coleta": {
+    "estado_dominante": "101",
+    "p_obs": 1.0,
+    "candidato_s": 5
+   },
+   "verificacao_independente": {
+    "verificado": true,
+    "discrepancias": 0,
+    "bases_testadas": 3
+   },
+   "resultado": {
+    "veredito": "1",
+    "modo": "CERTIFICADO_INDEPENDENTE",
+    "motivo_recusa": null,
+    "latencia_ms": 1239.19
+   },
+   "prev": "2ae1c9e3bd43611237cd1cc6c404599a5452af508425d819a3b2a9008a132bc2",
+   "selado_por": "zyql-pipeline-demo-2026"
+  },
+  "selo_sha3_256": "5352e93f44347686b22dca2bbc851283a304ecbbcc7b77a8e7858f82fe8c5c28"
+ },
+ {
+  "payload": {
+   "spec": "ZYQL-PIPELINE-DEMO/1.0",
+   "timestamp": "2026-11-08T02:02:52.147533+00:00",
+   "problema": {
+    "algoritmo": "bernstein_vazirani",
+    "n": 3,
+    "s_alvo": 5,
+    "promessa": "PROMISE_OK"
+   },
+   "rotas": {
+    "rota": "simulacao",
+    "razao": "QUANTUM_QUERY_ADVANTAGE_REQUIRED",
+    "custo_classico": 3,
+    "orcamento_classico": 1,
+    "consultas_quanticas": 1,
+    "consultas_classicas": {
+     "tabela_verdade": 8,
+     "verificacao": 3,
+     "total_oraculo": 12,
+     "nota": "a comparacao 1 Q vs n C vale apenas para a etapa de interferencia; o experimento usa funcao conhecida, nao oraculo caixa-preta"
+    }
+   },
+   "circuito": {
+    "n_qubits": 4,
+    "profundidade_original": 6,
+    "profundidade_transpilada": 5,
+    "cx_portas": 2
+   },
+   "execucao": {
+    "backend": "qiskit_aer.AerSimulator",
+    "shots": 2048,
+    "seed": 11,
+    "hardware_real": false
+   },
+   "coleta": {
+    "estado_dominante": "101",
+    "p_obs": 1.0,
+    "candidato_s": 5
+   },
+   "verificacao_independente": {
+    "verificado": true,
+    "discrepancias": 0,
+    "bases_testadas": 3
+   },
+   "resultado": {
+    "veredito": "1",
+    "modo": "CERTIFICADO_INDEPENDENTE",
+    "motivo_recusa": null,
+    "latencia_ms": 1234.14
+   },
+   "prev": "5352e93f44347686b22dca2bbc851283a304ecbbcc7b77a8e7858f82fe8c5c28",
+   "selado_por": "zyql-pipeline-demo-2026"
+  },
+  "selo_sha3_256": "1ba7f48965a3012681d6ac1171e3edb0f9d837b3ade84cce6f0c6d3ab5c97b09"
+ },
+ {
+  "payload": {
+   "spec": "ZYQL-PIPELINE-DEMO/1.0",
+   "timestamp": "2026-11-08T02:02:56.026541+00:00",
+   "problema": {
+    "algoritmo": "bernstein_vazirani",
+    "n": 3,
+    "s_alvo": 5,
+    "promessa": "PROMISE_OK"
+   },
+   "rotas": {
+    "rota": "simulacao",
+    "razao": "QUANTUM_QUERY_ADVANTAGE_REQUIRED",
+    "custo_classico": 3,
+    "orcamento_classico": 1,
+    "consultas_quanticas": 1,
+    "consultas_classicas": {
+     "tabela_verdade": 8,
+     "verificacao": 3,
+     "total_oraculo": 12,
+     "nota": "a comparacao 1 Q vs n C vale apenas para a etapa de interferencia; o experimento usa funcao conhecida, nao oraculo caixa-preta"
+    }
+   },
+   "circuito": {
+    "n_qubits": 4,
+    "profundidade_original": 6,
+    "profundidade_transpilada": 5,
+    "cx_portas": 2
+   },
+   "execucao": {
+    "backend": "qiskit_aer.AerSimulator",
+    "shots": 2048,
+    "seed": 11,
+    "hardware_real": false
+   },
+   "coleta": {
+    "estado_dominante": "101",
+    "p_obs": 1.0,
+    "candidato_s": 5
+   },
+   "verificacao_independente": {
+    "verificado": true,
+    "discrepancias": 0,
+    "bases_testadas": 3
+   },
+   "resultado": {
+    "veredito": "1",
+    "modo": "CERTIFICADO_INDEPENDENTE",
+    "motivo_recusa": null,
+    "latencia_ms": 1363.17
+   },
+   "prev": "1ba7f48965a3012681d6ac1171e3edb0f9d837b3ade84cce6f0c6d3ab5c97b09",
+   "selado_por": "zyql-pipeline-demo-2026"
+  },
+  "selo_sha3_256": "c16e6d7341788364c26f61aeea796c5bed1dc0a4f700174537956ee51f37775b"
+ },
+ {
+  "payload": {
+   "spec": "ZYQL-PIPELINE-DEMO/1.0",
+   "timestamp": "2026-11-08T02:02:59.904234+00:00",
+   "problema": {
+    "algoritmo": "bernstein_vazirani",
+    "n": 3,
+    "s_alvo": 5,
+    "promessa": "PROMISE_OK"
+   },
+   "rotas": {
+    "rota": "simulacao",
+    "razao": "QUANTUM_QUERY_ADVANTAGE_REQUIRED",
+    "custo_classico": 3,
+    "orcamento_classico": 1,
+    "consultas_quanticas": 1,
+    "consultas_classicas": {
+     "tabela_verdade": 8,
+     "verificacao": 3,
+     "total_oraculo": 12,
+     "nota": "a comparacao 1 Q vs n C vale apenas para a etapa de interferencia; o experimento usa funcao conhecida, nao oraculo caixa-preta"
+    }
+   },
+   "circuito": {
+    "n_qubits": 4,
+    "profundidade_original": 6,
+    "profundidade_transpilada": 5,
+    "cx_portas": 2
+   },
+   "execucao": {
+    "backend": "qiskit_aer.AerSimulator",
+    "shots": 2048,
+    "seed": 11,
+    "hardware_real": false
+   },
+   "coleta": {
+    "estado_dominante": "101",
+    "p_obs": 1.0,
+    "candidato_s": 5
+   },
+   "verificacao_independente": {
+    "verificado": true,
+    "discrepancias": 0,
+    "bases_testadas": 3
+   },
+   "resultado": {
+    "veredito": "1",
+    "modo": "CERTIFICADO_INDEPENDENTE",
+    "motivo_recusa": null,
+    "latencia_ms": 1290.29
+   },
+   "prev": "c16e6d7341788364c26f61aeea796c5bed1dc0a4f700174537956ee51f37775b",
+   "selado_por": "zyql-pipeline-demo-2026"
+  },
+  "selo_sha3_256": "b70b4b43811f33cf3a333904719fe3f4edb840c024cfd35315d1e02073e21a73"
+ },
+ {
+  "payload": {
+   "spec": "ZYQL-PIPELINE-DEMO/1.0",
+   "timestamp": "2026-11-08T02:03:13.660985+00:00",
+   "problema": {
+    "algoritmo": "bernstein_vazirani",
+    "n": 3,
+    "s_alvo": 5,
+    "promessa": "PROMISE_OK"
+   },
+   "rotas": {
+    "rota": "simulacao",
+    "razao": "QUANTUM_QUERY_ADVANTAGE_REQUIRED",
+    "custo_classico": 3,
+    "orcamento_classico": 1,
+    "consultas_quanticas": 1,
+    "consultas_classicas": {
+     "tabela_verdade": 8,
+     "verificacao": 3,
+     "total_oraculo": 12,
+     "nota": "a comparacao 1 Q vs n C vale apenas para a etapa de interferencia; o experimento usa funcao conhecida, nao oraculo caixa-preta"
+    }
+   },
+   "circuito": {
+    "n_qubits": 4,
+    "profundidade_original": 6,
+    "profundidade_transpilada": 5,
+    "cx_portas": 2
+   },
+   "execucao": {
+    "backend": "qiskit_aer.AerSimulator",
+    "shots": 2048,
+    "seed": 11,
+    "hardware_real": false
+   },
+   "coleta": {
+    "estado_dominante": "101",
+    "p_obs": 1.0,
+    "candidato_s": 5
+   },
+   "verificacao_independente": {
+    "verificado": true,
+    "discrepancias": 0,
+    "bases_testadas": 3
+   },
+   "resultado": {
+    "veredito": "1",
+    "modo": "CERTIFICADO_INDEPENDENTE",
+    "motivo_recusa": null,
+    "latencia_ms": 1240.87
+   },
+   "prev": "b70b4b43811f33cf3a333904719fe3f4edb840c024cfd35315d1e02073e21a73",
+   "selado_por": "zyql-pipeline-demo-2026"
+  },
+  "selo_sha3_256": "0a015dd3db25b1e9f2cffce3660a89c0593cc55eac99769f6db984d8ea522226"
  }
 ]

@@ -109,9 +109,12 @@ def cli_stripe(tmp_path, monkeypatch):
     return TestClient(gateway.app), billing
 
 
-def _evento(sessao="cs_live_1"):
-    return json.dumps({"type": "checkout.session.completed",
-                       "data": {"object": {"id": sessao,
+def _evento(sessao="cs_live_1", tipo="checkout.session.completed", pago="paid",
+            centavos=5000, moeda="usd"):
+    """Payload no formato real do Stripe: o credito exige conclusao E pagamento efetivado."""
+    return json.dumps({"type": tipo,
+                       "data": {"object": {"id": sessao, "payment_status": pago,
+                                           "amount_total": centavos, "currency": moeda,
                                            "customer_details": {"email": "c@x.com"}}}}).encode()
 
 
@@ -170,3 +173,38 @@ def test_evento_sem_sessao_recusa_422(cli_stripe):
     r = c.post("/v1/billing/webhook", content=corpo,
                headers={"Stripe-Signature": f"t={t},v1={sig}", "Content-Type": "application/json"})
     assert r.status_code == 422
+
+
+def _post(cli_stripe, corpo):
+    c, billing = cli_stripe
+    t = str(int(__import__("time").time()))
+    sig = billing._assinar("whsec_teste", t, corpo)
+    return c.post("/v1/billing/webhook", content=corpo,
+                  headers={"Stripe-Signature": f"t={t},v1={sig}", "Content-Type": "application/json"})
+
+
+def test_evento_expirado_nao_credita(cli_stripe):
+    """P1 da reauditoria: checkout.session.expired nao pode emitir chave."""
+    r = _post(cli_stripe, _evento(tipo="checkout.session.expired", pago=None))
+    assert r.status_code == 409, r.text
+
+
+def test_evento_falho_nao_credita(cli_stripe):
+    r = _post(cli_stripe, _evento(tipo="checkout.session.async_payment_failed", pago="unpaid"))
+    assert r.status_code == 409, r.text
+
+
+def test_pagamento_pendente_nao_credita(cli_stripe):
+    """completed com payment_status pendente (metodo assincrono) nao credita."""
+    r = _post(cli_stripe, _evento(pago="unpaid"))
+    assert r.status_code == 409, r.text
+
+
+def test_valor_divergente_do_plano_nao_credita(cli_stripe):
+    r = _post(cli_stripe, _evento(centavos=1))
+    assert r.status_code == 409, r.text
+
+
+def test_moeda_errada_nao_credita(cli_stripe):
+    r = _post(cli_stripe, _evento(moeda="brl"))
+    assert r.status_code == 409, r.text
