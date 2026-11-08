@@ -172,7 +172,7 @@ class ZYQLQuantumGate:
         qc.gates_applied.append("Uf(x) [1 oracle call]")
 
     def run_quantum(self, shots=2048, seed=1701, epsilon=None, family=1):
-        """Interference decision: 1 oracle call.
+        """Interference decision: 1 phase-oracle call (+1 classical f(0) probe).
 
         epsilon (v1.9.0): banda adaptativa por Hoeffding inverso.
         family (v1.9.1): k vereditos conjuntos -> banda Bonferroni
@@ -221,7 +221,7 @@ class ZYQLQuantumGate:
         family_field = {"family": family,
                         "epsilon_family": (epsilon_declared if adaptive else None)}
         if p0 >= 1 - margin:
-            # constant. Which constant? the classical f(0) probe (1 extra call)
+            # constant. Which constant? the classical f(0) probe (P2-4: 2nd call, counted)
             self.oracle_calls += 1
             verdict = 1 if self.f(0) == 1 else 0
             d = {"decision": verdict, "mode": "DECIDED_BY_INTERFERENCE",
