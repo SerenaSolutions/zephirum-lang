@@ -26,7 +26,7 @@ Outputs: `status` (INTEGRAL/BROKEN), `seal` (recomputed SHA3-256).
 
 ## Pricing model (declared, honest)
 
-- **Free forever:** this verifier — open source, MIT, no paywall. Its job is
+- **Free forever:** this verifier — open source, Apache-2.0, no paywall. Its job is
   to make sealed receipts a public good.
 - **Future hosted tier (declared roadmap):** signed receipts (ML-DSA-44 /
   FIPS 204, HSM-held keys), receipt registry and compliance reports —

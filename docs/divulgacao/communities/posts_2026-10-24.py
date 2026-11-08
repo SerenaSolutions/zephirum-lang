@@ -21,7 +21,7 @@ Recent results on IBM Heron processors (Open Plan, all job IDs citable):
 
 The core is deliberately honest about noise: REFUSED is a first-class outcome and margins are derived from a declared epsilon, not tuned post hoc. Cross-validated in six SDKs (the Python quantum SDK, OpenQASM 3, Cirq, PennyLane, Braket, Q#) with exact agreement.
 
-Code (MIT): https://github.com/SerenaSolutions/zephirum-lang
+Code (Apache-2.0): https://github.com/SerenaSolutions/zephirum-lang
 Proof index with all job IDs: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
 DOI: 10.5281/zenodo.23632019
 
@@ -51,7 +51,7 @@ Hardware validation (IBM Heron: superconducting QPU, superconducting QPU, superc
 
 The poliglota core agrees exactly across six SDKs (the Python quantum SDK, OpenQASM 3, Cirq, PennyLane, Braket, Q#).
 
-Code (MIT): https://github.com/SerenaSolutions/zephirum-lang
+Code (Apache-2.0): https://github.com/SerenaSolutions/zephirum-lang
 Methodology + all job IDs: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
 DOI: 10.5281/zenodo.23632019
 
@@ -76,7 +76,7 @@ The design decisions we'd like feedback on:
 
 Every run is sealed with a receipt (SHA3-256 + ML-DSA-44) binding verdict + job ID + calibration snapshot.
 
-Code (MIT): https://github.com/SerenaSolutions/zephirum-lang
+Code (Apache-2.0): https://github.com/SerenaSolutions/zephirum-lang
 Methodology post: https://github.com/SerenaSolutions/zephirum-lang/discussions/35
 
 Would love to hear from this community: does the adaptive-margin approach hold up, and are there PennyLane-native tools (e.g., for shot-based confidence or device benchmarks) you'd recommend to strengthen the cross-validation?"""

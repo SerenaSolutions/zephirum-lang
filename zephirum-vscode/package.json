@@ -4,7 +4,7 @@
   "description": "Language support for Zephirum, the Lisp-style quantum language with the ZYQL trivalent decision core.",
   "version": "0.1.0",
   "publisher": "SerenaSolutions",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "engines": {"vscode": "^1.75.0"},
   "categories": ["Programming Languages"],
   "contributes": {
