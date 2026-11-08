@@ -185,7 +185,17 @@ def run_pipeline(prob: ProblemSpec, quiet: bool = False) -> dict:
             "razao": route_reason,
             "custo_classico": classical_cost,
             "orcamento_classico": prob.classical_budget,
+            # Reauditoria 07/11/2026: a contagem quantica nao pode ser lida como custo total
+            # de acesso a um oraculo caixa-preta. A tabela de verdade e as sondas de
+            # verificacao consultam a MESMA funcao classicamente.
             "consultas_quanticas": 1,
+            "consultas_classicas": {
+                "tabela_verdade": 1 << prob.n,
+                "verificacao": prob.n,
+                "total_oraculo": (1 << prob.n) + prob.n + 1,
+                "nota": ("a comparacao 1 Q vs n C vale apenas para a etapa de interferencia; "
+                         "o experimento usa funcao conhecida, nao oraculo caixa-preta"),
+            },
         },
         "circuito": {
             "n_qubits": n + 1,
@@ -237,7 +247,7 @@ def run_pipeline(prob: ProblemSpec, quiet: bool = False) -> dict:
             f"=== ZYQL REPRODUCIBLE PIPELINE (E1-E9) ===",
             f"[E1] Entrada: BV n={n}, s={s} ({s:0{n}b}), B_classico={prob.classical_budget}",
             f"[E2] Decisao Classica: promessa=PROMISE_OK, custo={classical_cost} consultas",
-            f"[E3] Rota Trivalente: {route.upper()} (1 consulta Q vs {classical_cost} C)",
+            f"[E3] Rota Trivalente: {route.upper()} (interferencia: 1 consulta Q vs {classical_cost} C; custo total de acesso inclui {1 << prob.n} C da tabela de verdade)",
             f"[E4] Circuito Qiskit: {n+1} qubits ({n} entrada + 1 ancilla), {cx_count} CXs",
             f"[E5] Transpilacao Aer: prof={depth_orig}->{depth_transp}, ops={cx_count} CX",
             f"[E6] Simulacao: {prob.shots} shots em Aer (seed={prob.seed}, sem QPU)",

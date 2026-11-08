@@ -235,10 +235,33 @@ async def webhook(request: Request):
     except Exception:
         raise HTTPException(400, "corpo nao e json")
     sessao, email = dado.get("sessao"), dado.get("email")
-    if str(dado.get("type", "")).startswith("checkout.session"):
+    tipo = str(dado.get("type", ""))
+    if tipo.startswith("checkout.session"):
+        # P1 (reauditoria 07/11/2026): so o evento de CONCLUSAO credita, e so se pago.
         obj = (dado.get("data") or {}).get("object") or {}
+        if tipo in ("checkout.session.expired", "checkout.session.async_payment_failed"):
+            raise HTTPException(409, f"evento sem credito: {tipo}")
+        if tipo != "checkout.session.completed":
+            raise HTTPException(202, f"evento ignorado: {tipo}")
         sessao = obj.get("id") or sessao
         email = ((obj.get("customer_details") or {}).get("email")) or email
+        if not sessao:
+            raise HTTPException(422, "sessao ausente no evento")
+        estado_pagamento = obj.get("payment_status")
+        if estado_pagamento != "paid":
+            # metodo assincrono: completed com payment_status pendente NAO credita
+            raise HTTPException(409, f"pagamento nao concluido: payment_status={estado_pagamento!r}")
+        # confere valor e moeda contra o plano gravado na criacao da sessao
+        registrada = _ler()["sessoes"].get(sessao) or {}
+        plano = registrada.get("plano")
+        if plano not in PLANOS:
+            raise HTTPException(409, f"sessao sem plano conhecido: {sessao}")
+        esperado_centavos = int(round(PLANOS[plano]["preco_usd"] * 100))
+        if obj.get("amount_total") is not None and int(obj["amount_total"]) != esperado_centavos:
+            raise HTTPException(409, "valor do evento diverge do plano: %s != %s"
+                                % (obj.get("amount_total"), esperado_centavos))
+        if obj.get("currency") and str(obj["currency"]).lower() != "usd":
+            raise HTTPException(409, f"moeda inesperada: {obj.get('currency')}")
     if not sessao:
         raise HTTPException(422, "sessao ausente no evento")
     r = confirmar(sessao, email)
