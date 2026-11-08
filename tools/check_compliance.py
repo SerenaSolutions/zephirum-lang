@@ -110,6 +110,20 @@ item("semântica unificada (balanceado != 0)", "BALANCED_ORACLE" in sv and "bala
 tz = ler("tests/test_zqea_sig.py")
 item("bateria criptográfica exige pqcrypto em CI", "ZYQL_REQUIRE_PQ" in tz, "falha em CI sem pqcrypto")
 
+
+# 18. nenhum artefato grande rastreado (bundle, venv, binário)
+import subprocess as _sp
+_lista = _sp.run(["git", "ls-files"], capture_output=True, text=True).stdout.split()
+_grandes = []
+for _f in _lista:
+    _p = pathlib.Path(_f)
+    if _p.is_file() and _p.stat().st_size > 5 * 1024 * 1024:
+        _grandes.append((_f, round(_p.stat().st_size / 1048576, 1)))
+item("nenhum artefato grande rastreado", not _grandes, "ok" if not _grandes else f"{_grandes[:2]}")
+
+# 19. nome do projeto escrito corretamente
+item("nome do projeto grafado certo", "Zephyron" not in ler("README.md"), "README sem 'Zephyron'")
+
 largura = max(len(n) for n, _, _ in ITENS)
 falhas = 0
 for nome, ok, ev in ITENS:

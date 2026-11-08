@@ -14,7 +14,7 @@
     <img src="assets/demos/zyql_decision_sphere_poster.jpg" width="640" alt="ZYQL trivalent decision sphere — 30 s animation with sound">
   </a>
   <br>
-  <sub><b>▶ 30 s animation (with sound)</b> — the trivalent decision sphere: verdict <code>0</code> for the constant oracle, then <code>REFUSED</code> (BALANCED_ORACLE). Declared simulation; hardware reference on a production superconducting QPU (device and job identifiers in internal evidence), measured p(000) = 0.9844</sub>
+  <sub><b>▶ 30 s animation (with sound)</b> — the trivalent decision sphere: verdict <code>0</code> for the constant oracle, then <code>REFUSED</code> (BALANCED_ORACLE). Declared simulation; hardware reference on a production superconducting QPU (device `ibm_marrakesh`; job `dbnqhi8ou4as73b4vu00`), measured p(000) = 0.9844</sub>
 </p>
 
 <p align="center"><img src="assets/social-preview-1280x640.jpg" alt="ZYQL: Exact-decision language" width="640"></p>
@@ -115,9 +115,9 @@ converging into three fusion channels, the geometry the experiments probe.*
 | Fusion space is 3-dimensional (qutrit in 2 qubits) | noiseless | exact 1/3+1/3+1/3, forbidden channel vetoed | [sealed receipt](experiments/s3_qutrit_final_receipt.json) |
 | Braiding is non-Abelian (order matters) | noiseless | commutator L1 = 6 exact; B_R∘B_S → ch2, B_S∘B_R → ch1 | same |
 | Noiseless round | noiseless | exact-zero deviation vs theory (canonical rationals) | same |
-| ZYQL trivalent decisions 1 / 0 / REFUSED | **a production superconducting QPU** | **3/3 PASS** (job identifiers kept in internal evidence records;) | [battery receipt](experiments/zyql_hardware_battery.json) |
-| Braid order measured on real hardware | **a production superconducting QPU** | **98.1% vs 95.8%** (job identifiers kept in internal evidence records;) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
-| **Shots-to-verdict efficiency** | **a production superconducting QPU** | **256 shots** to a first-step verdict — **96.88% savings vs 8192** | receipt `28f406202e9d125a` (issue #40) |
+| ZYQL trivalent decisions 1 / 0 / REFUSED | **a production superconducting QPU** | **3/3 PASS** (jobs `dbn88ns4148s7390g750`, `dbn87toqtr0c73achjvg`, `dbmfcvt8ft8s738up32g`) | [battery receipt](experiments/zyql_hardware_battery.json) |
+| Braid order measured on real hardware | **a production superconducting QPU** | **98.1% vs 95.8%** (jobs `dbme1pl8mdtc73d7qbig`, `dbl1v71kdqps7393e9m0`) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
+| **Shots-to-verdict efficiency** | **a production superconducting QPU** | **256 shots** to a first-step verdict — 96,88% fewer shots **contra a linha de base de 8192** (linha de base declarada: varredura exaustiva com 8192 tiros, não um padrão externo) | receipt `28f406202e9d125a` (issue #40) |
 
 Receipt seal (SHA3-256): `a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a` — verify it yourself: `python3 .github/actions/zqea-verify/zqea_verify.py experiments/s3_qutrit_final_receipt.json`
 In language: [`examples/s3_qutrit.zph`](examples/s3_qutrit.zph).
@@ -132,7 +132,7 @@ verifiable job IDs; no endorsement claimed):
   Z-QEA receipt sealed, see `experiments/`)
 - Balanced purpose: p(000)=0.0000, orthogonal outcome 93.9%
 - Same-task confrontation against an industry-standard quantum SDK (identifiers in internal evidence):
-  Zephyron transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
+  Zephirum transpiles to depth 2 / 0 two-qubit gates vs depth 10 / 3 CZ
 
 Benchmark suite: [`benchmarks/`](benchmarks/) (public comparative benchmark, issue #28).
 
@@ -193,7 +193,7 @@ circuit bell {
 
 - `src/` — kernel (state-vector), OpenQASM 3 transpiler, trivalent gate,
   quantum types (no-cloning enforced), neural RAG layer, runtime (`zyql_runtime`)
-- `tests/` — 13 suites (see above)
+- `tests/` — 33 suites (see above)
 - `examples/` — `hello_world.zph`, `bell.zph`, `grover.zph`, `dj_constant.zph`, `s3_qutrit.zph`
 - `benchmarks/` — public comparative benchmark suite
 - `notebooks/` — scientific presentation layer
@@ -294,7 +294,16 @@ bootloader, installer, or activation keys. Simulations are labeled as
 simulations; without error correction, useful executions are bounded well
 under 20 qubits.
 
-## Runtime de produção (v1.8.0)
+
+> **Qual banda se aplica (esclarecimento de 08/11/2026).** A banda fixa **±0,15** vale no
+> modo legado, quando nenhuma `epsilon` é declarada. Quando `epsilon` é informado, a banda é
+> **calculada**: `m = sqrt(ln(2/ε)/(2·shots))`, e o valor depende de ε e do número de tiros
+> (com ε = 0,05 e 2048 tiros, m ≈ 0,030; com 16 384 tiros, m ≈ 0,011). Números como ±0,042
+> em material de divulgação referem-se a uma combinação específica de ε e tiros e não são
+> uma segunda regra. Enquanto a revisão matemática da margem familiar não concluir, o valor
+> **não deve ser apresentado como garantia estatística**, apenas como banda de decisão.
+
+## Runtime de produção (mesma versão do pacote: ver `VERSION`)
 
 ```python
 from zyql_runtime import decide, Verdict
@@ -306,7 +315,7 @@ CLI: `zyql-decide --oracle balanced --shots 512`
 ## PyPI — estado verificado (30/10/2026)
 
 O pacote oficial **existe e está publicado**: `pip install zephirum`.
-Versões no índice do PyPI: 2.1.0, 2.1.1, 2.1.2. A linha 2.3 e 2.4 do repositório sai do build desta árvore.
+Versão publicada no PyPI: **2.5.7**, licença **Apache-2.0**, verificada em 08/11/2026. `VERSION` é a fonte única: badge, `pyproject.toml`, `docs/openapi.json` e `APP_VERSION` da API são conferidos por `tools/check_compliance.py` a cada commit.
 Procedência verificável em https://pypi.org/pypi/zephirum/json — autor do
 registro no PyPI: Reginaldo Gonçalves (mantenedor), projeto Serena Solutions.
 
