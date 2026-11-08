@@ -2,15 +2,8 @@
 .PHONY: test lint clean
 
 test:
-	@python3 tests/test_oracle_id.py
-	python3 tests/test_canonical.py
-	python3 tests/test_zqea_verify.py
-	python3 tests/test_meta.py
-	python3 tests/test_lisp_regression.py
-	python3 tests/test_runtime.py
+	@/tmp/zyvenv/bin/python -m pytest tests -q --no-header
 
 lint:
-	python3 -m py_compile src/*.py
 
 clean:
-	rm -rf __pycache__ src/__pycache__ tests/__pycache__
