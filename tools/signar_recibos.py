@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Assina e encadeia os recibos do WORLD-3 com ML-DSA-44.
 
 Demonstracao da camada Z-SIG. AVISO: a chave privada e efemera, gerada nesta

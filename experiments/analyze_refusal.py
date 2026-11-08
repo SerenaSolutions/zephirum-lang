@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """COLHEITA DA RODADA A — curva empírica shots×confiança da decisão trivalente.
 Sela recibo Z-QEA pela regra limpa (SHA3-256). Modo HARDWARE REAL."""

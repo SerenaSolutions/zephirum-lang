@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 import json, hashlib, math, time, sys, os
 sys.path.insert(0, "/app/conversations/6ab3060a7f5a926229167e45/zlang/proofs_m1_s2_c3/security")
 from policy_gate import sha, canon

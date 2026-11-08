@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Mapa de rotas: enumeracao de caminhos simples e avaliacao classica de restricoes.
 
 Sem heuristica escondida: todas as rotas simples origem->destino sao enumeradas.

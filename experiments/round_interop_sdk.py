@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA INTEROP-SDK — o veredito trivalente e a mesma lingua em qualquer SDK.
 Kernel: Deutsch-Jozsa n=3 (constante-1 e balanceado) nativo em tres stacks

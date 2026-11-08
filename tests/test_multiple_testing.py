@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """v1.9.1 — disciplina do auditor: 'cada alegacao precisa de um teste que
 possa falhar'. Cada teste aqui e um teste de FALSIFICACAO: remove a

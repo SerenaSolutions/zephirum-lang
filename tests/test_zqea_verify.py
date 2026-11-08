@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Z-QEA seal verifier battery: integrity must pass, tampering must fail."""
 import sys, os, json, copy, hashlib
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))

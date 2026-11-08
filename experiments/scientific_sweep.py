@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """VARREDURA CIENTIFICA S3-QUTRIT (Zephirum/ZYQL, padrao Z-QEA)
 A. sweep do angulo de tracado: teoria (float64, declarado) vs noiseless vs hardware, chi2

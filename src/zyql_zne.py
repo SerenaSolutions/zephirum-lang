@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """ZYQL-ZNE v2.0.0 — extrapolacao a ruido zero, nativa, primeira fonte.
 

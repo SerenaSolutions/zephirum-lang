@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA C — analise do upgrade v1.9.0 no silicio (porta GHZ + DJ adaptativo).
 Executavel varias vezes: so sela quando TODOS os jobs estao DONE.

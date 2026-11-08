@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA F-REV — analise do re-teste das fronteiras (CHSH angulos corretos +
 QEC base Z com injecao deterministica de erro). Executavel varias vezes: so

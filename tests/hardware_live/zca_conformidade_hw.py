@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 ZCA — SUITE DE CONFORMIDADE NO IBM QUANTUM
 Consolidação do degrau quântico da escada certificada (ZYQL kernel).

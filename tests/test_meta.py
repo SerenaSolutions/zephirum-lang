@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Meta-testes de versao: o `pyproject.toml` e a fonte unica, os outros arquivos seguem.
 
 Antes este arquivo fazia `assert` no nivel do modulo e nao declarava nenhuma funcao de

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """ZYQL-ROBUST v2.1.0 — RODADA H: guardas adversariais para o cientista hostil.
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # C3 — TEOREMA DE UNIVERSALIDADE ZYQL — kernel ZEPHYRUM 1.12
 # Aritmetica EXATA em Z[i][sqrt2][1/2]: entrada = (p + q*sqrt2 + i(r + t*sqrt2))/2^k
 import json, hashlib, itertools

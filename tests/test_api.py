@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """Testes da API REST (v2.5.0). Falsificáveis: cada assert compara com a
 matemática esperada por construção, não com "não explodiu"."""

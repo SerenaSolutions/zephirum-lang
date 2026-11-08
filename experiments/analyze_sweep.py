@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """Analisa o job da varredura (dbbuh17i0auc73dtpaeg) quando terminar.
 Executavel varias vezes: so salva o recibo quando o job esta DONE."""

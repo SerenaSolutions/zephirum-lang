@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """build_livro_zephirum.py — monta a edição íntegra do livro ZEPHIRUM/ZYQL."""
 import os, re, random, math

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Pipeline Q-ROUTE: avaliacao classica -> busca de Grover -> veredito trivalente -> recibo.
 
 Semantica do veredito (a mesma do nucleo ZYQL, aplicada a rotas):

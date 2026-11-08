@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """
 RODADA A — SWEEP DE SHOTS DA DECISAO TRIVALENTE (Zephirum/ZYQL, Z-QEA)

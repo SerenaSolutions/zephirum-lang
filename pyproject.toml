@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
-dependencies = ["numpy", "lark", "qiskit>=2.6,<3"]
+dependencies = ["numpy>=1.26,<3", "lark>=1.1,<2", "qiskit>=2.6,<3"]
 authors = [{name = "Reginaldo Pinezi Uhlmann", email = "builderquantunxia@gmail.com"}]
 maintainers = [
   {name = "Reginaldo Pinezi Uhlmann"},

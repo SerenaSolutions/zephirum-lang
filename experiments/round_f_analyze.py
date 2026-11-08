@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA F — analise das fronteiras (CHSH + QEC + Grover n=4, kingston).
 Executavel varias vezes: so sela quando TODOS os jobs estao DONE.

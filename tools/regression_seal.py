@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Quantum Regression Seal (QRS-01): detecta miscompilacao silenciosa.
 
 Compara a unitaria (ate fase global) entre o circuito de entrada e o de

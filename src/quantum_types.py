@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 ZEPHIRUM QUANTUM TYPES (v1.0.0, 12/10/2026) — qbit as a first-class type.
 Prototype pre-parser: the type layer is real (wraps the state-vector kernel),

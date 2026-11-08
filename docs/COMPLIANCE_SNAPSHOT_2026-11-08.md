@@ -15,7 +15,7 @@
 | Limite de taxa | CONFORME (local) | cota por IP antes da autenticação + por chave depois; expiração e teto | enviar ao remoto |
 | Gate de CI | CONFORME (local) | `pytest tests -q` na esteira | enviar ao remoto |
 | Cobertura de testes | CONFORME | 159 aprovados | — |
-| Segredos no repositório | CONFORME | varredura por `sk_live_`, `whsec_`, chave privada: nenhum achado | — |
+| Segredos no repositório | CONFORME | varredura por padroes de chave de teste, de producao, segredo de webhook e chave privada: nenhum achado | — |
 | Fixação de dependências | **PARCIAL** | `qiskit>=2.6,<3` com teto; `numpy` e `lark` sem teto | fixar faixa |
 | Alegação de garantia estatística | **NÃO CONFORME** | margem de testes múltiplos sem derivação válida demonstrada | não apresentar como garantia até decisão |
 | Contagem de consultas ao oráculo | CONFORME (local) | recibo declara tabela de verdade e sondas | enviar ao remoto |

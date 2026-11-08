@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Power analysis da regra de agregacao trivalente (3 repeticoes).
 
 Motivo: o WORLD-3 certificou W-02 comparando a MEDIA com a banda, sem deslocar o

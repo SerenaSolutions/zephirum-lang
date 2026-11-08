@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Baterias escritas como script (sys.exit no import) sao excluidas da coleta direta
 e executadas como subprocesso por tests/test_baterias_script.py."""
 import pathlib

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """ZYQL no IBM Heron — bateria DJ completa (constante-1, constante-0, balanceado)
 com a regra trivalente da casa aplicada sobre contagens de hardware real.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Verifica se o que publicamos e o que declaramos batem entre si.
 
 Motivo: revisar de memoria ja gerou erro (comentario duplicado no PR,

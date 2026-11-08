@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """COLHEITA DA VARREDURA v2 (calibrada). Se o job nao estiver DONE, imprime status e sai 0
 (quem chama re-agenda). Se DONE: mitiga pela matriz de confusao, roda chi2 mitigado,

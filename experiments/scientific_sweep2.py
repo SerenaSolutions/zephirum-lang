@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """VARREDURA CIENTIFICA S3-QUTRIT v2 — COM CALIBRACAO DE LEITURA (Z-QEA)
 Hipotese (da v1): a reprovacao do chi2 em 10/10 pontos foi vies de leitura

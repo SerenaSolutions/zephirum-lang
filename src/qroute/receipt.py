@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Recibo Q-ROUTE: SHA3-256 canonico + encadeamento com o recibo anterior."""
 import datetime
 import hashlib

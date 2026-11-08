@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 import sys, os, json, threading, hashlib, http.server, socketserver
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from zysdk.client import ProvedorREST, ProvedorLocal, Contagem, ErroDeProvedor

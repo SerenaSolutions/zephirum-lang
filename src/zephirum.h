@@ -1,3 +1,7 @@
+/* NAO IMPLEMENTADO — este cabecalho e declarativo (roadmap), nao uma API disponivel.
+ * Nao existe nenhum arquivo .c neste repositorio. A recusa trivalente em uso real e a
+ * string "REFUSED" no runtime Python. Nao trate estas declaracoes como API suportada.
+ */
 /* SPDX-License-Identifier: Apache-2.0 */
 /* zephirum.h - C API of the ZYQL trivalent decision core (v1.4.3).
  *

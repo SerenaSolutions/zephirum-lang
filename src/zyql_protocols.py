@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """P-08 (ZNE vs C†) e P-10 (fronteira clássica vs hardware). Recibos selados."""
 import json, os

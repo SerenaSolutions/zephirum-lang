@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Sincroniza README e CHANGELOG com a versao do pyproject.toml.
 
 O `pyproject.toml` e a fonte unica. Este script remove a possibilidade de divergencia

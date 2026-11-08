@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """Bateria permanente do SHOT AUDITOR.
 Se a regra trivalente de continuacao quebrar, este teste falha a CI

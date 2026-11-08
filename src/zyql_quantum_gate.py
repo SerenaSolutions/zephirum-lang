@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 ZYQL QUANTUM GATE — Deutsch-Jozsa prototype (v1.0.0, 12/10/2026).
 The trivalent decision (1 / 0 / REFUSED) now comes from quantum interference,

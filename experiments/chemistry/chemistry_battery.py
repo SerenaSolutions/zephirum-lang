@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """BATERIA DE MOLÉCULAS DA NATUREZA — provas de química quântica com recibo.
 
 Moléculas: H2 (hidrogênio), LiH (hidreto de lítio), H2O (água), NH3 (amônia).

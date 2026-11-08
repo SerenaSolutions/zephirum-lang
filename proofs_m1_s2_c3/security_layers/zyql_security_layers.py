@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """ZYQL — CAMADAS DE CIBERSEGURANCA (L1..L7) para a linguagem e para os apps.
 
 Regra da casa: cada camada tem codigo, teste e limite declarado. Camada sem

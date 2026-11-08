@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Executa cada bateria estilo script como subprocesso e exige codigo de saida 0.
 
 Motivo: essas baterias chamam sys.exit no nivel do modulo, o que interrompe a
