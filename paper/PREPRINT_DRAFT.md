@@ -42,7 +42,7 @@ Identical trivalent verdicts (p0 = 1.0 / 0.0 exact) across four independent
 paths (an industry-standard quantum SDK, another quantum SDK, a differentiable quantum SDK, OpenQASM 3 round-trip), sealed receipt efd0bb92.
 
 ## 6. Ecosystem Integration
-Open source (MIT); bridges to seven quantum and classical stacks; CI decision
+Open source (Apache-2.0); bridges to seven quantum and classical stacks; CI decision
 Action; an industry-standard quantum SDK Ecosystem submission (PR #1433) under review at time of writing.
 
 ## 7. Reproducibility
