@@ -25,6 +25,19 @@ from pydantic import BaseModel, Field
 
 ARQ = Path(os.environ.get("ZYQL_CREDITS_FILE", ".credits.json"))
 
+# Cobranca DESLIGADA por padrao (08/11/2026): a plataforma opera em modo gratuito.
+# Nenhum e-mail e coletado e nenhuma sessao de pagamento e criada enquanto
+# ZYQL_BILLING nao for explicitamente ativado.
+BILLING_ATIVO = os.environ.get("ZYQL_BILLING", "off").strip().lower() in ("on", "1", "true", "yes")
+MOTIVO_DESLIGADO = ("cobranca desativada: a plataforma esta em modo gratuito e nao coleta "
+                    "e-mail nem dados de pagamento")
+
+
+def _exigir_cobranca_ativa() -> None:
+    if not BILLING_ATIVO:
+        raise HTTPException(410, MOTIVO_DESLIGADO)
+
+
 PLANOS = {
     "verify-starter": {"creditos": 25_000, "preco_usd": 50.0, "descricao": "verificacoes avulsas"},
     "verify-growth": {"creditos": 150_000, "preco_usd": 250.0, "descricao": "operacao continua"},
@@ -63,7 +76,8 @@ def _provedor() -> str:
     return "nenhum"
 
 
-def criar_sessao(plano: str, email: str, sucesso_url: str) -> dict:
+def criar_sessao(plano: str, email: str | None, sucesso_url: str) -> dict:
+    _exigir_cobranca_ativa()
     if plano not in PLANOS:
         raise HTTPException(422, f"pacote invalido: escolha entre {sorted(PLANOS)}")
     p = PLANOS[plano]
@@ -103,6 +117,7 @@ def criar_sessao(plano: str, email: str, sucesso_url: str) -> dict:
 
 
 def confirmar(sessao: str, email: str | None = None) -> dict:
+    _exigir_cobranca_ativa()
     """Confirma o pagamento e emite a chave com saldo. Idempotente por sessao."""
     d = _ler()
     sess = d["sessoes"].get(sessao)
@@ -151,7 +166,7 @@ router = APIRouter()
 
 class CheckoutIn(BaseModel):
     plano: str = Field(..., description="verify-starter, verify-growth ou verify-scale")
-    email: str
+    email: str | None = None          # 08/11/2026: opcional; nada e coletado em modo gratuito
     sucesso_url: str = "https://serenasolutions.github.io/zephirum-lang/obrigado"
 
 
@@ -210,7 +225,8 @@ def validar_assinatura_stripe(corpo: bytes, cabecalho: str | None, segredo: str,
 
 @router.post("/webhook")
 async def webhook(request: Request):
-    """Confirma pagamento. Sem verificacao configurada, recusa em vez de aceitar."""
+    """Confirma pagamento. Desligada junto com a cobranca."""
+    _exigir_cobranca_ativa()
     corpo = await request.body()
     seg_stripe = os.environ.get("STRIPE_WEBHOOK_SECRET")
     seg_proprio = os.environ.get("ZYQL_WEBHOOK_SECRET")
@@ -272,12 +288,14 @@ async def webhook(request: Request):
 
 @router.get("/saldo")
 def consultar_saldo(chave: str):
+    _exigir_cobranca_ativa()
     return saldo(chave)
 
 
 @router.post("/verificar")
 def verificar(req: VerifyIn):
     """Verifica um recibo e debita um credito. A conta e feita no servidor."""
+    _exigir_cobranca_ativa()
     d = _ler()
     sess = d["contas"].get(_h(req.chave))
     if not sess:

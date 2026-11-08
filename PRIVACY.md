@@ -1,6 +1,6 @@
 # Política de Privacidade e Tratamento de Dados — ZEPHIRUM / ZYQL
 
-Versão 1.0 · Vigência: 2026-11-07 · Responsável: Reginaldo Pinezi Uhlmann · Serena Solutions · contato serena.aigronovatech@gmail.com
+Versão 1.1 · Vigência: 2026-11-08 · Responsável: Reginaldo Pinezi Uhlmann · Serena Solutions · contato serena.aigronovatech@gmail.com
 
 ## 1. Princípio
 
@@ -45,22 +45,30 @@ registrada no recibo.
 
 ## 6. Papéis na proteção de dados (LGPD)
 
-Ao usar o ZEPHIRUM nos seus próprios dados, você é o controlador e a Serena Solutions
-não trata dados pessoais em seu nome. Se um serviço futuro implicar tratamento de dados
-por nossa conta, esta política será substituída por um instrumento com finalidade,
-base legal, prazo de retenção e canal de titulares definidos.
+Ao usar o ZEPHIRUM nos seus próprios dados, você é o controlador e a Serena Solutions não trata
+dados pessoais em seu nome. O software não cria conta, não pede cadastro e não exige identificação
+para funcionar.
 
 ## 7. Direitos dos titulares
 
-Como o software não coleta dados pessoais por padrão, não há base de dados de titulares
-a consultar. Se você acredita que algum dado seu foi tratado indevidamente em material
-do projeto, escreva para o canal de contato do repositório e o caso será respondido por
-escrito.
+Como o software não coleta dados pessoais, não existe base de titulares a consultar, exportar ou
+eliminar. Se você acredita que algum dado seu apareceu indevidamente em material do projeto,
+escreva para o canal de contato do repositório e o caso será respondido por escrito.
 
 ## 8. Retenção
 
-Recibos são seus e ficam onde você os guardar. O projeto não mantém cópia. A cadeia de
-hash é verificável para sempre; nenhum dado pessoal depende dela.
+Recibos são seus e ficam onde você os guardar. O projeto não mantém cópia. A cadeia de recibos é
+local ao ambiente de quem executou.
+
+## 8-A. Cobrança: não existe
+
+**Atualização de 08/11/2026.** A plataforma opera em **modo gratuito**. Não há plano pago, não há
+checkout, não há assinatura e **não é solicitado nem armazenado e-mail, cartão ou qualquer dado de
+pagamento**. Os endpoints de cobrança respondem com recusa explícita (`HTTP 410`) enquanto a
+cobrança estiver desligada. Não há, portanto, tratamento de dados pessoais para fins de faturamento.
+
+Se um dia houver cobrança, esta política será revisada e publicada **antes** da primeira transação,
+declarando finalidade, base legal, prazo de retenção e canal do titular.
 
 ## 9. Limites declarados
 
