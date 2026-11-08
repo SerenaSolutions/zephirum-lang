@@ -87,9 +87,10 @@ item("pipeline declara consultas clássicas", "consultas_classicas" in pl, "pipe
 
 # 13. licença coerente: varredura ampla com exceções declaradas
 ISENTOS = {"CHANGELOG.md", "DEPENDENCIAS_LICENCAS.md", "RESPOSTA_AUDITORIA_EXTERNA_2026-11-07.md"}
-PADROES_MIT = [r"\(MIT\)", r"\bMIT\b(?! License)", r'"license"\s*:\s*"MIT"', r"code MIT", r"open source, MIT"]
+FALSOS = r"permit|commit|submit|transmit|limit|omit|admit|commission"
+PADROES_MIT = [r"mit[-_ ]?licen", r"\bMIT\b", r'"license"\s*:\s*"mit"', r"code MIT", r"open source, MIT"]
 ofensores = []
-for caminho in list(pathlib.Path("docs").rglob("*")) + list(pathlib.Path("site").rglob("*")) + list(pathlib.Path(".").glob("*.md")):
+for caminho in list(pathlib.Path("docs").rglob("*")) + list(pathlib.Path("site").rglob("*")) + list(pathlib.Path("paper").rglob("*")) + list(pathlib.Path(".").glob("*.md")):
     if not caminho.is_file() or caminho.name in ISENTOS:
         continue
     if caminho.suffix not in (".md", ".html", ".py", ".json", ".toml", ".txt", ".cff", ".yml"):
@@ -99,7 +100,9 @@ for caminho in list(pathlib.Path("docs").rglob("*")) + list(pathlib.Path("site")
     if "dependenc" in caminho.name.lower() or "LICENCAS" in caminho.name:
         continue
     for pad in PADROES_MIT:
-        if re.search(pad, txt):
+        achados = [m for m in re.finditer(pad, txt, re.IGNORECASE)
+                   if not re.search(FALSOS, txt[max(0, m.start()-12):m.end()+6], re.IGNORECASE)]
+        if achados and not re.search(r"lark|numpy|scipy", txt[:200], re.IGNORECASE):
             ofensores.append(str(caminho)); break
 # extensao do VS Code
 try:
