@@ -1,7 +1,7 @@
 # ZEPHIRUM / ZYQL — Technical Dossier
 
 **Trivalent quantum decision language with sealed, tamper-evident receipts.**
-Version v2.1.0 · MIT license · Zenodo concept DOI 10.5281/zenodo.23632019
+Version v2.5.7 · Apache-2.0 license · Zenodo concept DOI 10.5281/zenodo.23632019
 
 This dossier consolidates what the project is, what has been *measured on
 real quantum hardware*, what it means for industry, and where its honest

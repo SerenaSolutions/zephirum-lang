@@ -1,4 +1,4 @@
-# Maturidade por componente — ZEPHIRUM/ZYQL (v1.8.0)
+# Maturidade por componente — ZEPHIRUM/ZYQL (v2.0.0 — 08/11/2026)
 
 Declaração oficial de escopo e maturidade, componente a componente. Nada aqui é
 marketing; cada nível tem critério. Auditorias devem citar este documento.
@@ -22,3 +22,14 @@ simulação rotulada como simulação.
 > múltiplos) não tem garantia familiar demonstrada. Não deve ser apresentada como
 > garantia estatística até a rederivação independente ser aprovada. Ver
 > `docs/RESPOSTA_AUDITORIA_EXTERNA_2026-11-07.md`.
+
+## Mecanismos de assinatura (nao confundir)
+
+| Mecanismo | Onde | Status |
+|---|---|---|
+| SHA3-256 (selo de conteudo) | `src/zqea_sig.py`, runtime | Implementado. Prova integridade, nao autoria. |
+| Ed25519 (cadeia legada) | recibos antigos de `zyql_witness` | Mantido por compatibilidade. Nao e pos-quantico. |
+| ML-DSA-44 / FIPS 204 | `zqea_sig.assinar/verificar` | Implementado via `pqcrypto`. **Sem certificacao FIPS/CAVP ou CMVP.** Chave gerada localmente, arquivo 0600. |
+
+O que NAO temos e nao pode ser alegado: certificacao FIPS/CAVP, CMVP, gestao
+institucional de chaves (HSM/KMS) e auditoria criptografica externa.
