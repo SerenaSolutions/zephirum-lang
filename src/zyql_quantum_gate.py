@@ -46,7 +46,7 @@ def adaptive_margin(epsilon, shots):
     return adaptive_margin_family(epsilon, shots, 1)
 
 
-def adaptive_margin_family(epsilon, shots, family=1):
+def adaptive_margin_family(epsilon, shots, family=1, modo="conservative"):
     """v1.9.1 — correcao de testes multiplos (Bonferroni, DIRECAO CORRETA).
 
     ACHADO DA FALSIFICACAO (nosso, publico): a primeira implementacao
@@ -68,6 +68,11 @@ def adaptive_margin_family(epsilon, shots, family=1):
         raise ValueError("family precisa ser inteiro >= 1; recebido %r" % family)
     m_single = math.sqrt(math.log(2.0 / epsilon) / (2.0 * shots))
     m_fam = math.sqrt(math.log(2.0 / (epsilon / family)) / (2.0 * shots))
+    if modo == "rigorous":
+        # Limite derivado da uniao para ESTA regra (p0 >= 1-m / p0 <= m):
+        # k * 2 exp(-2 S (1/2 - m)^2) <= epsilon  =>  m <= 1/2 - sqrt(ln(2k/eps)/(2S))
+        # E a margem MAXIMA permitida: acima disso a garantia familiar cai.
+        return 0.5 - math.sqrt(math.log(2.0 * family / epsilon) / (2.0 * shots))
     return 2.0 * m_single - m_fam
 
 

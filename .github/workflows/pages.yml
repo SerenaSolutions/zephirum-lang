@@ -3,7 +3,7 @@ name: Deploy docs site to Pages
 on:
   push:
     branches: [main]
-    paths: ['site/**', '.github/workflows/pages.yml']
+    paths: ['site/**', 'docs/SPEC_Z-QEA_v1.0.md', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
