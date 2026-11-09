@@ -39,11 +39,23 @@ def db():
 def decidir(payload):
     counts = payload.get("counts", {})
     shots = int(payload.get("shots", sum(counts.values()) or 0))
-    delta = float(payload.get("delta", 0.05))
+    try:
+        delta = float(payload.get("delta", 0.05))
+    except (TypeError, ValueError):
+        delta = float("nan")
     alvo = payload.get("key", "000")
-    limiar = float(payload.get("threshold", 0.5))
-    if shots <= 0 or not (0 < delta < 1):
-        rec = {"app": MANIFEST["name"], "verdict": "REFUSED", "reason": "CONTRATO_INVALIDO",
+    try:
+        limiar = float(payload.get("threshold", 0.5))
+    except (TypeError, ValueError):
+        limiar = float("nan")
+    # DEFEITO CORRIGIDO: limiar nao era validado. Threshold negativo ou maior que 1
+    # empurrava a comparacao sempre para o mesmo lado e forjava veredito 1 ou 0
+    # sem evidencia nenhuma. O limiar e premissa do contrato, nao dado do usuario:
+    # fora de (0,1) e REFUSED, nunca "1".
+    limiar_invalido = not (limiar == limiar) or not (0.0 < limiar < 1.0)
+    if shots <= 0 or not (0 < delta < 1) or limiar_invalido:
+        motivo = "LIMIAR_FORA_DO_CONTRATO" if limiar_invalido and shots > 0 and (0 < delta < 1) else "CONTRATO_INVALIDO"
+        rec = {"app": MANIFEST["name"], "verdict": "REFUSED", "reason": motivo,
                "rule": "proporcao-v1", "manifest_sha3_256": MANIFEST_SHA3,
                "blueprint_sha3_256": MANIFEST["provenance"]["blueprint_sha3_256"]}
         rec["receipt_hash"] = hashlib.sha3_256(canon(rec).encode()).hexdigest()
@@ -55,6 +67,7 @@ def decidir(payload):
     else: v = "INCONCLUSIVE"
     rec = {"app": MANIFEST["name"], "verdict": v, "p_hat": round(p,6),
            "epsilon": round(eps,6), "shots": shots, "delta": delta,
+           "threshold": limiar,
            "rule": "proporcao-v1",
            "manifest_sha3_256": MANIFEST_SHA3,
            "blueprint_sha3_256": MANIFEST["provenance"]["blueprint_sha3_256"],

@@ -32,12 +32,12 @@
    "detail": "['[1] ASSINATURA_INVALIDA', '[1] CADEIA_QUEBRADA']"
   }
  },
- "chave_publica": "ZivQBoJqkVCvTyqUAlVQRbMyYjiSOpkzNwvoDbcjZxg=",
+ "chave_publica": "/ukpxbbcWVq/Y3cC1N1tSn+GE1hAYUZOVqEpA3LK420=",
  "niveis": [
   "integridade",
   "autenticidade",
   "reprodutibilidade",
   "correcao"
  ],
- "RECEIPT_HASH": "aa3f4658dea1669ade1564d5f5333911"
+ "RECEIPT_HASH": "e37cc39834f40ca1278def4b991e62f1"
 }

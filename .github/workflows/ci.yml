@@ -37,6 +37,8 @@ jobs:
           PYTHONPATH: src
       - run: python tests/test_selfverified.py
       - run: python -m pytest tests -q --no-header  # P2-3: suite completa no gate
+      - name: provas em formato de script (fora da coleta do pytest)
+        run: PYTHONPATH=src python scripts/rodar_provas.py
         env:
           PYTHONPATH: "src:api:experiments"
           PYTHONHASHSEED: "0"
