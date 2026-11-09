@@ -87,3 +87,27 @@ O estatuto do Dexia proíbe dependência externa. Actions de CI não são
 dependência do pacote, então tecnicamente convivem. Mas AWS, Azure, GCP e
 Fly.io não têm uso hoje: não há serviço hospedado fora da Vercel. Instalar
 credencial de nuvem sem serviço para operar é passivo, não capacidade.
+
+## Varredura complementar (09/11/2026, segunda passada)
+
+| termo | actions | apps | leitura |
+|---|---|---|---|
+| aws | 784 | — | dominio total de infraestrutura |
+| kubernetes | 241 | — | so faz sentido com cluster real |
+| cloudflare | 172 | — | workers, R2, pages |
+| gcp | 54 | — | gcloud, GKE, Vertex AI |
+| ollama | 37 | — | IA local sem custo de API (nada oficial) |
+| hugging face | 11 | — | sync de modelo/dataset |
+| cloudflare apps | - | 0 | nenhum |
+
+Verificados nesta passada: cloudflare/wrangler-action v4.1.3, azure/k8s-deploy v7.0.1,
+azure/setup-kubectl v5.2.0, azure/setup-helm v5.0.1, google-github-actions/setup-gcloud
+v3.0.1, aws-actions/amazon-ecr-login v2.1.7, astral-sh/setup-uv v10.3.3,
+codecov/codecov-action v7.1.1, docker/setup-qemu-action v4.4.0.
+
+Adotado com medicao: astral-sh/setup-uv v10.3.3 no experiment-lab. Instalacao das
+dependencias do projeto caiu de 13s para 1s; job inteiro de 26s para 13s (parte do
+ganho vem de cache quente, o numero honesto e o passo de instalacao).
+
+Ollama: nenhuma action oficial. ai-action/setup-ollama (push 06/11/2026) e
+ai-action/ollama-action (push 24/06/2026) sao as mais mantidas, ambas de comunidade.
