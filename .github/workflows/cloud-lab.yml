@@ -1,0 +1,93 @@
+name: cloud-lab
+
+# Ponte para nuvem e servidor, acionada a mao.
+# Cada fornecedor so autentica se o secret existir. Sem secret, o passo e pulado
+# e o workflow continua verde: nada de credencial morta derrubando o CI.
+#
+# Regra do ecossistema: nenhuma action de nuvem entra em push automatico. Servico
+# hospedado fora da Vercel so entra quando houver servico para operar.
+
+on:
+  workflow_dispatch:
+    inputs:
+      provedor:
+        description: "aws | azure | gcp | cloudflare | nenhum"
+        required: true
+        default: "nenhum"
+        type: choice
+        options: ["nenhum", "aws", "azure", "gcp", "cloudflare"]
+      comando:
+        description: "Comando a rodar depois do login (opcional)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  aws:
+    if: inputs.provedor == 'aws'
+    runs-on: ubuntu-latest
+    env:
+      AWS_SECRET: ${{ secrets.AWS_ROLE_ARN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: autenticar aws
+        if: env.AWS_SECRET != ''
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+      - name: comando
+        if: env.AWS_SECRET != '' && inputs.comando != ''
+        run: ${{ inputs.comando }}
+
+  azure:
+    if: inputs.provedor == 'azure'
+    runs-on: ubuntu-latest
+    env:
+      AZ_CREDS: ${{ secrets.AZURE_CREDENTIALS }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: autenticar azure
+        if: env.AZ_CREDS != ''
+        uses: azure/login@v3.1.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: comando
+        if: env.AZ_CREDS != '' && inputs.comando != ''
+        run: ${{ inputs.comando }}
+
+  gcp:
+    if: inputs.provedor == 'gcp'
+    runs-on: ubuntu-latest
+    env:
+      GCP_WIF: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: autenticar gcp
+        if: env.GCP_WIF != ''
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v3.0.1
+        if: env.GCP_WIF != ''
+      - name: comando
+        if: env.GCP_WIF != '' && inputs.comando != ''
+        run: ${{ inputs.comando }}
+
+  cloudflare:
+    if: inputs.provedor == 'cloudflare'
+    runs-on: ubuntu-latest
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: wrangler
+        if: env.CF_TOKEN != ''
+        uses: cloudflare/wrangler-action@v4.1.3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: ${{ inputs.comando || 'whoami' }}

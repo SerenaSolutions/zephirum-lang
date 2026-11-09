@@ -15,6 +15,9 @@ seis termos nomeados e não as categorias de IA.
 | antigravity | 3 | — | Nenhuma da Google. |
 | ibm quantum | **1** | — | A única é a `SerenaSolutions/ravi-quantuno`. |
 | qiskit | **0** | — | Não existe action de Qiskit no Marketplace. |
+| aws | 784 | — | Nuvem madura: credencial, ECS, Lambda, CloudFormation, S3. |
+| azure | 320 | — | Inclui Azure AI Agent Evaluation e Artifact Signing. |
+| ollama | 37 | — | Servidor de LLM local em runner, sem custo de API. |
 
 ## Fornecedores oficiais verificados na fonte
 
@@ -36,6 +39,15 @@ Repositório, licença, último push e última release, checados pela API do Git
 | Papermill | `nteract/papermill` | BSD-3-Clause | sem release tagueada |
 | nbconvert | `jupyter/nbconvert` | BSD-3-Clause | v7.17.2 |
 | Hugging Face Hub | `huggingface/huggingface_hub` | Apache-2.0 | v2.4.0 |
+| uv | `astral-sh/setup-uv` | MIT | v10.3.3 |
+| Cloudflare | `cloudflare/wrangler-action` | Apache-2.0 | v4.1.3 |
+| kubectl | `azure/setup-kubectl` | MIT | v5.2.0 |
+| Helm | `azure/setup-helm` | MIT | v5.0.1 |
+| k8s deploy | `azure/k8s-deploy` | MIT | v7.0.1 |
+| gcloud | `google-github-actions/setup-gcloud` | Apache-2.0 | v3.0.1 |
+| ECR login | `aws-actions/amazon-ecr-login` | MIT | v2.1.7 |
+| Codecov | `codecov/codecov-action` | MIT | v7.1.1 |
+| QEMU | `docker/setup-qemu-action` | Apache-2.0 | v4.4.0 |
 
 ## O que foi ativado
 
@@ -55,6 +67,19 @@ revisor de PR de terceiro que pede a chave do seu modelo e ganha acesso ao
 diff. Com CodeQL, Ruff, mypy e revisão humana já no repositório, é superfície
 de risco sem ganho. O mesmo vale para os 268 de "mcp": são quase todos
 scanners de segurança de agente, úteis apenas se você publicar servidor MCP.
+
+## Servidor de LLM local: a única rota de IA que não gasta crédito
+
+As 37 actions de Ollama existem porque o gargalo de 2026 é custo de token em CI.
+Nenhuma é oficial: as mais mantidas são `ai-action/ollama-action` (34 estrelas,
+push em junho) e `ai-action/setup-ollama` (17 estrelas, push em novembro). Rodam
+modelo pequeno em CPU de runner, o que serve para resumir diff e rotular PR,
+não para trabalho de fronteira. É a alternativa honesta ao bloqueio de cota.
+
+## O ganho medido de hoje
+
+O laboratório trocou `pip install` por `astral-sh/setup-uv` mais `uv pip install`.
+Mesmo conjunto de dependências, incluindo qiskit, com cache de resolução.
 
 ## Tensão a resolver antes de adotar nuvem
 
