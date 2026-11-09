@@ -53,3 +53,41 @@ def test_contract_violation_is_refused_not_zero():
         assert r["verdict"] == "REFUSED"
     finally:
         pr.terminate(); pr.wait()
+
+
+# --- Regressao: o limiar era aceito sem validacao e forjava veredito ---
+
+def _com_servidor(payload):
+    """Sobe o servico, consulta uma vez e derruba. Padrao dos demais testes."""
+    pr, _, _ = _start(tempfile.mkdtemp())
+    try:
+        return _post(payload)
+    finally:
+        pr.terminate(); pr.wait()
+
+
+def test_limiar_negativo_recusa_em_vez_de_forjar_veredito():
+    r = _com_servidor({"counts": {"000": 0}, "shots": 512, "delta": 0.05, "threshold": -1.0})
+    assert r["verdict"] == "REFUSED"
+    assert r["reason"] == "LIMIAR_FORA_DO_CONTRATO"
+
+
+def test_limiar_acima_de_um_recusa():
+    r = _com_servidor({"counts": {"000": 512}, "shots": 512, "delta": 0.05, "threshold": 1.5})
+    assert r["verdict"] == "REFUSED"
+
+
+def test_limiar_nao_numerico_nao_derruba_o_servico():
+    r = _com_servidor({"counts": {"000": 300}, "shots": 512, "delta": 0.05, "threshold": "abc"})
+    assert r["verdict"] == "REFUSED"
+
+
+def test_delta_invalido_nao_derruba_o_servico():
+    r = _com_servidor({"counts": {"000": 300}, "shots": 512, "delta": "x"})
+    assert r["verdict"] == "REFUSED"
+
+
+def test_recibo_registra_o_limiar_usado():
+    r = _com_servidor({"counts": {"000": 498}, "shots": 512, "delta": 0.05, "threshold": 0.9})
+    assert r["verdict"] != "REFUSED"
+    assert r["threshold"] == 0.9
