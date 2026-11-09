@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Zyclotron: experimental derivative-app synthesis layer for ZYQL.
 
 Zyclotron does not replace the ZYQL decision core. It compiles a validated

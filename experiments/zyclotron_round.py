@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Round Zyclotron: 5,000 simulator trials across 1k..5k shots.
 
 This is a local state-vector validation round, not a claim of hardware execution.

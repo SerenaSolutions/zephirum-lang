@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Zyclotron v0.3 — o degrau completo: interface e dados.
 
 Emite um app autonomo (biblioteca padrao do Python, zero dependencias) a partir
