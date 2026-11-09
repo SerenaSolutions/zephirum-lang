@@ -31,6 +31,8 @@ jobs:
         with: { python-version: "3.12" }
       - name: comparar pyproject, PyPI e arquivo de membro
         run: python scripts/verificar_metadado.py
+      - name: links da entrada no catalogo respondem
+        run: python scripts/verificar_links_catalogo.py
       - name: testes do guard
         run: |
           python -m pip install --quiet pytest
