@@ -86,7 +86,16 @@ item("pipeline declara consultas clássicas", "consultas_classicas" in pl, "pipe
 
 
 # 13. licença coerente: varredura ampla com exceções declaradas
-ISENTOS = {"CHANGELOG.md", "DEPENDENCIAS_LICENCAS.md", "RESPOSTA_AUDITORIA_EXTERNA_2026-11-07.md"}
+# Documentos que catalogam licenca de TERCEIROS (MIT de action alheia, Apache de outra
+# ferramenta) nao declaram a nossa licenca e ficam fora desta varredura.
+ISENTOS = {
+    "CHANGELOG.md",
+    "DEPENDENCIAS_LICENCAS.md",
+    "RESPOSTA_AUDITORIA_EXTERNA_2026-11-07.md",
+    "CATALOGO_MARKETPLACE_IA_2026.md",
+    "TEXTOS_MULTILINGUES_2026-11-08.md",
+    "AVALIACAO_30_FERRAMENTAS_CI.md",
+}
 FALSOS = r"permit|commit|submit|transmit|limit|omit|admit|commission"
 PADROES_MIT = [r"mit[-_ ]?licen", r"\bMIT\b", r'"license"\s*:\s*"mit"', r"code MIT", r"open source, MIT"]
 ofensores = []

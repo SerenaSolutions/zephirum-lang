@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Inferencia local contra um servidor Ollama em 127.0.0.1:11434.
 
 Usado pelo workflow ollama-lab. Nao consome API paga: o modelo roda no proprio

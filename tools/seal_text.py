@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Sela em SHA3-256 o prompt e a resposta de uma inferencia local.
 
 Grava recibo JSON com os hashes, o commit, o run e o custo (zero de API).
