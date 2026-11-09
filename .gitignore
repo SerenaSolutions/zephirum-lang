@@ -20,3 +20,5 @@ pyvenv.cfg
 *.egg-info/
 .handoff/
 *.bundle
+.vercel
+.env*
