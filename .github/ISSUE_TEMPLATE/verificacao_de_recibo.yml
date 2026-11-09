@@ -1,0 +1,51 @@
+name: Verificação de recibo
+description: Confira um recibo publicado e diga se ele se sustenta
+title: "[recibo] "
+labels: ["recibo", "reproducao-independente"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Este é o trabalho mais útil que alguém de fora pode fazer aqui: tentar
+        **quebrar** um recibo. Selo que confere não prova que a alegação é verdadeira,
+        só que o conteúdo não foi alterado.
+  - type: input
+    id: recibo
+    attributes:
+      label: Caminho ou link do recibo
+      placeholder: "recibos/examples/hello_world.receipt.json"
+    validations:
+      required: true
+  - type: dropdown
+    id: selo
+    attributes:
+      label: O selo SHA3-256 confere?
+      options:
+        - "Sim, recalculei e bate"
+        - "Não, divergiu"
+        - "Não consegui recalcular (explique abaixo)"
+    validations:
+      required: true
+  - type: dropdown
+    id: assinatura
+    attributes:
+      label: A assinatura ML-DSA-44 confere?
+      options:
+        - "Sim, verifiquei com a chave pública"
+        - "Não, falhou"
+        - "Não verifiquei"
+    validations:
+      required: true
+  - type: textarea
+    id: alegacao
+    attributes:
+      label: A alegação do recibo é sustentada pelo que foi medido?
+      description: Foi aqui que os defeitos reais apareceram. Descreva o raciocínio.
+    validations:
+      required: true
+  - type: input
+    id: versao
+    attributes:
+      label: Versão usada para verificar
+    validations:
+      required: true

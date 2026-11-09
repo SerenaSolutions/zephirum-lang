@@ -1,0 +1,57 @@
+name: Reprodução independente
+description: Rodou algo do ZEPHIRUM por conta própria e quer registrar o resultado
+title: "[reprodução] "
+labels: ["reproducao-independente"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por testar. O que vale aqui é **evidência**, não opinião.
+        Se algo não bateu, isso é resultado, não erro seu: registre como divergência.
+  - type: input
+    id: versao
+    attributes:
+      label: Versão do pacote
+      description: Saída de `pip show zephirum` ou o commit que você usou
+      placeholder: "2.5.7 / commit abc1234"
+    validations:
+      required: true
+  - type: input
+    id: ambiente
+    attributes:
+      label: Ambiente
+      description: SO, Python, e se foi simulador ou hardware
+      placeholder: "Ubuntu 24.04, Python 3.12, simulador qiskit-aer"
+    validations:
+      required: true
+  - type: textarea
+    id: comando
+    attributes:
+      label: O que você executou
+      description: Cole o comando ou o trecho de código, sem editar
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: resultado
+    attributes:
+      label: O que aconteceu
+      description: Cole a saída, incluindo o veredito (1, 0 ou REFUSED) e o selo, se houver
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que você esperava
+      description: Se não esperava nada específico, escreva "exploratório"
+    validations:
+      required: true
+  - type: input
+    id: job
+    attributes:
+      label: Job ID (somente se rodou em hardware)
+      description: Sem job ID, o resultado é tratado como simulação
+      placeholder: "dboh76oqtr0c738crlng"
+    validations:
+      required: false
