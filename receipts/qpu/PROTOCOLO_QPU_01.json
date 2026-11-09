@@ -1,0 +1,29 @@
+{
+  "backend_preferido": "ibm_marrakesh",
+  "data": "2026-11-09T15:22:13.187425+00:00",
+  "desenho": {
+    "casos": [
+      "f_constante_0",
+      "f_balanceada_paridade"
+    ],
+    "circuito": "Deutsch-Jozsa n=3 (4 qubits, mede apenas dados)",
+    "epsilon": 0.05,
+    "seed_transpilacao": 1701,
+    "shots": 2048
+  },
+  "desfecho": {
+    "0": "p0 <= 0.05",
+    "1": "p0 >= 0.95",
+    "REFUSED": "banda intermediaria"
+  },
+  "falha_do_teste": "se p0 do constante ficar abaixo de 0.95 ou o balanceado acima de 0.05, a hipotese cai",
+  "gate": "spec selado antes do submit (G1 -> G3)",
+  "hipotese": "Em ibm_marrakesh, a decisao trivalente do ZYQL separa funcao constante de balanceada com uma unica chamada ao oraculo, e as duas ficam fora da banda epsilon, sem recusa indevida.",
+  "id": "QPU-01",
+  "metricas_de_sistema": [
+    "qubits",
+    "profundidade_transpilada",
+    "throughput_circuitos_s"
+  ],
+  "plano": "open (free)"
+}

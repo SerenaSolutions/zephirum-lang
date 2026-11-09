@@ -1,0 +1,42 @@
+{
+  "backend": "ibm_marrakesh",
+  "plano": "open (free)",
+  "job_id": "dbouacgou4as73csnbb0",
+  "shots_por_circuito": 2048,
+  "epsilon": 0.05,
+  "casos": [
+    {
+      "caso": "f_constante_0",
+      "p0": 0.978,
+      "veredito": 1,
+      "banda": "p0 >= 0.95"
+    },
+    {
+      "caso": "f_balanceada_paridade",
+      "p0": 0.0073,
+      "veredito": 0,
+      "banda": "p0 <= 0.05"
+    }
+  ],
+  "hipotese_confirmada": true,
+  "refusas": 0,
+  "metricas_de_sistema": {
+    "qubits_programaveis": 156,
+    "profundidade_transpilada": {
+      "constante": 3,
+      "balanceado": 10
+    },
+    "throughput_circuitos_s": "nao_medido_em_fila",
+    "origem": "hardware_real"
+  },
+  "selo_protocolo": "8d965207f2ee24e4b65c84b9589db25c4815dbe231e98ce61ce3845ba6388115",
+  "data": "2026-11-09T15:29:16.851778+00:00",
+  "recibo": {
+    "schema": "1.0.0",
+    "gramatica": "1.5.0",
+    "operacao": "decisao_qpu",
+    "entrada_sha3": "a3830431ba079ae52d5231ac1d03d33500ef8f0f80fff4583ad296824681d587",
+    "saida_sha3": "381c31c717f99f78df5f8207402ba916d5beb9b588355dc3c2c0a2e8d6a1ffcb",
+    "assinatura": "ausente"
+  }
+}

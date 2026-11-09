@@ -1,0 +1,19 @@
+{
+  "selo_protocolo": "8d965207f2ee24e4b65c84b9589db25c4815dbe231e98ce61ce3845ba6388115",
+  "job_id": "dbouacgou4as73csnbb0",
+  "backend": "ibm_marrakesh",
+  "metas": [
+    {
+      "caso": "constante",
+      "profundidade": 3,
+      "qubits": 156
+    },
+    {
+      "caso": "balanceado",
+      "profundidade": 10,
+      "qubits": 156
+    }
+  ],
+  "shots": 2048,
+  "epsilon": 0.05
+}
