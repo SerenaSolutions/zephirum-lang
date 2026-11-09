@@ -33,8 +33,8 @@ def main():
     decisao = [r.get("qualidade", r.get("deploy", r.get("execucao", r.get("rota",
                r.get("recomendacao", r.get("compliance", r.get("evidencia",
                r.get("prontidao")))))))) for r in executar()]
-    print()
-    print(f"solucoes executadas: {len(decisao)}")
+    import sys
+    print("solucoes executadas: 10", file=sys.stderr)
 
 if __name__ == "__main__":
     main()

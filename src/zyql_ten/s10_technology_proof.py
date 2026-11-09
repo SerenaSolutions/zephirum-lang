@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """10 Empreendedor: prova tecnica com metrica economica."""
+from .receipt import selado
+@selado
 def run(benchmarks, custo_por_operacao, custo_concorrente, diferencial_tecnico):
     if not benchmarks:
         return {"solucao": "10 technology proof", "prontidao": "REFUSED",

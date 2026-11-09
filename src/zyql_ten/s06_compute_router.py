@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """06 Arquiteto: roteador de execucao classico, ML ou quantico (Qiskit)."""
+from .receipt import selado
 from qiskit import QuantumCircuit, transpile
 
 def custo_quantico(n_qubits, profundidade_relativa=3):
@@ -13,6 +14,7 @@ def custo_quantico(n_qubits, profundidade_relativa=3):
         qc.h(range(n_qubits))
     return transpile(qc, basis_gates=["u", "cx"], optimization_level=1).depth()
 
+@selado
 def run(n_qubits, tem_solucao_classica, problema_estrutural, orcamento=40):
     custo_q = custo_quantico(n_qubits) if 1 <= n_qubits <= 20 else None
     if tem_solucao_classica:

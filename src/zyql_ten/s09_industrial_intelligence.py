@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """09 Consultor setorial: mesma camada, regras por setor."""
+from .receipt import selado
 SETORES = {
     "agro": {"metrica": "consumo_agua", "limite": 1.2, "unidade": "m3/ha"},
     "saude": {"metrica": "exames_inconsistentes", "limite": 0.05, "unidade": "fracao"},
@@ -9,6 +10,7 @@ SETORES = {
     "juridico": {"metrica": "documentos_conflitantes", "limite": 0.03, "unidade": "fracao"},
 }
 
+@selado
 def run(setor, valor, referencia=None):
     if setor not in SETORES:
         return {"solucao": "09 industrial intelligence", "recomendacao": "REFUSED",

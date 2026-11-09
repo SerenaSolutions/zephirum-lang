@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """08 Pesquisador: base classica (Statevector) contra o runtime ZYQL."""
+from .receipt import selado
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
 import sys, pathlib
@@ -16,6 +17,7 @@ def dj_amplitudes(n, balanceado):
     qc.h(range(n))
     return Statevector.from_instruction(qc).probabilities(list(range(n)))
 
+@selado
 def run(n=3, shots=2048, seed=1701):
     p0_const = float(dj_amplitudes(n, False)[0])
     p0_bal = float(dj_amplitudes(n, True)[0])
@@ -34,6 +36,7 @@ def run(n=3, shots=2048, seed=1701):
     else:
         evidencia = 1
     return {"solucao": "08 scientific verification", "evidencia": evidencia,
+            "motivo": (None if evidencia == 1 else ("BASELINE_CLASSICO_FALHOU" if classico != 1 else "NAO_REPRODUZIVEL")),
             "p0_constante": round(p0_const, 4), "p0_balanceado": round(p0_bal, 4),
             "veredito_zyql": d.verdict.name, "reproduzivel": reproducivel,
             "erro_declarado": round(d.error_bound, 4)}

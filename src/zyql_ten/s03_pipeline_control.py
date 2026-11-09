@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """03 Engenheiro de IA/MLOps: controle de execucao do pipeline."""
+from .receipt import selado
 import hashlib, pathlib
 
 def hash_arquivos(caminhos):
@@ -17,6 +18,7 @@ def custo_estimado(etapas):
     pesos = {"treino": 1.0, "inferencia": 0.3, "avaliacao": 0.2, "publicacao": 0.1}
     return round(sum(pesos.get(e, 0.5) for e in etapas), 2)
 
+@selado
 def run(caminhos, etapas, versao_modelo, versao_exigida, custo_teto=2.0):
     digest = hash_arquivos(caminhos)
     custo = custo_estimado(etapas)

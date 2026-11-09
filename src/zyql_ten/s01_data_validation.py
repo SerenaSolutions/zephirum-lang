@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """01 Cientista de dados: qualidade do dado antes do treino."""
+from .receipt import selado
 import statistics
 
 def check_integrity(rows):
@@ -29,6 +30,7 @@ def check_bias(rows, campo, corte=0.7):
         return 1.0
     return max(contagem.values()) / len(rows)
 
+@selado
 def run(rows, campos, campo_bias="segmento", limites=None):
     limites = limites or {"missing": 0.05, "duplicates": 0.02, "bias": 0.7}
     metricas = {
