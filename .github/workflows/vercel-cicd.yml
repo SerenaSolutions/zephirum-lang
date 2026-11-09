@@ -1,0 +1,102 @@
+name: vercel-cicd
+
+# Pipeline de entrega do site publico do ZEPHIRUM.
+# Nao depende do app Git da Vercel: usa a CLI oficial com token do repositorio.
+# push em main -> producao (zephirum.vercel.app)
+# pull_request -> preview isolado, com a URL comentada no PR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "vercel.json"
+      - ".vercelignore"
+      - ".github/workflows/vercel-cicd.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "vercel.json"
+      - ".vercelignore"
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  guard:
+    name: portao de integridade do site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: o site tem entrada e assets
+        run: |
+          test -f site/index.html || { echo "site/index.html ausente"; exit 1; }
+          test -s site/index.html || { echo "site/index.html vazio"; exit 1; }
+          echo "entrada do site: $(wc -c < site/index.html) bytes"
+
+  deploy:
+    name: deploy ${{ github.event_name == 'pull_request' && 'preview' || 'producao' }}
+    needs: guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: instalar CLI
+        run: npm install --global vercel@latest
+
+      - name: pull (producao)
+        if: github.event_name != 'pull_request'
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: build (producao)
+        if: github.event_name != 'pull_request'
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: deploy producao
+        if: github.event_name != 'pull_request'
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "URL de producao: $url"
+          echo "### Producao: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: pull (preview)
+        if: github.event_name == 'pull_request'
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: build (preview)
+        if: github.event_name == 'pull_request'
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: deploy preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        run: |
+          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Preview: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: comentar a URL no PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = "${{ steps.preview.outputs.url }}";
+            await github.rest.issues.createComment({
+              ...context.repo, issue_number: context.issue.number,
+              body: `Preview deste commit: ${url}`
+            });
