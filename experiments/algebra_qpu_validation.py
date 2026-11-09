@@ -16,7 +16,7 @@ Na QPU medimos decisoes reais e verificamos que:
 import json, os, sys
 
 from qiskit import QuantumCircuit, transpile
-from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2
+from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from zyql_algebra import Decisao, n_testes, recibo_da_expressao, sequencia, RECUSA
@@ -42,7 +42,7 @@ def main():
     qc = QuantumCircuit(1, 1)
     qc.measure(0, 0)
     tc = transpile(qc, backend, optimization_level=1)
-    job = SamplerV2(backend).run([tc], shots=S_ALTA)
+    job = Sampler(mode=backend).run([tc], shots=S_ALTA)
     print("JOB_ID=%s BACKEND=%s" % (job.job_id(), backend.name))
     res = job.result()[0].data.c.get_counts()
     total = sum(res.values())

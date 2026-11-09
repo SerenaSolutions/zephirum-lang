@@ -109,3 +109,18 @@ def test_selo_nao_colide_entre_e_ou():
 def test_selo_distingue_negacao():
     a = d(UM)
     assert recibo_da_expressao(a)["selo_sha3_256"] != recibo_da_expressao(negacao(a))["selo_sha3_256"]
+
+
+def test_no_composto_declara_erro_do_conjunto():
+    """Achado S2 da 2a auditoria: o composto repetia o epsilon de uma folha."""
+    x, y = d(UM, eps=0.05), d(UM, eps=0.0001)
+    c = conjuncao(x, y)
+    assert abs(c.epsilon - epsilon_familia(c)) < 1e-12
+    assert c.epsilon > 0.05  # erro do conjunto, nao de uma folha
+
+
+def test_recusa_dupla_preserva_os_dois_motivos():
+    """Achado S3: o segundo motivo da recusa era descartado."""
+    r = conjuncao(d(RECUSA, motivo="deriva_acima"), d(RECUSA, motivo="shots_baixos"))
+    assert r.veredito == RECUSA
+    assert "deriva_acima" in r.refusal_reason and "shots_baixos" in r.refusal_reason

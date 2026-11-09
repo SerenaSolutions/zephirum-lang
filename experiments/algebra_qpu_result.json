@@ -1,7 +1,7 @@
 {
- "job_id": "dboh76oqtr0c738crlng",
+ "job_id": "dbohdelt7fqc7387s2n0",
  "backend": "ibm_marrakesh",
- "p0": 0.972,
+ "p0": 0.987,
  "shots": 2000,
  "decisao_unica": {
   "tipo": "conj",

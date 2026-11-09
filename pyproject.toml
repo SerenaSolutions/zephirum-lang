@@ -20,7 +20,7 @@ maintainers = [
 
 [project.optional-dependencies]
 # execucao em hardware real e simulacao ruidosa (Qiskit Runtime / Aer)
-hardware = ["qiskit-aer>=0.17,<0.19", "qiskit-ibm-runtime>=0.50"]
+hardware = ["qiskit-aer>=0.17,<0.19", "qiskit-ibm-runtime>=0.50,<0.53"]
 # paridade de semantica com o ecossistema Google
 interop = ["cirq>=1.4"]
 # API REST (servidor HTTP)
