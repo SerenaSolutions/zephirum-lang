@@ -76,10 +76,7 @@ def epsilon_familia(no):
 
     Reduz-se a 1 - (1 - eps)^k quando as folhas tem o mesmo epsilon.
     """
-    prod = 1.0
-    for f in _folhas(no):
-        prod *= (1.0 - f.epsilon)
-    return 1.0 - prod
+    return _erro_familiar(_folhas(no))
 
 
 def _cabe_no_orcamento(folhas):
@@ -91,16 +88,29 @@ def _cabe_no_orcamento(folhas):
     return True
 
 
+def _erro_familiar(folhas):
+    """1 - prod(1 - eps_i), limitado abaixo de 1 para caber em (0,1)."""
+    prod = 1.0
+    for f in folhas:
+        prod *= (1.0 - f.epsilon)
+    return min(1.0 - 1e-9, 1.0 - prod)
+
+
 def _compor(veredito, motivo, a, b, op):
+    """O no composto declara o erro do CONJUNTO, nunca o de uma folha."""
     filhos = (a, b)
     folhas = _folhas(Decisao(UM, a.epsilon, a.shots, filhos=filhos))
+    eps_fam = _erro_familiar(folhas)
     if veredito != RECUSA and not _cabe_no_orcamento(folhas):
-        return Decisao(RECUSA, a.epsilon, a.shots, refusal_reason=MOTIVO_FAMILIA, filhos=filhos, op=op)
-    return Decisao(veredito, a.epsilon, a.shots, refusal_reason=motivo, filhos=filhos, op=op)
+        return Decisao(RECUSA, eps_fam, a.shots, refusal_reason=MOTIVO_FAMILIA,
+                       filhos=filhos, op=op)
+    return Decisao(veredito, eps_fam, a.shots, refusal_reason=motivo, filhos=filhos, op=op)
 
 
 def conjuncao(a, b):
     """1 somente se ambas 1. Qualquer 0 decide 0. Recusa propaga o motivo."""
+    if a.veredito == RECUSA and b.veredito == RECUSA:
+        return _compor(RECUSA, "%s + %s" % (a.refusal_reason, b.refusal_reason), a, b, "conj")
     if a.veredito == ZERO or b.veredito == ZERO:
         return _compor(ZERO, None, a, b, "conj")
     if a.veredito == RECUSA:
@@ -112,6 +122,8 @@ def conjuncao(a, b):
 
 def disjuncao(a, b):
     """1 se qualquer 1. So e 0 se ambas 0. Recusa propaga o motivo."""
+    if a.veredito == RECUSA and b.veredito == RECUSA:
+        return _compor(RECUSA, "%s + %s" % (a.refusal_reason, b.refusal_reason), a, b, "disj")
     if a.veredito == UM or b.veredito == UM:
         return _compor(UM, None, a, b, "disj")
     if a.veredito == RECUSA:
