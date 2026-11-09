@@ -1,0 +1,65 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Validação científica ZYQL · semântica trivalente</title>
+<style>
+:root{--bg:#0f1216;--surf:#161a20;--lin:#252b33;--fg:#e8e6e1;--dim:#9aa3ad;--acc:#d97757}
+@media(prefers-color-scheme:light){:root{--bg:#f7f5f1;--surf:#fff;--lin:#e2ddd4;--fg:#1a1a1a;--dim:#5f6672;--acc:#b5563a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);
+font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:48px 20px 80px}
+.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h1{font-size:clamp(26px,4vw,42px);line-height:1.1;margin:12px 0;letter-spacing:-.02em}
+p.lead{color:var(--dim);max-width:72ch}
+h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:44px 0 14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:24px}
+.kpi{background:var(--surf);border:1px solid var(--lin);border-radius:12px;padding:14px}
+.kpi b{display:block;font-size:26px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;background:var(--surf);border:1px solid var(--lin);
+border-radius:12px;overflow:hidden;font-size:14px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+padding:11px 14px;border-bottom:1px solid var(--lin)}
+td{padding:11px 14px;border-bottom:1px solid var(--lin);vertical-align:top}
+tr:last-child td{border-bottom:none}.id{color:var(--dim);font-variant-numeric:tabular-nums}
+.nome{font-weight:600}.forma{color:var(--dim);font-size:13px}.num{font-variant-numeric:tabular-nums}
+.st{font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid var(--c);color:var(--c)}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px}
+pre{background:var(--surf);border:1px solid var(--lin);border-radius:10px;padding:14px;overflow-x:auto}
+.hash{font-size:12px;word-break:break-all;color:var(--dim)}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--lin);color:var(--dim);font-size:13px}
+</style></head><body><div class="wrap">
+<div class="kicker">Serena Quantum Solutions · pré-registro selado</div>
+<h1>Validação científica da semântica trivalente ZYQL</h1>
+<p class="lead">Sete hipóteses falsificáveis declaradas antes da execução, domínio fixado,
+critério de refutação por contraexemplo único. O que se mede aqui é a consistência entre
+a decisão implementada e a regra que ela declara. Não é prova de vantagem quântica.</p>
+<div class="kpis"><div class="kpi"><b>1461</b><span>1</span></div><div class="kpi"><b>1461</b><span>0</span></div><div class="kpi"><b>642</b><span>INCONCLUSIVE</span></div><div class="kpi"><b>0</b><span>REFUSED</span></div>
+<div class="kpi"><b>3630</b><span>casos</span></div>
+<div class="kpi"><b>0</b><span>violações</span></div>
+<div class="kpi"><b>7/7</b><span>hipóteses suportadas</span></div></div>
+
+<h2>Resultado por hipótese</h2>
+<table><thead><tr><th>ID</th><th>Hipótese</th><th>Forma testada</th><th>Viol.</th><th>Status</th></tr></thead>
+<tbody><tr><td class="id">H1</td><td class="nome">Solidez do veredito 1</td><td class="forma">veredito 1 implica p̂ − ε &gt; limiar</td><td class="num">0</td><td><span class="st" style="--c:#2f6f4f">SUPORTADA</span></td></tr><tr><td class="id">H2</td><td class="nome">Solidez do veredito 0</td><td class="forma">veredito 0 implica p̂ + ε &lt; limiar</td><td class="num">0</td><td><span class="st" style="--c:#2f6f4f">SUPORTADA</span></td></tr><tr><td class="id">H3</td><td class="nome">Completude</td><td class="forma">distância maior que ε nunca resulta em INCONCLUSIVE</td><td class="num">0</td><td><span class="st" style="--c:#2f6f4f">SUPORTADA</span></td></tr><tr><td class="id">H4</td><td class="nome">Recusa informativa</td><td class="forma">INCONCLUSIVE só ocorre dentro da faixa de incerteza</td><td class="num">0</td><td><span class="st" style="--c:#2f6f4f">SUPORTADA</span></td></tr><tr><td class="id">H5</td><td class="nome">Contrato fechado</td><td class="forma">limiar ou Δ inválidos, shots ≤ 0 → REFUSED</td><td class="num">0</td><td><span class="st" style="--c:#2f6f4f">SUPORTADA</span></td></tr><tr><td class="id">H6</td><td class="nome">Monotonicidade do erro</td><td class="forma">ε decresce com shots e escala como 1/√shots</td><td class="num">0</td><td><span class="st" style="--c:#2f6f4f">SUPORTADA</span></td></tr><tr><td class="id">H7</td><td class="nome">Determinismo e cobertura</td><td class="forma">mesmo payload → mesmo hash; limiar entra no hash</td><td class="num">0</td><td><span class="st" style="--c:#2f6f4f">SUPORTADA</span></td></tr></tbody></table>
+
+<h2>Cadeia de custódia</h2>
+<table><tbody>
+<tr><td>SHA3-256 do protocolo, selado antes de rodar</td><td class="hash">ed50c6122539df136300ca6e12484e3ecd8ac759cad964461856e11525be7314</td></tr>
+<tr><td>SHA3-256 do resultado agregado</td><td class="hash">62664883d35592ef9eb63cae9c27c36c383025bc17f6c3551e02284ce5579219</td></tr>
+<tr><td>Recibos distintos emitidos</td><td class="num">3564</td></tr>
+<tr><td>ε observado</td><td class="num">0.02371 a 0.203453</td></tr>
+</tbody></table>
+
+<h2>Como refutar</h2>
+<p class="lead">O protocolo, o domínio e o comando estão publicados. Refutar exige um caso,
+não uma opinião.</p>
+<pre>git clone https://github.com/SerenaSolutions/zephirum-lang
+cd zephirum-lang
+PYTHONPATH=src python3 validacao/validar_semantica.py</pre>
+
+<h2>Limitações</h2>
+<ul class="lead"><li>dominio finito e discreto: ausencia de contraexemplo nao e prova universal</li><li>uma execucao por configuracao, sem estudo estatistico</li><li>sem assinatura: o recibo prova integridade, nao autoria (marco 03)</li></ul>
+
+<footer>Executado em 2026-11-09T17:17:34+00:00 · Python 3.11.16 ·
+Relatório completo em <code>validacao/RELATORIO.md</code></footer>
+</div></body></html>
