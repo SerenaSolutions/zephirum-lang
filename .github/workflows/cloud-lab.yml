@@ -26,6 +26,25 @@ permissions:
   id-token: write
 
 jobs:
+  # Roda sempre. Diz o que esta configurado, em vez de deixar a run muda quando
+  # nao ha credencial. Tambem impede a run inteira de terminar como "skipped".
+  diagnostico:
+    name: o que esta configurado
+    runs-on: ubuntu-latest
+    steps:
+      - name: inventario de credenciais
+        env:
+          AWS: ${{ secrets.AWS_ROLE_ARN }}
+          AZURE: ${{ secrets.AZURE_CREDENTIALS }}
+          GCP: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          CF: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          for par in "aws:$AWS" "azure:$AZURE" "gcp:$GCP" "cloudflare:$CF"; do
+            nome="${par%%:*}"; valor="${par#*:}"
+            if [ -n "$valor" ]; then echo "$nome: configurado"; else echo "$nome: sem secret"; fi
+          done
+          echo "provedor pedido: ${{ inputs.provedor }}"
+
   aws:
     if: inputs.provedor == 'aws'
     runs-on: ubuntu-latest
