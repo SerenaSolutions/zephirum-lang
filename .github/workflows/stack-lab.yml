@@ -1,0 +1,76 @@
+name: Stack de engenharia de IA (gratuita)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
+  push:
+    paths:
+      - "lab/**"
+      - ".github/workflows/stack-lab.yml"
+
+jobs:
+  leves:
+    name: camadas 1-3 (rapido)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: astral-sh/setup-uv@v3
+      - name: instalar ferramentas leves
+        run: uv pip install --system -r lab/requirements-leves.txt
+      - name: camada 1 (python)
+        run: python lab/smoke/camada1_python.py
+      - name: camada 2 (rag, vetorial, estruturado)
+        run: python lab/smoke/camada2_rag.py
+      - name: camada 3 (grafo, hibrida, cache)
+        run: python lab/smoke/camada3_otimizacao.py
+      - name: inventario
+        run: |
+          python - <<'PY' > inventario.json
+          import json, importlib.metadata as md
+          alvos = ["langgraph", "chromadb", "rank-bm25", "pydantic"]
+          inv = {}
+          for a in alvos:
+              try: inv[a] = md.version(a)
+              except Exception: inv[a] = "ausente"
+          print(json.dumps({"camadas": 3, "ferramentas": inv}, indent=2, ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: inventario-stack-leve
+          path: inventario.json
+
+  pesados:
+    name: docling e embeddings (semanal)
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: astral-sh/setup-uv@v3
+      - name: instalar docling e embeddings
+        run: uv pip install --system -r lab/requirements-pesados.txt
+      - name: docling converte PDF em dado estruturado
+        run: |
+          python - <<'PY'
+          from reportlab.pdfgen import canvas
+          c = canvas.Canvas("/tmp/zyql.pdf"); c.drawString(72, 720, "ZYQL: recibo prova, portao decide."); c.save()
+          from docling.document_converter import DocumentConverter
+          d = DocumentConverter().convert("/tmp/zyql.pdf")
+          md = d.document.export_to_markdown()
+          print(md[:200]); assert "ZYQL" in md
+          PY
+      - name: embedding local
+        run: |
+          python - <<'PY'
+          from sentence_transformers import SentenceTransformer
+          m = SentenceTransformer("all-MiniLM-L6-v2")
+          v = m.encode(["recibo prova", "portao decide"])
+          print("dimensao:", v.shape, "norma:", round(float((v[0]**2).sum()**0.5), 3))
+          assert v.shape[1] == 384
+          PY
