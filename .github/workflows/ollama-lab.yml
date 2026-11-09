@@ -1,122 +1,95 @@
 name: ollama-lab
 
-# IA local no runner: sem chave de API, sem custo por token.
+# IA local no runner: custo zero de API.
 #
-# Por que um workflow e nao as 37 entradas da busca: apenas 7 repositorios sao
-# actions de Ollama de fato (2 arquivados); o resto dos resultados sao actions de
-# terceiros que so mencionam a ferramenta na descricao. Instalar varias nao soma
-# capacidade, sobe o mesmo servidor e disputa a mesma porta.
-
+# Refinado para usar as actions de Ollama que existem de fato. A busca do
+# Marketplace devolve 37 resultados, mas so 5 repositorios ativos e nao
+# arquivados sobram, e destes apenas 2 sao actions de verdade:
+#   ai-action/setup-ollama  v2.1.18  (instala e sobe o servidor)
+#   ai-action/ollama-action v2.0.1   (executa o prompt)
+# Os outros tres sao catalogo, demo e app de exemplo: nao entram em YAML.
+# Ambos fixados por SHA de commit, nao por tag movel.
 on:
   workflow_dispatch:
     inputs:
       modelo:
-        description: 'Modelo do catalogo Ollama'
+        description: 'Modelo pequeno para CPU do runner'
         required: false
         default: 'qwen2.5-coder:1.5b'
       tarefa:
-        description: 'O que o modelo local deve fazer com o contexto'
+        description: 'O que o modelo local deve fazer'
         required: false
-        default: 'Resuma em 5 linhas o que mudou e aponte um risco tecnico.'
+        default: 'Resuma o diff recente em 3 linhas e aponte um risco.'
 
 permissions:
   contents: read
 
 jobs:
-  local:
+  inferencia-local:
     name: inferencia local (custo zero de API)
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 20
+    env:
+      MODELO: ${{ inputs.modelo }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: instalar ollama
-        run: |
-          set -euo pipefail
-          curl -fsSL https://ollama.com/install.sh -o /tmp/ollama.sh
-          sh /tmp/ollama.sh
-          ollama --version
+      - name: instalar e subir ollama
+        uses: ai-action/setup-ollama@798483f55e7466b967eee0627554aa3d0e0f3279
+        with:
+          model: ${{ inputs.modelo }}
 
-      - name: subir servidor
+      - name: montar prompt
+        id: p
         run: |
-          set -euo pipefail
-          nohup ollama serve > /tmp/ollama.log 2>&1 &
-          for i in $(seq 1 60); do
-            if curl -sf http://127.0.0.1:11434/api/tags > /dev/null; then
-              echo "servidor no ar apos $((i*2))s"
-              exit 0
-            fi
-            sleep 2
-          done
-          echo "servidor nao subiu"
-          tail -20 /tmp/ollama.log
-          exit 1
+          {
+            echo "Tarefa: ${{ inputs.tarefa }}"
+            echo
+            echo "Contexto (ultimos commits):"
+            git log -3 --pretty='- %h %s'
+          } > prompt.txt
+          {
+            echo "PROMPT<<FIM_PROMPT"
+            cat prompt.txt
+            echo "FIM_PROMPT"
+          } >> "$GITHUB_OUTPUT"
+          wc -c prompt.txt
 
-      - name: diagnostico do ambiente
-        run: |
-          df -h / | tail -1
-          free -h | head -2
-          echo "--- registro do ollama ---"
-          curl -s -o /dev/null -w "registry.ollama.ai: HTTP %{http_code}\n" -m 20 https://registry.ollama.ai/v2/ || true
-          echo "--- servidor ---"
-          curl -s -m 10 http://127.0.0.1:11434/api/version || true
-          echo
-          ollama --version || true
+      - name: rodar modelo local
+        id: gen
+        uses: ai-action/ollama-action@0b0ba51b122d9259d4f0a0118932f6bb719c1006
+        with:
+          model: ${{ inputs.modelo }}
+          prompt: ${{ steps.p.outputs.PROMPT }}
+          response: resposta.txt
 
-      - name: baixar modelo
+      - name: garantir arquivo de resposta
         run: |
-          set -uo pipefail
-          for m in "${{ inputs.modelo }}" "llama3.2:1b" "qwen2.5:0.5b" "tinyllama"; do
-            echo "::group::tentando $m"
-            ollama pull "$m"
-            rc=$?
-            echo "::endgroup::"
-            echo "saida de '$m': codigo $rc"
-            if [ "$rc" -eq 0 ]; then
-              ESCOLHIDO="$m"
-              echo "MODELO=$m" >> "$GITHUB_ENV"
-              echo "modelo pronto: $m"
-              break
-            fi
-          done
-          if [ -z "${ESCOLHIDO:-}" ]; then
-            echo "nenhum modelo baixou; veja os erros acima"
-            exit 1
+          if [ ! -s resposta.txt ]; then
+            printf '%s\n' "${{ steps.gen.outputs.response }}" > resposta.txt
           fi
-          echo "confirmado no shell: $ESCOLHIDO"
+          echo "--- resposta ---"
+          cat resposta.txt
 
-      - name: preparar contexto
-        run: |
-          set -euo pipefail
-          git log -5 --pretty='%h %s' > /tmp/contexto.txt
-          git diff HEAD~1 --stat 2>/dev/null | tail -15 >> /tmp/contexto.txt || true
-          printf '%s\n\nCONTEXTO:\n%s\n' "${{ inputs.tarefa }}" "$(cat /tmp/contexto.txt)" > /tmp/prompt.txt
-          wc -c /tmp/prompt.txt
-
-      - name: inferencia local
-        run: |
-          set -euo pipefail
-          python3 tools/ollama_local.py
-          echo "--- resposta do modelo local ---"
-          cat /tmp/resposta.txt
+      - name: selar em SHA3-256
+        run: python3 tools/seal_text.py prompt.txt resposta.txt recibo_ollama.json
 
       - name: publicar no resumo
         run: |
           {
-            echo "## Inferencia local (Ollama)"
+            echo "### Ollama local — $MODELO"
             echo
-            echo "**Modelo:** ${MODELO}"
-            echo "**Custo de API:** zero"
+            echo "Custo de API: 0"
             echo
-            echo "### Resposta"
             echo '```'
-            cat /tmp/resposta.txt
+            cat resposta.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ollama-recibo
+          name: ollama-local
           path: |
-            /tmp/recibo_ollama.json
-            /tmp/resposta.txt
+            prompt.txt
+            resposta.txt
+            recibo_ollama.json
