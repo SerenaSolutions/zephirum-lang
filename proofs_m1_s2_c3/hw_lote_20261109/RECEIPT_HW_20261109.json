@@ -1,0 +1,57 @@
+{
+ "identity": {
+  "receipt_version": "1",
+  "language_version": "2.5.7",
+  "compiler_version": "c2-v0.1",
+  "policy_version": "P1-2026-11",
+  "program_hash": "6a8974c58ccdf3d9752797e764be27a2951f4f1646c66d05e67e693d70ed61ed"
+ },
+ "execution": {
+  "execution_id": "hw-lote-20261109",
+  "sequence": 1,
+  "input_commitment": "d62b381f9aab45c54bcf43fbc7fa5cefd3d5008d107d4ed54bc39227c9dc62e4",
+  "backend": "qpu-producao",
+  "environment": {
+   "kernel": "ZEPHYRUM 1.12"
+  },
+  "parameters": {
+   "shots": 1024,
+   "circuitos": 3
+  },
+  "start_time": "2026-11-09T13:05:00Z",
+  "end_time": "2026-11-09T13:12:00Z",
+  "execution_state": "EXECUTED"
+ },
+ "evidence": {
+  "evidence_hashes": [
+   "d62b381f9aab45c54bcf43fbc7fa5cefd3d5008d107d4ed54bc39227c9dc62e4"
+  ],
+  "decision_rule": "proporcao-v1",
+  "uncertainty": {
+   "epsilon_hoeffding": 0.042441,
+   "delta": 0.05
+  },
+  "resultados": {
+   "constante": {
+    "p000": 0.967773,
+    "veredito": "1"
+   },
+   "balanceado": {
+    "p000": 0.0,
+    "veredito": "0"
+   },
+   "bell_fidelidade_correlacao": 0.9404
+  }
+ },
+ "authenticity": {
+  "previous_receipt_hash": null,
+  "signer_key_id": "SERENA-EMISSOR-01",
+  "signature_algorithm": "Ed25519",
+  "signature": null
+ },
+ "_signature": {
+  "algorithm": "Ed25519",
+  "signer_key_id": "SERENA-EMISSOR-01",
+  "value": "BycOEBR09spQTeU/c5ycAPlOI64FD5cLZiYz/Ls+6rSn3qpsGIbFgxq/pitpS6pi5rf/FJ666wPR9bsJx9wlCg=="
+ }
+}
