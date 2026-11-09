@@ -60,10 +60,12 @@ jobs:
         # Em vez de brigar com a protecao, o job falha quando o YAML foi editado
         # sem regenerar as saidas. Quem edita, regenera.
         run: |
-          if git diff --quiet -- site/cronograma docs/cronograma; then
+          # O PPTX e binario e o zip carrega horario de gravacao, entao ele nunca
+          # bate byte a byte entre execucoes. O drift e medido nas saidas de texto.
+          if git diff --quiet -- site/cronograma/index.html docs/cronograma/cronograma.csv docs/cronograma/cronograma.md; then
             echo "saidas em dia com docs/cronograma/zephirum_60d.yaml"
           else
             echo "::error::Cronograma defasado. Rode: python scripts/gerar_cronograma.py"
-            git diff --stat -- site/cronograma docs/cronograma
+            git diff --stat -- site/cronograma/index.html docs/cronograma/cronograma.csv docs/cronograma/cronograma.md
             exit 1
           fi
