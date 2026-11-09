@@ -1,7 +1,8 @@
 # Divulgação nas comunidades quânticas brasileiras
 
 **Objetivo:** levar o ZEPHIRUM/ZYQL a quem já trabalha com computação quântica no Brasil,
-começando por Campinas, São Paulo, Curitiba e Nordeste.
+começando por Campinas, São Paulo, Curitiba e Nordeste. A apresentação é do projeto e do que
+ele mede: nada de credencial emprestada.
 **Situação:** materiais prontos, alvos verificados, publicação depende de conta própria em
 cada plataforma. Nenhuma mensagem foi enviada por mim: eu não tenho conta nessas
 comunidades, e inventar uma seria o oposto de divulgação.
@@ -32,45 +33,46 @@ de qualquer envio.
 
 ### 2.1 Para grupo de mensagens / meetup (curto)
 
-> Pesquisadores de Campinas, São Paulo, Curitiba e Nordeste: o ZEPHIRUM, linguagem de
-> decisão trivalente para computação quântica, foi aceito como membro do ecossistema Qiskit
-> (PR #1433, commit d327b86, 09/11/2026). A ideia é simples e incômoda: antes de computar,
-> a linguagem decide se a pergunta merece um computador quântico. Cada veredito é 1, 0 ou
-> REFUSED, com erro declarado e recibo SHA3 verificável.
-> Classificação honesta: experimental, estágio inicial. Não é certificação da IBM.
-> Reproduz em cinco minutos: `pip install zephirum`. Protocolo de validação em
+> Pesquisadores de Campinas, São Paulo, Curitiba e Nordeste: o ZEPHIRUM é uma linguagem de
+> decisão para computação quântica. A ideia é simples e incômoda: antes de computar, ela
+> decide se a pergunta merece um computador quântico. Cada veredito é 1, 0 ou REFUSED, com
+> erro declarado e recibo SHA3 verificável, e o mesmo portão responde "os tiros não bastam"
+> quando é o caso.
+> É experimental e está em estágio inicial, e diz isso na própria documentação.
+> Reproduz em cinco minutos: `pip install zephirum`. Protocolo de validação pré-registrado,
+> com sete hipóteses falsificáveis e 3.630 casos executados, em
 > github.com/SerenaSolutions/zephirum-lang
 
 ### 2.2 Para professor / coordenador de laboratório (e-mail curto)
 
-> Assunto: ZEPHIRUM no ecossistema Qiskit — material de aula e objeto de refutação
+> Assunto: linguagem de decisão trivalente para laboratório de computação quântica
 >
-> Professor(a), o ZEPHIRUM entrou no catálogo do Qiskit Ecosystem em 09/11/2026 (PR #1433).
-> É uma linguagem de decisão trivalente com recibos verificáveis, publicada em Apache-2.0 e
-> instalável por `pip install zephirum`. O que pode interessar ao seu grupo: temos um
-> protocolo de validação pré-registrado, com sete hipóteses falsificáveis e 3.630 casos
-> executados, e uma demonstração de integração com Qiskit que inclui controle negativo.
+> Professor(a), mantenho o ZEPHIRUM, uma linguagem de decisão trivalente com recibos
+> verificáveis, publicada em Apache-2.0 e instalável por `pip install zephirum`. O que pode
+> interessar ao seu grupo: um protocolo de validação pré-registrado, com sete hipóteses
+> falsificáveis e 3.630 casos executados, uma demonstração de integração com Qiskit que
+> inclui controle negativo, e recibos que qualquer pessoa pode recomputar por hash.
 > Nada disso foi reproduzido por terceiros ainda, e é exatamente isso que buscamos.
 > Se houver espaço em seminário ou aula, preparo uma apresentação de 20 minutos com o código
 > rodando ao vivo. Repositório: github.com/SerenaSolutions/zephirum-lang
 
 ### 2.3 Para LinkedIn (institucional)
 
-> O ZEPHIRUM passa a integrar o ecossistema Qiskit.
+> O ZEPHIRUM é uma linguagem de decisão para computação quântica, e a tese dela é
+> desconfortável: a maior parte das perguntas feitas a um computador quântico não deveria
+> chegar lá antes de passar por um portão que sabe dizer não.
 >
-> O PR #1433 foi mergeado em 09/11/2026, com revisão e edições do mantenedor Luciano Bello.
-> O que foi incorporado é o registro de membro: um arquivo de metadado. Nenhuma linha de
-> código do projeto roda dentro do Qiskit, e isso não é certificação da IBM.
->
-> O ZEPHIRUM é uma linguagem de decisão trivalente: cada veredito é 1, 0 ou REFUSED, com
-> incerteza declarada e recibo verificável. A tese é que a maior parte das perguntas feitas a
-> um computador quântico não deveria chegar lá antes de passar por um portão que sabe dizer não.
+> Cada veredito é 1, 0 ou REFUSED, com incerteza declarada e recibo verificável por hash.
+> Quando os dados não sustentam uma conclusão, a resposta é a recusa, e a recusa vem com
+> motivo e com prova do que foi executado.
 >
 > O que está aberto e verificável: protocolo selado antes da execução, 3.630 casos, zero
-> contravenções, demonstração executável com controle negativo. O que ainda não existe:
-> assinatura criptográfica dos recibos, reprodução por terceiro e estudo estatístico em hardware.
+> contravenções, demonstração executável com controle negativo.
+> O que ainda não existe, e não anuncio como se existisse: assinatura criptográfica dos
+> recibos, reprodução por terceiro independente e estudo estatístico em hardware.
 >
-> Crédito a Luciano Bello pela revisão e pelo merge, e à comunidade Qiskit.
+> Classificação honesta: experimental, estágio inicial. O projeto é aberto e aceita
+> refutação com um contraexemplo, que vale mais que um aplauso.
 
 ---
 
@@ -87,6 +89,6 @@ de qualquer envio.
 
 ## 4. Regra de conduta
 
-Toda mensagem sai com a classificação `experimental` e com a frase de que não é certificação
-da IBM. Divulgação que infla o merge compra atenção hoje e cobra juros na primeira pergunta
-técnica.
+Toda mensagem sai com a classificação `experimental` e com a distinção entre recibo de
+integridade e autoria assinada. Divulgação que infla resultado compra atenção hoje e cobra
+juros na primeira pergunta técnica.
