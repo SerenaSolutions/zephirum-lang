@@ -73,15 +73,17 @@ jobs:
             echo "::endgroup::"
             echo "saida de '$m': codigo $rc"
             if [ "$rc" -eq 0 ]; then
+              ESCOLHIDO="$m"
               echo "MODELO=$m" >> "$GITHUB_ENV"
               echo "modelo pronto: $m"
               break
             fi
           done
-          if [ -z "${MODELO:-}" ]; then
+          if [ -z "${ESCOLHIDO:-}" ]; then
             echo "nenhum modelo baixou; veja os erros acima"
             exit 1
           fi
+          echo "confirmado no shell: $ESCOLHIDO"
 
       - name: preparar contexto
         run: |
