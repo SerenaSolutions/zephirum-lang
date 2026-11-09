@@ -1,0 +1,68 @@
+name: Cronograma ZEPHIRUM
+
+# Fonte unica: docs/cronograma/zephirum_60d.yaml
+# Regenera HTML (publicado pelo vercel-cicd), PPTX, CSV e Markdown.
+# O push deste workflow cai em site/**, o que dispara o deploy de producao.
+# O autor do commit precisa ser membro da conta Vercel, senao o plano Hobby
+# marca o deployment como BLOCKED.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "docs/cronograma/zephirum_60d.yaml"
+      - "scripts/gerar_cronograma.py"
+      - ".github/workflows/cronograma.yml"
+  schedule:
+    - cron: "0 9 1 * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cronograma
+  cancel-in-progress: true
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: astral-sh/setup-uv@v3
+      - name: instalar dependencias do gerador
+        run: uv pip install --system pyyaml python-pptx
+      - name: gerar as quatro saidas
+        run: python scripts/gerar_cronograma.py
+      - name: conferir integridade das saidas
+        run: |
+          python - <<'PY'
+          from pptx import Presentation
+          import pathlib
+          html = pathlib.Path("site/cronograma/index.html").read_text(encoding="utf-8")
+          assert "Cronograma ZEPHIRUM ZYQL" in html and len(html) > 10000, "HTML invalido"
+          assert html.count("<tr") >= 24, "tabela incompleta"
+          prs = Presentation("docs/cronograma/cronograma.pptx")
+          print(f"HTML {len(html)} bytes | PPTX {len(prs.slides.__iter__.__self__._sldIdLst)} slides")
+          assert len(prs.slides._sldIdLst) >= 8, "deck curto demais"
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cronograma-zephirum
+          path: |
+            docs/cronograma/cronograma.pptx
+            docs/cronograma/cronograma.csv
+            docs/cronograma/cronograma.md
+      - name: publicar artefatos no repositorio
+        run: |
+          git config user.name "Superagent (CI)"
+          git config user.email "serena.aigronovatech@gmail.com"
+          git add site/cronograma docs/cronograma
+          if git diff --cached --quiet; then
+            echo "sem mudanca: cronograma ja atualizado"
+          else
+            git commit -m "chore(cronograma): regenera HTML, PPTX, CSV e Markdown da fonte unica"
+            git push
+          fi
