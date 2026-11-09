@@ -1,0 +1,147 @@
+name: ollama-lab
+
+# IA local dentro do runner, sem chave de API e sem custo por token.
+#
+# Por que um workflow e nao 37 actions: a busca "ollama" no Marketplace devolve
+# 37 resultados, mas disso so 7 repositorios sao actions de Ollama de fato, dois
+# arquivados. As demais sao actions de terceiros que apenas mencionam Ollama na
+# descricao. Instalar varias nao soma capacidade: cada uma sobe o mesmo servidor
+# e disputa a mesma porta.
+#
+# Este arquivo faz o essencial: instala o Ollama oficial, sobe o servidor, baixa
+# um modelo pequeno (com fallback) e roda a tarefa. O resultado vai para o resumo
+# da execucao, com selo SHA3 ligado ao commit.
+
+on:
+  workflow_dispatch:
+    inputs:
+      modelo:
+        description: 'Modelo do catalogo Ollama (ex: qwen2.5-coder:1.5b)'
+        required: false
+        default: 'qwen2.5-coder:1.5b'
+      tarefa:
+        description: 'O que o modelo local deve fazer com o diff/commits'
+        required: false
+        default: 'Resuma em 5 linhas o que mudou e aponte um risco tecnico.'
+
+permissions:
+  contents: read
+
+jobs:
+  local:
+    name: inferencia local (custo zero de API)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: instalar ollama
+        run: |
+          set -euo pipefail
+          curl -fsSL https://ollama.com/install.sh -o /tmp/ollama.sh
+          sh /tmp/ollama.sh
+          ollama --version
+
+      - name: subir servidor
+        run: |
+          set -euo pipefail
+          nohup ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -sf http://127.0.0.1:11434/api/tags > /dev/null; then
+              echo "servidor no ar apos $((i*2))s"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "servidor nao subiu"; tail -20 /tmp/ollama.log; exit 1
+
+      - name: baixar modelo
+        run: |
+          set -uo pipefail
+          for m in "${{ inputs.modelo }}" "llama3.2:1b" "qwen2.5:0.5b" "tinyllama"; do
+            echo "tentando $m"
+            if ollama pull "$m" 2>/dev/null; then
+              echo "MODELO=$m" >> "$GITHUB_ENV"
+              echo "modelo pronto: $m"
+              break
+            fi
+          done
+          if [ -z "${MODELO:-}" ]; then echo "nenhum modelo disponivel"; exit 1; fi
+
+      - name: preparar contexto
+        run: |
+          set -euo pipefail
+          git log -5 --pretty='%h %s' > /tmp/contexto.txt
+          git diff HEAD~1 --stat 2>/dev/null | tail -15 >> /tmp/contexto.txt || true
+          printf '%s\n\nCONTEXTO:\n%s\n' "${{ inputs.tarefa }}" "$(cat /tmp/contexto.txt)" > /tmp/prompt.txt
+          wc -c /tmp/prompt.txt
+
+      - name: inferencia local
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+import json, os, time, urllib.request
+prompt = open('/tmp/prompt.txt').read()
+corpo = json.dumps({"model": os.environ["MODELO"], "prompt": prompt,
+                    "stream": False, "options": {"num_predict": 320}}).encode()
+req = urllib.request.Request("http://127.0.0.1:11434/api/generate", data=corpo,
+                             headers={"Content-Type": "application/json"})
+t0 = time.time()
+with urllib.request.urlopen(req, timeout=900) as r:
+    d = json.loads(r.read())
+dt = time.time() - t0
+open('/tmp/resposta.txt', 'w').write(d.get('response', '').strip() + "\n")
+print(f"modelo: {os.environ['MODELO']} | tempo: {dt:.1f}s")
+print(f"tokens gerados: {d.get('eval_count')} | avaliacao: {d.get('eval_duration',0)/1e9:.1f}s")
+sig = d.get('eval_count', 0) / dt if dt else 0
+print(f"~{sig:.1f} tokens/s (CPU do runner)")
+PY
+          echo "--- resposta do modelo local ---"
+          cat /tmp/resposta.txt
+
+      - name: selar resultado
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+import hashlib, json, os, platform
+def sha3(p):
+    h = hashlib.sha3_256()
+    with open(p, 'rb') as f:
+        for b in iter(lambda: f.read(65536), b''):
+            h.update(b)
+    return h.hexdigest()
+r = {
+    "tipo": "recibo-integridade-sha3",
+    "origem": "ollama local no runner",
+    "modelo": os.environ.get("MODELO"),
+    "sha3_256_prompt": sha3('/tmp/prompt.txt'),
+    "sha3_256_resposta": sha3('/tmp/resposta.txt'),
+    "commit": os.environ.get("GITHUB_SHA"),
+    "run_id": os.environ.get("GITHUB_RUN_ID"),
+    "custo_api": "0 (inferencia local)",
+    "python": platform.python_version(),
+}
+json.dump(r, open('/tmp/recibo_ollama.json', 'w'), indent=1)
+print(json.dumps(r, indent=1))
+PY
+
+      - name: publicar no resumo
+        run: |
+          {
+            echo "## Inferencia local (Ollama)"
+            echo
+            echo "**Modelo:** \`${MODELO}\`"
+            echo "**Custo de API:** zero"
+            echo
+            echo "### Resposta"
+            echo '```'
+            cat /tmp/resposta.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ollama-recibo
+          path: |
+            /tmp/recibo_ollama.json
+            /tmp/resposta.txt
