@@ -1,3 +1,3 @@
 # Instalacao pesada: roda semanal, nao em cada push.
-docling>=2.0            # PDF, DOCX e slide -> dado estruturado
+docling>=2.148.0            # PDF, DOCX e slide -> dado estruturado
 sentence-transformers>=3.0   # embeddings locais
