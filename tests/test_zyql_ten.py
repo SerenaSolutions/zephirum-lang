@@ -55,3 +55,19 @@ def test_09_setor_desconhecido_recusa():
 def test_10_sem_benchmark_recusa():
     assert s10.run([], 1.0, 2.0, True)["prontidao"] == "REFUSED"
     assert s10.run([{"reproduzivel": True}], 0.4, 1.0, True)["prontidao"] == 1
+
+
+def test_bridge_callable_e_circuito_concordam():
+    from zyql_ten.qiskit_bridge import cross_check
+    for tipo in ("constante", "balanceado"):
+        r = cross_check(3, tipo)
+        assert r["concordam"] is True, r
+        assert r["callable"] == tipo
+
+
+def test_bridge_custo_nativo():
+    from zyql_ten.qiskit_bridge import dj_circuit, transpiled_cost
+    c = transpiled_cost(dj_circuit(4, "balanceado"))
+    assert c["qubits"] == 5
+    assert c["profundidade"] > 0
+    assert isinstance(c["cabe"], bool)
