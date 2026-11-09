@@ -1,0 +1,70 @@
+{
+  "receipts": [
+    {
+      "backend": "aer_simulator",
+      "cenario": "ideal",
+      "circuito": "ghz-3 (sem o 3o entrelacamento no controle negativo)",
+      "contagens": {
+        "000": 1059,
+        "111": 989
+      },
+      "epsilon": 0.03001,
+      "fracao_ghz": 1.0,
+      "pergunta": "fracao_ghz > 0.8?",
+      "profundidade_transpilada": 4,
+      "qubits": 3,
+      "receipt_hash": "2c9eacd9b7a54a7d5d001a0aef7cd220d03d097f7b085b10d85c660c9136dce7",
+      "recibo_decisao": "27bbff7a51fafa0908d3e25fe687100c847f9d9d2245bb3792d6cbe808b340cf",
+      "regra": "proporcao-v1 (Hoeffding)",
+      "seed": 1701,
+      "shots": 2048,
+      "veredito": "1"
+    },
+    {
+      "backend": "aer_simulator",
+      "cenario": "ruido 2%",
+      "circuito": "ghz-3 (sem o 3o entrelacamento no controle negativo)",
+      "contagens": {
+        "000": 1010,
+        "001": 13,
+        "010": 9,
+        "011": 5,
+        "100": 3,
+        "101": 8,
+        "110": 14,
+        "111": 986
+      },
+      "epsilon": 0.03001,
+      "fracao_ghz": 0.974609,
+      "pergunta": "fracao_ghz > 0.8?",
+      "profundidade_transpilada": 6,
+      "qubits": 3,
+      "receipt_hash": "12bd488ca7bfd94fcead4a3c1623be8e8e535841abc38c089e2bdc4fe946e128",
+      "recibo_decisao": "2516215612f2658f64c4756b1887c19c7f1205dede99245ec800cffec14bbfc9",
+      "regra": "proporcao-v1 (Hoeffding)",
+      "seed": 1701,
+      "shots": 2048,
+      "veredito": "1"
+    },
+    {
+      "backend": "aer_simulator",
+      "cenario": "controle -",
+      "circuito": "ghz-3 (sem o 3o entrelacamento no controle negativo)",
+      "contagens": {
+        "000": 1059,
+        "011": 989
+      },
+      "epsilon": 0.03001,
+      "fracao_ghz": 0.51709,
+      "pergunta": "fracao_ghz > 0.8?",
+      "profundidade_transpilada": 3,
+      "qubits": 3,
+      "receipt_hash": "8cb2e5defd9867bab68faf3e002bafb1d649bc6acfa04f0da348a14c5156103e",
+      "recibo_decisao": "89afc62462434cdcafe394eb68c0b41f6fdedc355b8ea40f356620e73fec58b0",
+      "regra": "proporcao-v1 (Hoeffding)",
+      "seed": 1701,
+      "shots": 2048,
+      "veredito": "0"
+    }
+  ]
+}
