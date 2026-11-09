@@ -1,0 +1,35 @@
+name: Metadado do ecossistema
+
+# O bot do Qiskit/ecosystem le PyPI e reescreve o arquivo de membro sozinho.
+# Divergencia de licenca ou de versao ali e erro nosso exposto na vitrine deles,
+# e o conserto nao esta na nossa mao. Por isso o guard roda todo dia: o evento
+# que ele vigia acontece sem nenhum commit nosso.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "pyproject.toml"
+      - "scripts/verificar_metadado.py"
+      - ".github/workflows/metadado.yml"
+  pull_request:
+    paths:
+      - "pyproject.toml"
+  schedule:
+    - cron: "0 7 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  metadado:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: comparar pyproject, PyPI e arquivo de membro
+        run: python scripts/verificar_metadado.py
+      - name: testes do guard
+        run: python -m pytest tests/test_metadado.py -q
