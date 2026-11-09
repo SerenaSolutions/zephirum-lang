@@ -23,6 +23,11 @@ experimental, estágio inicial. Assinamos essa classificação porque ela é ver
 selo de qualidade científica. O que foi incorporado é um arquivo de metadado. A semântica,
 os recibos e os resultados seguem sujeitos a quem quiser refutá-los.
 
+Uma precisão que evita mal-entendido: o catálogo lista **ZEPHIRUM**, e descreve o ZYQL
+como seu núcleo de decisão. Isso não significa que o ZYQL tenha sido listado como projeto
+separado. Sendo exato: entrou um projeto, descrito em uma entrada, com um núcleo nomeado
+na descrição.
+
 O que já está publicado e verificável: um protocolo de validação selado antes da execução,
 com sete hipóteses falsificáveis e 3630 casos executados, sem
 contravenção; uma suíte de 222 testes; e uma demonstração executável da integração com
@@ -34,6 +39,10 @@ dos recibos, reprodução independente por terceiro e estudo estatístico em har
 Crédito devido: Luciano Bello, pela revisão e pelo merge; à comunidade Qiskit, pela
 manutenção de um ecossistema onde um projeto de fora dos grandes centros pode entrar
 sendo examinado em vez de aceito por cortesia.
+
+Links da entrada, todos verificados em 09/11/2026 (7 de 7 respondendo):
+repositório, documentação, site, PyPI, perfil de publicador, shortlink do catálogo
+e DOI no Zenodo.
 
 Repositório: <https://github.com/SerenaSolutions/zephirum-lang>
 Validação: <https://zephirum.vercel.app/validacao>
