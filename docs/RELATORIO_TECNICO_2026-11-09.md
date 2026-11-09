@@ -50,6 +50,13 @@ maturity = "experimental"
 status   = "Very Early Project"
 ```
 
+A entrada descreve o ZYQL como núcleo de decisão do ZEPHIRUM. **Isso não equivale a o
+ZYQL ter sido listado como projeto separado:** o catálogo lista um projeto, o ZEPHIRUM,
+e o ZYQL aparece na descrição. Qualquer leitura além disso é nossa, não do catálogo.
+
+Os sete links da entrada foram conferidos em 09/11/2026 e todos respondem 200,
+incluindo o DOI no Zenodo e o shortlink do catálogo.
+
 O ecossistema nos classifica como experimental e em estágio muito inicial. Isso não é
 diminuição: é o que assinamos ao submeter, e é o que deve constar de qualquer anúncio.
 
