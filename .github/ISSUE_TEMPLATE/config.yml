@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Pergunta ou ideia (Discussões)
+    url: https://github.com/SerenaSolutions/zephirum-lang/discussions
+    about: Para dúvida conceitual, proposta em aberto ou conversa sobre a especificação. Issue é para defeito e evidência.
+  - name: Falha de segurança
+    url: https://github.com/SerenaSolutions/zephirum-lang/security/advisories/new
+    about: Não abra issue pública para vulnerabilidade. Use o relato privado.

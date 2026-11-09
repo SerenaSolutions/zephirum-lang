@@ -1,0 +1,45 @@
+name: Defeito
+description: Algo executou errado, ou executou "certo" e devia ter recusado
+title: "[defeito] "
+labels: ["defeito"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Defeito aqui inclui dois casos, e o segundo é o mais importante:
+        algo quebrou, **ou** algo aprovou quando deveria ter dito REFUSED.
+  - type: input
+    id: versao
+    attributes:
+      label: Versão / commit
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que deveria acontecer
+    validations:
+      required: true
+  - type: textarea
+    id: aconteceu
+    attributes:
+      label: O que aconteceu
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: reproducao
+    attributes:
+      label: Como reproduzir
+      render: shell
+    validations:
+      required: true
+  - type: checkboxes
+    id: honestidade
+    attributes:
+      label: Confirmação
+      options:
+        - label: A saída que colei é a saída real, sem edição
+          required: true
+        - label: Se houve hardware, o job ID está incluído
+          required: false
