@@ -1,0 +1,58 @@
+name: security-scan
+
+# Varredura de seguranca fora do caminho de merge: semanal e sob demanda.
+# Nao bloqueia PR. Vulnerabilidade encontrada vira evidencia no artefato,
+# nao um pipeline vermelho que ninguem consegue consertar na hora.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trivy:
+    name: trivy (fs, segredos, config)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: varredura
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          scan-type: fs
+          scan-ref: "."
+          scanners: "vuln,secret,config"
+          severity: "CRITICAL,HIGH"
+          ignore-unfixed: true
+          exit-code: "0"
+          format: table
+          output: trivy.txt
+      - name: resumo
+        if: always()
+        run: |
+          if [ -f trivy.txt ]; then
+            head -60 trivy.txt >> "$GITHUB_STEP_SUMMARY" || true
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trivy-report
+          path: trivy.txt
+          if-no-files-found: warn
+
+  zap:
+    name: owasp zap baseline (site publico)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: baseline no site
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: "https://zephirum.vercel.app"
+          fail_action: false
+          allow_issue_writing: false
+          artifact_name: zap-baseline
