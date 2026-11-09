@@ -1,0 +1,221 @@
+{
+ "componente": "ZYQL Science — motor de decisão aplicado",
+ "casos": 15,
+ "passes": 15,
+ "resultado": {
+  "bio: sensibilidade atinge alvo": {
+   "pass": true,
+   "detail": "p=0.975 eps=0.030368"
+  },
+  "bio: margem impede afirmacao falsa": {
+   "pass": true,
+   "detail": "p=0.96 eps=0.060736"
+  },
+  "bio: amostra insuficiente recusa": {
+   "pass": true,
+   "detail": "AMOSTRA_INSUFICIENTE_12_DE_30"
+  },
+  "bio: braco A superior": {
+   "pass": true,
+   "detail": "dif=0.2 margem=0.13581"
+  },
+  "bio: bracos equivalentes inconclusivo": {
+   "pass": true,
+   "detail": "dif=0.01"
+  },
+  "bio: mesma proporcao, amostra menor recusa afirmar": {
+   "pass": true,
+   "detail": "p=0.93 eps=0.067905"
+  },
+  "exatas: energia menor decidida": {
+   "pass": true,
+   "detail": "dif=-0.002199 margem=0.001656"
+  },
+  "exatas: barras cruzadas inconclusivo": {
+   "pass": true,
+   "detail": ""
+  },
+  "exatas: medicao concorda": {
+   "pass": true,
+   "detail": "dif=0.02 margem=0.07"
+  },
+  "exatas: medicao diverge": {
+   "pass": true,
+   "detail": ""
+  },
+  "humanas: corpora diferem": {
+   "pass": true,
+   "detail": "dif=0.21 margem=0.085894"
+  },
+  "humanas: diferenca nao sustentada": {
+   "pass": true,
+   "detail": ""
+  },
+  "humanas: concordancia atinge minimo": {
+   "pass": true,
+   "detail": "p=0.9"
+  },
+  "humanas: meta social recusada por amostra": {
+   "pass": true,
+   "detail": "AMOSTRA_INSUFICIENTE_25_DE_30"
+  },
+  "recibos das tres areas assinados e verificados": {
+   "pass": true,
+   "detail": "3 recibos"
+  }
+ },
+ "areas": [
+  "biológicas",
+  "exatas",
+  "humanas"
+ ],
+ "estados": [
+  "1",
+  "0",
+  "REFUSED",
+  "INCONCLUSIVE",
+  "ERROR"
+ ],
+ "chave_publica": "uMOtVQNr17qzoEHVbzTbIMr+wkfAa+0/Wdepmee17uc=",
+ "recibos": [
+  {
+   "identity": {
+    "receipt_version": "1",
+    "language_version": "2.5.7",
+    "compiler_version": "science-0.1",
+    "policy_version": "P1-2026-11",
+    "program_hash": "c52478e7f1743b4b5c39de76a373ccab6e3c4084d69e11ded608bc2cae554333"
+   },
+   "execution": {
+    "execution_id": "science-bio-sensibilidade",
+    "sequence": 1,
+    "input_commitment": "c52478e7f1743b4b5c39de76a373ccab6e3c4084d69e11ded608bc2cae554333",
+    "backend": "motor-exato",
+    "environment": {
+     "kernel": "ZEPHYRUM 1.12"
+    },
+    "parameters": {
+     "n": 2000
+    },
+    "execution_state": "EXECUTED",
+    "start_time": "2026-11-09T13:40:00Z",
+    "end_time": "2026-11-09T13:40:01Z"
+   },
+   "evidence": {
+    "evidence_hashes": [
+     "c52478e7f1743b4b5c39de76a373ccab6e3c4084d69e11ded608bc2cae554333"
+    ],
+    "decision_rule": "diagnostico-v1",
+    "verdict": "1",
+    "uncertainty": {
+     "epsilon": 0.030368
+    },
+    "caso": "bio:sensibilidade"
+   },
+   "authenticity": {
+    "previous_receipt_hash": null,
+    "signer_key_id": "SERENA-SCIENCE",
+    "signature_algorithm": "Ed25519",
+    "signature": null
+   },
+   "_signature": {
+    "algorithm": "Ed25519",
+    "signer_key_id": "SERENA-SCIENCE",
+    "value": "683PjaxGiWNp8K6wGaI2J7lOmCIIUWPIiP6PkWp5QIfYn1f+qxIBtCH7Q4SNN1XdroFxPdRJiaJgUp+qVjAqDQ=="
+   }
+  },
+  {
+   "identity": {
+    "receipt_version": "1",
+    "language_version": "2.5.7",
+    "compiler_version": "science-0.1",
+    "policy_version": "P1-2026-11",
+    "program_hash": "1fd7c73aa90f092bf1966f9332f97c55105584990a6ea5ad4770f9fdf85ae39f"
+   },
+   "execution": {
+    "execution_id": "science-exatas-energia",
+    "sequence": 1,
+    "input_commitment": "1fd7c73aa90f092bf1966f9332f97c55105584990a6ea5ad4770f9fdf85ae39f",
+    "backend": "motor-exato",
+    "environment": {
+     "kernel": "ZEPHYRUM 1.12"
+    },
+    "parameters": {
+     "n": 0
+    },
+    "execution_state": "EXECUTED",
+    "start_time": "2026-11-09T13:40:00Z",
+    "end_time": "2026-11-09T13:40:01Z"
+   },
+   "evidence": {
+    "evidence_hashes": [
+     "1fd7c73aa90f092bf1966f9332f97c55105584990a6ea5ad4770f9fdf85ae39f"
+    ],
+    "decision_rule": "energia-v1",
+    "verdict": "1",
+    "uncertainty": {
+     "epsilon": 0.001656
+    },
+    "caso": "exatas:energia"
+   },
+   "authenticity": {
+    "previous_receipt_hash": null,
+    "signer_key_id": "SERENA-SCIENCE",
+    "signature_algorithm": "Ed25519",
+    "signature": null
+   },
+   "_signature": {
+    "algorithm": "Ed25519",
+    "signer_key_id": "SERENA-SCIENCE",
+    "value": "mbaNMp3ShSVBJfsl+BzW6c3OKL7y0uQ7TUIFg0tsn+JWP1MI5aHUC7TQz2nS2bec0M8NztIYD/UHwtYwzWGQCQ=="
+   }
+  },
+  {
+   "identity": {
+    "receipt_version": "1",
+    "language_version": "2.5.7",
+    "compiler_version": "science-0.1",
+    "policy_version": "P1-2026-11",
+    "program_hash": "c517e87e4c2895d16b8a94e40ff78070a41bfed409daf88f726ab1e056fbd344"
+   },
+   "execution": {
+    "execution_id": "science-humanas-corpus",
+    "sequence": 1,
+    "input_commitment": "c517e87e4c2895d16b8a94e40ff78070a41bfed409daf88f726ab1e056fbd344",
+    "backend": "motor-exato",
+    "environment": {
+     "kernel": "ZEPHYRUM 1.12"
+    },
+    "parameters": {
+     "n": 1000
+    },
+    "execution_state": "EXECUTED",
+    "start_time": "2026-11-09T13:40:00Z",
+    "end_time": "2026-11-09T13:40:01Z"
+   },
+   "evidence": {
+    "evidence_hashes": [
+     "c517e87e4c2895d16b8a94e40ff78070a41bfed409daf88f726ab1e056fbd344"
+    ],
+    "decision_rule": "corpus-v1",
+    "verdict": "1",
+    "uncertainty": {
+     "epsilon": 0.085894
+    },
+    "caso": "humanas:corpus"
+   },
+   "authenticity": {
+    "previous_receipt_hash": null,
+    "signer_key_id": "SERENA-SCIENCE",
+    "signature_algorithm": "Ed25519",
+    "signature": null
+   },
+   "_signature": {
+    "algorithm": "Ed25519",
+    "signer_key_id": "SERENA-SCIENCE",
+    "value": "lV0V+Kbkz1jz6nEVVlrt27m2AMgP3oCpd/x8eCD1iGn3o7axGfZOHBDSH4tffg5IdGgVCjcJ++Mgi47svq1nBQ=="
+   }
+  }
+ ],
+ "RECEIPT_HASH": "57af71f7a2e4bb94589dc90add4ddb4d"
+}
