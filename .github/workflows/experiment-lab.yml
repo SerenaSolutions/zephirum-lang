@@ -43,7 +43,7 @@ jobs:
 
       # uv no lugar do pip: resolve e instala o mesmo conjunto muito mais rapido,
       # que importa quando a dependencia e qiskit.
-      - uses: astral-sh/setup-uv@v10.3.3
+      - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
 
