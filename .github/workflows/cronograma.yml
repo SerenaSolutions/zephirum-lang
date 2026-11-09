@@ -55,14 +55,15 @@ jobs:
             docs/cronograma/cronograma.pptx
             docs/cronograma/cronograma.csv
             docs/cronograma/cronograma.md
-      - name: publicar artefatos no repositorio
+      - name: detectar cronograma defasado (gate de drift)
+        # O push automatico nao funciona aqui: a main exige PR e status checks.
+        # Em vez de brigar com a protecao, o job falha quando o YAML foi editado
+        # sem regenerar as saidas. Quem edita, regenera.
         run: |
-          git config user.name "Superagent (CI)"
-          git config user.email "serena.aigronovatech@gmail.com"
-          git add site/cronograma docs/cronograma
-          if git diff --cached --quiet; then
-            echo "sem mudanca: cronograma ja atualizado"
+          if git diff --quiet -- site/cronograma docs/cronograma; then
+            echo "saidas em dia com docs/cronograma/zephirum_60d.yaml"
           else
-            git commit -m "chore(cronograma): regenera HTML, PPTX, CSV e Markdown da fonte unica"
-            git push
+            echo "::error::Cronograma defasado. Rode: python scripts/gerar_cronograma.py"
+            git diff --stat -- site/cronograma docs/cronograma
+            exit 1
           fi
