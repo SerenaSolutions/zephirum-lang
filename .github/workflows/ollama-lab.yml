@@ -52,19 +52,34 @@ jobs:
           tail -20 /tmp/ollama.log
           exit 1
 
+      - name: diagnostico do ambiente
+        run: |
+          df -h / | tail -1
+          free -h | head -2
+          echo "--- registro do ollama ---"
+          curl -s -o /dev/null -w "registry.ollama.ai: HTTP %{http_code}\n" -m 20 https://registry.ollama.ai/v2/ || true
+          echo "--- servidor ---"
+          curl -s -m 10 http://127.0.0.1:11434/api/version || true
+          echo
+          ollama --version || true
+
       - name: baixar modelo
         run: |
           set -uo pipefail
           for m in "${{ inputs.modelo }}" "llama3.2:1b" "qwen2.5:0.5b" "tinyllama"; do
-            echo "tentando $m"
-            if ollama pull "$m" 2>/dev/null; then
+            echo "::group::tentando $m"
+            ollama pull "$m"
+            rc=$?
+            echo "::endgroup::"
+            echo "saida de '$m': codigo $rc"
+            if [ "$rc" -eq 0 ]; then
               echo "MODELO=$m" >> "$GITHUB_ENV"
               echo "modelo pronto: $m"
               break
             fi
           done
           if [ -z "${MODELO:-}" ]; then
-            echo "nenhum modelo disponivel"
+            echo "nenhum modelo baixou; veja os erros acima"
             exit 1
           fi
 
