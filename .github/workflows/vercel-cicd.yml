@@ -32,6 +32,7 @@ permissions:
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
 
 jobs:
   guard:
@@ -67,12 +68,45 @@ jobs:
         if: github.event_name != 'pull_request'
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
+      - name: commits deste deploy
+        if: github.event_name != 'pull_request'
+        id: commits
+        run: |
+          log=$(git log -8 --no-merges --pretty=format:'- %s (%h)')
+          { echo "log<<EOF"; echo "$log"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+
       - name: deploy producao
         if: github.event_name != 'pull_request'
         run: |
           url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
           echo "URL de producao: $url"
           echo "### Producao: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: vercel-ai
+        id: ai
+        if: github.event_name != 'pull_request' && env.AI_GATEWAY_API_KEY != ''
+        uses: vercel/ai-action@v2.2.0
+        with:
+          api-key: ${{ env.AI_GATEWAY_API_KEY }}
+          model: ${{ vars.AI_GATEWAY_MODEL || 'openai/gpt-4o-mini' }}
+          system: |
+            Voce escreve notas de release curtas e tecnicas em portugues do Brasil.
+            Nao invente fatos, nao prometa nada e nao cite numeros que nao estejam nos commits.
+          prompt: |
+            Projeto: ZEPHIRUM, linguagem de programacao quantica com recibos.
+            Commits publicados agora neste deploy de producao:
+
+            ${{ steps.commits.outputs.log }}
+
+            Escreva no maximo 4 linhas: o que mudou para quem usa o site
+            (zephirum.vercel.app) e o que mudou internamente. Sem saudacao.
+
+      - name: publicar a nota de release
+        if: github.event_name != 'pull_request' && env.AI_GATEWAY_API_KEY != ''
+        run: |
+          echo "### Nota de release" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "${{ steps.ai.outputs.text }}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: pull (preview)
         if: github.event_name == 'pull_request'
