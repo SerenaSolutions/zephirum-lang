@@ -1,5 +1,10 @@
 name: vercel-cicd
 
+# ATENCAO (plano hobby da Vercel): o deploy e bloqueado quando o autor do commit
+# nao e membro da conta Vercel ("commit author doesn't have permission to create
+# deployments"). Por isso os commits do agente usam o e-mail da conta. Commit de
+# colaborador externo ou fork vai gerar deployment BLOCKED.
+
 # Pipeline de entrega do site publico do ZEPHIRUM.
 # Nao depende do app Git da Vercel: usa a CLI oficial com token do repositorio.
 # push em main -> producao (zephirum.vercel.app)
