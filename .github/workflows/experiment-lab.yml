@@ -1,0 +1,93 @@
+name: experiment-lab
+
+# Laboratorio de experimentos do ZYQL/ZEPHIRUM.
+# Roda um script de experiments/ em ambiente reproduzivel e sela o resultado.
+#
+# HONESTIDADE SOBRE O SELO: aqui se calcula SHA3-256 do script e da saida.
+# Isso prova integridade e amarra o resultado a um commit e a um run, mas NAO
+# e o recibo ML-DSA-44 assinado: a chave privada nao vive em CI. Assinatura
+# continua sendo ato local e supervisionado.
+#
+# O gate tambem nao e furado: este workflow nao submete nada a QPU. Ele roda
+# codigo local/experimental, que e o passo "teste local" do gate.
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "Caminho do script em experiments/"
+        required: true
+        default: "experiments/adversarial_refused_demo.py"
+      python:
+        description: "Versao do Python"
+        required: false
+        default: "3.11"
+      extras:
+        description: "Pacotes adicionais (espaco separado), ex: pqcrypto cryptography"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  rodar:
+    name: executar e selar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python }}
+          cache: pip
+
+      - name: instalar dependencias do projeto
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          if [ -n "${{ inputs.extras }}" ]; then pip install ${{ inputs.extras }}; fi
+
+      - name: executar experimento
+        run: |
+          set -o pipefail
+          mkdir -p saida
+          PYTHONPATH=src:api:experiments:tools python "${{ inputs.script }}" 2>&1 | tee saida/execucao.log
+
+      - name: selar resultado
+        if: always()
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, platform, subprocess, time
+          def sha3(p):
+              h = hashlib.sha3_256()
+              with open(p, 'rb') as f:
+                  for b in iter(lambda: f.read(65536), b''):
+                      h.update(b)
+              return h.hexdigest()
+          script = os.environ["SCRIPT"]
+          log = "saida/execucao.log"
+          recibo = {
+              "tipo": "recibo-integridade-sha3",
+              "aviso": "nao assinado ML-DSA-44; assinatura exige chave fora do CI",
+              "script": script,
+              "sha3_256_script": sha3(script) if os.path.exists(script) else None,
+              "sha3_256_saida": sha3(log) if os.path.exists(log) else None,
+              "commit": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "runner": os.environ.get("RUNNER_OS"),
+              "python": platform.python_version(),
+              "instante_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+          }
+          with open("saida/recibo_integridade.json", "w") as f:
+              json.dump(recibo, f, indent=2, ensure_ascii=False)
+          print(json.dumps(recibo, indent=2, ensure_ascii=False))
+          PY
+        env:
+          SCRIPT: ${{ inputs.script }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: experimento-${{ github.run_id }}
+          path: saida/
+          if-no-files-found: warn
