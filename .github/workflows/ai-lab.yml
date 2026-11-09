@@ -1,0 +1,62 @@
+name: ai-lab
+
+# Camada de IA do desenvolvimento, acionada a mao e sob supervisao.
+# Nao roda em push nem em PR: nenhum modelo toca o repositorio sem alguem pedir.
+# Cada motor so executa se a chave existir nos secrets; sem chave, o passo e
+# pulado e o workflow fica verde, em vez de falhar por falta de credencial.
+
+on:
+  workflow_dispatch:
+    inputs:
+      motor:
+        description: "claude | gemini | ambos"
+        required: true
+        default: "claude"
+        type: choice
+        options: ["claude", "gemini", "ambos"]
+      tarefa:
+        description: "O que o agente deve fazer"
+        required: true
+        default: "Revise este repositorio e proponha uma melhoria concreta no algoritmo ZYQL, com justificativa e arquivos afetados."
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  claude:
+    name: claude (anthropic/claude-code-action)
+    if: inputs.motor == 'claude' || inputs.motor == 'ambos'
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: executar claude
+        if: env.ANTHROPIC_API_KEY != ''
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ env.ANTHROPIC_API_KEY }}
+          prompt: ${{ inputs.tarefa }}
+          claude_args: "--max-turns 12"
+
+  gemini:
+    name: gemini (google-github-actions/run-gemini-cli)
+    if: inputs.motor == 'gemini' || inputs.motor == 'ambos'
+    runs-on: ubuntu-latest
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: executar gemini
+        if: env.GEMINI_API_KEY != ''
+        uses: google-github-actions/run-gemini-cli@v0.1.22
+        with:
+          gemini_api_key: ${{ env.GEMINI_API_KEY }}
+          prompt: ${{ inputs.tarefa }}
+          settings: |
+            { "coreTools": ["run_shell_command", "read_file", "write_file"] }
