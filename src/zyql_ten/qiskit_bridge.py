@@ -45,10 +45,19 @@ def p0_from_circuit(n, tipo="constante", valor=0):
 
 
 def transpiled_cost(qc, budget=40):
-    """Custo: profundidade e qubits apos transpilar para o conjunto {u, cx}."""
+    """As tres metricas de sistema: qubits programaveis, profundidade e throughput.
+
+    O throughput aqui e local (circuitos por segundo do transpilador). Em QPU o
+    campo passa a declarar a medicao do backend, nunca um valor estimado.
+    """
+    import time
+    t0 = time.perf_counter()
     t = transpile(qc, basis_gates=["u", "cx"], optimization_level=1)
+    dt = max(time.perf_counter() - t0, 1e-9)
     depth = t.depth()
     return {"qubits": qc.num_qubits, "profundidade": depth,
+            "throughput_circuitos_s": round(1 / dt, 1),
+            "throughput_origem": "transpilador_local",
             "orcamento": budget, "cabe": depth <= budget}
 
 

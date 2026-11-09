@@ -1,8 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """04 Engenheiro de dados: roteamento e deduplicacao."""
+from .receipt import selado
 import hashlib
 
+@selado
 def run(registros, esquema, ja_processados=None):
     ja_processados = ja_processados or set()
     vistos, novos, repetidos, invalidos = set(), [], 0, 0

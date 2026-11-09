@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
 """05 Analista de dados: variacao, anomalia e suficiencia de evidencia."""
+from .receipt import selado
 import statistics
 
 def variacao(atual, anterior):
@@ -16,6 +17,7 @@ def anomalia(serie, limite_z=2.5):
     return [(i, round((v - media) / desvio, 2)) for i, v in enumerate(serie)
             if abs((v - media) / desvio) > limite_z]
 
+@selado
 def run(serie, atual, anterior, fontes):
     var = variacao(atual, anterior)
     anom = anomalia(serie) or []
