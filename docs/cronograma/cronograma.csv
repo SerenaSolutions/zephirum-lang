@@ -1,0 +1,24 @@
+id,inicio,fim,fase,marco,entregavel,aceite,gate
+0,2026-11-09,2026-11-09,Fechamento,Merge aceito e propagado,"d327b86 (#1433), 5a469bc (badge), c50f973 (fix pypi.py); TOML na main com 2.5.7 e Apache-2.0",Concluido,
+1,2026-11-10,2026-11-12,Consolidacao,Guard de metadado no CI,"Workflow que reprova divergencia entre pyproject, PyPI e TOML",PR de teste falha de proposito,G1
+2,2026-11-10,2026-11-14,Consolidacao,Circuitos equivalentes nos 3 caminhos,"Relatorio com profundidade, portas e medicoes: ZYQL puro, Qiskit puro, ZYQL via Qiskit",Mesmo circuito canonico ou diferenca explicada linha por linha,G1
+3,2026-11-10,2026-11-19,Consolidacao,Custodia de chave ML-DSA-44 (RF-06),Primeiro recibo assinado e chave publica publicada,Verificacao por terceiro com a chave publica,
+4,2026-11-10,2026-11-19,Consolidacao,Suite reproduzivel em 3.10,Run verde nos tres interpretadores,193+ testes aprovados sem xfail novo,
+5,2026-11-20,2026-11-23,Integracao,Matriz de compatibilidade SDK 2.x,"Tabela de versoes testadas contra qiskit>=2.6,<3",Piso e teto declarados e testados,
+6,2026-11-20,2026-11-25,Integracao,OpenQASM 3 round-trip,ZYQL para QASM 3 para ZYQL com comparacao de AST,Equivalencia semantica comprovada,
+7,2026-11-22,2026-11-26,Integracao,Transpiler em niveis 0 a 3,Custo em profundidade e portas por nivel,Tabela publicada sem alegacao de superioridade,
+8,2026-11-24,2026-11-28,Integracao,Aer contra kernel proprio,Comparacao de distribuicoes com TVD por circuito,"TVD declarada, nao apenas resultado final",
+9,2026-11-27,2026-11-29,Integracao,Primitives V2 (Sampler e Estimator),Implementacao ou ADR de nao aplicabilidade,Decisao registrada em ADR,
+10,2026-11-30,2026-12-07,Verificacao,Reproducao em QPU com protocolo selado,Novo job IBM com sha3 do protocolo antes do submit e metricas de sistema,"Qubits, profundidade e throughput declarados",G2
+11,2026-11-30,2026-12-09,Verificacao,Auditoria de recibo,Cadeia de hash verificada por script independente,"O que SHA3 prova e nao prova, escrito",G3
+12,2026-12-03,2026-12-11,Verificacao,Ruido e taxa de REFUSED,Sweep de epsilon com curva de recusa,"Recusa tratada como informacao, nao falha",
+13,2026-12-07,2026-12-14,Verificacao,Benchmarks com referencia justa,Deutsch-Jozsa e um caso com estrutura,"Mesmas shots, mesmo backend e mesmo transpile",
+14,2026-12-12,2026-12-14,Verificacao,Limitacoes conhecidas,Documento com o que nao funciona,"Lista honesta, sem eufemismo",
+15,2026-12-15,2026-12-19,Produto,ZYQL Decision Engine independente,Pacote e CLI usaveis sem escrever ZEPHIRUM,Instalavel e testado fora do repositorio,
+16,2026-12-17,2026-12-21,Produto,Exemplos de integracao executaveis,Exemplos rodando em CI a cada push,"Verde no CI, nao notebook morto",
+17,2026-12-19,2026-12-22,Produto,Documentacao de dev e politica de suporte,"Canais, SLA declarado e versao suportada",Requisito do ecossistema atendido,
+18,2026-12-22,2026-12-24,Produto,Demonstracao funcional,Video de 5 min com recibo verificado ao vivo,Recibo conferido por quem assiste,
+19,2026-12-25,2026-12-31,Ciencia,Artigo v1 com DOI,Submissao Zenodo ou arXiv,Texto com limitacoes e reprodutibilidade,
+20,2026-12-29,2027-01-03,Ciencia,Benchmarks publicados,Dados brutos mais script de reproducao,Terceiro reproduz sem falar conosco,
+21,2027-01-01,2027-01-06,Ciencia,Pedido formal de reproducao,Dois revisores convidados com prazo declarado,Resposta registrada por escrito,G4
+22,2027-01-05,2027-01-09,Ciencia,Dossie de manutencao,"Changelog, politica de versao e cadencia",Sustentavel por 12 meses,
