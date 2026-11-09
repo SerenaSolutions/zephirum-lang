@@ -139,3 +139,39 @@ jobs:
               ...context.repo, issue_number: context.issue.number,
               body: `Preview deste commit: ${url}`
             });
+
+  # Inventario IBM Cloud em modo somente leitura.
+  # Nao submete job a QPU: submissao exige selo previo (spec -> teste local -> QPU)
+  # e continua sendo ato manual e supervisionado, fora do CI.
+  # Roda em paralelo e nao bloqueia o deploy: continue-on-error + sem needs.
+  ibmcloud:
+    name: IBM Cloud (somente leitura)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
+    steps:
+      - name: IBM Cloud CLI
+        if: env.IBMCLOUD_API_KEY != ''
+        uses: IBM/actions-ibmcloud-cli@v2.2.1
+        with:
+          api_key: ${{ env.IBMCLOUD_API_KEY }}
+          region: us-south
+
+      - name: inventario de servicos
+        if: env.IBMCLOUD_API_KEY != ''
+        run: |
+          set -o pipefail
+          ibmcloud account show 2>&1 | sed 's/^/  /' || true
+          ibmcloud resource service-instances --output json > /tmp/si.json 2>/dev/null || echo '[]' > /tmp/si.json
+          python3 - <<'EOF'
+          import json
+          try:
+              data = json.load(open("/tmp/si.json"))
+          except Exception:
+              data = []
+          print(f"instancias de servico visiveis: {len(data)}")
+          for i in data:
+              print(f"  - {i.get('name')} | {i.get('state')} | {i.get('resource_group_id','')}")
+          print("nenhum job quantico foi submetido por este workflow")
+          EOF
