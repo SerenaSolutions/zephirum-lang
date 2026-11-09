@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Zyclotron v0.2 — do manifesto ao app executavel.
 
 Camada 2: recebe um blueprint, compila o manifesto (v0.1, intocado) e EMITE um
