@@ -1,0 +1,14 @@
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.coverage
+experiments
+tests
+tools
+src
+api
+docs
+proofs_m1_s2_c3
+incoming_files
