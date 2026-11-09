@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 #!/usr/bin/env python3
 """Bateria aplicada: biológicas, exatas e humanas — com recibo assinado por decisão."""
 import sys, os, json, hashlib

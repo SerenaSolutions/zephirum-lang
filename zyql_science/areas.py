@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 #!/usr/bin/env python3
 """Aplicações por grande área. Cada função devolve Decisao — a régua é a mesma."""
 from __future__ import annotations

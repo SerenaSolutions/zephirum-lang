@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 #!/usr/bin/env python3
 """ZYQL Science — motor de decisão aplicado a todas as áreas.
 
