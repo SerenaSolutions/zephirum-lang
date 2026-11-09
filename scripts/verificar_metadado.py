@@ -23,8 +23,12 @@ from __future__ import annotations
 import json
 import pathlib
 import sys
-import tomllib
 import urllib.request
+
+try:  # tomllib so existe a partir do 3.11
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - caminho do 3.10
+    tomllib = None
 
 RAIZ = pathlib.Path(__file__).resolve().parents[1]
 ECOSSISTEMA = ("https://raw.githubusercontent.com/Qiskit/ecosystem/main/"
@@ -58,7 +62,13 @@ def _buscar(url: str, tentativas: int = 3) -> bytes:
     raise RuntimeError(f"fonte inacessivel: {url} ({ultimo})")
 
 
+def _exige_tomllib() -> None:
+    if tomllib is None:
+        raise RuntimeError("tomllib exige Python 3.11+; o guard roda no job de 3.12")
+
+
 def coletar_pyproject(caminho: pathlib.Path | None = None) -> dict:
+    _exige_tomllib()
     dados = tomllib.loads((caminho or RAIZ / "pyproject.toml").read_text(encoding="utf-8"))
     projeto = dados["project"]
     licenca = projeto.get("license")
@@ -77,6 +87,7 @@ def coletar_pypi(texto: bytes) -> dict:
 
 
 def coletar_ecossistema(texto: bytes) -> list[dict]:
+    _exige_tomllib()
     dados = tomllib.loads(texto.decode("utf-8"))
     secoes = dados.get("pypi", [])
     if isinstance(secoes, dict):

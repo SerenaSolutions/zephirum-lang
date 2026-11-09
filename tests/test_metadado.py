@@ -1,9 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 Serena Quantum Solutions
-"""Testes do guard de metadado. Offline: comparam dicts, nao a rede."""
-import os, sys
+"""Testes do guard de metadado. Offline: comparam dicts, nao a rede.
+
+O modulo usa tomllib, que so existe no 3.11+. No 3.10 os testes sao pulados: a
+comparacao em si e pura e nao depende de interpretador, mas importar o modulo
+dependeria. Quem roda o guard e o job de 3.12.
+"""
+import os, pytest, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
-from verificar_metadado import comparar, normalizar_licenca
+import verificar_metadado as guard
+
+pytestmark = pytest.mark.skipif(guard.tomllib is None, reason="tomllib exige 3.11+")
+comparar, normalizar_licenca = guard.comparar, guard.normalizar_licenca
 
 
 def _f(version="2.5.7", license="Apache-2.0", requires_python=">=3.10"):
