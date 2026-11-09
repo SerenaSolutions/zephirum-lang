@@ -1,0 +1,104 @@
+{
+ "job_id": "dboh76oqtr0c738crlng",
+ "backend": "ibm_marrakesh",
+ "p0": 0.972,
+ "shots": 2000,
+ "decisao_unica": {
+  "tipo": "conj",
+  "veredito": "REFUSED",
+  "motivo": "FAMILY_EXCEEDS_SHOTS",
+  "filhos": [
+   {
+    "tipo": "conj",
+    "veredito": "REFUSED",
+    "motivo": "FAMILY_EXCEEDS_SHOTS",
+    "filhos": [
+     {
+      "tipo": "conj",
+      "veredito": "REFUSED",
+      "motivo": "FAMILY_EXCEEDS_SHOTS",
+      "filhos": [
+       {
+        "tipo": "conj",
+        "veredito": "REFUSED",
+        "motivo": "FAMILY_EXCEEDS_SHOTS",
+        "filhos": [
+         {
+          "tipo": "conj",
+          "veredito": "REFUSED",
+          "motivo": "FAMILY_EXCEEDS_SHOTS",
+          "filhos": [
+           {
+            "tipo": "conj",
+            "veredito": "REFUSED",
+            "motivo": "FAMILY_EXCEEDS_SHOTS",
+            "filhos": [
+             {
+              "tipo": "folha",
+              "veredito": 1,
+              "epsilon": 0.01,
+              "shots": 10,
+              "motivo": null
+             },
+             {
+              "tipo": "folha",
+              "veredito": 1,
+              "epsilon": 0.01,
+              "shots": 10,
+              "motivo": null
+             }
+            ]
+           },
+           {
+            "tipo": "folha",
+            "veredito": 1,
+            "epsilon": 0.01,
+            "shots": 10,
+            "motivo": null
+           }
+          ]
+         },
+         {
+          "tipo": "folha",
+          "veredito": 1,
+          "epsilon": 0.01,
+          "shots": 10,
+          "motivo": null
+         }
+        ]
+       },
+       {
+        "tipo": "folha",
+        "veredito": 1,
+        "epsilon": 0.01,
+        "shots": 10,
+        "motivo": null
+       }
+      ]
+     },
+     {
+      "tipo": "folha",
+      "veredito": 1,
+      "epsilon": 0.01,
+      "shots": 10,
+      "motivo": null
+     }
+    ]
+   },
+   {
+    "tipo": "folha",
+    "veredito": 1,
+    "epsilon": 0.01,
+    "shots": 10,
+    "motivo": null
+   }
+  ]
+ },
+ "veredito_unico": 1,
+ "programa_7": {
+  "n_testes": 7,
+  "veredito": "REFUSED",
+  "refusal_reason": "FAMILY_EXCEEDS_SHOTS",
+  "selo_sha3_256": "0f91eaf14806657746ce1d41efad0ca7b6f21d30a1c9199dd1e0ee1a9b0802cd"
+ }
+}
