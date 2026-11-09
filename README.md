@@ -57,22 +57,38 @@ an explicit error. Simulation mode is labeled as simulation.
 
 ## Quickstart
 
+Two paths, both tested on 2026-11-09 with Python 3.11 from a clean virtualenv.
+
+**If you only want to use it** (package published on PyPI, 9 s install, 13 packages):
+
 ```bash
-git clone https://github.com/SerenaSolutions/zephirum-lang.git && cd zephirum-lang
-pip install -e .            # or: PYTHONPATH=src
+pip install zephirum
 ```
 
 ```python
 from zyql_quantum_gate import ZYQLQuantumGate
 
-gate = ZYQLQuantumGate(3, lambda x: x ^ 1)      # balanced oracle
-r = gate.run_quantum(shots=2048)
-print(r["decision"], r.get("refusal_reason", ""))   # REFUSED BALANCED_ORACLE
+# constant oracle: the decision comes out
+print(ZYQLQuantumGate(3, lambda x: 0).run_quantum(shots=2048)["decision"])          # 0
+
+# balanced oracle: the language refuses to promote noise to a conclusion
+r = ZYQLQuantumGate(3, lambda x: x ^ 1).run_quantum(shots=2048)
+print(r["decision"], r["refusal_reason"])      # REFUSED INSIDE_NOISE_BAND
+```
+
+`REFUSED` is the point, not a failure: it means the shots did not separate the
+hypotheses well enough to justify a claim.
+
+**If you want to develop or reproduce the research** (needs the repository):
+
+```bash
+git clone https://github.com/SerenaSolutions/zephirum-lang.git && cd zephirum-lang
+pip install -e .
 ```
 
 ```bash
-zyql-decide --oracle balanced --shots 512      # CLI runtime, Hoeffding error bound
-python3 src/zyql_lisp.py examples/hello_world.zph   # language front-end + sealed receipt
+zyql-decide --oracle balanced --shots 512   # CLI runtime, Hoeffding error bound
+python -m zyql_lisp examples/hello_world.zph # language front-end + sealed receipt
 ```
 
 The baptism of the language — a trivalent greeting, sealed by ZEPHIRUM itself:
@@ -84,15 +100,14 @@ The baptism of the language — a trivalent greeting, sealed by ZEPHIRUM itself:
 ```
 
 ```console
-$ python3 src/zyql_lisp.py examples/hello_world.zph
+$ python -m zyql_lisp examples/hello_world.zph
 Hello, Zephirum! | decisao = 1
-SELO: <sha3-256 do recibo — carimbo temporal, varia por execucao>
+SELO: <sha3-256 of the receipt — timestamp bound, varies per execution>
 ```
 
 The `hello` form prints the greeting and returns the trivalent verdict `1`
 (a greeting is always permitted). The `seal` form writes a Z-QEA receipt
-(SHA3-256) of everything executed — the Hello World carries a sealed receipt,
-as every decision in this house does. Source: [`examples/hello_world.zph`](examples/hello_world.zph).
+(SHA3-256) of everything executed. Source: [`examples/hello_world.zph`](examples/hello_world.zph).
 
 ## Evidence
 
@@ -326,6 +341,44 @@ aqueles nomes não vem da ZEPHIRUM.
 Correção registrada: até 30/10/2026 esta seção afirmava que nenhum pacote estava
 no PyPI. Era falso, e a checagem passou a ser feita contra a API do índice, não
 contra a memória de quem escreveu.
+
+## Known limitations
+
+Stated here so nobody has to discover them by failing:
+
+- **Receipt integrity is not authorship.** Receipts carry SHA3-256, which proves
+  content has not changed. They are not yet signed with ML-DSA-44, so anyone can
+  regenerate the same hash. Author signature is
+  [#68](https://github.com/SerenaSolutions/zephirum-lang/issues/68).
+- **No independent reproduction yet.** The decision layer was validated against a
+  pre-registered protocol (7 hypotheses, 3,630 cases, 0 violations), but by the
+  same team that built it.
+- **Hardware evidence is thin.** One execution per circuit on `ibm_marrakesh`,
+  2,048 shots. It shows the device behaved as expected that day; it shows no
+  throughput, no repeatability and no statistics.
+- **The demonstration uses a simulator** with declared noise (2% depolarizing on
+  each CX), not a QPU.
+- **The finite domain is finite.** Absence of a counterexample in a discrete grid
+  is not a universal proof.
+- **Ecosystem status is `experimental` / `Very Early Project`**, as declared by the
+  entry itself in [`Qiskit/ecosystem`](https://github.com/Qiskit/ecosystem). Being a
+  member is metadata, not endorsement of results, and no code of this project runs
+  inside Qiskit.
+
+## How to participate
+
+- **Found a wrong instruction?** Open an issue with the command, the Python
+  version and the output you got. A documented failure is worth more than a
+  compliment.
+- **Want to refute a result?** The protocol, the domain and the command are
+  published in [`validacao/`](validacao). Refutation needs one counterexample, not
+  an opinion.
+- **Scope we accept:** reproducible bug reports, documentation fixes, onboarding
+  friction, additional oracles and language examples, adversarial tests of the
+  decision layer.
+- **Scope we are careful about:** new runtime dependencies. The project keeps a
+  deliberately small dependency set (`lark`, `numpy`, `qiskit`).
+- **Good first issues** are labelled in the issue tracker.
 
 ## Citation
 
