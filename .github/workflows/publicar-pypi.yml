@@ -47,9 +47,16 @@ jobs:
             echo "::error::A versao $V ja esta no PyPI. Suba a versao antes de publicar."
             exit 1
           fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Instalar o projeto e as dependencias de teste
+        run: |
+          python -m pip install -q --upgrade pip
+          python -m pip install -q build pytest
+          python -m pip install -q -e ".[test,hardware]"
       - name: Verificacoes locais obrigatorias
         run: |
-          pip install -q build
           python -m pytest tests -q --no-header || { echo "::error::Suite vermelha: publicacao bloqueada."; exit 1; }
           PYTHONPATH=src:api:experiments python tools/check_compliance.py
 
