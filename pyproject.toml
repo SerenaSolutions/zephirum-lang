@@ -6,10 +6,21 @@ build-backend = "setuptools.build_meta"
 name = "zephirum"
 version = "2.5.8"
 description = "ZEPHIRUM: quantum programming language and runtime for auditable decisions, with the ZYQL trivalent core (1/0/REFUSED)"
+keywords = ["quantum-computing", "quantum-programming-language", "zyql", "verifiable-receipts", "auditable-decisions", "qasm3"]
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering :: Physics",
+  "Topic :: Software Development :: Interpreters",
+]
 dependencies = ["numpy>=1.26,<3", "lark>=1.1,<2", "qiskit>=2.6,<3"]
 authors = [{name = "Reginaldo Pinezi Uhlmann", email = "builderquantunxia@gmail.com"}]
 maintainers = [
@@ -44,3 +55,11 @@ zyql-decide = "zyql_runtime:main"
 package-dir = {"" = "src"}
 packages = ["zqgate", "qroute", "zephirum", "zephirum.adapters"]
 py-modules = ["battery_ci", "zqea_canon", "oq3", "quantum_types", "quantum_safe_readiness", "shot_auditor", "zkernel", "zqea_kem", "zqea_sig", "zquantum", "zyql_auditkit", "zyql_cirq", "zyql_lisp", "zyql_llm_compress", "zyql_mps", "zyql_protocols", "zyql_quantum_gate", "zyql_rag_layer", "zyql_robust", "zyql_runtime", "zyql_oracle_id", "zyql_selfverified", "zyql_witness", "zyql_world3", "zyql_worldscale", "zyql_zne", "zyqml_core", "zyclotron"]
+
+[project.urls]
+Homepage = "https://serenasolutions.github.io/zephirum-lang/"
+Documentation = "https://serenasolutions.github.io/zephirum-lang/"
+Repository = "https://github.com/SerenaSolutions/zephirum-lang"
+Issues = "https://github.com/SerenaSolutions/zephirum-lang/issues"
+Changelog = "https://github.com/SerenaSolutions/zephirum-lang/releases"
+PyPI = "https://pypi.org/project/zephirum/"
