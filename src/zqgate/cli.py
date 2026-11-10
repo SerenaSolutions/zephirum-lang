@@ -4,21 +4,23 @@
 Uso: zqgate verify <receipt.json>   — verifica integridade SHA3-256 de um recibo
      zqgate version
 """
-import sys, json, hashlib
+import sys
 
-def canonical(obj): return json.dumps(obj, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+from zqea_canon import verificar_arquivo
 
 def verify(path):
-    rec = json.load(open(path))
-    seal = rec.get("sha3_256")
-    canon = {k: v for k, v in rec.items() if k != "sha3_256"}
-    calc = hashlib.sha3_256(canonical(canon).encode()).hexdigest()
-    ok = (seal == calc)
+    res = verificar_arquivo(path)
     print(f"recibo: {path}")
-    print(f"selo declarado: {seal}")
-    print(f"selo calculado: {calc}")
-    print("VEREDITO: 1 (recibo íntegro)" if ok else "VEREDITO: 0 (adulterado)")
-    return 0 if ok else 1
+    print(f"campo do selo: {res['campo'] or '(ausente)'}")
+    print(f"regra do canon: {res['regra'] or '(nao identificada)'}")
+    print(f"selo declarado: {res['declarado']}")
+    print(f"selo calculado: {res['calculado']}")
+    if res["integro"]:
+        print("VEREDITO: 1 (recibo íntegro)")
+        return 0
+    motivo = "selo ausente" if res["motivo"] == "SEM_SELO" else "selo divergente"
+    print(f"VEREDITO: 0 (adulterado — {motivo})")
+    return 1
 
 def main():
     if len(sys.argv) >= 3 and sys.argv[1] == "verify":

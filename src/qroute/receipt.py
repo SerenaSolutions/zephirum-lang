@@ -41,9 +41,14 @@ def le_anterior(caminho):
 
 
 def verifica(caminho):
+    """Verificacao unificada: uma regra normativa, variantes historicas aceitas.
+
+    Antes esta funcao lia apenas a chave `sha3_256`; recibos emitidos pelo
+    interpretador (chave `selo_sha3_256`) respondiam "adulterado" mesmo integros.
+    """
+    from zqea_canon import verificar_arquivo
+    res = verificar_arquivo(caminho)
     with open(caminho, encoding="utf-8") as f:
         rec = json.load(f)
-    declarado = rec.get(CHAVE)
-    corpo = {k: v for k, v in rec.items() if k != CHAVE}
-    calc = hashlib.sha3_256(canonical(corpo).encode()).hexdigest()
-    return {"integro": declarado == calc, "declarado": declarado, "calculado": calc, "recibo": rec}
+    res["recibo"] = rec
+    return res
