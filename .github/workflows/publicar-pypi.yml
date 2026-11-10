@@ -54,7 +54,7 @@ jobs:
         run: |
           python -m pip install -q --upgrade pip
           python -m pip install -q build pytest
-          python -m pip install -q -e ".[test,hardware]"
+          python -m pip install -q -e ".[test,hardware,pq]"
       - name: Verificacoes locais obrigatorias
         run: |
           python -m pytest tests -q --no-header || { echo "::error::Suite vermelha: publicacao bloqueada."; exit 1; }
