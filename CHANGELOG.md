@@ -1,4 +1,4 @@
-## [2.5.7] - 2026-11-07
+## [2.5.8] - 2026-11-07
 
 ### Segurança (auditoria integrada de 06/11)
 - Rate limit por chave: janela deslizante de 60 s, `ZYQL_RATE_LIMIT` (padrão 120/min), 429 com `Retry-After`.
