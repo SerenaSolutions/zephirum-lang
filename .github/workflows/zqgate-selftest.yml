@@ -6,8 +6,22 @@ jobs:
   selftest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
+      # Teste da propria Action com evidencia real do lote de endurecimento:
+      # 2048 tiros no caso constante, p(000) = 0,9644 -> 1975 sucessos.
+      # Antes passava "battery: all", que a Action nao aceita: shots chegava
+      # vazio e o job quebrava por contrato de entrada, nao por veredito.
       - name: Run zq-gate action on itself
+        id: gate
         uses: ./
         with:
-          battery: all
+          shots: '2048'
+          counts: '{"000": 1975, "111": 73}'
+          threshold: '0.90'
+          delta: '0.05'
+      - name: Conferir o veredito e o recibo
+        run: |
+          echo "veredito: ${{ steps.gate.outputs.verdict }}"
+          echo "recibo:   ${{ steps.gate.outputs.receipt }}"
+          test "${{ steps.gate.outputs.verdict }}" = "1" || { echo "::error::Veredito esperado 1, obtido ${{ steps.gate.outputs.verdict }}"; exit 1; }
+          test -f "${{ steps.gate.outputs.receipt }}" || { echo "::error::Recibo nao foi escrito"; exit 1; }
