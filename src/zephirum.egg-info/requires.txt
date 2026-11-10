@@ -7,6 +7,12 @@ fastapi>=0.110
 httpx>=0.27
 uvicorn>=0.30
 
+[docs]
+sphinx<9,>=7
+myst-parser>=3
+qiskit-sphinx-theme>=2.1
+sphinx-copybutton>=0.5
+
 [hardware]
 qiskit-aer<0.19,>=0.17
 qiskit-ibm-runtime<0.53,>=0.50

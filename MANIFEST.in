@@ -1,0 +1,6 @@
+include README.md LICENSE NOTICE CITATION.cff VERSION
+graft tests
+graft examples
+graft benchmarks
+prune tests/hardware_live
+global-exclude __pycache__ *.py[cod]

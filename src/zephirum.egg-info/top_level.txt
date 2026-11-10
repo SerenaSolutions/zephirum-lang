@@ -6,6 +6,7 @@ quantum_types
 shot_auditor
 zephirum
 zkernel
+zqea_canon
 zqea_kem
 zqea_sig
 zqgate
