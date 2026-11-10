@@ -4,11 +4,13 @@ qroute
 quantum_safe_readiness
 quantum_types
 shot_auditor
+zephirum
 zkernel
 zqea_kem
 zqea_sig
 zqgate
 zquantum
+zyclotron
 zyql_auditkit
 zyql_cirq
 zyql_lisp
