@@ -9,6 +9,11 @@ concurrency:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    # Os modulos vivem direto em src/ (zyql_quantum_gate, zyclotron, zephirum/...).
+    # Sem esta linha o pytest importa a maquina de desenvolvimento, nunca o repo —
+    # foi o que derrubou o teste do adaptador no commit cd1fda3b.
+    env:
+      PYTHONPATH: src
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
