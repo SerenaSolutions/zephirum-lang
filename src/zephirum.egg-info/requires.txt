@@ -1,5 +1,5 @@
-numpy
-lark
+numpy<3,>=1.26
+lark<2,>=1.1
 qiskit<3,>=2.6
 
 [api]
@@ -9,7 +9,7 @@ uvicorn>=0.30
 
 [hardware]
 qiskit-aer<0.19,>=0.17
-qiskit-ibm-runtime>=0.50
+qiskit-ibm-runtime<0.53,>=0.50
 
 [interop]
 cirq>=1.4
