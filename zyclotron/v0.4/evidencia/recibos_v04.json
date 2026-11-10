@@ -1,0 +1,60 @@
+[
+ {
+  "app": "zyclotron_v04",
+  "rule": "proporcao-v1",
+  "started_at": "2026-11-10T01:01:07.781606+00:00",
+  "manifest_sha3_256": "5c23c6ed878d6cf56963cbddfb3dd48dfe532fc46c925075ba4442b0182930e9",
+  "blueprint_sha3_256": "74b215d226e950a42af35c8f2fa70436321ff6cffc1d1112cd6b77e12648b251",
+  "policy": {
+   "delta": 0.05,
+   "max_shots": 2048,
+   "target_key": "000",
+   "threshold": 0.9
+  },
+  "verdict": "1",
+  "p_hat": 0.985352,
+  "epsilon": 0.042441,
+  "shots": 1024,
+  "counts": {
+   "000": 1009,
+   "001": 6,
+   "100": 7,
+   "010": 2
+  },
+  "target_key": "000",
+  "input_commitment": "2f20d5205e72d2ec1056b2331f43e2942a50b4e009393a20b18a276f79346384",
+  "finished_at": "2026-11-10T01:01:07.781649+00:00",
+  "previous_receipt_hash": null,
+  "receipt_hash": "cd19951cd1b9d85535ed68066961c623746c0ab0fa34ffe7e4872f1363897824",
+  "caso": "constante"
+ },
+ {
+  "app": "zyclotron_v04",
+  "rule": "proporcao-v1",
+  "started_at": "2026-11-10T01:01:07.859218+00:00",
+  "manifest_sha3_256": "5c23c6ed878d6cf56963cbddfb3dd48dfe532fc46c925075ba4442b0182930e9",
+  "blueprint_sha3_256": "74b215d226e950a42af35c8f2fa70436321ff6cffc1d1112cd6b77e12648b251",
+  "policy": {
+   "delta": 0.05,
+   "max_shots": 2048,
+   "target_key": "000",
+   "threshold": 0.9
+  },
+  "verdict": "0",
+  "p_hat": 0.0,
+  "epsilon": 0.042441,
+  "shots": 1024,
+  "counts": {
+   "111": 963,
+   "011": 33,
+   "101": 12,
+   "110": 16
+  },
+  "target_key": "000",
+  "input_commitment": "77bda5c5a7f73d4bc2e5d10805c7dd9abf70e7bd4a978e7c12c65aff80d7514c",
+  "finished_at": "2026-11-10T01:01:07.859321+00:00",
+  "previous_receipt_hash": "cd19951cd1b9d85535ed68066961c623746c0ab0fa34ffe7e4872f1363897824",
+  "receipt_hash": "5e7e2fe922f7b17f53d53c84d16f1a2e014dd070891066312c092eabdeaf8e35",
+  "caso": "balanceado"
+ }
+]
