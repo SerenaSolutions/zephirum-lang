@@ -45,8 +45,11 @@ src/zephirum.egg-info/dependency_links.txt
 src/zephirum.egg-info/entry_points.txt
 src/zephirum.egg-info/requires.txt
 src/zephirum.egg-info/top_level.txt
+src/zephirum/adapters/__init__.py
+src/zephirum/adapters/qiskit_backend.py
 src/zqgate/__init__.py
 src/zqgate/cli.py
+tests/test_adaptador_qiskit.py
 tests/test_ancoragem_e_metadados.py
 tests/test_api.py
 tests/test_auditkit.py

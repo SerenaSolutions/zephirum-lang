@@ -28,6 +28,8 @@ Requires-Dist: fastapi>=0.110; extra == "test"
 Requires-Dist: httpx>=0.27; extra == "test"
 Dynamic: license-file
 
+[![Qiskit Ecosystem](https://qisk.it/e-b2b5fe46)](https://qisk.it/e)
+
 <p align="center"><img src="assets/brand/zephirum-header.png" width="520" alt="ZEPHIRUM&trade; &middot; ZYQL&trade; — computação quântica antes da execução"></p>
 
 <p align="center">
@@ -52,7 +54,7 @@ Dynamic: license-file
 
 **The quantum programming language with receipts.** ZYQL, its decision core, returns one of three verdicts — `1` (permitted), `0` (forbidden) or `REFUSED` (insufficient confidence) — and seals every decision in a verifiable receipt.
 
-![version](https://img.shields.io/badge/version-2.5.7-6e46b8)
+![version](https://img.shields.io/badge/version-2.5.8-6e46b8)
 ![license](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23632019-gold)
@@ -359,7 +361,7 @@ CLI: `zyql-decide --oracle balanced --shots 512`
 ## PyPI — estado verificado (30/10/2026)
 
 O pacote oficial **existe e está publicado**: `pip install zephirum`.
-Versão publicada no PyPI: **2.5.7**, licença **Apache-2.0**, verificada em 08/11/2026. `VERSION` é a fonte única: badge, `pyproject.toml`, `docs/openapi.json` e `APP_VERSION` da API são conferidos por `tools/check_compliance.py` a cada commit.
+Versão publicada no PyPI: **2.5.8**, licença **Apache-2.0**, verificada em 08/11/2026. `VERSION` é a fonte única: badge, `pyproject.toml`, `docs/openapi.json` e `APP_VERSION` da API são conferidos por `tools/check_compliance.py` a cada commit.
 Procedência verificável em https://pypi.org/pypi/zephirum/json — autor do
 registro no PyPI: Reginaldo Gonçalves (mantenedor), projeto Serena Solutions.
 
