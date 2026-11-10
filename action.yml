@@ -1,20 +1,48 @@
-name: 'zephirum-zq-gate'
-description: 'Runs the trivalent decision battery (1/0/REFUSED) and verifies SHA3-256 receipts in CI.'
-author: 'Serena Quantum Solutions'
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Serena Quantum Solutions
+name: 'ZYQL Decision Gate'
+description: 'Gate a workflow on a verifiable decision: verdict 1, 0, REFUSED or INCONCLUSIVE, with a signed receipt.'
 branding:
-  icon: 'check-circle'
+  icon: 'shield'
   color: 'blue'
 inputs:
-  battery:
-    description: 'Which battery to run (all | battery | verify-receipts)'
+  shots:
+    description: 'Number of samples in the evidence payload.'
+    required: true
+  counts:
+    description: 'JSON object with observed counts, e.g. {"000": 964}.'
+    required: true
+  threshold:
+    description: 'Proportion the evidence must beat, between 0 and 1.'
+    required: true
+  delta:
+    description: 'Maximum tolerated error probability (Hoeffding bound).'
     required: false
-    default: 'all'
+    default: '0.05'
+  fail_on:
+    description: 'Verdicts that fail the job, comma separated. Default fails on 0 and REFUSED.'
+    required: false
+    default: '0,REFUSED'
+outputs:
+  verdict:
+    description: 'The decision: 1, 0, REFUSED or INCONCLUSIVE.'
+  receipt:
+    description: 'Path to the receipt written for this decision.'
 runs:
   using: 'composite'
   steps:
-    - run: python3 -m pip install --quiet numpy lark
-      shell: bash
-    - run: python3 ${{ github.action_path }}/src/battery_ci.py
-      shell: bash
-      env:
-        ZQG_MODE: ${{ inputs.battery }}
+    - shell: bash
+      run: |
+        python3 -m pip install --quiet zephirum==2.5.7 || true
+        python3 "${{ github.action_path }}/tools/action_decidir.py" \
+          --shots "${{ inputs.shots }}" \
+          --counts '${{ inputs.counts }}' \
+          --threshold "${{ inputs.threshold }}" \
+          --delta "${{ inputs.delta }}" \
+          --receipt "$RUNNER_TEMP/zyql_receipt.json"
+        VEREDITO=$(python3 -c "import json;print(json.load(open('$RUNNER_TEMP/zyql_receipt.json'))['verdict'])")
+        echo "verdict=$VEREDITO" >> "$GITHUB_OUTPUT"
+        echo "receipt=$RUNNER_TEMP/zyql_receipt.json" >> "$GITHUB_OUTPUT"
+        case ",${{ inputs.fail_on }}," in
+          *",$VEREDITO,"*) echo "::error::veredito $VEREDITO reprova o portao"; exit 1 ;;
+        esac
