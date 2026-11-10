@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Serena Quantum Solutions
 name: 'ZYQL Decision Gate'
-description: 'Gate a workflow on a verifiable decision: verdict 1, 0, REFUSED or INCONCLUSIVE, with a signed receipt.'
+description: 'Block or pass a workflow on an auditable decision: verdict 1, 0, REFUSED or INCONCLUSIVE, sealed in a SHA3-256 receipt.'
 branding:
   icon: 'shield'
   color: 'blue'
@@ -36,7 +36,6 @@ runs:
     - id: decidir
       shell: bash
       run: |
-        python3 -m pip install --quiet zephirum==2.5.7 || true
         python3 "${{ github.action_path }}/tools/action_decidir.py" \
           --shots "${{ inputs.shots }}" \
           --counts '${{ inputs.counts }}' \
