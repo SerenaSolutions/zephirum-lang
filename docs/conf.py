@@ -54,6 +54,10 @@ html_short_title = "ZEPHIRUM"
 html_static_path = []
 html_show_sphinx = False
 
+# O tema do ecossistema lista apenas a folha propria; a folha base do Furo
+# precisa ser declarada aqui, senao a pagina chega sem layout.
+html_css_files = ["styles/furo.css", "styles/qiskit-sphinx-theme.css"]
+
 html_theme_options = {
     "sidebar_qiskit_text": "Projeto do ecossistema",
     "topbar_right_links": [
