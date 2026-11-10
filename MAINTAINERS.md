@@ -1,5 +1,11 @@
 # Maintainers
 
+## Maintainers
+
+| Maintainer | GitHub ID | Company/Organization |
+| ---------- | --------- | -------------------- |
+| SerenaSolutions | [@SerenaSolutions](https://github.com/SerenaSolutions) | Serena Solutions |
+
 ## Primary maintainer
 
 **SerenaSolutions** is the primary maintainer of ZEPHIRUM and ZYQL. The
