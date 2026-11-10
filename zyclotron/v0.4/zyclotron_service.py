@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Serena Quantum Solutions
 """Zyclotron v0.4 — endurecido após auditoria cega.
 
 Correções: política fixa no servidor (nunca do cliente), amostra validada contra

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Serena Quantum Solutions
 #!/usr/bin/env python3
 """Regressao dos seis defeitos achados pelo auditor cego."""
 import sys, os, json, subprocess, hashlib, tempfile, shutil
