@@ -15,7 +15,7 @@
     <img src="assets/demos/zyql_decision_sphere_poster.jpg" width="640" alt="ZYQL trivalent decision sphere — 30 s animation with sound">
   </a>
   <br>
-  <sub><b>▶ 30 s animation (with sound)</b> — the trivalent decision sphere: verdict <code>0</code> for the constant oracle, then <code>REFUSED</code> (BALANCED_ORACLE). Declared simulation; hardware reference on a production superconducting QPU (device `ibm_marrakesh`; job `dbnqhi8ou4as73b4vu00`), measured p(000) = 0.9844</sub>
+  <sub><b>▶ 30 s animation (with sound)</b> — the trivalent decision sphere: verdict <code>0</code> for the constant oracle, then <code>REFUSED</code> (BALANCED_ORACLE). Declared simulation; hardware reference on a production superconducting QPU (job identifiers kept in internal evidence), measured p(000) = 0.9844</sub>
 </p>
 
 <p align="center"><img src="assets/social-preview-1280x640.jpg" alt="ZYQL: Exact-decision language" width="640"></p>
@@ -33,18 +33,24 @@
 [![CodeQL](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/codeql.yml)
 ![python](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue)
 
-**Contents** — [What it is](#what-it-is) · [Quickstart](#quickstart) · [Evidence](#evidence) · [Architecture](#architecture) · [Tests & reproducibility](#tests--reproducibility) · [Learn](#learn) · [Layout](#layout) · [Scope & honest limits](#honest-scope) · [Citation](#citation)
+**Contents** — [What it is](#what-it-is) · [Use it in CI](#use-it-in-ci-github-action) · [Quickstart](#quickstart) · [Evidence](#evidence) · [Architecture](#architecture) · [Tests & reproducibility](#tests--reproducibility) · [Learn](#learn) · [Layout](#layout) · [Scope & honest limits](#honest-scope) · [Citation](#citation)
 
 ---
 
 ## What it is
 
-ZEPHIRUM is a small quantum programming language. ZYQL is its decision algorithm:
+ZEPHIRUM is a quantum programming language and runtime for auditable decisions.
+ZYQL is its decision algorithm:
 every computational decision is trivalent — `1` (permitted), `0` (forbidden),
 `REFUSED` (input-dependent or insufficient confidence) — and carries a sealed
 receipt (SHA3-256 integrity seal, hash proves content integrity, not authorship).
-ML-DSA-44 / FIPS 204 signatures are IMPLEMENTED in `src/zqea_sig.py` (assinar/verificar/ancorar). Not yet certified: no FIPS/CAVP or CMVP validation, and key management is local (file, 0600).
-with an accredited module and HSM-held keys, never hand-rolled (see [docs/receipts.md](docs/receipts.md)).
+ML-DSA-44 / FIPS 204 signatures are implemented in `src/zqea_sig.py`
+(`assinar`/`verificar`/`ancorar`) and ship behind the `[pq]` extra
+(`pip install "zephirum[pq]"`). Declared state, precisely: the layer works in
+code, it is not yet applied to the receipts published here, it has no FIPS/CAVP
+or CMVP validation, and keys are local files (`0600`). Production use requires
+an accredited module with HSM-held keys, never hand-rolled (see
+[docs/receipts.md](docs/receipts.md)).
 
 Decisions are produced by Deutsch–Jozsa interference, one oracle call, with a
 declared noise band (±0.15). Nothing executes silently: unknown syntax raises
@@ -52,10 +58,58 @@ an explicit error. Simulation mode is labeled as simulation.
 
 - **Trivalent semantics** — refusal is a first-class verdict, not an exception.
 - **Receipts by construction** — every decision can be sealed (Z-QEA, SHA3-256).
-- **Hardware-verified** — measured on a production superconducting QPU with job IDs published below.
+- **Hardware-verified** — measured on a production superconducting QPU; the receipts are published below and the job identifiers stay in internal evidence.
 
 
 **Search:** [`"ZYQL" quantum language`](https://www.google.com/search?q=%22ZYQL%22+quantum+language) · [`Zephirum receipts`](https://www.google.com/search?q=%22Zephirum%22+quantum+recibos+OR+receipts) · [`trivalent REFUSED`](https://www.google.com/search?q=%22trivalent%22+%22REFUSED%22+quantum+decision) · [`zephirum on PyPI`](https://www.google.com/search?q=%22zephirum%22+PyPI)
+
+## Use it in CI (GitHub Action)
+
+The decision gate is a composite action: no secrets, no network, stdlib Python
+only. It reads an evidence payload you already measured, applies the declared
+proportion rule with a Hoeffding bound, writes a receipt, and fails the job
+according to `fail_on`.
+
+```yaml
+name: decision
+on: [push]
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: SerenaSolutions/zephirum-lang@v0.4.0
+        id: gate
+        with:
+          shots: 2048
+          counts: '{"000": 1975, "111": 73}'   # measured evidence, not a claim
+          threshold: 0.90
+          delta: 0.05
+      - run: echo "receipt written to $RUNNER_TEMP/zyql_receipt.json"
+```
+
+| input | required | meaning |
+|-------|----------|---------|
+| `shots` | yes | number of samples in the evidence payload |
+| `counts` | yes | observed counts as JSON; must sum to `shots`, otherwise the gate returns `REFUSED` with reason `CONTRATO_INVALIDO` |
+| `threshold` | yes | proportion the evidence must beat, strictly between 0 and 1 |
+| `delta` | no (`0.05`) | tolerated error probability in the Hoeffding bound |
+| `fail_on` | no (`0,REFUSED`) | verdicts that fail the job, comma separated |
+
+Outputs: `verdict` (`1`, `0`, `REFUSED` or `INCONCLUSIVE`) and `receipt` (path to
+the sealed receipt). Both are exported from the release that ships this section;
+on `v0.4.0` the receipt is still written to `$RUNNER_TEMP/zyql_receipt.json`, so
+read that file directly.
+
+The rule is declared, not implied: with `p_hat = counts[target] / shots` and
+`eps = sqrt(ln(2/delta) / (2*shots))`, the verdict is `1` when `p_hat - eps > threshold`,
+`0` when `p_hat + eps < threshold`, and `INCONCLUSIVE` otherwise. The receipt
+records `p_hat`, `eps`, the rule version, and an input commitment, so the decision
+can be re-derived from the numbers alone.
+
+One semantic note, stated so nobody has to discover it: `INCONCLUSIVE` does **not**
+fail the job by default, because inconclusive evidence is a legitimate state. If a
+pipeline must be decisive to merge, add it explicitly:
+`fail_on: '0,REFUSED,INCONCLUSIVE'`.
 
 ## Quickstart
 
@@ -131,15 +185,16 @@ converging into three fusion channels, the geometry the experiments probe.*
 | Fusion space is 3-dimensional (qutrit in 2 qubits) | noiseless | exact 1/3+1/3+1/3, forbidden channel vetoed | [sealed receipt](experiments/s3_qutrit_final_receipt.json) |
 | Braiding is non-Abelian (order matters) | noiseless | commutator L1 = 6 exact; B_R∘B_S → ch2, B_S∘B_R → ch1 | same |
 | Noiseless round | noiseless | exact-zero deviation vs theory (canonical rationals) | same |
-| ZYQL trivalent decisions 1 / 0 / REFUSED | **a production superconducting QPU** | **3/3 PASS** (jobs `dbn88ns4148s7390g750`, `dbn87toqtr0c73achjvg`, `dbmfcvt8ft8s738up32g`) | [battery receipt](experiments/zyql_hardware_battery.json) |
-| Braid order measured on real hardware | **a production superconducting QPU** | **98.1% vs 95.8%** (jobs `dbme1pl8mdtc73d7qbig`, `dbl1v71kdqps7393e9m0`) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
+| ZYQL trivalent decisions 1 / 0 / REFUSED | **a production superconducting QPU** | **3/3 PASS** (job identifiers kept in internal evidence records) | [battery receipt](experiments/zyql_hardware_battery.json) |
+| Braid order measured on real hardware | **a production superconducting QPU** | **98.1% vs 95.8%** (job identifiers kept in internal evidence records) | [master receipt](experiments/s3_qutrit_final_receipt.json) |
 | **Shots-to-verdict efficiency** | **a production superconducting QPU** | **256 shots** to a first-step verdict — 96,88% fewer shots **contra a linha de base de 8192** (linha de base declarada: varredura exaustiva com 8192 tiros, não um padrão externo) | receipt `28f406202e9d125a` (issue #40) |
 
 Receipt seal (SHA3-256): `a44192463ea669564a3da51728c8577e59e5684c67cf2d48f7a95442d548476a` — verify it yourself: `python3 .github/actions/zqea-verify/zqea_verify.py experiments/s3_qutrit_final_receipt.json`
 In language: [`examples/s3_qutrit.zph`](examples/s3_qutrit.zph).
 
-Verified on real hardware (a production superconducting QPU (vendor-neutral), cited as test laboratory, vendor-neutral, with
-verifiable job IDs; no endorsement claimed):
+Verified on real hardware (a production superconducting QPU, cited as test
+laboratory, vendor-neutral, with job identifiers retained in internal evidence;
+no endorsement claimed):
 
 - Constant purpose: measured p(000)=0.9844 (job identifiers kept in internal evidence records;)
 - S3 qutrit miniature: fusion channels (qutrit-in-qubits) + braiding non-commutativity,
@@ -192,7 +247,8 @@ circuit bell {
 - **Statistical discipline**: multiple-comparison correction is part of the test
   battery — verdicts are not claimed on uncorrected p-values.
 - **Verifiable by construction**: every hardware claim above points to a sealed
-  receipt and a job ID; receipts are re-verifiable with
+  receipt, with job identifiers retained in internal evidence; receipts are
+  re-verifiable with
   `.github/actions/zqea-verify/zqea_verify.py`.
 - Published testing roadmap (fuzzing the front-end, unitary-equivalence
   assertions, executed notebooks, coverage gate): tracked in issues.
@@ -213,7 +269,7 @@ circuit bell {
 - `examples/` — `hello_world.zph`, `bell.zph`, `grover.zph`, `dj_constant.zph`, `s3_qutrit.zph`
 - `benchmarks/` — public comparative benchmark suite
 - `notebooks/` — scientific presentation layer
-- `experiments/` — hardware rounds and sealed receipts (job IDs)
+- `experiments/` — hardware rounds and sealed receipts (job identifiers in internal evidence)
 - `docs/` — language reference, receipt specification, proofs, maturity, dossier
 - `playground/` — browser playground assets · `site/` — docs site · `paper/` — preprint sources
 - `zephirum-vscode/` — VS Code extension for `.zph`
@@ -299,7 +355,7 @@ Detalhes: **[docs/APPS.md](docs/APPS.md)**
 <b>Self-verified (C&#8224;)</b> — the QPU certifies its own run, selfcheck_p0 0.969 ·
 <b>Z-KEM</b> — ML-KEM-768 + AES-256-GCM envelope ·
 <b>S3 anyons</b> — braiding measured on a production QPU, 98.1% vs 95.8%
-<br>All animations are declared simulations built over real receipts and job IDs.
+<br>All animations are declared simulations built over real receipts.
 </sub></p>
 
 ## Honest scope
@@ -349,13 +405,16 @@ contra a memória de quem escreveu.
 Stated here so nobody has to discover them by failing:
 
 - **Receipt integrity is not authorship.** Receipts carry SHA3-256, which proves
-  content has not changed. They are not yet signed with ML-DSA-44, so anyone can
-  regenerate the same hash. Author signature is
+  content has not changed. The published receipts are not yet signed with
+  ML-DSA-44 — the signature layer exists behind the `[pq]` extra, but wiring it
+  into every receipt is [#68](https://github.com/SerenaSolutions/zephirum-lang/issues/68)
+  — so anyone can regenerate the same hash. Author signature is
   [#68](https://github.com/SerenaSolutions/zephirum-lang/issues/68).
 - **No independent reproduction yet.** The decision layer was validated against a
   pre-registered protocol (7 hypotheses, 3,630 cases, 0 violations), but by the
   same team that built it.
-- **Hardware evidence is thin.** One execution per circuit on `ibm_marrakesh`,
+- **Hardware evidence is thin.** One execution per circuit on a production
+  superconducting QPU,
   2,048 shots. It shows the device behaved as expected that day; it shows no
   throughput, no repeatability and no statistics.
 - **The demonstration uses a simulator** with declared noise (2% depolarizing on
