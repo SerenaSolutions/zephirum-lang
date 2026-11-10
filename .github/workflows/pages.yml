@@ -3,7 +3,7 @@ name: Deploy docs site to Pages
 on:
   push:
     branches: [main]
-    paths: ['site/**', 'docs/SPEC_Z-QEA_v1.0.md', '.github/workflows/pages.yml']
+    paths: ['docs/**', 'site/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
@@ -16,16 +16,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  construir:
+    name: Construir o site (Sphinx + tema do ecossistema)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Instalar Sphinx e o tema
+        run: |
+          python -m pip install -q --upgrade pip
+          python -m pip install -q -e ".[docs]"
+      - name: Construir HTML
+        run: sphinx-build -b html docs _build/html
+      - name: Guardar o resultado
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _build/html
+
+  publicar:
+    name: Publicar no Pages
+    needs: construir
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
       - id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
