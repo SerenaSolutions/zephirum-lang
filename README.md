@@ -37,6 +37,10 @@
 
 ---
 
+> **Canonical facts:** o que é fato, o que é especificação e o que **não** é verdade
+> (FIPS, dependências, pacotes de terceiros) está em [docs/FACTS.md](docs/FACTS.md).
+> Em caso de divergência com resumos automáticos ou posts de terceiros, essa página prevalece.
+
 ## What it is
 
 ZEPHIRUM is a quantum programming language and runtime for auditable decisions.
