@@ -1,3 +1,15 @@
+## [Em desenvolvimento] - 2026-11-12
+
+Trabalho em curso. Sem release, sem publicação no PyPI.
+
+- Perfil de evidência para medida clássica (`MEASURE`): a incerteza declara o método
+  (amostra ou expandida, com fator de cobertura `k`), e a obrigação declara quais
+  tipos de evidência a quitam. O padrão segue fechado em apenas quântico.
+- Três defesas ativas: obrigação quântica recusa medida clássica; `MEASURE` sem `k`
+  é recusada; tipo de evidência desconhecido é recusa, nunca omissão.
+- Bateria de metrologia: 20 casos com veredito previsto antes da execução, 19/20,
+  com 5/5 nos casos de bancada clássica.
+
 ## [2.5.8] - 2026-11-07
 
 ### Segurança (auditoria integrada de 06/11)
