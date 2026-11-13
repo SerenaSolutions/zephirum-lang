@@ -1,0 +1,67 @@
+name: Third-party receipt verification
+
+# Recomputes the Z-QEA seal on every third-party receipt before a ledger row is
+# accepted. A broken seal fails the job: nothing enters the ledger unverified.
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "conformance/third_party/**"
+      - "docs/THIRD_PARTY.md"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Find submitted receipts
+        id: find
+        run: |
+          mkdir -p conformance/third_party
+          files=$(find conformance/third_party -name '*.json' | sort)
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "recibos encontrados:"; echo "$files"
+      - name: Recompute SHA3-256 seals
+        if: steps.find.outputs.files != ''
+        run: |
+          fail=0
+          for f in ${{ steps.find.outputs.files }}; do
+            echo "::group::$f"
+            if python3 .github/actions/zqea-verify/zqea_verify.py "$f"; then
+              echo "INTEGRAL: $f"
+            else
+              echo "::error file=$f::selo quebrado ou ausente"
+              fail=1
+            fi
+            echo "::endgroup::"
+          done
+          exit $fail
+      - name: Ledger must cite every verified receipt
+        if: steps.find.outputs.files != ''
+        run: |
+          missing=0
+          for f in ${{ steps.find.outputs.files }}; do
+            base=$(basename "$f")
+            if ! grep -q "$base" docs/THIRD_PARTY.md; then
+              echo "::error::recibo $base sem linha correspondente em docs/THIRD_PARTY.md"
+              missing=1
+            fi
+          done
+          exit $missing
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Verificação de recibos de terceiros"
+            echo "- recibos: ${{ steps.find.outputs.files != '' && 'verificados' || 'nenhum enviado' }}"
+            echo "- regra: selo = SHA3-256 sobre o JSON canônico sem o campo selo_sha3_256"
+          } >> "$GITHUB_STEP_SUMMARY"
