@@ -33,6 +33,45 @@ except ImportError:  # in-tree, no install
 MARGIN = 0.15          # declared confidence band (+-0.15) of the noise rule
 
 
+def _erfinv(y):
+    """Inversa da erf por bisseccao (stdlib only). Erro < 1e-12."""
+    if y == 0:
+        return 0.0
+    lo, hi = 0.0, 6.0
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        if math.erf(mid) < y:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2
+
+
+def wilson_interval(k, n, delta=0.05):
+    """Intervalo de Wilson para proporcao, 1-delta. Sem scipy.
+
+    Devolve (p_lo, p_hi) dentro de [0, 1] por construcao, ao contrario de uma
+    banda fixa somada a p_hat.
+    """
+    if not (0 < delta < 1):
+        raise ValueError("delta must be in (0, 1), got %r" % (delta,))
+    z = math.sqrt(2) * _erfinv(1 - delta)
+    prop = k / n
+    z2 = z * z
+    den = 1 + z2 / n
+    centro = (prop + z2 / (2 * n)) / den
+    meia = (z * math.sqrt(prop * (1 - prop) / n + z2 / (4 * n * n))) / den
+    return (max(0.0, centro - meia), min(1.0, centro + meia))
+
+
+def _as_int(nome, valor, minimo):
+    if isinstance(valor, bool) or not isinstance(valor, int):
+        raise TypeError("%s must be an int, got %s (%r)" % (nome, type(valor).__name__, valor))
+    if valor < minimo:
+        raise ValueError("%s must be >= %d, got %d" % (nome, minimo, valor))
+    return valor
+
+
 def adaptive_margin(epsilon, shots):
     """UPGRADE v1.9.0 — banda de confianca adaptativa (Hoeffding inverso).
 
@@ -166,6 +205,15 @@ class ZYQLQuantumGate:
 
     def __init__(self, n, f):
         """n: number of input qubits. f: purpose function on n-bit ints -> 0/1."""
+        _as_int("n", n, 1)
+        if not callable(f):
+            raise TypeError("f must be callable, got %s" % type(f).__name__)
+        sonda = f(0)
+        if sonda not in (0, 1, True, False):
+            raise ValueError(
+                "oracle f(0) returned %r (%s); the DJ promise needs f in {0, 1} - "
+                "a non-boolean answer is refused instead of silently read as 0"
+                % (sonda, type(sonda).__name__))
         self.n = n
         self.f = f
         self.oracle_calls = 0
@@ -186,7 +234,15 @@ class ZYQLQuantumGate:
         (erro de familia <= epsilon). k=1 = decisao unica.
         Sem epsilon: banda fixa MARGIN (comportamento v1.x preservado).
         """
+        _as_int("shots", shots, 1)
+        _as_int("family", family, 1)
         if epsilon is not None:
+            if isinstance(epsilon, bool) or not isinstance(epsilon, (int, float)):
+                raise TypeError("epsilon must be a float in (0, 1] or None, got %s"
+                                % type(epsilon).__name__)
+            if not (0 < epsilon <= 1):
+                raise ValueError("epsilon must be in (0, 1], got %r" % (epsilon,))
+            epsilon = float(epsilon)
             margin = adaptive_margin_family(epsilon, shots, family)
             if margin <= 0:
                 # familia grande demais para os shots: RECUSA TUDO, honesto
@@ -224,9 +280,16 @@ class ZYQLQuantumGate:
         POR QUE recusou (oraculo balanceado vs zona cinzenta), em vez de
         lumping de toda dificuldade numa recusa unica.
         """
-        hoeff = min(epsilon_declared, 2 * math.exp(-2 * shots * margin ** 2)) if adaptive else 2 * math.exp(-2 * shots * margin ** 2)
+        bruto = min(epsilon_declared, 2 * math.exp(-2 * shots * margin ** 2)) if adaptive else 2 * math.exp(-2 * shots * margin ** 2)
+        # v2.5.9: cota de probabilidade de erro acima de 1 nao significa nada.
+        hoeff = min(1.0, bruto)
+        k = int(round(p0 * shots))
+        lo, hi = wilson_interval(k, shots, delta=min(max(bruto, 0.01), 0.99))
         family_field = {"family": family,
-                        "epsilon_family": (epsilon_declared if adaptive else None)}
+                        "epsilon_family": (epsilon_declared if adaptive else None),
+                        "p_lo": round(lo, 6), "p_hi": round(hi, 6),
+                        "interval_rule": "wilson 1-delta declarado",
+                        "error_bound_raw": bruto, "error_bound_clamped": bruto > 1.0}
         if p0 >= 1 - margin:
             # constant. Which constant? the classical f(0) probe (P2-4: 2nd call, counted)
             self.oracle_calls += 1
