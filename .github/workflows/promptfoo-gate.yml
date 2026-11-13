@@ -22,7 +22,7 @@ jobs:
         run: npm install -g promptfoo
       - name: casos de borda do ZYQL
         run: promptfoo eval -c lab/eval/promptfooconfig.yaml --no-cache --max-concurrency 2
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: relatorio-promptfoo
