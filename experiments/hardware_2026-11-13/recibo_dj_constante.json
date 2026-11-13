@@ -1,0 +1,23 @@
+{
+ "protocolo": "Z-QEA",
+ "versao_linguagem": "2.5.8",
+ "circuito": "dj_constante",
+ "backend": "ibm_fez",
+ "job_id": "dbrhr5ok09pc73av21n0",
+ "shots": 2048,
+ "counts": {
+  "000": 1005,
+  "100": 1013,
+  "010": 15,
+  "001": 3,
+  "101": 3,
+  "110": 9
+ },
+ "p_hat": 0.00293,
+ "eps": 0.03001,
+ "regra": "hoeffding delta=0.05 threshold=0.5",
+ "veredito": "0",
+ "medido_em": "2026-11-13T14:29:45.656186+00:00",
+ "selo_regra": "SHA3-256 do JSON canonico sem o campo selo_sha3_256",
+ "selo_sha3_256": "1fb56c1f02488c4915dd68f11741ef48b21d956a986b20648b19b24684b7ddd6"
+}
