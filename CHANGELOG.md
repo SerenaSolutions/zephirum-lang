@@ -1,6 +1,4 @@
-## [Em desenvolvimento] - 2026-11-12
-
-## Nao lancado
+## [2.5.9] - 2026-11-13
 
 ### Corrigido
 
