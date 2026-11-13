@@ -122,9 +122,16 @@ version_doi = pub["doi"]
 print(f"[SYNCED] release {tag} -> {version_doi} "
       f"(concepto permanente: {CONCEPT_DOI})")
 
-# 6) comentar o DOI na release do GitHub
+# 6) registrar o DOI na release do GitHub
+# Releases nao aceitam comentario: /issues/{id}/comments trata o id da release como
+# numero de issue e devolve 404. O lugar certo do DOI e o corpo da propria release.
 release = gh(f"/repos/{REPO}/releases/tags/{tag}")
-gh(f"/repos/{REPO}/issues/{release['id']}/comments", "POST",
-   {"body": f"Archived on Zenodo: {version_doi} (concept DOI {CONCEPT_DOI}). "
-            f"Synced automatically by the ZENODO_SYNC action."})
-print(f"[NOTED] DOI comentado na release {tag}")
+linha = (f"**Archived on Zenodo:** {version_doi} "
+         f"(concept DOI {CONCEPT_DOI}). Synced automatically by the ZENODO_SYNC action.")
+corpo = release.get("body") or ""
+if version_doi in corpo:
+    print(f"[NOTED] DOI {version_doi} ja estava na release {tag}")
+else:
+    gh(f"/repos/{REPO}/releases/{release['id']}", "PATCH",
+       {"body": (corpo.rstrip() + "\n\n---\n\n" + linha).strip()})
+    print(f"[NOTED] DOI {version_doi} registrado no corpo da release {tag}")
