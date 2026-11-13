@@ -21,7 +21,16 @@ license: Apache-2.0
 identifiers:
   - type: doi
     value: "10.5281/zenodo.23632019"
-    description: "Zenodo concept DOI (software deposit)"
+    description: "Zenodo concept DOI for the software deposit (always resolves to the latest version). Cite this one."
+  - type: doi
+    value: "10.5281/zenodo.24112080"
+    description: "Version DOI, software v2.5.8 (use when exact content matters)."
+  - type: doi
+    value: "10.5281/zenodo.23330695"
+    description: "Preprint: ZYQL, a trivalent-decision quantum language with pre-registered, signed results."
+  - type: doi
+    value: "10.5281/zenodo.24116721"
+    description: "Errata: universality claim for the implemented ZYQL gate set."
 preferred-citation:
   type: article
   title: "Necessity-First Computational Quantum Chemistry: The ZYQL Exact-Decision Language and Quantum-Witnessed Verification on Superconducting Hardware (thesis v0.1)"

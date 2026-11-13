@@ -10,8 +10,13 @@ prevalece.
 - Repositório oficial: `SerenaSolutions/zephirum-lang` (único).
 - Pacote oficial: `zephirum` no PyPI — `pip install zephirum`.
 - Licença: Apache-2.0.
-- DOIs: preprint 10.5281/zenodo.23330695 · software 10.5281/zenodo.24112080 ·
-  errata 10.5281/zenodo.24116721.
+- DOIs, com o papel de cada um declarado:
+  - software, **DOI conceito** `10.5281/zenodo.23632019` — é este que se cita; resolve sempre para a versão depositada mais recente;
+  - software, versão 2.5.8: `10.5281/zenodo.24112080` — use quando a exatidão de conteúdo importar;
+  - software, versão 2.1.0 (histórica): `10.5281/zenodo.23632020`;
+  - preprint: `10.5281/zenodo.23330695`;
+  - errata da alegação de universalidade: `10.5281/zenodo.24116721`.
+- Regra de citação: para o software, cite o DOI conceito e, se precisar fixar conteúdo, acrescente o DOI de versão. Nunca cite dois registros como se fossem o mesmo.
 - Projeto experimental listado no Qiskit ecosystem (submission 1432).
 
 ## What is a FACT (code + tests exist)
