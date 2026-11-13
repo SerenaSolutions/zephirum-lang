@@ -7,7 +7,7 @@
 
 | Item | Diretriz dizia | Decisão | Motivo |
 | --- | --- | --- | --- |
-| Licença | "Preservar MIT" | **Apache-2.0 mantido** | Concessão explícita de patentes; já declarada no PyPI, Zenodo e catálogo Qiskit. Trocar para MIT enfraquece a proteção e desmente três registros públicos. |
+| Licença | "Preservar a licença permissiva anterior" | **Apache-2.0 mantido** | Concessão explícita de patentes; já declarada no PyPI, Zenodo e catálogo Qiskit. Voltar atrás enfraquece a proteção (perde a concessão de patentes) e desmente três registros públicos. |
 | Numeração | "1.0 → 2.0" | **Pacote em 2.5.8; "1.0 → 2.0" vale para a especificação** | Renumerar para baixo quebraria PyPI, Zenodo e o catálogo. |
 | Segunda sintaxe (PROBLEM/DECIDE/RETURN) | linguagem independente | **Descopada por ora** | O front-end é Lisp `.zph` (v2), com 26 exemplos e regressão própria. Duas superfícies públicas fragmentam a base. Reavaliar como superfície que compila para a forma canônica. |
 
