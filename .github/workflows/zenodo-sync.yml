@@ -20,10 +20,13 @@ jobs:
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # NOTAS vem por env, nunca interpolada no shell: o corpo da release tem
+          # crase e $(...), que o bash executaria como comando.
+          RELEASE_NOTES: ${{ github.event.release.body }}
         run: |
           if [ "${{ github.event_name }}" = "release" ]; then
             TAG="${GITHUB_REF#refs/tags/}"
-            NOTES="${{ github.event.release.body }}"
+            NOTES="$RELEASE_NOTES"
           else
             TAG="${{ github.event.inputs.tag }}"
             NOTES=""
