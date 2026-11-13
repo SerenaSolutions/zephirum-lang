@@ -20,6 +20,8 @@ RAIZ = Path(__file__).resolve().parent.parent
 PYPROJECT = RAIZ / "pyproject.toml"
 README = RAIZ / "README.md"
 CHANGELOG = RAIZ / "CHANGELOG.md"
+OPENAPI = RAIZ / "docs" / "openapi.json"
+SERVIDOR = RAIZ / "api" / "server.py"
 
 
 def versao() -> str:
@@ -47,6 +49,27 @@ def sincronizar(v: str, aplicar: bool = True) -> list[str]:
         mudancas.append(f"CHANGELOG: abre em {atual}, pyproject diz {v}")
         if aplicar and not achado:
             CHANGELOG.write_text(f"## [{v}] - pendente de notas\n\n" + changelog, encoding="utf-8")
+
+    # O guard tools/check_compliance.py confere estas duas fontes alem do badge.
+    # Deixa-las de fora foi o que manteve o main vermelho depois do release 2.5.9.
+    if OPENAPI.exists():
+        openapi = OPENAPI.read_text(encoding="utf-8")
+        novo = re.sub(r'("version"\s*:\s*")\d+\.\d+\.\d+(")',
+                      rf"\g<1>{v}\g<2>", openapi, count=1)
+        if novo != openapi:
+            mudancas.append(f"docs/openapi.json: info.version -> {v}")
+            if aplicar:
+                OPENAPI.write_text(novo, encoding="utf-8")
+
+    if SERVIDOR.exists():
+        servidor = SERVIDOR.read_text(encoding="utf-8")
+        novo = re.sub(r'^APP_VERSION\s*=\s*"\d+\.\d+\.\d+"',
+                      f'APP_VERSION = "{v}"', servidor, count=1, flags=re.MULTILINE)
+        if novo != servidor:
+            mudancas.append(f"api/server.py: APP_VERSION -> {v}")
+            if aplicar:
+                SERVIDOR.write_text(novo, encoding="utf-8")
+
     return mudancas
 
 
@@ -55,7 +78,7 @@ def main(argv: list[str]) -> int:
     aplicar = "--check" not in argv
     mudancas = sincronizar(v, aplicar)
     if not mudancas:
-        print(f"versao {v} consistente em pyproject, README e CHANGELOG")
+        print(f"versao {v} consistente em pyproject, README, CHANGELOG, openapi e APP_VERSION")
         return 0
     for m in mudancas:
         print(("- " if aplicar else "DIVERGENTE: ") + m)
