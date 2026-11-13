@@ -52,7 +52,7 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
-      - uses: jpetrucciani/mypy-check@1.20.2
+      - uses: jpetrucciani/mypy-check@2.4.1
         # continue-on-error na ETAPA, nao so no job: no nivel do job o check-run
         # continua vermelho e trava o PR, mesmo com a run verde.
         continue-on-error: true
