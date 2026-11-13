@@ -18,6 +18,11 @@ recomputed by CI before the row was written. Rows that contradict us stay.
    não foi alterado depois de selado. Quem afirma ser o autor é a linha do ledger,
    não o hash.
 
+6. **Crédito é escolha de quem testa.** Nome, handle público ou anônimo: o testador
+   decide na hora de mandar. Anônimo não perde nada na verificação — o selo é
+   recalculado igual e a linha entra igual. Perde só o crédito, e isso é direito dele.
+   Não publicamos nome de terceiro que não pediu para aparecer.
+
 ## Níveis
 
 | Nível | O que é | O que a CI consegue checar sozinha |
@@ -28,6 +33,9 @@ recomputed by CI before the row was written. Rows that contradict us stay.
 | T3 | Tentou quebrar uma guarda | o resultado do ataque, com o recibo do que quebrou |
 
 ## Ledger
+
+Crédito conforme a escolha do testador: nome, handle ou anônimo. A coluna *Testador*
+mostra o que a pessoa autorizou a publicar, e nada além disso.
 
 | # | Data | Testador | Nível | Versão / commit | Modo | Veredito | Recibo (selo, 12 primeiros) | Job ID | Issue |
 |---|------|----------|-------|-----------------|------|----------|------------------------------|--------|-------|
