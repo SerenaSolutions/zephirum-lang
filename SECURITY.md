@@ -1,8 +1,12 @@
 # Security
 
 Report vulnerabilities privately to **serena.aigronovatech@gmail.com**
-(subject prefix `[SECURITY]`). Do not open a public issue. Include a receipt if one exists. ML-DSA-44 (FIPS 204) seals every
-decision; tampered receipts fail verification.
+(subject prefix `[SECURITY]`). Do not open a public issue. Include a receipt if one exists. Todo recibo carrega selo de
+integridade SHA3-256, e a cadeia de assinatura em uso hoje e Ed25519 (`public_key.txt`);
+recibo adulterado reprova na verificacao. A camada pos-quantica ML-DSA-44 (FIPS 204)
+esta implementada em `src/zqea_sig.py`, atras do extra `[pq]`, mas **ainda nao esta
+aplicada aos recibos publicados** — quando a assinatura hibrida entrar, esta linha muda.
+O que o selo prova, exatamente, esta em `docs/FACTS.md`.
 
 ## Prazo de resposta
 
