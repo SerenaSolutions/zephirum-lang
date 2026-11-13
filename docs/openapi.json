@@ -3,7 +3,7 @@
   "info": {
     "title": "ZYQL Decision API",
     "description": "Decisão trivalente com banda derivada e recibo verificável offline.",
-    "version": "2.5.8"
+    "version": "2.5.9"
   },
   "servers": [
     {
