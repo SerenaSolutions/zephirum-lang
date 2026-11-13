@@ -18,7 +18,7 @@
   `interval_rule` em todo veredito: intervalo que fica dentro de [0, 1] por construcao.
 - `tests/test_input_validation.py`, 8 casos cobrindo as guardas acima.
 
-Trabalho em curso. Sem release, sem publicação no PyPI.
+Publicado no PyPI em 13/11/2026 (17h18 UTC), wheel `zephirum-2.5.9-py3-none-any.whl`. Tag `v2.5.9`.
 
 - Perfil de evidência para medida clássica (`MEASURE`): a incerteza declara o método
   (amostra ou expandida, com fator de cobertura `k`), e a obrigação declara quais
