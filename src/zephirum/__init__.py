@@ -17,7 +17,7 @@ import hashlib
 import json
 import math
 
-__version__ = "2.5.8"
+__version__ = "2.5.9"
 __all__ = ["decidir", "verificar_recibo", "modulos", "__version__"]
 
 
