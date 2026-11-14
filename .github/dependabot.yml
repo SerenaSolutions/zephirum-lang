@@ -27,5 +27,5 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
-      - "ci"
+      - "github_actions"
     rebase-strategy: "auto"
