@@ -1,3 +1,7 @@
+**ZEPHIRUM / ZYQL: a quantum programming language and algorithm under active, full-time development. Work in progress, nothing here is final.**
+
+> Trivalent decisions (`1` / `0` / `REFUSED`) with sealed, verifiable receipts, built on Qiskit. Status: experimental, very early project.
+
 [![Qiskit Ecosystem](https://qisk.it/e-b2b5fe46)](https://qisk.it/e)
 
 <p align="center"><img src="assets/brand/zephirum-header.png" width="520" alt="ZEPHIRUM&trade; &middot; ZYQL&trade; — computação quântica antes da execução"></p>
