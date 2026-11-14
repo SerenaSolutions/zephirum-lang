@@ -74,7 +74,7 @@ def main():
     ap.add_argument("--outdir", default=None)
     a = ap.parse_args()
 
-    tok = os.environ.get("IBM_QUANTUM_TOKEN") or os.environ.get("IBM_CLOUD_API_KEY")
+    tok = os.environ.get("IBM_CLOUD_API_KEY") or os.environ.get("IBM_QUANTUM_TOKEN")
     inst = os.environ.get("IBM_QUANTUM_INSTANCE") or None
     svc = None
     if not a.sim:
