@@ -172,9 +172,18 @@ def test_absurd_family_refuses_everything():
 
 # ---------- H8: um tick alem da banda e recusa ----------
 def test_band_boundary_is_refused():
+    """v2.6.0: decide quem tem LIMITE inferior acima do limiar, nao quem tem media.
+
+    O caso antigo (0.86 com 100 disparos) decidia 1 exibindo p_lo=0.78, abaixo do
+    proprio limiar de 0.85. Isso era o recibo contradizendo o veredito.
+    """
     gate = ZYQLQuantumGate(2, lambda x: 1)
-    inside = gate._trivalent(0.86, 100, margin=0.15)   # >= 1-m: decide
-    assert inside["decision"] == 1
+    contradicao = gate._trivalent(0.86, 100, margin=0.15)
+    assert contradicao["decision"] == "REFUSED"
+    assert contradicao["refusal_reason"] == "INTERVAL_INSIDE_BAND"
+    assert contradicao["p_lo"] < 1 - 0.15
+    decide = gate._trivalent(0.98, 2000, margin=0.15)   # p_lo ~0.974 >= 0.85
+    assert decide["decision"] == 1
     one_tick_out = gate._trivalent(0.84, 100, margin=0.15)  # centro da banda
     assert one_tick_out["decision"] == "REFUSED"
     assert one_tick_out["refusal_reason"] == "INSIDE_NOISE_BAND"
