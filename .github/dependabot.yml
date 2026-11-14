@@ -8,6 +8,7 @@ updates:
     labels:
       - "dependencies"
       - "python"
+    rebase-strategy: "auto"
 
   - package-ecosystem: "uv"
     directory: "/"
@@ -17,6 +18,7 @@ updates:
     labels:
       - "dependencies"
       - "python"
+    rebase-strategy: "auto"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -26,3 +28,4 @@ updates:
     labels:
       - "dependencies"
       - "ci"
+    rebase-strategy: "auto"
