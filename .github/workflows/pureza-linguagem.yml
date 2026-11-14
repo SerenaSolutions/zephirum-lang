@@ -1,0 +1,15 @@
+name: Pureza da linguagem - ZEPH-PUR-01
+on:
+  push: {branches: [main]}
+  pull_request:
+  workflow_dispatch:
+jobs:
+  pureza:
+    name: Nenhuma cobrança dentro da linguagem
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: Guarda de pureza
+        run: python3 tools/check_language_purity.py
