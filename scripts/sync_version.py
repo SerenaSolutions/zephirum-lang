@@ -22,6 +22,7 @@ README = RAIZ / "README.md"
 CHANGELOG = RAIZ / "CHANGELOG.md"
 OPENAPI = RAIZ / "docs" / "openapi.json"
 SERVIDOR = RAIZ / "api" / "server.py"
+PACOTE = RAIZ / "src" / "zephirum" / "__init__.py"
 
 
 def versao() -> str:
@@ -70,6 +71,16 @@ def sincronizar(v: str, aplicar: bool = True) -> list[str]:
             if aplicar:
                 SERVIDOR.write_text(novo, encoding="utf-8")
 
+    # O __init__ ficou de fora e o wheel 2.5.9 saiu dizendo 2.5.8 em tempo de execucao.
+    if PACOTE.exists():
+        pacote = PACOTE.read_text(encoding="utf-8")
+        novo = re.sub(r'^__version__\s*=\s*"\d+\.\d+\.\d+"',
+                      f'__version__ = "{v}"', pacote, count=1, flags=re.MULTILINE)
+        if novo != pacote:
+            mudancas.append(f"src/zephirum/__init__.py: __version__ -> {v}")
+            if aplicar:
+                PACOTE.write_text(novo, encoding="utf-8")
+
     return mudancas
 
 
@@ -78,7 +89,7 @@ def main(argv: list[str]) -> int:
     aplicar = "--check" not in argv
     mudancas = sincronizar(v, aplicar)
     if not mudancas:
-        print(f"versao {v} consistente em pyproject, README, CHANGELOG, openapi e APP_VERSION")
+        print(f"versao {v} consistente em pyproject, README, CHANGELOG, openapi, APP_VERSION e __version__ do pacote")
         return 0
     for m in mudancas:
         print(("- " if aplicar else "DIVERGENTE: ") + m)
