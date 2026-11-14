@@ -18,3 +18,8 @@ lib64/
 include/
 pyvenv.cfg
 *.egg-info/
+.handoff/
+*.bundle
+.vercel
+.env*
+cpp/libzyql.so

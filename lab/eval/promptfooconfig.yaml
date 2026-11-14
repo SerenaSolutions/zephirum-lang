@@ -1,0 +1,27 @@
+description: Portao ZYQL nunca aprova sem evidencia
+providers:
+  - id: file://provedor_zyql.py
+    label: portao-zyql
+prompts:
+  - "{{caso}}"
+tests:
+  - vars: { caso: '{"achados": []}' }
+    assert:
+      - type: equals
+        value: REFUSED
+  - vars: { caso: '{"achados": [{"resultado": "PASS", "severidade": "alta"}]}' }
+    assert:
+      - type: equals
+        value: APROVADO
+  - vars: { caso: '{"achados": [{"resultado": "FALHA", "severidade": "critica"}]}' }
+    assert:
+      - type: equals
+        value: BLOQUEADO
+  - vars: { caso: '{"achados": [{"resultado": "REFUSED", "severidade": "critica"}]}' }
+    assert:
+      - type: equals
+        value: REFUSED
+  - vars: { caso: '{"achados": [{"resultado": "PASS", "severidade": "alta"}, {"resultado": "FALHA", "severidade": "alta"}]}' }
+    assert:
+      - type: not-equals
+        value: APROVADO

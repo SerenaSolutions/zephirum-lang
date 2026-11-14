@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Bateria dos protocolos P-08 (ZNE vs C†) e P-10 (fronteira clássica x hardware)."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))

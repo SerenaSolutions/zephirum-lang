@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """ZEPHYRUM kernel: process table, scheduler, audit log, backend registry."""
 import time, uuid
 

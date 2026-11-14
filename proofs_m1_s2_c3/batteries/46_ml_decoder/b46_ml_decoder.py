@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # BATERIA 46 — DECODER DE IA AUDITADO PELA REGUA EXATA — kernel ZEPHYRUM 1.12
 # Codigo de superficie d=3 (bateria 43) + decoder neural (numpy, Adam) + avaliacao EXAUSTIVA
 import numpy as np, json, hashlib

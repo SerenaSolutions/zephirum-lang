@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 ZYQL RAG+LLM NEURAL LAYER (v1.0.0, 12/10/2026) — the LinkedIn architecture rooted
 in the language: trusted docs -> RAG retrieval -> LLM (Gemini 3.5 Flash) translates

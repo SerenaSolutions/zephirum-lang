@@ -1,4 +1,34 @@
-## [2.5.7] - 2026-11-07
+## [2.5.9] - 2026-11-13
+
+### Corrigido
+
+- `shots=0` levantava `ZeroDivisionError` cru; agora `ValueError` com mensagem.
+- `epsilon` fora de (0, 1] e tipos invalidos (`shots=2048.5`, `'2048'`, `None`, `n=-1`)
+  passam a ser recusados na entrada, em vez de estourar excecao de biblioteca.
+- Oráculo que devolve valor fora de {0, 1} (`2`, `None`, `'1'`) era lido em silencio como
+  constante 0; agora levanta `ValueError`. `True`/`False` continuam validos: a convencao
+  declarada e `f == 1 em todo ponto -> DECIDE 1`.
+- `error_bound` por Hoeffding podia passar de 1 com poucos shots, o que nao significa
+  nada como cota de probabilidade. Passa a ser limitado a 1, com `error_bound_raw` e
+  `error_bound_clamped` expondo o valor original.
+
+### Adicionado
+
+- `wilson_interval(k, n, delta)` em stdlib pura, e os campos `p_lo` / `p_hi` /
+  `interval_rule` em todo veredito: intervalo que fica dentro de [0, 1] por construcao.
+- `tests/test_input_validation.py`, 8 casos cobrindo as guardas acima.
+
+Publicado no PyPI em 13/11/2026 (17h18 UTC), wheel `zephirum-2.5.9-py3-none-any.whl`. Tag `v2.5.9`.
+
+- Perfil de evidência para medida clássica (`MEASURE`): a incerteza declara o método
+  (amostra ou expandida, com fator de cobertura `k`), e a obrigação declara quais
+  tipos de evidência a quitam. O padrão segue fechado em apenas quântico.
+- Três defesas ativas: obrigação quântica recusa medida clássica; `MEASURE` sem `k`
+  é recusada; tipo de evidência desconhecido é recusa, nunca omissão.
+- Bateria de metrologia: 20 casos com veredito previsto antes da execução, 19/20,
+  com 5/5 nos casos de bancada clássica.
+
+## [2.5.8] - 2026-11-07
 
 ### Segurança (auditoria integrada de 06/11)
 - Rate limit por chave: janela deslizante de 60 s, `ZYQL_RATE_LIMIT` (padrão 120/min), 429 com `Retry-After`.

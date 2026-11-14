@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
+name: SBOM (SPDX)
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Exportar SBOM do dependency graph
+        run: |
+          gh api "repos/${{ github.repository }}/dependency-graph/sbom" -q .sbom > sbom.spdx.json
+          echo "pacotes: $(python3 -c 'import json;print(len(json.load(open("sbom.spdx.json")).get("packages",[])))')"
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Anexar ao release
+        if: github.event_name == 'release'
+        run: gh release upload "${{ github.event.release.tag_name }}" sbom.spdx.json --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sbom-spdx
+          path: sbom.spdx.json

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Bateria logica do WORLD-3 (sem QPU, sem 8192 shots)."""
 import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))

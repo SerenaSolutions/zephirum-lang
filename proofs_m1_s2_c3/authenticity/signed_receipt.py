@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """ZYQL — RECIBO ASSINADO (autenticidade real) + verificador independente.
 
 Niveis de evidencia da casa, agora com o que faltava:

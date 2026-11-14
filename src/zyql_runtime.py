@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """ZYQL PRODUCTION RUNTIME (v1.8.0) — decisão trivalente como componente de produção.
 
 API pública estável:

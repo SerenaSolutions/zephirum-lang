@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 try:
     import pqcrypto  # noqa: F401
 except ImportError:  # extra 'pq' nao instalado: pular a bateria inteira

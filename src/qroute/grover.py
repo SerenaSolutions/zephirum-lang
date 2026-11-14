@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Grover exato em vetor de estado (sem shots, sem ruido falso).
 
 Marcamos indices de rotas viaveis e medimos a probabilidade de o algoritmo

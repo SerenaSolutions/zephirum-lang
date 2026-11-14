@@ -1,0 +1,94 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZEPHIRUM no ecossistema Qiskit · relatório técnico</title>
+<style>
+:root{--bg:#0f1216;--surf:#161a20;--lin:#252b33;--fg:#e8e6e1;--dim:#9aa3ad;--acc:#d97757;--ok:#2f6f4f;--no:#a33}
+@media(prefers-color-scheme:light){:root{--bg:#f7f5f1;--surf:#fff;--lin:#e2ddd4;--fg:#1a1a1a;--dim:#5f6672;--acc:#b5563a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);
+font:16px/1.58 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:48px 20px 80px}
+.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h1{font-size:clamp(27px,4.2vw,44px);line-height:1.08;margin:12px 0 10px;letter-spacing:-.022em}
+.lead{color:var(--dim);max-width:74ch}
+h2{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin:46px 0 14px}
+table{width:100%;border-collapse:collapse;background:var(--surf);border:1px solid var(--lin);
+border-radius:12px;overflow:hidden;font-size:14px;margin-top:6px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+padding:11px 14px;border-bottom:1px solid var(--lin)}
+td{padding:11px 14px;border-bottom:1px solid var(--lin);vertical-align:top}
+tr:last-child td{border-bottom:none}.n{font-variant-numeric:tabular-nums}
+.h{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--dim)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--surf);border:1px solid var(--lin);border-radius:12px;padding:18px}
+.card h3{margin:0 0 10px;font-size:15px}
+.card.y{border-left:3px solid var(--ok)}.card.n{border-left:3px solid var(--no)}
+ul{margin:8px 0 0;padding-left:20px}li{margin:5px 0;color:var(--dim)}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+pre{background:var(--surf);border:1px solid var(--lin);border-radius:10px;padding:14px;overflow-x:auto}
+.v{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--acc);color:var(--acc)}
+footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--lin);color:var(--dim);font-size:13px}
+</style></head><body><div class="wrap">
+<div class="kicker">Serena Quantum Solutions · registro de marco</div>
+<h1>ZEPHIRUM entrou no ecossistema Qiskit. Isto é o que exatamente aconteceu.</h1>
+<p class="lead">Relatório técnico de 9 de novembro de 2026. Escrito para ser conferido, não para
+ser acreditado. Onde um fato não pôde ser reverificado, ele não aparece afirmado.</p>
+
+<h2>O que foi incorporado</h2>
+<table><tbody>
+<tr><td>Pull request</td><td>#1433, "Add ZEPHIRUM"</td></tr>
+<tr><td>Destino</td><td><code>Qiskit/ecosystem</code>, branch <code>main</code></td></tr>
+<tr><td>Commit de merge</td><td class=h>d327b86e21a4ac794842519951387bb9013abda1</td></tr>
+<tr><td>Data</td><td>2026-11-09 16:00:00 UTC</td></tr>
+<tr><td>Merge executado por</td><td>Luciano Bello (<code>1ucian0</code>)</td></tr>
+<tr><td>Arquivos alterados</td><td><b>1</b> — <code>resources/members/zephirum_b2b5fe46.toml</code> (+81)</td></tr>
+<tr><td>Classificação declarada</td><td>categoria SDK · maturidade experimental · estágio muito inicial</td></tr>
+</tbody></table>
+<p class="lead" style="margin-top:14px"><b>Nenhuma linha de código ZYQL foi incorporada ao Qiskit.</b>
+O que passou a existir é o registro de que o projeto é membro. Não é certificação da IBM,
+não é validação da linguagem pela comunidade, não é selo científico.</p>
+
+<h2>O que já está medido</h2>
+<table><thead><tr><th>Frente</th><th>Resultado</th><th>Recibo</th></tr></thead><tbody>
+<tr><td>Semântica trivalente</td><td>3630 casos, 7 hipóteses, <b>0 violações</b></td>
+<td class=h>62664883d35592ef9eb63cae…</td></tr>
+<tr><td>Protocolo pré-registrado</td><td>selado antes da execução, alteração aborta</td>
+<td class=h>ed50c6122539df136300ca6e…</td></tr>
+<tr><td>Suíte de testes</td><td>222 testes em Python 3.10, 3.11 e 3.12</td><td class=h>CI verde</td></tr>
+<tr><td>Provas executáveis</td><td>17 de 17 aprovadas</td><td class=h>rodar_provas.py</td></tr>
+<tr><td>Hardware</td><td>1 job em ibm_marrakesh, 2.048 tiros, uma execução por circuito</td>
+<td class=h>dbouacgou4as73csnbb0</td></tr>
+</tbody></table>
+
+<h2>Demonstração ZYQL + Qiskit</h2>
+<p class="lead">GHZ de 3 qubits, simulador, 2.048 tiros, seed 1701. A pergunta foi declarada
+antes de rodar: a fração GHZ passa de 0,80? O controle negativo remove o terceiro
+entrelaçamento de propósito.</p>
+<table><thead><tr><th>Cenário</th><th>Prof.</th><th>Fração</th><th>Veredito</th><th>ε</th><th>Recibo</th></tr></thead>
+<tbody><tr><td>ideal</td><td class=n>4</td><td class=n>1.0000</td><td><b>1</b></td><td class=n>0.03001</td><td class=h>2c9eacd9b7a54a7d5d001a0aef7c…</td></tr><tr><td>ruido 2%</td><td class=n>6</td><td class=n>0.9746</td><td><b>1</b></td><td class=n>0.03001</td><td class=h>12bd488ca7bfd94fcead4a3c1623…</td></tr><tr><td>controle -</td><td class=n>3</td><td class=n>0.5171</td><td><b>0</b></td><td class=n>0.03001</td><td class=h>8cb2e5defd9867bab68faf3e002b…</td></tr></tbody></table>
+
+<h2>O que ainda não existe</h2>
+<div class="two">
+<div class="card n"><h3>Não demonstrado</h3><ul>
+<li>Autoria dos recibos: hoje há integridade SHA3, não assinatura ML-DSA-44</li>
+<li>Reprodução por terceiro independente</li>
+<li>Estudo estatístico em hardware</li>
+<li>Avaliação da semântica pela comunidade</li>
+<li>Cinco defeitos do Zyclotron ainda sem lista formal</li></ul></div>
+<div class="card y"><h3>Demonstrado</h3><ul>
+<li>A camada decide conforme a regra que declara, sem contraexemplo em 3630 casos</li>
+<li>Distingue estado bom de estado quebrado, com controle negativo</li>
+<li>Sabe responder que os tiros não bastaram</li>
+<li>Metadado alinhado entre repositório, PyPI e ecossistema, verificado todo dia</li>
+<li>Recibos reprodutíveis e verificáveis por hash</li></ul></div>
+</div>
+
+<h2>Reproduzir</h2>
+<pre>git clone https://github.com/SerenaSolutions/zephirum-lang
+cd zephirum-lang
+PYTHONPATH=src python3 validacao/validar_semantica.py
+PYTHONPATH=src python3 demo/demonstracao_qiskit.py
+python3 scripts/verificar_metadado.py</pre>
+
+<footer>Relatório completo em <code>docs/RELATORIO_TECNICO_2026-11-09.md</code> ·
+Produzido pelo mesmo time que construiu o sistema: validação independente segue aberta.</footer>
+</div></body></html>

@@ -1,0 +1,36 @@
+{
+  "backend": "ibm_fez",
+  "qubits_aparelho": 156,
+  "casos": {
+    "ghz_10": {
+      "job_id": "dbs9b8fv5hds73dimmb0",
+      "status": "DONE",
+      "p_00_mais_11": 0.748
+    },
+    "ghz_20": {
+      "job_id": "dbs9b88k09pc73avt6h0",
+      "status": "DONE",
+      "p_00_mais_11": 0.3057
+    },
+    "ghz_30": {
+      "job_id": "dbs9b8nv5hds73dimmbg",
+      "status": "DONE",
+      "p_00_mais_11": 0.0439
+    },
+    "ghz_50": {
+      "job_id": "dbs9b8habdes73fqstj0",
+      "status": "DONE",
+      "p_00_mais_11": 0.0039
+    },
+    "ghz_80": {
+      "job_id": "dbs9b8ujjaos73ajtrb0",
+      "status": "DONE",
+      "p_00_mais_11": 0.0
+    },
+    "ghz_100": {
+      "job_id": "dbs9b8vv5hds73dimmd0",
+      "status": "DONE",
+      "p_00_mais_11": 0.0
+    }
+  }
+}

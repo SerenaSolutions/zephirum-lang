@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA 4 — PRODUTOS DERIVADOS DO KERNEL ZEPHIRUM (ZeptonQL) + Z-ANYON LAB
 MODO DECLARADO: SIMULACAO STATEVECTOR LOCAL (numpy, aritmetica exata) —

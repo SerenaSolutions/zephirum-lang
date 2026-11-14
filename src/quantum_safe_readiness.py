@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Serena Quantum-Safe Readiness (QSR): inventario, classificacao, veredito e recibo.
 
 Principio: o modulo nao afirma conformidade regulatoria. Ele responde a uma pergunta

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 BENCHMARK PÚBLICO E INDEPENDENTE — VERIFICAÇÃO DA BATERIA QUÍMICA ZEPHIRUM
 Verifica o alinhamento numérico entre PySCF FCI, mapeamento Jordan-Wigner via Qiskit

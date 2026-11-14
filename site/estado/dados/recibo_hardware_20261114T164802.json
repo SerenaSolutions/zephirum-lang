@@ -1,0 +1,74 @@
+{
+ "quando": "2026-11-14T16:47:49+00:00",
+ "crn": "crn:v1:bluemix:public:quantum-computing:us-east:a/888715ba1dd2452683a0fcff7331c956:04b5c3ba-cbb0-4180-afba-6ba4a2660b8d::",
+ "backend": "ibm_fez",
+ "shots": 4096,
+ "calibracao": {
+  "backend_id": "ibm_fez",
+  "epoch": "2026-11-13T16:27:59+00:00",
+  "t1_mediano": 136.795945,
+  "t2_mediano": 97.895193,
+  "erro_leitura_mediano": 0.027741,
+  "erro_porta_2q_mediano": 0.014108,
+  "n_qubits": 156
+ },
+ "casos": {
+  "constante_0": {
+   "job_id": "dbs91d9abdes73fqsjpg",
+   "p0": 0.99292,
+   "contagens": {
+    "000": 4067,
+    "001": 16,
+    "010": 2,
+    "100": 11
+   },
+   "veredito": {
+    "decision": 0,
+    "mode": "DECIDED_BY_INTERFERENCE",
+    "p0": 0.992919921875,
+    "rule": "band>=0.85",
+    "error_bound": 1.7859573823144106e-80,
+    "error_bound_type": "Hoeffding",
+    "gate": "G1",
+    "family": 1,
+    "epsilon_family": null,
+    "p_lo": 0.988658,
+    "p_hi": 0.995588,
+    "interval_rule": "wilson 1-delta declarado",
+    "error_bound_raw": 1.7859573823144106e-80,
+    "error_bound_clamped": false
+   }
+  },
+  "balanceado_paridade": {
+   "job_id": "dbs91f0k09pc73avssd0",
+   "p0": 0.05249,
+   "contagens": {
+    "111": 2617,
+    "110": 220,
+    "010": 173,
+    "000": 215,
+    "101": 309,
+    "100": 163,
+    "001": 168,
+    "011": 231
+   },
+   "veredito": {
+    "decision": "REFUSED",
+    "mode": "DECIDED_BY_INTERFERENCE",
+    "refusal_reason": "BALANCED_ORACLE",
+    "p0": 0.052490234375,
+    "rule": "band<=0.15 (balanced: input-dependent)",
+    "error_bound": 1.7859573823144106e-80,
+    "error_bound_type": "Hoeffding",
+    "gate": "G1",
+    "family": 1,
+    "epsilon_family": null,
+    "p_lo": 0.044216,
+    "p_hi": 0.062212,
+    "interval_rule": "wilson 1-delta declarado",
+    "error_bound_raw": 1.7859573823144106e-80,
+    "error_bound_clamped": false
+   }
+  }
+ }
+}

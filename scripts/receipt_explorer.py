@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Receipts explorer (issue #30): resume e verifica recibos Z-QEA.
 
 Uso: python3 scripts/receipt_explorer.py caminho/recibo.json [mais.json ...]

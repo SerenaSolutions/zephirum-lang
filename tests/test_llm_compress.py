@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """ZYQL-LLM-COMPRESS v2.1.0 — compressao tensorial de pesos: testes.
 

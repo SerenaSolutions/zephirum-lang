@@ -1,0 +1,31 @@
+{
+  "programa": "Bell Phi+ (H q0, CX q0-q1, medicao total)",
+  "shots": 4096,
+  "pontas": {
+    "qpu": {
+      "backend": "ibm_fez",
+      "counts": {
+        "00": 1991,
+        "11": 1878,
+        "10": 132,
+        "01": 95
+      },
+      "paridade": 0.94458,
+      "recibo_hash": "cddac8ca3c271b1e"
+    },
+    "pennylane": {
+      "device": "default.qubit",
+      "counts": {
+        "00": 2046,
+        "11": 2050
+      },
+      "paridade": 1.0,
+      "versao": "0.45.1"
+    }
+  },
+  "desvio_paridade": 0.05542,
+  "margem_combinada": 0.03001,
+  "dentro_da_margem": false,
+  "leitura": "desvio maior que a margem: ha erro de hardware a caracterizar",
+  "recibo_hash": "c415e06dd5888e4dba48cdc4748dcc1301501f8db6e3417f447269ee69e99c85"
+}

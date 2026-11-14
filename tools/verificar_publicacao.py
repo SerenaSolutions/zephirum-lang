@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Verifica se o que publicamos e o que declaramos batem entre si.
 
 Motivo: revisar de memoria ja gerou erro (comentario duplicado no PR,
@@ -12,6 +14,10 @@ import json
 import pathlib
 import sys
 import tomllib
+try:
+    import tomllib  # 3.11+
+except ModuleNotFoundError:  # 3.10
+    import tomli as tomllib
 import urllib.error
 import urllib.request
 

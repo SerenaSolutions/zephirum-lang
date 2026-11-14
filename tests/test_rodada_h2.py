@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """Bateria H-2 (25/10/2026) — os dois buracos que a leitura adversarial interna
 apontou na Rodada H, fechados com guardas falsificaveis.

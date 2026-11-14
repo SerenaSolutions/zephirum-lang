@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """COLHEITA DA RODADA 3 (escalada trivalente). Sela recibo Z-QEA (regra limpa)."""
 import os, json, time, hashlib

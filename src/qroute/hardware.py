@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Q-ROUTE na QPU: monta o Grover, transpila para o backend e submete a IBM.
 
 O recibo de hardware carrega job_id, backend, shots, contagens brutas e o

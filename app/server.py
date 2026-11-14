@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """ZYQL QUANTUM CONSOLE — interface do Q-ROUTE.
 
 Servidor local que roda o nucleo qroute e devolve JSON para a tela.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Ponte ZYQL <-> Google Cirq: paridade de veredito trivalente e recibo.
 
 Comprova que a SEMÂNTICA da ZYQL sobrevive à travessia para o framework
