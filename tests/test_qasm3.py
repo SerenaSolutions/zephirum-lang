@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Conformidade OpenQASM 3 (Q-03): a ZYQL exporta QASM3 valido e reimporta identico.
 
 Sem QPU, sem credencial. O teste que importa nao e "o texto parece QASM3":

@@ -1,0 +1,70 @@
+{
+  "protocolo_sha3_256": "ed50c6122539df136300ca6e12484e3ecd8ac759cad964461856e11525be7314",
+  "executado_em": "2026-11-09T17:17:34+00:00",
+  "ambiente": {
+    "python": "3.11.16",
+    "plataforma": "Linux"
+  },
+  "objeto": "funcao decidir() do app emitido por zyclotron_service.emit_service",
+  "regra": "proporcao-v1 (intervalo de Hoeffding)",
+  "casos_executados": 3630,
+  "distribuicao_vereditos": {
+    "1": 1461,
+    "0": 1461,
+    "INCONCLUSIVE": 642,
+    "REFUSED": 0
+  },
+  "eps_min": 0.02371,
+  "eps_max": 0.203453,
+  "hashes_distintos": 3564,
+  "hipoteses": {
+    "H1": {
+      "casos_verificados": 3630,
+      "violacoes": 0,
+      "exemplos": [],
+      "status": "SUPORTADA"
+    },
+    "H2": {
+      "casos_verificados": 3630,
+      "violacoes": 0,
+      "exemplos": [],
+      "status": "SUPORTADA"
+    },
+    "H3": {
+      "casos_verificados": 3630,
+      "violacoes": 0,
+      "exemplos": [],
+      "status": "SUPORTADA"
+    },
+    "H4": {
+      "casos_verificados": 3630,
+      "violacoes": 0,
+      "exemplos": [],
+      "status": "SUPORTADA"
+    },
+    "H5": {
+      "casos_verificados": 3630,
+      "violacoes": 0,
+      "exemplos": [],
+      "status": "SUPORTADA"
+    },
+    "H6": {
+      "casos_verificados": 4,
+      "violacoes": 0,
+      "exemplos": [],
+      "status": "SUPORTADA"
+    },
+    "H7": {
+      "casos_verificados": 3630,
+      "violacoes": 0,
+      "exemplos": [],
+      "status": "SUPORTADA"
+    }
+  },
+  "limitacoes": [
+    "dominio finito e discreto: ausencia de contraexemplo nao e prova universal",
+    "uma execucao por configuracao, sem estudo estatistico",
+    "sem assinatura: o recibo prova integridade, nao autoria (marco 03)"
+  ],
+  "receipt_hash_agregado": "62664883d35592ef9eb63cae9c27c36c383025bc17f6c3551e02284ce5579219"
+}

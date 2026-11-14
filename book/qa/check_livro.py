@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """check_livro.py — gate de qualidade da edicao. Roda offline, sem API, sem credito.
 
 Sete verificacoes: (1) citacoes resolvem para a bibliografia; (2) bibliografia e citada;

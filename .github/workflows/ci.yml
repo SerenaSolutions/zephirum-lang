@@ -1,17 +1,35 @@
 name: CI
 on: [push, pull_request]
+
+# cancelar execucao duplicada da mesma ref poupa minutos de Actions
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tests:
     runs-on: ubuntu-latest
+    # Os modulos vivem direto em src/ (zyql_quantum_gate, zyclotron, zephirum/...).
+    # Sem esta linha o pytest importa a maquina de desenvolvimento, nunca o repo —
+    # foi o que derrubou o teste do adaptador no commit cd1fda3b.
+    env:
+      PYTHONPATH: src
     strategy:
       matrix:
-        python-version: ["3.10", "3.11"]
+        python-version: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install numpy lark scipy pqcrypto cryptography qiskit qiskit-aer cirq qiskit-qasm3-import pytest
+          cache: 'pip'
+      # a suite completa cobre API (fastapi/httpx) e hardware (qiskit-ibm-runtime)
+      - uses: astral-sh/setup-uv@v10.3.3
+        with:
+          enable-cache: true
+      # uv resolve e instala o mesmo conjunto de pacotes: medido de 13s para 1s
+      # no experiment-lab. --system usa o Python do setup-python.
+      - run: uv pip install --system numpy lark scipy pqcrypto cryptography qiskit qiskit-aer qiskit-ibm-runtime cirq qiskit-qasm3-import fastapi httpx uvicorn pytest tomli
       - run: python tests/test_canonical.py
         env:
           PYTHONHASHSEED: "0"
@@ -23,6 +41,14 @@ jobs:
         env:
           PYTHONPATH: src
       - run: python tests/test_selfverified.py
+      - run: python -m pytest tests -q --no-header  # P2-3: suite completa no gate
+      - name: provas em formato de script (fora da coleta do pytest)
+        run: PYTHONPATH=src python scripts/rodar_provas.py
+        env:
+          PYTHONPATH: "src:api:experiments"
+          PYTHONHASHSEED: "0"
+      - run: PYTHONPATH=src:api:experiments python tools/check_compliance.py  # portao de conformidade
+      - run: PYTHONPATH=src:api python tools/conformance_zqea.py  # vetores normativos Z-QEA v1.0
       - run: python tests/test_witness.py
       - run: python tests/test_protocols.py
       - run: python tests/test_cirq.py
@@ -33,3 +59,19 @@ jobs:
       - run: PYTHONPATH=src:tools python tests/test_regression_seal.py
       - run: python tests/test_worldscale.py
       - run: python tests/test_world3.py
+
+  cpp-nucleo:
+    name: nucleo C++ (concordancia com Python)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: compilar nucleo nativo
+        run: make -C cpp
+      - name: dependencias de teste
+        run: pip install pytest qiskit
+      - name: concordancia C++ x Python
+        run: PYTHONPATH=src python -m pytest tests/test_zyql_ten.py -k nativo -q

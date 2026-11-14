@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """Bateria permanente de ataques ao log de decisoes certificadas.
 Se QUALQUER fraude deixar de ser detectada, este teste falha a CI

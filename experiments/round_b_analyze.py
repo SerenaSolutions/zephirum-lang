@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA B — analise da lacuna de shots baixos (64..384), ibm_kingston.
 Executavel varias vezes: so sela o recibo quando TODOS os jobs estao DONE.

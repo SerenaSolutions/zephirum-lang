@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Testes da testemunha de abstenção (refusal witness) — roda sem QPU."""
 import json
 import math

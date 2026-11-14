@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """ZYSDK — o SDK do ZEPHIRUM. Zero dependencia de terceiros.
 
 Por que isto existe: falar com hardware quantico nao exige SDK de fornecedor.

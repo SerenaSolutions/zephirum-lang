@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """
 RODADA E — CARGA MAXIMA no silicio (ordem do dono: entrar DIFICIL, nao facinho).

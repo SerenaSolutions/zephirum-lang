@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """BENCHMARK-01 — a camada de DECISAO da ZEPHIRUM sob medida (issue #28).
 Tese: nao competimos em velocidade de circuito; competimos em honestidade.

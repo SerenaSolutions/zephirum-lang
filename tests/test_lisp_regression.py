@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Suite de regressao do interpretador ZEPHIRUM (issue #26).
 
 Matriz: exemplos canonicos + casos de erro de parse + forma (hello).

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Rodada fresca de prova de conceito na QPU (2026-11-05)."""
 import hashlib, json, sys, time
 from pathlib import Path

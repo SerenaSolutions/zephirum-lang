@@ -1,0 +1,30 @@
+{
+ "modulo": "camadas de ciberseguranca L1-L7",
+ "casos": 13,
+ "passes": 13,
+ "resultado": {
+  "L1 aceita JSON normal": true,
+  "L1 recusa acima do limite": true,
+  "L1 recusa caractere de controle": true,
+  "L1 recusa JSON invalido": true,
+  "L1 recusa profundidade absurda": true,
+  "L4 redige chave": true,
+  "L4 redige token em log": true,
+  "L6 bloqueia acima da taxa": true,
+  "L7 recusa bind externo": true,
+  "L7 aceita loopback": true,
+  "L7 recusa dependencia": true,
+  "L7 cabecalhos presentes": true,
+  "mapa cobre 7 camadas": true
+ },
+ "mapa": {
+  "L1_entrada": "validar_entrada / json_seguro",
+  "L2_autenticidade": "signed_receipt.verify_receipt (Ed25519)",
+  "L3_autorizacao": "policy_gate.PolicyGate (nega por padrao)",
+  "L4_confidencialidade": "redigir / log_seguro",
+  "L5_integridade": "sha3 chain + recibo assinado",
+  "L6_disponibilidade": "LimiteDeTaxa + timeout",
+  "L7_superficie": "cabecalhos_de_seguranca / bind_seguro / politica_de_dependencias"
+ },
+ "RECEIPT_HASH": "071eda0953b24278e329ff81d9657c48"
+}

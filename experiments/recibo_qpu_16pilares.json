@@ -1,0 +1,128 @@
+{
+  "origem": "qpu",
+  "backend": "ibm_fez",
+  "motivo_bloqueio_qpu": "",
+  "circuito_no_alvo": {
+    "profundidade": 8,
+    "portas": {
+      "rz": 6,
+      "sx": 3,
+      "measure": 2,
+      "cz": 1,
+      "barrier": 1
+    }
+  },
+  "linguagem": "ZYQL 2.5.8",
+  "programa_hash": "126dec697f6405de4a70695700f8e1cf746133bae87f50066494b7edb37338ce",
+  "shots": 4096,
+  "counts": {
+    "00": 1991,
+    "11": 1878,
+    "10": 132,
+    "01": 95
+  },
+  "por_paridade": {
+    "par": 3869,
+    "impar": 227
+  },
+  "veredito": {
+    "verdict": "1",
+    "p_hat": 0.94458,
+    "epsilon": 0.02122,
+    "threshold": 0.9,
+    "delta": 0.05,
+    "shots": 4096,
+    "target_key": "par",
+    "rule": "proporcao-v1",
+    "input_commitment": "2c37af017e07a2e81cd7effb8a4a52642246a37b32f86673aef0f8339c6473ef",
+    "receipt_hash": "208799752b5118ac899671204c25b402f818a3cfc8274d810d2890fd12359bdd"
+  },
+  "alvo_do_teste": "paridade_par (P(00)+P(11))",
+  "conferido": true,
+  "pilares": {
+    "contrato": {
+      "feito": true,
+      "portas": 2
+    },
+    "identidade": {
+      "feito": true,
+      "motivo": ""
+    },
+    "permissao": {
+      "feito": true,
+      "lista": [
+        "ibm_boston",
+        "ibm_fez",
+        "ibm_kingston",
+        "ibm_marrakesh",
+        "ibm_strasbourg",
+        "ibm_torino"
+      ]
+    },
+    "nao_duplicar": {
+      "feito": true,
+      "assinatura": "126dec697f6405de",
+      "reaproveitado": false
+    },
+    "teto": {
+      "feito": true,
+      "shots": 4096,
+      "teto": 8192
+    },
+    "carga": {
+      "feito": true,
+      "jobs_simultaneos": 1
+    },
+    "fatiamento": {
+      "feito": true,
+      "blocos": 1,
+      "nota": "rodada unica; sem colecao a paginar"
+    },
+    "prazo": {
+      "feito": true,
+      "limite_s": 900
+    },
+    "versao": {
+      "feito": true,
+      "linguagem": "2.5.8",
+      "contrato": "programa/qubits+gates"
+    },
+    "repeticao": {
+      "feito": true,
+      "tentativas": 3,
+      "espera": "exponencial 0.2/0.4/0.8"
+    },
+    "parada": {
+      "feito": true,
+      "nota": "abandona a via QPU apos 3 falhas e cai para simulador declarado"
+    },
+    "memoria": {
+      "feito": true,
+      "backend_conhecido": "ibm_fez"
+    },
+    "aviso": {
+      "feito": true,
+      "evento": "rodada_concluida",
+      "destino": "recibo_qpu_16pilares.json"
+    },
+    "publicacao": {
+      "feito": true,
+      "recibo": "recibo_qpu_16pilares.json",
+      "contrato": "ZYQL 2.5.8"
+    },
+    "trilha": {
+      "feito": true,
+      "eventos": [
+        "execucao_direta",
+        "rodada"
+      ]
+    },
+    "erro": {
+      "feito": true,
+      "motivo_declarado": "nenhum",
+      "nunca_hardware_fingido": true
+    }
+  },
+  "quando": "2026-11-14T21:12:20Z",
+  "recibo_hash": "cddac8ca3c271b1ee4925c7d148a5c8909f5e9f62a990e6d458eb61add04c903"
+}

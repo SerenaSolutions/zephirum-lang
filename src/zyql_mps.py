@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """ZYQL-MPS v2.0.0 — simulador de produto de estados de matriz, primeira fonte.
 

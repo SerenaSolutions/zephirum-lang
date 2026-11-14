@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # C3-EXT — bateria da extensao T/Rz (o que e EXATO e o que ainda e ESPECIFICACAO)
 import sys, os, math, json, hashlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

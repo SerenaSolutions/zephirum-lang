@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """Submissao dos circuitos da miniatura S3 ao IBM Heron (ibm_fez).
 Padrao da casa: job IDs no recibo; IBM citada como laboratorio de teste, sem endosso."""

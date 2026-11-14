@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Sincroniza README e CHANGELOG com a versao do pyproject.toml.
 
 O `pyproject.toml` e a fonte unica. Este script remove a possibilidade de divergencia
@@ -18,6 +20,9 @@ RAIZ = Path(__file__).resolve().parent.parent
 PYPROJECT = RAIZ / "pyproject.toml"
 README = RAIZ / "README.md"
 CHANGELOG = RAIZ / "CHANGELOG.md"
+OPENAPI = RAIZ / "docs" / "openapi.json"
+SERVIDOR = RAIZ / "api" / "server.py"
+PACOTE = RAIZ / "src" / "zephirum" / "__init__.py"
 
 
 def versao() -> str:
@@ -45,6 +50,37 @@ def sincronizar(v: str, aplicar: bool = True) -> list[str]:
         mudancas.append(f"CHANGELOG: abre em {atual}, pyproject diz {v}")
         if aplicar and not achado:
             CHANGELOG.write_text(f"## [{v}] - pendente de notas\n\n" + changelog, encoding="utf-8")
+
+    # O guard tools/check_compliance.py confere estas duas fontes alem do badge.
+    # Deixa-las de fora foi o que manteve o main vermelho depois do release 2.5.9.
+    if OPENAPI.exists():
+        openapi = OPENAPI.read_text(encoding="utf-8")
+        novo = re.sub(r'("version"\s*:\s*")\d+\.\d+\.\d+(")',
+                      rf"\g<1>{v}\g<2>", openapi, count=1)
+        if novo != openapi:
+            mudancas.append(f"docs/openapi.json: info.version -> {v}")
+            if aplicar:
+                OPENAPI.write_text(novo, encoding="utf-8")
+
+    if SERVIDOR.exists():
+        servidor = SERVIDOR.read_text(encoding="utf-8")
+        novo = re.sub(r'^APP_VERSION\s*=\s*"\d+\.\d+\.\d+"',
+                      f'APP_VERSION = "{v}"', servidor, count=1, flags=re.MULTILINE)
+        if novo != servidor:
+            mudancas.append(f"api/server.py: APP_VERSION -> {v}")
+            if aplicar:
+                SERVIDOR.write_text(novo, encoding="utf-8")
+
+    # O __init__ ficou de fora e o wheel 2.5.9 saiu dizendo 2.5.8 em tempo de execucao.
+    if PACOTE.exists():
+        pacote = PACOTE.read_text(encoding="utf-8")
+        novo = re.sub(r'^__version__\s*=\s*"\d+\.\d+\.\d+"',
+                      f'__version__ = "{v}"', pacote, count=1, flags=re.MULTILINE)
+        if novo != pacote:
+            mudancas.append(f"src/zephirum/__init__.py: __version__ -> {v}")
+            if aplicar:
+                PACOTE.write_text(novo, encoding="utf-8")
+
     return mudancas
 
 
@@ -53,7 +89,7 @@ def main(argv: list[str]) -> int:
     aplicar = "--check" not in argv
     mudancas = sincronizar(v, aplicar)
     if not mudancas:
-        print(f"versao {v} consistente em pyproject, README e CHANGELOG")
+        print(f"versao {v} consistente em pyproject, README, CHANGELOG, openapi, APP_VERSION e __version__ do pacote")
         return 0
     for m in mudancas:
         print(("- " if aplicar else "DIVERGENTE: ") + m)

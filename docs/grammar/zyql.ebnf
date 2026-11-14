@@ -1,0 +1,31 @@
+(* ZYQL v2 — gramática formal (EBNF) · SPDX-License-Identifier: Apache-2.0 *)
+(* Derivada do front-end src/zyql_lisp.py. Sintaxe Lisp; arquivos .zph. *)
+
+program        = { form } ;
+form           = atom | list ;
+list           = "(", { form }, ")" ;
+atom           = symbol | number | string | boolean | decision ;
+
+symbol         = letter, { letter | digit | special } ;
+letter         = "a".."z" | "A".."Z" ;
+digit          = "0".."9" ;
+special        = "-" | "_" | "?" | "!" | "*" | "/" | "+" | "<" | ">" | "=" | "." ;
+
+number         = [ "-" ], digit, { digit }, [ ".", digit, { digit } ] ;
+string         = '"', { any-char - '"' }, '"' ;
+boolean        = "true" | "false" ;
+
+(* trivalência: nunca colapsar 0 com REFUSED *)
+decision       = "1" | "0" | "REFUSED" ;
+
+(* formas especiais *)
+define         = "(", "define", symbol, form, ")" ;
+decision-form  = "(", "decide", { clause }, ")" ;
+clause         = condition | otherwise ;
+condition      = "(", "if", form, form, ")" ;
+otherwise      = "(", "otherwise", form, ")" ;
+receipt-form   = "(", "emit", "receipt", { field }, ")" ;
+field          = symbol, form ;
+
+(* comentário de linha *)
+comment        = ";;", { any-char - newline } ;

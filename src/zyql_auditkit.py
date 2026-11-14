@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """AuditKit: certificacao de entropia quantica com recibo (CPA-01)."""
 import json, math, os
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile

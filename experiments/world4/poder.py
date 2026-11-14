@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """Analise de poder da regra de agregacao 3/3 — responde ao item BLOQUEANTE #2 da auditoria.
 
 Criterio declarado do WORLD-3: certificar se as 3 repeticoes tiverem p_hat >= banda.

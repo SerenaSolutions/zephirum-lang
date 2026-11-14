@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """
 RODADA C — UPGRADE v1.9.0 NO SILICIO (Zephirum/ZYQL, Z-QEA)

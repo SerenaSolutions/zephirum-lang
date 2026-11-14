@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # Bateria do adaptador QASM 3 — ida e volta + recusas
 import sys, os, json, hashlib, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # -*- coding: utf-8 -*-
 """RODADA E — analise da CARGA MAXIMA no silicio (GHZ n=5/n=8, DJ n=4/5/6,
 BV n=6, Grover n=3, ibm_kingston). Executavel varias vezes: so sela quando

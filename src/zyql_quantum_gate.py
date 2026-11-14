@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """
 ZYQL QUANTUM GATE — Deutsch-Jozsa prototype (v1.0.0, 12/10/2026).
 The trivalent decision (1 / 0 / REFUSED) now comes from quantum interference,
@@ -31,6 +33,45 @@ except ImportError:  # in-tree, no install
 MARGIN = 0.15          # declared confidence band (+-0.15) of the noise rule
 
 
+def _erfinv(y):
+    """Inversa da erf por bisseccao (stdlib only). Erro < 1e-12."""
+    if y == 0:
+        return 0.0
+    lo, hi = 0.0, 6.0
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        if math.erf(mid) < y:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2
+
+
+def wilson_interval(k, n, delta=0.05):
+    """Intervalo de Wilson para proporcao, 1-delta. Sem scipy.
+
+    Devolve (p_lo, p_hi) dentro de [0, 1] por construcao, ao contrario de uma
+    banda fixa somada a p_hat.
+    """
+    if not (0 < delta < 1):
+        raise ValueError("delta must be in (0, 1), got %r" % (delta,))
+    z = math.sqrt(2) * _erfinv(1 - delta)
+    prop = k / n
+    z2 = z * z
+    den = 1 + z2 / n
+    centro = (prop + z2 / (2 * n)) / den
+    meia = (z * math.sqrt(prop * (1 - prop) / n + z2 / (4 * n * n))) / den
+    return (max(0.0, centro - meia), min(1.0, centro + meia))
+
+
+def _as_int(nome, valor, minimo):
+    if isinstance(valor, bool) or not isinstance(valor, int):
+        raise TypeError("%s must be an int, got %s (%r)" % (nome, type(valor).__name__, valor))
+    if valor < minimo:
+        raise ValueError("%s must be >= %d, got %d" % (nome, minimo, valor))
+    return valor
+
+
 def adaptive_margin(epsilon, shots):
     """UPGRADE v1.9.0 — banda de confianca adaptativa (Hoeffding inverso).
 
@@ -44,7 +85,7 @@ def adaptive_margin(epsilon, shots):
     return adaptive_margin_family(epsilon, shots, 1)
 
 
-def adaptive_margin_family(epsilon, shots, family=1):
+def adaptive_margin_family(epsilon, shots, family=1, modo="conservative"):
     """v1.9.1 — correcao de testes multiplos (Bonferroni, DIRECAO CORRETA).
 
     ACHADO DA FALSIFICACAO (nosso, publico): a primeira implementacao
@@ -66,6 +107,11 @@ def adaptive_margin_family(epsilon, shots, family=1):
         raise ValueError("family precisa ser inteiro >= 1; recebido %r" % family)
     m_single = math.sqrt(math.log(2.0 / epsilon) / (2.0 * shots))
     m_fam = math.sqrt(math.log(2.0 / (epsilon / family)) / (2.0 * shots))
+    if modo == "rigorous":
+        # Limite derivado da uniao para ESTA regra (p0 >= 1-m / p0 <= m):
+        # k * 2 exp(-2 S (1/2 - m)^2) <= epsilon  =>  m <= 1/2 - sqrt(ln(2k/eps)/(2S))
+        # E a margem MAXIMA permitida: acima disso a garantia familiar cai.
+        return 0.5 - math.sqrt(math.log(2.0 * family / epsilon) / (2.0 * shots))
     return 2.0 * m_single - m_fam
 
 
@@ -159,6 +205,15 @@ class ZYQLQuantumGate:
 
     def __init__(self, n, f):
         """n: number of input qubits. f: purpose function on n-bit ints -> 0/1."""
+        _as_int("n", n, 1)
+        if not callable(f):
+            raise TypeError("f must be callable, got %s" % type(f).__name__)
+        sonda = f(0)
+        if sonda not in (0, 1, True, False):
+            raise ValueError(
+                "oracle f(0) returned %r (%s); the DJ promise needs f in {0, 1} - "
+                "a non-boolean answer is refused instead of silently read as 0"
+                % (sonda, type(sonda).__name__))
         self.n = n
         self.f = f
         self.oracle_calls = 0
@@ -172,14 +227,22 @@ class ZYQLQuantumGate:
         qc.gates_applied.append("Uf(x) [1 oracle call]")
 
     def run_quantum(self, shots=2048, seed=1701, epsilon=None, family=1):
-        """Interference decision: 1 oracle call.
+        """Interference decision: 1 phase-oracle call (+1 classical f(0) probe).
 
         epsilon (v1.9.0): banda adaptativa por Hoeffding inverso.
         family (v1.9.1): k vereditos conjuntos -> banda Bonferroni
         (erro de familia <= epsilon). k=1 = decisao unica.
         Sem epsilon: banda fixa MARGIN (comportamento v1.x preservado).
         """
+        _as_int("shots", shots, 1)
+        _as_int("family", family, 1)
         if epsilon is not None:
+            if isinstance(epsilon, bool) or not isinstance(epsilon, (int, float)):
+                raise TypeError("epsilon must be a float in (0, 1] or None, got %s"
+                                % type(epsilon).__name__)
+            if not (0 < epsilon <= 1):
+                raise ValueError("epsilon must be in (0, 1], got %r" % (epsilon,))
+            epsilon = float(epsilon)
             margin = adaptive_margin_family(epsilon, shots, family)
             if margin <= 0:
                 # familia grande demais para os shots: RECUSA TUDO, honesto
@@ -211,17 +274,60 @@ class ZYQLQuantumGate:
 
     def _trivalent(self, p0, shots, eps_name="Hoeffding", margin=MARGIN,
                    adaptive=False, epsilon_declared=1.0, family=1):
-        """Noise rule: band +-margin around 0 and 1; outside both -> REFUSED.
+        """Gate 1: decide-se pelo intervalo, nao pela media.
+
+        Regra: banda +-margin em torno de 0 e 1; fora das duas -> REFUSED.
+        G0 (historico) decidia por p0 e anexava o intervalo, o que permitia
+        recibo com veredito 1 e p_lo abaixo do proprio limiar. G1 exige que o
+        limite do intervalo cruce a banda e declara a razao da recusa.
 
         v1.9.1: toda RECUSA carrega refusal_reason — o núcleo distingue
         POR QUE recusou (oraculo balanceado vs zona cinzenta), em vez de
         lumping de toda dificuldade numa recusa unica.
         """
-        hoeff = min(epsilon_declared, 2 * math.exp(-2 * shots * margin ** 2)) if adaptive else 2 * math.exp(-2 * shots * margin ** 2)
-        family_field = {"family": family,
-                        "epsilon_family": (epsilon_declared if adaptive else None)}
-        if p0 >= 1 - margin:
-            # constant. Which constant? the classical f(0) probe (1 extra call)
+        bruto = min(epsilon_declared, 2 * math.exp(-2 * shots * margin ** 2)) if adaptive else 2 * math.exp(-2 * shots * margin ** 2)
+        # v2.5.9: cota de probabilidade de erro acima de 1 nao significa nada.
+        hoeff = min(1.0, bruto)
+        k = int(round(p0 * shots))
+        lo, hi = wilson_interval(k, shots, delta=min(max(bruto, 0.01), 0.99))
+        family_field = {"gate": "G1", "family": family,
+                        "epsilon_family": (epsilon_declared if adaptive else None),
+                        "p_lo": round(lo, 6), "p_hi": round(hi, 6),
+                        "interval_rule": "wilson 1-delta declarado",
+                        "error_bound_raw": bruto, "error_bound_clamped": bruto > 1.0}
+        # v2.6.0 (3): banda >= 0.5 nao discrimina nada: com ela, todo resultado
+        # cabe em "balanceado" ou "constante". Recusa declarada, nao semantica falsa.
+        if margin >= 0.5:
+            d = {"decision": "REFUSED", "mode": "NO_INFORMATION",
+                 "refusal_reason": "BAND_TOO_WIDE",
+                 "p0": p0, "rule": "declared band +-%.4f cannot separate outcomes at %d shots"
+                                   % (margin, shots),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
+        # v2.6.0 (1): cota de erro >= 1 e informacao nenhuma. Nao decide nada.
+        if bruto >= 1.0:
+            d = {"decision": "REFUSED", "mode": "NO_INFORMATION",
+                 "refusal_reason": "ERROR_BOUND_AT_LEAST_ONE",
+                 "p0": p0, "rule": "error bound %.3f >= 1 at %d shots: zero information"
+                                   % (bruto, shots),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
+        # v2.6.0 (2): decide-se pelo LIMITE do intervalo, nunca pela estimativa
+        # pontual. Antes, o recibo podia dizer "permitido" exibindo p_lo abaixo
+        # do proprio limiar (7 acertos em 8: p_lo=0.53 com limiar 0.85).
+        fora_alto = p0 >= 1 - margin
+        fora_baixo = p0 <= margin
+        if fora_baixo and hi <= margin:
+            d = {"decision": "REFUSED", "mode": "DECIDED_BY_INTERFERENCE",
+                 "refusal_reason": "BALANCED_ORACLE",
+                 "p0": p0, "rule": ("adaptive band<=%.4f (balanced: input-dependent)" % margin) if adaptive else ("band<=%.2f (balanced: input-dependent)" % margin),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
+        if fora_alto and lo >= 1 - margin:
+            # constant. Which constant? the classical f(0) probe (P2-4: 2nd call, counted)
             self.oracle_calls += 1
             verdict = 1 if self.f(0) == 1 else 0
             d = {"decision": verdict, "mode": "DECIDED_BY_INTERFERENCE",
@@ -229,10 +335,12 @@ class ZYQLQuantumGate:
                  "error_bound": hoeff, "error_bound_type": eps_name}
             d.update(family_field)
             return d
-        if p0 <= margin:
-            d = {"decision": "REFUSED", "mode": "DECIDED_BY_INTERFERENCE",
-                 "refusal_reason": "BALANCED_ORACLE",
-                 "p0": p0, "rule": ("adaptive band<=%.4f (balanced: input-dependent)" % margin) if adaptive else ("band<=%.2f (balanced: input-dependent)" % margin),
+        if fora_alto or fora_baixo:
+            d = {"decision": "REFUSED", "mode": "INSUFFICIENT_EVIDENCE",
+                 "refusal_reason": "INTERVAL_INSIDE_BAND",
+                 "p0": p0, "rule": ("point estimate outside band but interval does not "
+                                    "clear it (p_lo=%.4f, p_hi=%.4f, band +-%.4f)"
+                                    % (lo, hi, margin)),
                  "error_bound": hoeff, "error_bound_type": eps_name}
             d.update(family_field)
             return d

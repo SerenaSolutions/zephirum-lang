@@ -1,0 +1,177 @@
+name: vercel-cicd
+
+# ATENCAO (plano hobby da Vercel): o deploy e bloqueado quando o autor do commit
+# nao e membro da conta Vercel ("commit author doesn't have permission to create
+# deployments"). Por isso os commits do agente usam o e-mail da conta. Commit de
+# colaborador externo ou fork vai gerar deployment BLOCKED.
+
+# Pipeline de entrega do site publico do ZEPHIRUM.
+# Nao depende do app Git da Vercel: usa a CLI oficial com token do repositorio.
+# push em main -> producao (zephirum.vercel.app)
+# pull_request -> preview isolado, com a URL comentada no PR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "vercel.json"
+      - ".vercelignore"
+      - ".github/workflows/vercel-cicd.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "vercel.json"
+      - ".vercelignore"
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
+
+jobs:
+  guard:
+    name: portao de integridade do site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: o site tem entrada e assets
+        run: |
+          test -f site/index.html || { echo "site/index.html ausente"; exit 1; }
+          test -s site/index.html || { echo "site/index.html vazio"; exit 1; }
+          echo "entrada do site: $(wc -c < site/index.html) bytes"
+
+  deploy:
+    name: deploy ${{ github.event_name == 'pull_request' && 'preview' || 'producao' }}
+    needs: guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "20"
+
+      - name: instalar CLI
+        run: npm install --global vercel@latest
+
+      - name: pull (producao)
+        if: github.event_name != 'pull_request'
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: build (producao)
+        if: github.event_name != 'pull_request'
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: commits deste deploy
+        if: github.event_name != 'pull_request'
+        id: commits
+        run: |
+          log=$(git log -8 --no-merges --pretty=format:'- %s (%h)')
+          { echo "log<<EOF"; echo "$log"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+
+      - name: deploy producao
+        if: github.event_name != 'pull_request'
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "URL de producao: $url"
+          echo "### Producao: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: vercel-ai
+        id: ai
+        if: github.event_name != 'pull_request' && env.AI_GATEWAY_API_KEY != ''
+        uses: vercel/ai-action@v2.2.0
+        with:
+          api-key: ${{ env.AI_GATEWAY_API_KEY }}
+          model: ${{ vars.AI_GATEWAY_MODEL || 'openai/gpt-4o-mini' }}
+          system: |
+            Voce escreve notas de release curtas e tecnicas em portugues do Brasil.
+            Nao invente fatos, nao prometa nada e nao cite numeros que nao estejam nos commits.
+          prompt: |
+            Projeto: ZEPHIRUM, linguagem de programacao quantica com recibos.
+            Commits publicados agora neste deploy de producao:
+
+            ${{ steps.commits.outputs.log }}
+
+            Escreva no maximo 4 linhas: o que mudou para quem usa o site
+            (zephirum.vercel.app) e o que mudou internamente. Sem saudacao.
+
+      - name: publicar a nota de release
+        if: github.event_name != 'pull_request' && env.AI_GATEWAY_API_KEY != ''
+        run: |
+          echo "### Nota de release" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "${{ steps.ai.outputs.text }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: pull (preview)
+        if: github.event_name == 'pull_request'
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: build (preview)
+        if: github.event_name == 'pull_request'
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: deploy preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        run: |
+          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Preview: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: comentar a URL no PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = "${{ steps.preview.outputs.url }}";
+            await github.rest.issues.createComment({
+              ...context.repo, issue_number: context.issue.number,
+              body: `Preview deste commit: ${url}`
+            });
+
+  # Inventario IBM Cloud em modo somente leitura.
+  # Nao submete job a QPU: submissao exige selo previo (spec -> teste local -> QPU)
+  # e continua sendo ato manual e supervisionado, fora do CI.
+  # Roda em paralelo e nao bloqueia o deploy: continue-on-error + sem needs.
+  ibmcloud:
+    name: IBM Cloud (somente leitura)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
+    steps:
+      - name: IBM Cloud CLI
+        if: env.IBMCLOUD_API_KEY != ''
+        uses: IBM/actions-ibmcloud-cli@v2.2.1
+        with:
+          api_key: ${{ env.IBMCLOUD_API_KEY }}
+          region: us-south
+
+      - name: inventario de servicos
+        if: env.IBMCLOUD_API_KEY != ''
+        run: |
+          set -o pipefail
+          ibmcloud account show 2>&1 | sed 's/^/  /' || true
+          ibmcloud resource service-instances --output json > /tmp/si.json 2>/dev/null || echo '[]' > /tmp/si.json
+          python3 - <<'EOF'
+          import json
+          try:
+              data = json.load(open("/tmp/si.json"))
+          except Exception:
+              data = []
+          print(f"instancias de servico visiveis: {len(data)}")
+          for i in data:
+              print(f"  - {i.get('name')} | {i.get('state')} | {i.get('resource_group_id','')}")
+          print("nenhum job quantico foi submetido por este workflow")
+          EOF

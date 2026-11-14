@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """W-01..W-03: rodada de escala mundial (matematica algoritmica + analogo fotonico).
 Protocolo declarado: shots=1024, alpha=0.01, um unico job com 3 circuitos.
 Veredito por protocolo: 1 dentro da banda / 0 desvio provado / REFUSED sem evidencia.

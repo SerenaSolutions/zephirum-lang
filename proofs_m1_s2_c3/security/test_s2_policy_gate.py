@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # ZYQL S2 — BATERIA DE CONFORMIDADE DO POLICY GATE (12 casos)
 # Prova: negacao por padrao, recusa com recibo, funcao NAO executada,
 # anti-replay, cadeia de auditoria, limite de tempo, e a distincao

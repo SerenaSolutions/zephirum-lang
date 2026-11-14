@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 # C3-EXT — T/Rz: a extensao que torna a ZYQL universal
 # Exato ate pi/4 por construcao; aproximacao com erro DECLARADO para o resto.
 import numpy as np, math, json, hashlib

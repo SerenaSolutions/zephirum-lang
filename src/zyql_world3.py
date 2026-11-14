@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Serena Quantum Solutions
 """WORLD-3: rodada revisada apos auditoria Nemotron.
 
 Correcoes obrigatorias incorporadas:
