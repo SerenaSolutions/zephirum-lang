@@ -1,0 +1,116 @@
+{
+  "origem": "simulador",
+  "backend": "statevector_local",
+  "motivo_bloqueio_qpu": "",
+  "linguagem": "ZYQL 2.5.8",
+  "programa_hash": "befea75ef97bd64028412e222e7f7b163115cb053e795cb4178358857a45d3f7",
+  "shots": 1024,
+  "counts": {
+    "11": 500,
+    "00": 524
+  },
+  "por_paridade": {
+    "par": 1024,
+    "impar": 0
+  },
+  "veredito": {
+    "verdict": "1",
+    "p_hat": 1.0,
+    "epsilon": 0.042441,
+    "threshold": 0.9,
+    "delta": 0.05,
+    "shots": 1024,
+    "target_key": "par",
+    "rule": "proporcao-v1",
+    "input_commitment": "b2dfa78e09dfe29cd633e12555db00ad7fda6edaa6397e18fd33632b636fec0e",
+    "receipt_hash": "109eb55c3885b73b4e28d6250b38a4567081266eb036940e4eff642051ab74c4"
+  },
+  "alvo_do_teste": "paridade_par (P(00)+P(11))",
+  "conferido": true,
+  "pilares": {
+    "contrato": {
+      "feito": true,
+      "portas": 2
+    },
+    "identidade": {
+      "feito": true,
+      "motivo": ""
+    },
+    "permissao": {
+      "feito": true,
+      "lista": [
+        "ibm_boston",
+        "ibm_fez",
+        "ibm_kingston",
+        "ibm_marrakesh",
+        "ibm_strasbourg",
+        "ibm_torino"
+      ]
+    },
+    "nao_duplicar": {
+      "feito": true,
+      "assinatura": "befea75ef97bd640",
+      "reaproveitado": true
+    },
+    "teto": {
+      "feito": true,
+      "shots": 1024,
+      "teto": 8192
+    },
+    "carga": {
+      "feito": true,
+      "jobs_simultaneos": 1
+    },
+    "fatiamento": {
+      "feito": true,
+      "blocos": 1,
+      "nota": "rodada unica; sem colecao a paginar"
+    },
+    "prazo": {
+      "feito": true,
+      "limite_s": 900
+    },
+    "versao": {
+      "feito": true,
+      "linguagem": "2.5.8",
+      "contrato": "programa/qubits+gates"
+    },
+    "repeticao": {
+      "feito": true,
+      "tentativas": 3,
+      "espera": "exponencial 0.2/0.4/0.8"
+    },
+    "parada": {
+      "feito": true,
+      "nota": "abandona a via QPU apos 3 falhas e cai para simulador declarado"
+    },
+    "memoria": {
+      "feito": true,
+      "backend_conhecido": "statevector_local"
+    },
+    "aviso": {
+      "feito": true,
+      "evento": "rodada_concluida",
+      "destino": "recibo_qpu_16pilares.json"
+    },
+    "publicacao": {
+      "feito": true,
+      "recibo": "recibo_qpu_16pilares.json",
+      "contrato": "ZYQL 2.5.8"
+    },
+    "trilha": {
+      "feito": true,
+      "eventos": [
+        "execucao_direta",
+        "rodada"
+      ]
+    },
+    "erro": {
+      "feito": true,
+      "motivo_declarado": "nenhum",
+      "nunca_hardware_fingido": true
+    }
+  },
+  "quando": "2026-11-14T20:54:17Z",
+  "recibo_hash": "57b6f747f574440571ea7bd71b9678944dcadf1b9a4af40fe9aa58afbfb26225"
+}
