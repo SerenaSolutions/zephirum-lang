@@ -1,1 +1,1 @@
-{"assinatura": "befea75ef97bd64028412e222e7f7b163115cb053e795cb4178358857a45d3f7", "origem": "simulador", "backend": "statevector_local", "counts": {"11": 500, "00": 524}}
+{"assinatura": "126dec697f6405de4a70695700f8e1cf746133bae87f50066494b7edb37338ce", "origem": "qpu", "backend": "ibm_fez", "counts": {"00": 1991, "11": 1878, "10": 132, "01": 95}}

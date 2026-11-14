@@ -26,6 +26,7 @@ SHOTS = int(os.environ.get("ZYQL_SHOTS", "1024"))
 TETO_SHOTS = 8192
 PRAZO_S = 900
 BACKENDS_PERMITIDOS = {"ibm_fez", "ibm_marrakesh", "ibm_kingston", "ibm_torino", "ibm_strasbourg", "ibm_boston"}
+CANDIDATOS_TOKEN = ("IBM_QUANTUM_API_KEY", "IBM_QUANTUM_TOKEN", "IBM_TOKEN", "API_KEY")
 
 
 def sha3(v) -> str:
@@ -43,7 +44,7 @@ def programa_bell() -> dict:
 
 def executar_qpu(programa: dict) -> dict:
     """Tenta hardware. Devolve counts com origem declarada e motivo de bloqueio, se houver."""
-    tema = os.environ.get("IBM_QUANTUM_TOKEN") or os.environ.get("API_KEY")
+    tema = next((os.environ[k] for k in CANDIDATOS_TOKEN if os.environ.get(k)), None)
     if not tema:
         return {"ok": False, "motivo": "credencial_ausente", "origem": "nenhuma"}
     try:
@@ -52,13 +53,16 @@ def executar_qpu(programa: dict) -> dict:
         return {"ok": False, "motivo": f"runtime_indisponivel:{type(e).__name__}", "origem": "nenhuma"}
 
     servico, motivo = None, ""
-    for tentativa in range(3):                     # repeticao com espera
-        try:
-            servico = QiskitRuntimeService(channel="ibm_quantum_platform", token=tema)
+    for candidato in [os.environ[k] for k in CANDIDATOS_TOKEN if os.environ.get(k)]:
+        for tentativa in range(2):                 # repeticao com espera
+            try:
+                servico = QiskitRuntimeService(channel="ibm_quantum_platform", token=candidato)
+                break
+            except Exception as e:
+                motivo = f"{type(e).__name__}:{str(e)[:60]}"
+                time.sleep(0.2 * (2 ** tentativa))
+        if servico is not None:
             break
-        except Exception as e:
-            motivo = f"{type(e).__name__}:{str(e)[:60]}"
-            time.sleep(0.2 * (2 ** tentativa))
     if servico is None:
         return {"ok": False, "motivo": f"conta_invalida:{motivo}", "origem": "nenhuma"}
 
@@ -72,9 +76,14 @@ def executar_qpu(programa: dict) -> dict:
     if escolhido.name not in BACKENDS_PERMITIDOS:
         return {"ok": False, "motivo": f"backend_fora_da_lista:{escolhido.name}", "origem": "nenhuma"}
 
+    from qiskit import transpile
+
     from zephirum.adapters.qiskit_backend import construir
     circuito = construir(programa)
     circuito.measure_all()
+    # O backend nao aceita h arbitrario: transpilar para a porta nativa do alvo.
+    circuito = transpile(circuito, backend=escolhido, optimization_level=1)
+    forma = {"profundidade": circuito.depth(), "portas": {k: int(v) for k, v in circuito.count_ops().items()}}
     inicio = time.time()
     try:
         job = Sampler(escolhido).run([circuito], shots=SHOTS)
@@ -83,7 +92,7 @@ def executar_qpu(programa: dict) -> dict:
     except Exception as e:
         return {"ok": False, "motivo": f"execucao_falhou:{type(e).__name__}:{str(e)[:80]}", "origem": "nenhuma"}
     return {"ok": True, "motivo": "", "origem": "qpu", "backend": escolhido.name,
-            "counts": counts, "gasto_s": round(time.time() - inicio, 1)}
+            "counts": counts, "gasto_s": round(time.time() - inicio, 1), "transpilado": forma}
 
 
 def simular_exato(programa: dict) -> dict:
@@ -117,13 +126,13 @@ def main() -> int:
         pilares["contrato"] = {"feito": False, "motivo": str(e)}
         return 2
     # 2 identidade / 3 permissao
-    pilares["identidade"] = {"feito": bool(os.environ.get("IBM_QUANTUM_TOKEN") or os.environ.get("API_KEY")),
-                             "motivo": "" if os.environ.get("IBM_QUANTUM_TOKEN") or os.environ.get("API_KEY") else "sem credencial"}
+    _tem_chave = any(os.environ.get(k) for k in CANDIDATOS_TOKEN)
+    pilares["identidade"] = {"feito": _tem_chave, "motivo": "" if _tem_chave else "sem credencial"}
     pilares["permissao"] = {"feito": True, "lista": sorted(BACKENDS_PERMITIDOS)}
     # 4 nao duplicar
     assinatura = sha3({"programa": normalizado, "shots": SHOTS, "lang": zephirum.__version__})
     anterior = json.loads(ESTADO.read_text()) if ESTADO.exists() else {}
-    reaproveitado = anterior.get("assinatura") == assinatura
+    reaproveitado = anterior.get("assinatura") == assinatura and anterior.get("origem") == "qpu"
     pilares["nao_duplicar"] = {"feito": True, "assinatura": assinatura[:16], "reaproveitado": reaproveitado}
     # 5 teto / 6 carga / 8 fatiamento
     pilares["teto"] = {"feito": SHOTS <= TETO_SHOTS, "shots": SHOTS, "teto": TETO_SHOTS}
@@ -168,6 +177,7 @@ def main() -> int:
     recibo = {
         "origem": execucao["origem"], "backend": execucao["backend"],
         "motivo_bloqueio_qpu": execucao.get("motivo_bloqueio_qpu", ""),
+        "circuito_no_alvo": execucao.get("transpilado", {}),
         "linguagem": f"ZYQL {zephirum.__version__}", "programa_hash": assinatura,
         "shots": SHOTS, "counts": contagem, "por_paridade": por_paridade, "veredito": veredito,
         "alvo_do_teste": "paridade_par (P(00)+P(11))",
