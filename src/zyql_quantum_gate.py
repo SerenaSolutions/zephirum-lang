@@ -274,7 +274,12 @@ class ZYQLQuantumGate:
 
     def _trivalent(self, p0, shots, eps_name="Hoeffding", margin=MARGIN,
                    adaptive=False, epsilon_declared=1.0, family=1):
-        """Noise rule: band +-margin around 0 and 1; outside both -> REFUSED.
+        """Gate 1: decide-se pelo intervalo, nao pela media.
+
+        Regra: banda +-margin em torno de 0 e 1; fora das duas -> REFUSED.
+        G0 (historico) decidia por p0 e anexava o intervalo, o que permitia
+        recibo com veredito 1 e p_lo abaixo do proprio limiar. G1 exige que o
+        limite do intervalo cruce a banda e declara a razao da recusa.
 
         v1.9.1: toda RECUSA carrega refusal_reason — o núcleo distingue
         POR QUE recusou (oraculo balanceado vs zona cinzenta), em vez de
@@ -285,12 +290,43 @@ class ZYQLQuantumGate:
         hoeff = min(1.0, bruto)
         k = int(round(p0 * shots))
         lo, hi = wilson_interval(k, shots, delta=min(max(bruto, 0.01), 0.99))
-        family_field = {"family": family,
+        family_field = {"gate": "G1", "family": family,
                         "epsilon_family": (epsilon_declared if adaptive else None),
                         "p_lo": round(lo, 6), "p_hi": round(hi, 6),
                         "interval_rule": "wilson 1-delta declarado",
                         "error_bound_raw": bruto, "error_bound_clamped": bruto > 1.0}
-        if p0 >= 1 - margin:
+        # v2.6.0 (3): banda >= 0.5 nao discrimina nada: com ela, todo resultado
+        # cabe em "balanceado" ou "constante". Recusa declarada, nao semantica falsa.
+        if margin >= 0.5:
+            d = {"decision": "REFUSED", "mode": "NO_INFORMATION",
+                 "refusal_reason": "BAND_TOO_WIDE",
+                 "p0": p0, "rule": "declared band +-%.4f cannot separate outcomes at %d shots"
+                                   % (margin, shots),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
+        # v2.6.0 (1): cota de erro >= 1 e informacao nenhuma. Nao decide nada.
+        if bruto >= 1.0:
+            d = {"decision": "REFUSED", "mode": "NO_INFORMATION",
+                 "refusal_reason": "ERROR_BOUND_AT_LEAST_ONE",
+                 "p0": p0, "rule": "error bound %.3f >= 1 at %d shots: zero information"
+                                   % (bruto, shots),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
+        # v2.6.0 (2): decide-se pelo LIMITE do intervalo, nunca pela estimativa
+        # pontual. Antes, o recibo podia dizer "permitido" exibindo p_lo abaixo
+        # do proprio limiar (7 acertos em 8: p_lo=0.53 com limiar 0.85).
+        fora_alto = p0 >= 1 - margin
+        fora_baixo = p0 <= margin
+        if fora_baixo and hi <= margin:
+            d = {"decision": "REFUSED", "mode": "DECIDED_BY_INTERFERENCE",
+                 "refusal_reason": "BALANCED_ORACLE",
+                 "p0": p0, "rule": ("adaptive band<=%.4f (balanced: input-dependent)" % margin) if adaptive else ("band<=%.2f (balanced: input-dependent)" % margin),
+                 "error_bound": hoeff, "error_bound_type": eps_name}
+            d.update(family_field)
+            return d
+        if fora_alto and lo >= 1 - margin:
             # constant. Which constant? the classical f(0) probe (P2-4: 2nd call, counted)
             self.oracle_calls += 1
             verdict = 1 if self.f(0) == 1 else 0
@@ -299,10 +335,12 @@ class ZYQLQuantumGate:
                  "error_bound": hoeff, "error_bound_type": eps_name}
             d.update(family_field)
             return d
-        if p0 <= margin:
-            d = {"decision": "REFUSED", "mode": "DECIDED_BY_INTERFERENCE",
-                 "refusal_reason": "BALANCED_ORACLE",
-                 "p0": p0, "rule": ("adaptive band<=%.4f (balanced: input-dependent)" % margin) if adaptive else ("band<=%.2f (balanced: input-dependent)" % margin),
+        if fora_alto or fora_baixo:
+            d = {"decision": "REFUSED", "mode": "INSUFFICIENT_EVIDENCE",
+                 "refusal_reason": "INTERVAL_INSIDE_BAND",
+                 "p0": p0, "rule": ("point estimate outside band but interval does not "
+                                    "clear it (p_lo=%.4f, p_hi=%.4f, band +-%.4f)"
+                                    % (lo, hi, margin)),
                  "error_bound": hoeff, "error_bound_type": eps_name}
             d.update(family_field)
             return d
