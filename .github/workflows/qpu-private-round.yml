@@ -1,0 +1,81 @@
+name: Rodada QPU privada (ZYQL)
+
+# Rodada manual, sob demanda: nao roda em push. Precisa do secret
+# IBM_CLOUD_API_KEY (Settings > Secrets and variables > Actions) e, se a conta
+# usar instancia nomeada, de IBM_QUANTUM_INSTANCE com o CRN.
+
+on:
+  workflow_dispatch:
+    inputs:
+      backend:
+        description: "Backend (vazio = menor fila)"
+        required: false
+        default: ""
+      shots:
+        description: "Shots por circuito"
+        required: false
+        default: "256"
+
+permissions:
+  contents: read
+
+jobs:
+  round:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install runtime
+        run: |
+          python -m pip install --upgrade pip
+          pip install qiskit qiskit-ibm-runtime qiskit-aer
+
+      - name: Verify credential is present
+        env:
+          IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+        run: |
+          if [ -z "$IBM_CLOUD_API_KEY" ]; then
+            echo "SEM CREDENCIAL: configure o secret IBM_CLOUD_API_KEY. Nada foi executado."
+            exit 2
+          fi
+
+      - name: Run trivalent battery on hardware
+        env:
+          IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+          IBM_QUANTUM_INSTANCE: ${{ secrets.IBM_QUANTUM_INSTANCE }}
+        run: |
+          python experiments/qpu_round.py \
+            --backend "${{ inputs.backend }}" \
+            --shots "${{ inputs.shots }}"
+
+      - name: Seal check (house canon)
+        run: |
+          python - <<'PY'
+          import glob, hashlib, json, sys
+          canon = lambda o: json.dumps(o, sort_keys=True, ensure_ascii=True, default=str)
+          ok = True
+          files = sorted(glob.glob("experiments/qpu_round_*/receipt.json"))
+          if not files:
+              print("nenhum recibo gerado"); sys.exit(2)
+          for f in files:
+              r = json.load(open(f))
+              if "payload" not in r:
+                  continue
+              got = hashlib.sha3_256(canon(r["payload"]).encode()).hexdigest()
+              good = got == r.get("selo_sha3_256")
+              print(("OK  " if good else "ROMPIDO ") + f)
+              ok = ok and good
+          sys.exit(0 if ok else 1)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qpu-round-receipt
+          path: experiments/qpu_round_*/receipt.json
+          if-no-files-found: warn
