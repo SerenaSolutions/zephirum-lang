@@ -1,5 +1,12 @@
 ## [2.5.10] - 2026-11-14
 
+### Adicionado
+
+- `intervalo_exato` (Clopper-Pearson) calculado sem dependencia externa e publicado no recibo
+  como relato, com `used_for_decision: false`. A decisao continua vindo da cota de Hoeffding.
+- Adaptador qBraid com negociacao de capacidades e conversao para o conjunto de portas nativo;
+  o que o provedor nao declara vira recusa, e o conjunto assumido pelo chamador fica marcado.
+
 ### Corrigido
 
 - Piso de `qiskit` elevado para `>=2.6.1`: a serie traz limite de recursao na
