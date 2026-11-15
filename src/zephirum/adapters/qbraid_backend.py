@@ -45,6 +45,28 @@ def executar(programa: dict[str, Any], device: str, api_key: str,
         dev = prov.get_device(device)
         qc = _circuito(programa)
         job = dev.run(qc, shots=shots)
+        # Falha rapida: o qBraid aceita a submissao e so recusa na execucao quando o vinculo
+        # com o provedor externo nao existe. Esperar o result() nesse caso so gasta fila.
+        import time as _t
+        limite = _t.monotonic() + 45
+        estado = str(job.status()).upper()
+        while _t.monotonic() < limite and "FAIL" not in estado and "CANCEL" not in estado and "COMPLET" not in estado:
+            _t.sleep(3)
+            try:
+                estado = str(job.status()).upper()
+            except Exception:
+                break
+        if "FAIL" in estado or "CANCEL" in estado:
+            try:
+                detalhe = prov.client.get_job(job.id)
+                msg = str(detalhe.get("statusMsg", "")) if isinstance(detalhe, dict) else ""
+            except Exception:
+                msg = ""
+            if "not connected" in msg.lower() or "link it" in msg.lower():
+                return {"status": "REFUSED", "motivo": "VINCULO_AUSENTE", "device": device,
+                        "detalhe": msg[:120], "job_id": str(getattr(job, "id", ""))}
+            return {"status": "REFUSED", "motivo": f"EXECUCAO_FALHOU: {msg[:90] or estado}",
+                    "job_id": str(getattr(job, "id", ""))}
         res = job.result()
         counts = dict(res.measurement_counts())
     except Exception as exc:
