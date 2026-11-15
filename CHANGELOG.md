@@ -2,6 +2,10 @@
 
 ### Corrigido
 
+- Piso de `qiskit` elevado para `>=2.6.1`: a serie traz limite de recursao na
+  desserializacao QPY (#17413), seguranca de buffer em `qk_circuit_inst_unitary` (#17418),
+  bloqueio do parser de `SymbolExpr` vindo de sympy em QPY (#16745) e correcao da exportacao
+  QASM3 de parametros decompostos (#16997). O export QASM3 do projeto usa essa via.
 - `zephirum.__version__` respondia 2.5.8 no wheel 2.5.9; agora acompanha o `pyproject.toml`.
 - `scripts/sync_version.py` passou a cobrir `src/zephirum/__init__.py`, que era o unico alvo
   fora da verificacao e a causa da divergencia em execucao.
