@@ -96,3 +96,71 @@ def pode_executar(programa: dict, caps: dict) -> dict:
     faltando = sorted(exigidas - nativas)
     return {"pode": True, "motivo": "", "portas_a_converter": faltando,
             "aviso": "portas ausentes exigem conversao para o conjunto nativo"}
+
+
+def converter_para_nativas(programa: dict, caps: dict, conjunto_assumido: list | None = None) -> dict:
+    """Reescreve o programa no conjunto de portas que o dispositivo declarou.
+
+    Sem declaracao, nao converte: recusa. A conversao e registrada para que o recibo
+    mostre o que foi enviado, e nao o que foi escrito.
+    """
+    if caps.get("status") != "OK":
+        return {"status": "REFUSED", "motivo": caps.get("motivo", "CAPACIDADE_INDISPONIVEL")}
+    if caps.get("paradigma") != "gate_model":
+        return {"status": "REFUSED", "motivo": f"PARADIGMA_NAO_SUPORTADO:{caps.get('paradigma')}"}
+    nativas = [str(g) for g in (caps.get("portas_declaradas") or [])]
+    assumido = False
+    if not nativas and conjunto_assumido:
+        # O chamador pode declarar o conjunto por escrito. Fica marcado no resultado, para
+        # que o recibo distinga o que o provedor declarou do que o usuario assumiu.
+        nativas = [str(g) for g in conjunto_assumido]
+        assumido = True
+    if not nativas:
+        return {"status": "REFUSED", "motivo": "PORTAS_NAO_DECLARADAS"}
+    try:
+        from qiskit import transpile
+        from qiskit.circuit.library.standard_gates import get_standard_gate_name_mapping
+    except ImportError:
+        return {"status": "REFUSED", "motivo": "QISKIT_AUSENTE"}
+    # O provedor declara portas que o Qiskit nao conhece (ccnot, por exemplo). Elas nao
+    # entram como basis_gates: ficam registradas e o conjunto utilizavel e o resto.
+    conhecidas = set(get_standard_gate_name_mapping())
+    utilizaveis = [g for g in nativas if g.lower() in conhecidas]
+    ignoradas = sorted(set(nativas) - set(utilizaveis))
+    if not utilizaveis:
+        return {"status": "REFUSED", "motivo": "NENHUMA_PORTA_NATIVA_RECONHECIDA",
+                "portas_ignoradas": ignoradas}
+    try:
+        qc = _circuito(programa)
+        convertido = transpile(qc, basis_gates=utilizaveis, optimization_level=1)
+    except Exception as exc:
+        return {"status": "REFUSED", "motivo": f"CONVERSAO_FALHOU:{type(exc).__name__}: {str(exc)[:80]}"}
+    operacoes = []
+    for instrucao in convertido.data:
+        nome = instrucao.operation.name
+        if nome in ("barrier", "measure"):
+            continue
+        operacoes.append({"op": nome, "qubits": [convertido.find_bit(q).index for q in instrucao.qubits]})
+    usadas = sorted({o["op"] for o in operacoes})
+    fora = sorted(set(usadas) - {n.lower() for n in utilizaveis})
+    if fora:
+        return {"status": "REFUSED", "motivo": f"PORTA_FORA_DO_CONJUNTO:{','.join(fora)}"}
+    escritas = sorted({str(g.get("op", "")).lower() for g in programa.get("gates", [])})
+    return {"status": "OK", "programa_nativo": operacoes, "portas_usadas": usadas,
+            "profundidade": convertido.depth(), "convertidas": sorted(set(escritas) - set(usadas)),
+            "portas_ignoradas": ignoradas, "conjunto_assumido_pelo_chamador": assumido}
+
+
+def executar_com_conversao(programa: dict, device: str, chave: str, shots: int = 1024,
+                           conjunto_assumido: list | None = None) -> dict:
+    """Caminho completo: le capacidade, converte, executa e devolve o que foi enviado."""
+    caps = capacidades(device, chave)
+    conv = converter_para_nativas(programa, caps, conjunto_assumido)
+    if conv.get("status") != "OK":
+        return {"status": "REFUSED", "motivo": conv.get("motivo"), "etapa": "conversao"}
+    saida = executar(programa, device, chave, shots=shots)
+    if saida.get("status") == "OK":
+        saida["programa_nativo"] = conv["programa_nativo"]
+        saida["portas_usadas"] = conv["portas_usadas"]
+        saida["conjunto_assumido_pelo_chamador"] = conv.get("conjunto_assumido_pelo_chamador", False)
+    return saida
