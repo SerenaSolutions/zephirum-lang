@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Auditoria: o veredito usa COTA de Hoeffding, nao margem de erro convencional.
 
 Cota de Hoeffding vale para qualquer distribuicao e e conservadora. O intervalo

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Adaptador qBraid nunca devolve resultado sem execucao real."""
 import sys
 
@@ -8,17 +9,17 @@ from zephirum.adapters import qbraid_backend
 PROGRAMA = {"qubits": 2, "gates": [{"op": "h", "qubits": [0]}, {"op": "cx", "qubits": [0, 1]}]}
 
 
-def test_sem_chave_recusa_listagem():
+def test_sem_chave_recusa_listagem(sdk_qbraid_falso):
     r = qbraid_backend.listar(None)
     assert r["status"] == "REFUSED" and r["motivo"] == "CREDENCIAL_AUSENTE"
 
 
-def test_chave_invalida_nao_vira_lista_vazia():
+def test_chave_invalida_nao_vira_lista_vazia(sdk_qbraid_falso):
     r = qbraid_backend.listar("chave-invalida-de-teste")
     assert r["status"] == "REFUSED" and r["motivo"].startswith("FALHA_AUTENTICACAO")
 
 
-def test_execucao_sem_credencial_nao_finge_resultado():
+def test_execucao_sem_credencial_nao_finge_resultado(sdk_qbraid_falso):
     r = qbraid_backend.executar(PROGRAMA, "qbraid:qbraid:sim", "chave-invalida")
     assert r["status"] == "REFUSED" and "counts" not in r
 

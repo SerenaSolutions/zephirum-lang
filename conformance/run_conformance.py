@@ -39,7 +39,10 @@ except Exception as e:  # pragma: no cover
 # Chaves de selo aceitas, com a regra de payload de cada formato.
 # selo_sha3_256: formato da casa (Rodada G em diante), selo sobre rec["payload"].
 # sha3_256:      formato q-route legado, selo sobre o corpo sem a própria chave.
-CHAVES_SELO = ("selo_sha3_256", "sha3_256")
+# recibo_hash:   formato dos recibos de QPU (16 pilares em diante), selo sobre o
+#                corpo canonico sem a propria chave. Sem esta chave na lista, um
+#                recibo de hardware adulterado passava sem ser verificado.
+CHAVES_SELO = ("selo_sha3_256", "sha3_256", "recibo_hash")
 
 ORACULOS = {
     "const0": lambda x: 0,
@@ -168,6 +171,13 @@ def recibos_do_repositorio():
         "experiments/**/*_receipt.json",
         "examples/recibos/*.json",
         "*_receipt.json",
+        # Nomes em portugues e recibos por rodada. Sem estes padroes, os recibos
+        # de QPU (recibo_qpu_16pilares.json, recibo_interop_pennylane.json) e os
+        # recibos por rodada ficavam fora da varredura: um recibo de hardware
+        # adulterado passava sem verificacao.
+        "experiments/recibo_*.json",
+        "recibo_*.json",
+        "experiments/**/receipt.json",
     ]
     achados = []
     for padrao in padroes:

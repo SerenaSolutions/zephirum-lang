@@ -1,5 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
 """Uma versao so: pyproject, pacote e metadata nao podem divergir."""
-import tomllib
+try:  # Python 3.11+
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10
+    import tomli as tomllib
 from pathlib import Path
 
 import zephirum

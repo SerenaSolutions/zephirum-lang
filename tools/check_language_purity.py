@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
 """Guarda de pureza: a linguagem nao carrega cobranca, chave de API nem CORS.
 
 Motivo: revisor de linguagem nao deve auditar Stripe. Se este checador falhar,

@@ -32,10 +32,12 @@ abertas = {
     "VERSION": ler("VERSION").strip(),
     "docs/openapi.json": json.loads(ler("docs/openapi.json"))["info"]["version"],
 }
-try:
-    abertas["api/server.py"] = re.search(r'APP_VERSION\s*=\s*"([^"]+)"', ler("api/server.py")).group(1)
-except Exception:
-    abertas["api/server.py"] = "?"
+# api/server.py so entra na conferencia se existir; a pasta api saiu do repositorio.
+if (RAIZ / "api" / "server.py").exists():
+    try:
+        abertas["api/server.py"] = re.search(r'APP_VERSION\s*=\s*"([^"]+)"', ler("api/server.py")).group(1)
+    except Exception:
+        abertas["api/server.py"] = "?"
 div = {k: v for k, v in abertas.items() if v != versao}
 item("versão única nas fontes", not div, f"{versao}" if not div else f"divergem: {div}")
 
@@ -48,8 +50,15 @@ mk = ler("Makefile")
 item("make test roda a suíte completa", "pytest tests" in mk, "pytest tests" if "pytest tests" in mk else "ausente")
 
 # 5. cobrança desligada por padrão
-bill = ler("api/billing.py")
-item("cobrança desligada por padrão", 'os.environ.get("ZYQL_BILLING", "off")' in bill, "ZYQL_BILLING default off")
+# Sem modulo de cobranca no repositorio, nao ha o que ligar: a plataforma e gratuita
+# (PRIVACY.md 8-A) e o criterio e satisfeito. Se o modulo voltar a existir, exige-se
+# o padrao desligado, como antes.
+_billing = RAIZ / "api" / "billing.py"
+if _billing.exists():
+    bill = _billing.read_text(errors="ignore")
+    item("cobrança desligada por padrão", 'os.environ.get("ZYQL_BILLING", "off")' in bill, "ZYQL_BILLING default off")
+else:
+    item("cobrança desligada por padrão", True, "sem módulo de cobrança (modo gratuito, PRIVACY.md 8-A)")
 
 # 6. privacidade coerente (sem cobrança ativa, seção de modo gratuito)
 priv = ler("PRIVACY.md")

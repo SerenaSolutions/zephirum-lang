@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Nada e assumido sobre o dispositivo: o que nao foi declarado vira recusa."""
 from zephirum.adapters import qbraid_backend
 
@@ -26,5 +27,5 @@ def test_analogico_nao_entra_pela_interface_de_portas():
     assert qbraid_backend.pode_executar(PROGRAMA, caps)["pode"] is False
 
 
-def test_sem_credencial_nao_le_capacidade():
+def test_sem_credencial_nao_le_capacidade(sdk_qbraid_falso):
     assert qbraid_backend.capacidades("qbraid:qbraid:sim:qir-sv", "")["motivo"] == "CREDENCIAL_AUSENTE"

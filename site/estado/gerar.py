@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
 """Gera site/estado/index.html a partir dos recibos em dados/.
 
 O site do projeto e estatico (vercel.json: outputDirectory "site", sem build),
