@@ -13,12 +13,14 @@ Exemplo:
 """
 from __future__ import annotations
 
+from .estatistica import intervalo_exato
+
 import hashlib
 import json
 import math
 
 __version__ = "2.5.10"
-__all__ = ["decidir", "verificar_recibo", "modulos", "__version__"]
+__all__ = ["decidir", "verificar_recibo", "modulos", "intervalo_exato", "__version__"]
 
 
 def _canon(v):
@@ -61,9 +63,14 @@ def decidir(counts, shots=None, threshold=0.5, delta=0.05, target_key="000"):
         v = "0"
     else:
         v = "INCONCLUSIVE"
+    # O veredito continua vindo da cota de Hoeffding. O intervalo exato entra ao lado,
+    # como relato, e nunca como criterio: cota e intervalo respondem perguntas diferentes.
+    baixo, alto = intervalo_exato(limpo.get(target_key, 0), shots, float(delta))
     recibo = {"verdict": v, "p_hat": round(p, 6), "epsilon": round(eps, 6),
               "threshold": float(threshold), "delta": float(delta), "shots": shots,
               "target_key": target_key, "rule": "proporcao-v1",
+              "exact_interval": {"low": round(baixo, 6), "high": round(alto, 6),
+                                 "method": "clopper-pearson", "used_for_decision": False},
               "input_commitment": _sha3({"counts": limpo, "shots": shots})}
     recibo["receipt_hash"] = _sha3(recibo)
     return recibo
