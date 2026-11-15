@@ -9,6 +9,7 @@ PARADA NO PRIMEIRO VEREDITO; comparado com os shots exigidos por Hoeffding
 Kernel B (refusal-fidelity): w em {0,1/8,1/4,3/8,1/2} => p0=(1-2w)^2;
 200 tentativas por (w, shots); falsificavel: falso-confirma == 0 esperado."""
 import sys, os, math
+from datetime import datetime, timezone
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 from zyql_quantum_gate import ZYQLQuantumGate, MARGIN
 
@@ -77,5 +78,18 @@ if __name__ == "__main__":
     print(json.dumps({"kernel_A": A, "kernel_B_all_pass": B_ok,
                       "veredito_global": result["veredito_global"]}, indent=1))
     os.makedirs(os.path.join(os.path.dirname(__file__), "..", "experiments"), exist_ok=True)
-    json.dump(result, open(os.path.join(os.path.dirname(__file__), "..", "experiments",
-        "bench_decision_receipt.json"), "w"), indent=1)
+    # Recibo selado: o selo cobre rec["payload"] no canon unico da casa. Sem isso o
+    # arquivo e dado, nao recibo, e a suite de conformidade o reprova (e deve reprovar).
+    import hashlib
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+    from battery_ci import canon  # noqa: E402
+
+    # O selo tem de ser calculado sobre o payload JA serializado. Calcular sobre o
+    # objeto em memoria produzia selo que nao fechava depois da leitura do disco,
+    # porque o round-trip do JSON normaliza tipos numericos.
+    bruto = {**result, "emitido_em": datetime.now(timezone.utc).isoformat()}
+    payload = json.loads(json.dumps(bruto, sort_keys=True))
+    recibo = {"payload": payload}
+    recibo["selo_sha3_256"] = hashlib.sha3_256(canon(payload).encode()).hexdigest()
+    json.dump(recibo, open(os.path.join(os.path.dirname(__file__), "..", "experiments",
+        "bench_decision_receipt.json"), "w"), indent=1, ensure_ascii=False)
