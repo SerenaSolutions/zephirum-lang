@@ -1,0 +1,28 @@
+{
+ "bit_order": "Qiskit: q0 = bit menos significativo; ancilla marginalizado",
+ "dj_constante": {
+  "counts": {
+   "00": 2048
+  },
+  "p_zero": 1.0,
+  "veredito": "1",
+  "conferido": true
+ },
+ "dj_balanceada": {
+  "counts": {
+   "01": 2048
+  },
+  "p_zero": 0.0,
+  "veredito": "0",
+  "conferido": true
+ },
+ "bell_paridade": {
+  "counts": {
+   "00": 1037,
+   "11": 1011
+  },
+  "paridade": 1.0,
+  "veredito": "1",
+  "conferido": true
+ }
+}
