@@ -1,25 +1,26 @@
 {
- "origem": "qbraid_sim",
- "device": "qbraid:qbraid:sim:qir-sv",
- "job_id": "qbraid:qbraid:sim:qir-sv-8a27-qjob-6af9b4ce27eb7437b2fee2a7",
- "shots": 2000,
+ "conferido": true,
  "counts": {
   "00": 977,
   "11": 1023
  },
+ "device": "qbraid:qbraid:sim:qir-sv",
+ "job_id": "qbraid:qbraid:sim:qir-sv-8a27-qjob-6af9b4ce27eb7437b2fee2a7",
+ "origem": "qbraid_sim",
  "paridade": 1.0,
+ "segundos": 11.9,
+ "selo_sha3_256": "4600e85b7f02b6cea2f895834920e9acf171a13f05d8bf4ecc16eb5e8da22fae",
+ "shots": 2000,
  "veredito": {
-  "verdict": "1",
-  "p_hat": 1.0,
-  "epsilon": 0.030368,
-  "threshold": 0.9,
   "delta": 0.05,
+  "epsilon": 0.030368,
+  "input_commitment": "bccd6808acb36bb21b4e32089e5741ef1d23273aebf674d7b50d1403bd8db6aa",
+  "p_hat": 1.0,
+  "receipt_hash": "74e1776799f880076d32043bf60bd3777e7cd8f77c9c3151ffdebb708bf26d2e",
+  "rule": "proporcao-v1",
   "shots": 2000,
   "target_key": "par",
-  "rule": "proporcao-v1",
-  "input_commitment": "bccd6808acb36bb21b4e32089e5741ef1d23273aebf674d7b50d1403bd8db6aa",
-  "receipt_hash": "74e1776799f880076d32043bf60bd3777e7cd8f77c9c3151ffdebb708bf26d2e"
- },
- "segundos": 11.9,
- "conferido": true
+  "threshold": 0.9,
+  "verdict": "1"
+ }
 }
