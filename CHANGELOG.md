@@ -1,3 +1,12 @@
+## [2.5.10] - 2026-11-14
+
+### Corrigido
+
+- `zephirum.__version__` respondia 2.5.8 no wheel 2.5.9; agora acompanha o `pyproject.toml`.
+- `scripts/sync_version.py` passou a cobrir `src/zephirum/__init__.py`, que era o unico alvo
+  fora da verificacao e a causa da divergencia em execucao.
+- Teste `tests/test_versao_unica.py` falha se pyproject e pacote divergirem.
+
 ## [2.5.9] - 2026-11-13
 
 ### Corrigido

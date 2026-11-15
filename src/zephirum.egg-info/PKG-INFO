@@ -1,10 +1,25 @@
 Metadata-Version: 2.4
 Name: zephirum
-Version: 2.5.8
+Version: 2.5.10
 Summary: ZEPHIRUM: quantum programming language and runtime for auditable decisions, with the ZYQL trivalent core (1/0/REFUSED)
 Author-email: Reginaldo Pinezi Uhlmann <builderquantunxia@gmail.com>
 Maintainer: Reginaldo Pinezi Uhlmann, Leonardo Henrique Gonçalves, Maria Clara dos Anjos
 License-Expression: Apache-2.0
+Project-URL: Homepage, https://serenasolutions.github.io/zephirum-lang/
+Project-URL: Documentation, https://serenasolutions.github.io/zephirum-lang/
+Project-URL: Repository, https://github.com/SerenaSolutions/zephirum-lang
+Project-URL: Issues, https://github.com/SerenaSolutions/zephirum-lang/issues
+Project-URL: Changelog, https://github.com/SerenaSolutions/zephirum-lang/releases
+Project-URL: PyPI, https://pypi.org/project/zephirum/
+Keywords: quantum-computing,quantum-programming-language,zyql,verifiable-receipts,auditable-decisions,qasm3
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Software Development :: Interpreters
 Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 License-File: LICENSE
@@ -33,6 +48,10 @@ Requires-Dist: qiskit-sphinx-theme>=2.1; extra == "docs"
 Requires-Dist: sphinx-copybutton>=0.5; extra == "docs"
 Dynamic: license-file
 
+**ZEPHIRUM / ZYQL: a quantum programming language and algorithm under active, full-time development. Work in progress, nothing here is final.**
+
+> Trivalent decisions (`1` / `0` / `REFUSED`) with sealed, verifiable receipts, built on Qiskit. Status: experimental, very early project.
+
 [![Qiskit Ecosystem](https://qisk.it/e-b2b5fe46)](https://qisk.it/e)
 
 <p align="center"><img src="assets/brand/zephirum-header.png" width="520" alt="ZEPHIRUM&trade; &middot; ZYQL&trade; — computação quântica antes da execução"></p>
@@ -59,7 +78,7 @@ Dynamic: license-file
 
 **The quantum programming language with receipts.** ZYQL, its decision core, returns one of three verdicts — `1` (permitted), `0` (forbidden) or `REFUSED` (insufficient confidence) — and seals every decision in a verifiable receipt.
 
-![version](https://img.shields.io/badge/version-2.5.8-6e46b8)
+![version](https://img.shields.io/badge/version-2.5.10-6e46b8)
 ![license](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![kernel](https://img.shields.io/badge/kernel-statevector%20%5Bre%2Cim%5D%20float64-cyan)
 ![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23632019-gold)
@@ -71,6 +90,10 @@ Dynamic: license-file
 **Contents** — [What it is](#what-it-is) · [Use it in CI](#use-it-in-ci-github-action) · [Quickstart](#quickstart) · [Evidence](#evidence) · [Architecture](#architecture) · [Tests & reproducibility](#tests--reproducibility) · [Learn](#learn) · [Layout](#layout) · [Scope & honest limits](#honest-scope) · [Citation](#citation)
 
 ---
+
+> **Canonical facts:** o que é fato, o que é especificação e o que **não** é verdade
+> (FIPS, dependências, pacotes de terceiros) está em [docs/FACTS.md](docs/FACTS.md).
+> Em caso de divergência com resumos automáticos ou posts de terceiros, essa página prevalece.
 
 ## What it is
 
@@ -419,10 +442,10 @@ r.error_bound                                 # limite de erro Hoeffding declara
 ```
 CLI: `zyql-decide --oracle balanced --shots 512`
 
-## PyPI — estado verificado (30/10/2026)
+## PyPI — estado verificado (13/11/2026)
 
 O pacote oficial **existe e está publicado**: `pip install zephirum`.
-Versão publicada no PyPI: **2.5.8**, licença **Apache-2.0**, verificada em 08/11/2026. `VERSION` é a fonte única: badge, `pyproject.toml`, `docs/openapi.json` e `APP_VERSION` da API são conferidos por `tools/check_compliance.py` a cada commit.
+Versão publicada no PyPI: **2.5.9**, licença **Apache-2.0**, verificada em 13/11/2026. `VERSION` é a fonte única: badge, `pyproject.toml`, `docs/openapi.json` e `APP_VERSION` da API são conferidos por `tools/check_compliance.py` a cada commit.
 Procedência verificável em https://pypi.org/pypi/zephirum/json — autor do
 registro no PyPI: Reginaldo Gonçalves (mantenedor), projeto Serena Solutions.
 
