@@ -1,0 +1,467 @@
+[
+ {
+  "id": "aws:aws:sim:dm1",
+  "nome": "DM1",
+  "qubits": 17,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 7.5
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "qbraid:qbraid:sim:qir-sv",
+  "nome": "QIR Simulator",
+  "qubits": 30,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "aws:quera:qpu:aquila",
+  "nome": "Aquila",
+  "qubits": 256,
+  "sim": false,
+  "paradigma": "analog",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 30.0,
+   "perShot": 1.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "aws:ionq:qpu:forte-1",
+  "nome": "Forte 1 (AWS)",
+  "qubits": 36,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 34,
+  "gates": [
+   "ccnot",
+   "ch",
+   "cnot",
+   "crx",
+   "cry",
+   "crz"
+  ],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 30.0,
+   "perShot": 8.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "ionq:ionq:sim:simulator",
+  "nome": "Simulator",
+  "qubits": 29,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 35,
+  "gates": [
+   "ccnot",
+   "ch",
+   "cnot",
+   "crx",
+   "cry",
+   "crz"
+  ],
+  "ruido": true,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "aws:aws:sim:sv1",
+  "nome": "SV1",
+  "qubits": 34,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 7.5
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "rigetti:rigetti:qpu:cepheus-1-108q",
+  "nome": "Cepheus-1-108Q",
+  "qubits": 107,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 12000.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "qbraid:quobly:sim:alloy-forge",
+  "nome": "Alloy Forge Emulator",
+  "qubits": 10,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "aws:rigetti:qpu:cepheus-1-108q",
+  "nome": "Cepheus-1-108Q (AWS)",
+  "qubits": 107,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 30.0,
+   "perShot": 0.0425,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "openquantum:aqt:qpu:ibex-q1",
+  "nome": "IBEX Q1 (OQ)",
+  "qubits": 12,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "openquantum:ionq:qpu:forte-1",
+  "nome": "Forte 1 (OQ)",
+  "qubits": 36,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 34,
+  "gates": [
+   "ccnot",
+   "ch",
+   "cnot",
+   "crx",
+   "cry",
+   "crz"
+  ],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "openquantum:ionq:qpu:forte-enterprise",
+  "nome": "Forte Enterprise 1 (OQ)",
+  "qubits": 36,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 34,
+  "gates": [
+   "ccnot",
+   "ch",
+   "cnot",
+   "crx",
+   "cry",
+   "crz"
+  ],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "openquantum:iqm:qpu:emerald",
+  "nome": "Emerald (OQ)",
+  "qubits": 54,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "openquantum:iqm:qpu:garnet",
+  "nome": "Garnet (OQ)",
+  "qubits": 20,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "openquantum:rigetti:qpu:cepheus-1-108q",
+  "nome": "Cepheus-1-108Q (OQ)",
+  "qubits": 107,
+  "sim": false,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": false,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "qbraid:qbraid:sim:gpu-sv",
+  "nome": "GPU State Vector Simulator",
+  "qubits": 35,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": true,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 5.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "qbraid:qbraid:sim:gpu-tn",
+  "nome": "GPU Tensor Network Simulator",
+  "qubits": 500,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": true,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 5.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "qperfect:qperfect:sim:mimiq-sv",
+  "nome": "QPerfect MIMIQ State Vector",
+  "qubits": 32,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": true,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ },
+ {
+  "id": "qperfect:qperfect:sim:mimiq-mps",
+  "nome": "QPerfect MIMIQ MPS",
+  "qubits": null,
+  "sim": true,
+  "paradigma": "gate_model",
+  "n_gates": 0,
+  "gates": [],
+  "ruido": false,
+  "batch": true,
+  "preco": {
+   "perTask": 0.0,
+   "perShot": 0.0,
+   "perMinute": 0.0
+  },
+  "max_shots": null,
+  "opcoes": [
+   "prepare",
+   "transform",
+   "transpile",
+   "validate"
+  ]
+ }
+]
