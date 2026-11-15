@@ -1,5 +1,5 @@
 {
-  "spec_version": "1.1.0",
+  "spec_version": "1.2.0",
   "descricao": "Casos dourados da conformidade ZYQL. Cada caso declara entrada e veredito exigido.",
   "casos": [
     {
@@ -125,10 +125,10 @@
       "shots": 1024,
       "banda": 0.0848813447,
       "esperado": {
-        "verdict": "0",
-        "refusal_reason": null
+        "verdict": "REFUSED",
+        "refusal_reason": "INTERVAL_INSIDE_BAND"
       },
-      "regra": "fronteira exata p0 = 1 - banda ainda decide (comparacao com >=)"
+      "regra": "fronteira exata p0 = 1 - banda: a estimativa pontual toca o limiar, mas o limite inferior do intervalo de Wilson nao o alcanca. Decide-se pelo limite do intervalo (regra v2.6.0 item 2), entao recusa declarada INTERVAL_INSIDE_BAND. Antes de 1.2.0 este caso esperava verdict 0, herdado da comparacao pontual."
     },
     {
       "id": "zona-cinzenta -> INSIDE_NOISE_BAND",
@@ -178,9 +178,18 @@
       "banda": 0.0848813447,
       "esperado": {
         "verdict": "REFUSED",
-        "refusal_reason": "BALANCED_ORACLE"
+        "refusal_reason": "INTERVAL_INSIDE_BAND"
       },
-      "regra": "fronteira exata p0 = banda recusa como balanceado (comparacao com <=)"
+      "regra": "fronteira exata p0 = banda: o limite superior do intervalo nao desce ate a banda, entao nao se classifica como oraculo balanceado. Recusa declarada INTERVAL_INSIDE_BAND. Antes de 1.2.0 este caso esperava BALANCED_ORACLE, herdado da comparacao pontual."
+    }
+  ],
+  "changelog": [
+    {
+      "versao": "1.2.0",
+      "data": "2026-11-14",
+      "mudanca": "Dois casos de fronteira passam a esperar recusa INTERVAL_INSIDE_BAND, porque a decisao vigente usa o limite do intervalo de Wilson e nao a estimativa pontual. Nenhum veredito de caso nao-fronteira mudou.",
+      "motivo": "Coerencia entre a regra implementada e os casos dourados; a regra do intervalo existe para impedir recibo permitido com limite abaixo do limiar.",
+      "impacto": "58/58 conformante apos a mudanca."
     }
   ]
 }
