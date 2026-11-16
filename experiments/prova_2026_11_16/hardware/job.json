@@ -1,0 +1,18 @@
+{
+  "job_id": "dbtk8ob2kf8s73c990jg",
+  "backend": "ibm_marrakesh",
+  "shots": 1024,
+  "basis_gates": [
+    "cz",
+    "id",
+    "rx",
+    "rz",
+    "rzz",
+    "sx",
+    "x"
+  ],
+  "circuitos": {
+    "bell": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[2] c;\nrz(pi/2) $0;\nsx $0;\nrz(pi/2) $0;\nrz(pi/2) $1;\nsx $1;\nrz(pi/2) $1;\ncz $0, $1;\nrz(pi/2) $1;\nsx $1;\nrz(pi/2) $1;\nc[0] = measure $0;\nc[1] = measure $1;\n",
+    "ghz6": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[6] c;\nrz(pi/2) $0;\nsx $0;\nrz(pi/2) $0;\nrz(pi/2) $1;\nsx $1;\nrz(pi/2) $1;\ncz $0, $1;\nrz(pi/2) $1;\nsx $1;\nrz(pi/2) $1;\nrz(pi/2) $2;\nsx $2;\nrz(pi/2) $2;\ncz $1, $2;\nrz(pi/2) $2;\nsx $2;\nrz(pi/2) $2;\nrz(pi/2) $3;\nsx $3;\nrz(pi/2) $3;\ncz $2, $3;\nrz(pi/2) $3;\nsx $3;\nrz(pi/2) $3;\nrz(pi/2) $4;\nsx $4;\nrz(pi/2) $4;\ncz $3, $4;\nrz(pi/2) $4;\nsx $4;\nrz(pi/2) $4;\nrz(pi/2) $5;\nsx $5;\nrz(pi/2) $5;\ncz $4, $5;\nrz(pi/2) $5;\nsx $5;\nrz(pi/2) $5;\nc[0] = measure $0;\nc[1] = measure $1;\nc[2] = measure $2;\nc[3] = measure $3;\nc[4] = measure $4;\nc[5] = measure $5;\n"
+  }
+}

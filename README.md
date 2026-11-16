@@ -1,5 +1,7 @@
 **ZEPHIRUM / ZYQL: a quantum programming language and algorithm under active, full-time development. Work in progress, nothing here is final.**
 
+> **Auditoria de hardware real, 16/11/2026:** job `dbtk8ob2kf8s73c990jg` no QPU `ibm_marrakesh`. Bell com 1 CZ deu 92.48% de concordância e GHZ-6 com 5 CZ deu 78.91%, diferencial de 13.57 pontos percentuais. O decisor devolveu `INCONCLUSIVE` para Bell em vez de afirmar `1`, porque o limite inferior (0.9069) fica abaixo do limiar de 0,90. Recibos verificados. Detalhe em [docs/AUDITORIA_HARDWARE_2026-11-16.md](docs/AUDITORIA_HARDWARE_2026-11-16.md).
+
 > Trivalent decisions (`1` / `0` / `REFUSED`) with sealed, verifiable receipts, built on Qiskit. Status: experimental, very early project.
 
 [![Qiskit Ecosystem](https://qisk.it/e-b2b5fe46)](https://qisk.it/e)
