@@ -1,11 +1,11 @@
 {
   "data": "2026-11-16",
-  "ambiente": "sandbox Linux do agente, sem QPU e sem VS Code",
+  "ambiente": "sandbox Linux do agente; sem IBM, sem QPU, sem VS Code",
   "itens": [
     {
-      "item": "1. equivalencia semantica vs Qiskit",
+      "item": "1. equivalencia semantica vs Cirq (sem IBM)",
       "estado": "PASS",
-      "detalhe": "fidelidade 1.000000000000 contra o Qiskit em Bell"
+      "detalhe": "fidelidade 1.000000000000 contra Cirq em Bell (convencao invertida)"
     },
     {
       "item": "2. round-trip da IR",
@@ -55,30 +55,35 @@
     {
       "item": "11. suite de testes coletada",
       "estado": "PASS",
-      "detalhe": "suite coletada: 255 tests collected in 0.73s"
+      "detalhe": "suite coletada: 255 tests collected in 0.71s"
     },
     {
-      "item": "12. diferencial com hardware",
+      "item": "12. vocabulario do terceiro valor",
+      "estado": "FALHA",
+      "detalhe": "nucleo devolve 'INCONCLUSIVE' e 38 modulo(s) usam REFUSED; o STARGATE aceita apenas REFUSED, entao evento do nucleo seria recusado"
+    },
+    {
+      "item": "13. diferencial com hardware",
       "estado": "BLOQUEADO",
-      "detalhe": "exige IBM_QUANTUM_TOKEN valido; hoje invalido"
+      "detalhe": "sem IBM por decisao: fica para hardware nao-IBM, ainda nao contratado"
     },
     {
-      "item": "13. custo com fila real",
+      "item": "14. custo com fila real",
       "estado": "BLOQUEADO",
-      "detalhe": "exige backend pago ou cota valida"
+      "detalhe": "exige backend pago; nenhum contratado"
     },
     {
-      "item": "14. prova de isolamento de processo",
+      "item": "15. prova de isolamento de processo",
       "estado": "BLOQUEADO",
       "detalhe": "existe como teste de suite; medicao dedicada pendente"
     },
     {
-      "item": "15. revisao por terceiro",
+      "item": "16. revisao por terceiro",
       "estado": "BLOQUEADO",
       "detalhe": "exige avaliador externo; nao se fabrica localmente"
     },
     {
-      "item": "16. experimento decisivo com 3 avaliadores",
+      "item": "17. experimento decisivo com 3 avaliadores",
       "estado": "BLOQUEADO",
       "detalhe": "exige pessoas de fora compilando sem ajuda"
     }

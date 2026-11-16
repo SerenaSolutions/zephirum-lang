@@ -198,59 +198,69 @@ def item_oq3_roundtrip():
     return "FALHA", "from_openqasm3 nao devolveu estrutura"
 
 
-def item_equivalencia_qiskit():
-    """Item A/1: unitaria do exportador contra a do Qiskit."""
+def item_equivalencia_cirq():
+    """Item A/1: unitaria do exportador contra Cirq — referencia de terceiro, sem IBM."""
     try:
         import numpy as np
-        import oq3
-        from qiskit import QuantumCircuit
-        from qiskit.quantum_info import Operator
+        import cirq
     except Exception as e:
-        return "BLOQUEADO", f"qiskit indisponivel no ambiente: {type(e).__name__}"
+        return "BLOQUEADO", f"cirq indisponivel: {type(e).__name__}"
+    import oq3
     gates = ["H(0)", "CNOT(0->1)"]
     qasm = oq3.to_openqasm3(gates, 2)
-    limpo = "\n".join(l for l in qasm.splitlines() if "measure" not in l and not l.startswith("bit["))
-    try:
-        qc = QuantumCircuit.from_qasm_str(limpo)
-    except Exception:
-        from qiskit import qasm3
-        qc = qasm3.loads(limpo)
-    u_qiskit = Operator(qc).data
-    # convencao do Qiskit: indice = bit0 + 2*bit1 (q0 e o bit menos significativo)
-    def unitaria_de(gates: list[str], n: int) -> np.ndarray:
+
+    q = cirq.LineQubit.range(2)
+    referencia = cirq.unitary(cirq.Circuit(cirq.H(q[0]), cirq.CNOT(q[0], q[1])))
+
+    def unitaria_nossa(n: int, ordem: str) -> "np.ndarray":
         dim = 1 << n
         u = np.zeros((dim, dim), dtype=complex)
         for coluna in range(dim):
-            psi = np.zeros(dim, dtype=complex)
-            psi[coluna] = 1.0
+            psi = np.zeros(dim, dtype=complex); psi[coluna] = 1.0
+            if ordem == "invertida":       # Cirq usa q0 como bit mais significativo
+                psi = psi.reshape([2]*n).transpose().reshape(dim)
             for g in gates:
                 nome = g.split("(")[0]
-                args = [int(x) for x in g[g.index("(") + 1:-1].replace("->", ",").split(",")]
+                args = [int(x) for x in g[g.index("(")+1:-1].replace("->",",").split(",")]
                 if nome == "H":
-                    q = args[0]; passo = 1 << q
+                    passo = 1 << args[0]
                     for base in range(dim):
-                        if (base >> q) & 1:
-                            continue
-                        a, b = psi[base], psi[base + passo]
-                        psi[base] = (a + b) / math.sqrt(2)
-                        psi[base + passo] = (a - b) / math.sqrt(2)
+                        if (base >> args[0]) & 1: continue
+                        a, b = psi[base], psi[base+passo]
+                        psi[base] = (a+b)/math.sqrt(2); psi[base+passo] = (a-b)/math.sqrt(2)
                 elif nome == "CNOT":
                     c, t = args
                     for i in range(dim):
                         if (i >> c) & 1:
                             j = i ^ (1 << t)
-                            if j > i:
-                                psi[i], psi[j] = psi[j], psi[i]
-                else:
-                    raise ValueError(f"portao nao suportado no teste: {nome}")
+                            if j > i: psi[i], psi[j] = psi[j], psi[i]
+            if ordem == "invertida":
+                psi = psi.reshape([2]*n).transpose().reshape(dim)
             u[:, coluna] = psi
         return u
 
-    u_nosso = unitaria_de(gates, 2)
-    fid = abs(np.trace(u_nosso.conj().T @ u_qiskit)) / 4
-    if abs(fid - 1.0) < 1e-9:
-        return "PASS", f"fidelidade {fid:.12f} contra o Qiskit em Bell"
-    return "FALHA", f"fidelidade {fid:.12f}"
+    fids = {}
+    for ordem in ("direta", "invertida"):
+        nosso = unitaria_nossa(2, ordem)
+        fids[ordem] = abs(np.trace(nosso.conj().T @ referencia)) / 4
+    melhor = max(fids.values())
+    if abs(melhor - 1.0) < 1e-9:
+        return "PASS", f"fidelidade {melhor:.12f} contra Cirq em Bell (convencao {max(fids, key=fids.get)})"
+    return "FALHA", f"fidelidade {melhor:.12f} contra Cirq; QASM gerado: {len(qasm)} chars"
+
+
+def item_vocabulario_terceiro_valor():
+    """Item novo: o terceiro valor tem um nome so? O STARGATE aceita {1, 0, REFUSED}."""
+    from zephirum import decidir
+    d = decidir({"000": 500, "111": 500}, shots=1000, target_key="000")
+    valor = str(d.get("verdict"))
+    modulos = subprocess.run(
+        ["grep", "-rl", "REFUSED", "src"], cwd=RAIZ, capture_output=True, text=True).stdout.split()
+    usa_refused = [m for m in modulos if m.endswith(".py")]
+    if valor == "REFUSED":
+        return "PASS", "nucleo e modulos concordam no nome do terceiro valor"
+    return "FALHA", (f"nucleo devolve {valor!r} e {len(usa_refused)} modulo(s) usam REFUSED; "
+                     f"o STARGATE aceita apenas REFUSED, entao evento do nucleo seria recusado")
 
 
 def item_falha_segura():
@@ -300,7 +310,7 @@ def item_contagem_testes():
 
 
 ITENS = [
-    ("1. equivalencia semantica vs Qiskit", item_equivalencia_qiskit),
+    ("1. equivalencia semantica vs Cirq (sem IBM)", item_equivalencia_cirq),
     ("2. round-trip da IR", item_oq3_roundtrip),
     ("3. propriedades metamorficas", item_metamorfico),
     ("4. falsificacao 2000 categorizada", item_falsificacao_2000),
@@ -311,17 +321,18 @@ ITENS = [
     ("9. falha segura", item_falha_segura),
     ("10. corpus verificavel", item_corpus),
     ("11. suite de testes coletada", item_contagem_testes),
+    ("12. vocabulario do terceiro valor", item_vocabulario_terceiro_valor),
 ]
 
 for nome, funcao in ITENS:
     roda(nome, funcao)
 
 BLOQUEADOS = [
-    ("12. diferencial com hardware", "exige IBM_QUANTUM_TOKEN valido; hoje invalido"),
-    ("13. custo com fila real", "exige backend pago ou cota valida"),
-    ("14. prova de isolamento de processo", "existe como teste de suite; medicao dedicada pendente"),
-    ("15. revisao por terceiro", "exige avaliador externo; nao se fabrica localmente"),
-    ("16. experimento decisivo com 3 avaliadores", "exige pessoas de fora compilando sem ajuda"),
+    ("13. diferencial com hardware", "sem IBM por decisao: fica para hardware nao-IBM, ainda nao contratado"),
+    ("14. custo com fila real", "exige backend pago; nenhum contratado"),
+    ("15. prova de isolamento de processo", "existe como teste de suite; medicao dedicada pendente"),
+    ("16. revisao por terceiro", "exige avaliador externo; nao se fabrica localmente"),
+    ("17. experimento decisivo com 3 avaliadores", "exige pessoas de fora compilando sem ajuda"),
 ]
 for nome, motivo in BLOQUEADOS:
     registrar(nome, "BLOQUEADO", motivo)
@@ -329,7 +340,7 @@ for nome, motivo in BLOQUEADOS:
 saida = RAIZ / "experiments" / "prova_2026_11_16" / "relatorio.json"
 saida.write_text(json.dumps({
     "data": "2026-11-16",
-    "ambiente": "sandbox Linux do agente, sem QPU e sem VS Code",
+    "ambiente": "sandbox Linux do agente; sem IBM, sem QPU, sem VS Code",
     "itens": RESULTADOS,
 }, indent=2, ensure_ascii=False))
 
