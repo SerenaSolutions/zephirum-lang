@@ -1,0 +1,54 @@
+{
+  "job_id": "dbtk8ob2kf8s73c990jg",
+  "backend": "ibm_marrakesh",
+  "shots": 1024,
+  "medicoes": {
+    "bell": {
+      "shots": 1024,
+      "concordam": 947,
+      "discordam": 77,
+      "p_concordam": 0.9248,
+      "verdict": "INCONCLUSIVE",
+      "epsilon": 0.042441,
+      "intervalo_exato": {
+        "low": 0.906912,
+        "high": 0.940204,
+        "method": "clopper-pearson",
+        "used_for_decision": false
+      },
+      "recibo_verifica": true,
+      "receipt_hash": "20a08a05978b3081b113829919e95b1b6c23e76862916d4fea1928226b2ffea3",
+      "distribuicao": {
+        "0x0": 534,
+        "0x3": 413,
+        "0x1": 72,
+        "0x2": 5
+      }
+    },
+    "ghz6": {
+      "shots": 1024,
+      "concordam": 808,
+      "discordam": 216,
+      "p_concordam": 0.7891,
+      "verdict": "0",
+      "epsilon": 0.042441,
+      "intervalo_exato": {
+        "low": 0.762772,
+        "high": 0.813679,
+        "method": "clopper-pearson",
+        "used_for_decision": false
+      },
+      "recibo_verifica": true,
+      "receipt_hash": "225e3c637bdf2887dc8122da01f5851627d1459c1b7ac932fd76f5f37b2548e1",
+      "distribuicao": {
+        "0x0": 494,
+        "0x3f": 314,
+        "0x3d": 78,
+        "0x2f": 35,
+        "0x3b": 14,
+        "0xf": 13
+      }
+    }
+  },
+  "diferencial_pp": 13.57
+}
