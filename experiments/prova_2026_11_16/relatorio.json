@@ -1,0 +1,86 @@
+{
+  "data": "2026-11-16",
+  "ambiente": "sandbox Linux do agente, sem QPU e sem VS Code",
+  "itens": [
+    {
+      "item": "1. equivalencia semantica vs Qiskit",
+      "estado": "PASS",
+      "detalhe": "fidelidade 1.000000000000 contra o Qiskit em Bell"
+    },
+    {
+      "item": "2. round-trip da IR",
+      "estado": "PASS",
+      "detalhe": "round-trip estavel, 98 caracteres de QASM 3"
+    },
+    {
+      "item": "3. propriedades metamorficas",
+      "estado": "PASS",
+      "detalhe": "300 casos x 3 escalas: nenhuma inversao entre 1 e 0 ao mudar shots"
+    },
+    {
+      "item": "4. falsificacao 2000 categorizada",
+      "estado": "PASS",
+      "detalhe": "2000 casos adversariais, 0 falso positivo, 0 falso negativo"
+    },
+    {
+      "item": "5. curva de operacao",
+      "estado": "PASS",
+      "detalhe": "p>=0.5: elimina 91.5%, erro 0.00% | p>=0.7: elimina 100.0%, erro 0.00% | p>=0.9: elimina 100.0%, erro 0.00%"
+    },
+    {
+      "item": "6. fronteira numerica do intervalo",
+      "estado": "PASS",
+      "detalhe": "concorda com a referencia independente (pior desvio 3.44e-13) em 7 casos"
+    },
+    {
+      "item": "7. determinismo",
+      "estado": "PASS",
+      "detalhe": "mesma decisao em duas execucoes ({'verdict': '1', 'p_hat': 0.7, 'epsilon': 0.042947, 'threshold': 0.5, 'delta': 0.05, 'shots': 1000, 'target_key': '000', 'rule': 'proporcao-v1', 'exact_interval': {'low': 0.670538, 'high': 0.728279, 'method': 'clopper-pearson', 'used_for_decision': False}, 'input_commitment': 'cc1a644326c524cd1c32180c7e21e13bb1a832c0c792065c811273fa3719d820', 'receipt_hash': 'e31494464aa8f437055517920f4f27abde02ee6363f044cb508ff511ea940a17'})"
+    },
+    {
+      "item": "8. recusa com selo",
+      "estado": "PASS",
+      "detalhe": "intacto aceito; 7 campos adulterados rejeitados"
+    },
+    {
+      "item": "9. falha segura",
+      "estado": "PASS",
+      "detalhe": "3 entradas invalidas: nenhuma virou veredito positivo/negativo"
+    },
+    {
+      "item": "10. corpus verificavel",
+      "estado": "PASS",
+      "detalhe": "12 programas no corpus; 0 recibos aceitos e 0 recusados na verificacao offline"
+    },
+    {
+      "item": "11. suite de testes coletada",
+      "estado": "PASS",
+      "detalhe": "suite coletada: 255 tests collected in 0.73s"
+    },
+    {
+      "item": "12. diferencial com hardware",
+      "estado": "BLOQUEADO",
+      "detalhe": "exige IBM_QUANTUM_TOKEN valido; hoje invalido"
+    },
+    {
+      "item": "13. custo com fila real",
+      "estado": "BLOQUEADO",
+      "detalhe": "exige backend pago ou cota valida"
+    },
+    {
+      "item": "14. prova de isolamento de processo",
+      "estado": "BLOQUEADO",
+      "detalhe": "existe como teste de suite; medicao dedicada pendente"
+    },
+    {
+      "item": "15. revisao por terceiro",
+      "estado": "BLOQUEADO",
+      "detalhe": "exige avaliador externo; nao se fabrica localmente"
+    },
+    {
+      "item": "16. experimento decisivo com 3 avaliadores",
+      "estado": "BLOQUEADO",
+      "detalhe": "exige pessoas de fora compilando sem ajuda"
+    }
+  ]
+}
