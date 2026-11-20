@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Assistente do ZEPHIRUM/ZYQL com contexto do projeto e execução opcional de cálculos seguros.">
+<title>Chat ZEPHIRUM · assistente do projeto</title>
+<style>
+:root{color-scheme:dark;--bg:#070b15;--panel:#0d1424;--line:#24314c;--text:#edf2ff;--muted:#a0aec8;--accent:#9eb4ff;--mint:#69e5d8;--warn:#ffd27a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0,#18264a 0,transparent 55%),var(--bg);color:var(--text);font:15px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+a{color:var(--accent)}button,textarea{font:inherit}main{max-width:900px;margin:auto;padding:28px 18px 24px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);padding:4px 0 18px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#182647;color:var(--mint);font-size:22px;border:1px solid #334a77}h1{font-size:18px;margin:0}header p{margin:3px 0 0;color:var(--muted);font-size:12px}.header-links{margin-left:auto;font-size:12px;display:flex;gap:14px;flex-wrap:wrap}
+.notice{margin:16px 0;padding:11px 14px;border:1px solid #54472c;background:#211c12;border-radius:12px;color:#e8d8ae;font-size:12px}
+#messages{flex:1;min-height:300px;max-height:calc(100vh - 310px);overflow:auto;padding:14px 2px;display:flex;flex-direction:column;gap:14px}.message{max-width:min(86%,720px);padding:12px 15px;border:1px solid var(--line);border-radius:16px;background:var(--panel);white-space:pre-wrap;overflow-wrap:anywhere}.message.user{align-self:flex-end;background:#172342;border-color:#354a7a}.message.assistant{align-self:flex-start}.message.error{border-color:#8a4545;color:#ffb6b6}.welcome{color:var(--muted);max-width:70ch}.welcome button{background:transparent;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:7px 11px;margin:5px 5px 0 0;cursor:pointer;font-size:12px}
+form{border:1px solid #344365;border-radius:16px;padding:10px;background:#0c1322}.input-row{display:flex;align-items:flex-end;gap:8px}textarea{resize:vertical;min-height:50px;max-height:180px;flex:1;color:var(--text);background:transparent;border:0;outline:0;padding:10px 8px}button.send{border:0;border-radius:11px;padding:10px 16px;background:linear-gradient(120deg,#aabaff,#69e5d8);color:#07101d;font-weight:700;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.controls{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px;padding:6px 6px 0}.controls button{background:transparent;border:0;color:var(--accent);cursor:pointer}.fine{color:#7d8aa4;text-align:center;font-size:11px;margin:12px 0 0}.typing{color:var(--muted);font-size:12px;padding:0 6px}.links{font-size:11px;margin-top:8px}@media(max-width:600px){main{padding:18px 12px}.header-links{flex-direction:column;gap:3px}#messages{max-height:calc(100vh - 290px)}.message{max-width:94%}}
+</style>
+</head>
+<body><main>
+<header><div class="logo" aria-hidden="true">◈</div><div><h1>Assistente ZEPHIRUM / ZYQL</h1><p>Documentação do projeto · cálculos ZYQL em simulação quando solicitados</p></div><nav class="header-links"><a href="/">Página inicial</a><a href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/FACTS.md">Fatos canônicos</a></nav></header>
+<div class="notice"><strong>Importante:</strong> respostas de IA podem conter erros e não são vereditos ZYQL. A API nunca executa QPU neste chat. Histórico fica somente neste navegador; cada mensagem enviada é processada pelo provedor OpenAI. Não envie dados pessoais, segredos ou informações confidenciais.</div>
+<section id="messages" aria-live="polite" aria-label="Conversa"><div class="welcome" id="welcome">Olá! Posso explicar a linguagem, os recibos e a documentação do ZEPHIRUM. Também posso executar um cálculo ZYQL em simulação quando você pedir explicitamente.<br><br><button type="button" data-prompt="O que significam 1, 0 e REFUSED no ZYQL?">O que significam os vereditos?</button><button type="button" data-prompt="Explique a diferença entre integridade SHA3 e autoria do recibo.">Como funcionam os recibos?</button><button type="button" data-prompt="Execute uma decisão ZYQL de exemplo para oracle const1, n=3 e 2048 shots em simulação.">Executar exemplo ZYQL</button></div></section>
+<div id="status" class="typing" role="status"></div>
+<form id="chat-form"><div class="input-row"><textarea id="prompt" maxlength="4000" aria-label="Sua mensagem" placeholder="Pergunte sobre o ZEPHIRUM..." required></textarea><button class="send" id="send" type="submit">Enviar</button></div><div class="controls"><span id="count">0 / 4000</span><button type="button" id="clear">Apagar conversa neste navegador</button></div></form>
+<p class="fine">As mensagens não são salvas no servidor pelo chat. Consulte <a href="https://github.com/SerenaSolutions/zephirum-lang/blob/main/PRIVACY.md">Privacidade do projeto</a> e os termos do provedor de IA.</p>
+</main>
+<script>
+(() => {
+  const STORE = 'zephirum-chat-v1';
+  const list = document.getElementById('messages');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('prompt');
+  const send = document.getElementById('send');
+  const status = document.getElementById('status');
+  let history = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE) || '[]');
+    if (Array.isArray(saved)) history = saved.filter(m => m && ['user','assistant'].includes(m.role) && typeof m.content === 'string').slice(-12);
+  } catch (_) { history = []; }
+  function bubble(role, text, isError=false) {
+    const node = document.createElement('div');
+    node.className = 'message ' + role + (isError ? ' error' : '');
+    node.textContent = text;
+    list.appendChild(node);
+    list.scrollTop = list.scrollHeight;
+    return node;
+  }
+  function draw() {
+    list.querySelectorAll('.message').forEach(n => n.remove());
+    history.forEach(m => bubble(m.role, m.content));
+    const welcome = document.getElementById('welcome');
+    welcome.style.display = history.length ? 'none' : '';
+  }
+  draw();
+  document.getElementById('count').textContent = input.value.length + ' / 4000';
+  input.addEventListener('input', () => document.getElementById('count').textContent = input.value.length + ' / 4000');
+  document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => { input.value = button.dataset.prompt; form.requestSubmit(); }));
+  document.getElementById('clear').addEventListener('click', () => {
+    history = [];
+    localStorage.removeItem(STORE);
+    draw(); status.textContent = 'Conversa apagada deste navegador.';
+  });
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text || send.disabled) return;
+    history.push({role:'user', content:text});
+    history = history.slice(-12);
+    bubble('user', text);
+    document.getElementById('welcome').style.display = 'none';
+    input.value = ''; input.dispatchEvent(new Event('input'));
+    send.disabled = true; status.textContent = 'Consultando o assistente…';
+    try {
+      const response = await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({messages:history})});
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Não foi possível responder.');
+      history.push({role:'assistant', content:data.reply});
+      history = history.slice(-12);
+      localStorage.setItem(STORE, JSON.stringify(history));
+      bubble('assistant', data.reply);
+      status.textContent = '';
+    } catch (error) {
+      history.pop();
+      bubble('assistant', error.message || 'Falha de rede.', true);
+      status.textContent = 'A mensagem não foi salva no histórico.';
+    } finally { send.disabled = false; input.focus(); }
+  });
+})();
+</script></body></html>
