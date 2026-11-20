@@ -83,3 +83,12 @@ https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/GOVERNANCA-AGENT
 
 Ele define os sete níveis de evidência, o protocolo de atuação, as proibições e os critérios de
 prioridade. Em caso de conflito com texto mais permissivo, vale o documento de governança.
+
+
+## Documento de governança vinculante
+
+`docs/GOVERNANCA-AGENTE-ARQUITETO-INFRAESTRUTURA.md` é o documento oficial de governança e
+arquitetura, adotado pelo Diretor em 20/11/2026. Ele define os sete estados de evidência
+(Implementado, Testado, Validado, Demonstrado, Experimental, Planejado, Não comprovado),
+os seis marcos do roadmap e o protocolo de atuação em 11 passos. Antes de propor qualquer
+mudança, leia esse documento. Ele prevalece sobre preferências locais deste arquivo.
