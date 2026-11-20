@@ -87,7 +87,7 @@ prioridade. Em caso de conflito com texto mais permissivo, vale o documento de g
 
 ## Documento de governança vinculante
 
-`docs/GOVERNANCA-AGENTE-ARQUITETO-INFRAESTRUTURA.md` é o documento oficial de governança e
+**Governança:** o documento estratégico do Agente Arquiteto de Infraestrutura é **privativo** (contém PI e go-to-market) e vive com o Diretor, fora de repositório público. As regras de engenharia acima continuam vinculantes; os 7 estados de evidência (Implementado, Testado, Validado, Demonstrado, Experimental, Planejado, Não comprovado) seguem obrigatórios em toda afirmação técnica.
 arquitetura, adotado pelo Diretor em 20/11/2026. Ele define os sete estados de evidência
 (Implementado, Testado, Validado, Demonstrado, Experimental, Planejado, Não comprovado),
 os seis marcos do roadmap e o protocolo de atuação em 11 passos. Antes de propor qualquer
