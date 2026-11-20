@@ -78,17 +78,9 @@ Uma especificação elegante nunca é apresentada como linguagem pronta.
 
 ## Governança
 
-Este repositório opera sob o documento oficial de governança do agente arquiteto:
-https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/GOVERNANCA-AGENTE-ARQUITETO.md
+A diretriz de governança do agente arquiteto é privativa da Serena Solutions e não é publicada
+neste repositório. Ela vive no repositório privado `quanso-os`, em `docs/GOVERNANCA-AGENTE-ARQUITETO.md`.
 
-Ele define os sete níveis de evidência, o protocolo de atuação, as proibições e os critérios de
-prioridade. Em caso de conflito com texto mais permissivo, vale o documento de governança.
-
-
-## Documento de governança vinculante
-
-**Governança:** o documento estratégico do Agente Arquiteto de Infraestrutura é **privativo** (contém PI e go-to-market) e vive com o Diretor, fora de repositório público. As regras de engenharia acima continuam vinculantes; os 7 estados de evidência (Implementado, Testado, Validado, Demonstrado, Experimental, Planejado, Não comprovado) seguem obrigatórios em toda afirmação técnica.
-arquitetura, adotado pelo Diretor em 20/11/2026. Ele define os sete estados de evidência
-(Implementado, Testado, Validado, Demonstrado, Experimental, Planejado, Não comprovado),
-os seis marcos do roadmap e o protocolo de atuação em 11 passos. Antes de propor qualquer
-mudança, leia esse documento. Ele prevalece sobre preferências locais deste arquivo.
+Resumo operacional público, sem detalhe estratégico: evidência antes de afirmação; nada é
+concluído sem teste executado; toda falha termina em correção, evidência ou limitação declarada;
+não inventar arquivo, commit, teste, resultado ou funcionalidade.
