@@ -37,41 +37,29 @@ Nunca pule etapa. Nunca apresente resultado de etapa 2 como se fosse etapa 3.
 Prefira funções pequenas, tipadas, com erro explícito em vez de exceção silenciosa.
 Recusa e erro devem ser distinguíveis no retorno. Nunca engula exceção.
 
-## Equipe, papéis e liderança (a partir de 20/11/2026)
+## Invariantes de engenharia (valem acima de estilo)
 
-Este repositório é operado por uma equipe de agentes com papéis explícitos. O agente que
-propõe código NUNCA aprova o próprio trabalho.
+1. Proof -> Compute: nenhum cálculo roda antes da prova/eliminação.
+2. Trivalente `1` / `0` / `REFUSED`. Nunca converter `REFUSED` em booleano, nunca
+   substituir por heurística quando falta prova.
+3. Aritmética exata no núcleo e na VM (`Fraction`, inteiro arbitrário). Ponto
+   flutuante só em apresentação, nunca em decisão.
+4. Todo veredito emite recibo: SHA3-256 da forma canônica (RFC 8785) + ML-DSA-44.
+5. Fail-closed: backend não verificado recusa explicitamente; proibido fallback silencioso.
 
-| Papel | Quem | Autoridade |
-| --- | --- | --- |
-| Diretor humano | Miguel | Aprovação final (G8). Única autoridade para publicar, gastar ou expor credencial. |
-| Editor-Chefe / Orquestrador | AG-01 (Ravi) | Define pauta, gates e estados de maturidade; audita entregas; não aprova o que ele mesmo escreveu. |
-| Engenharia do ecossistema | Z3_ZEPHYR | Repos, PRs, arquivamento, integrações; reporta evidência por fase. |
-| Implementação assistida | Agente Copilot (este ambiente) | Escreve código e testes SOB estas instruções; não inventa interfaces; não declara validado o que não rodou. |
-| Orquestração de chat/deploy | Agente ChatGPT | Interface de chat, deploy Vercel, variáveis de ambiente. Nunca cola segredo em código ou log. |
-| Verificação | Papel rotativo (nunca o autor) | Testes adversariais, reprodutibilidade, parecer APROVADO/BLOQUEADO. |
+## Processo (RCCSO + MQO)
 
-### Fluxo obrigatório de trabalho
+- A especificação é a fonte da verdade; conformance é o contrato; reprodutibilidade é a prova.
+- Nada direto na `main`: branch + PR, com o comando que reproduz cada número citado.
+- Cada regra nova exige três testes: eliminação certificada, fallback para computação
+  necessária, e `REFUSED` explícito no indecidível.
+- Proibido desligar teste, gate de política ou checagem para "passar". Se o gate barra,
+  documente o motivo no lugar previsto.
+- Proibido commitar segredo, `.pyc` sem fonte, ou dependência não declarada.
 
-1. Objetivo definido pelo Diretor (ou pelo AG-01 com base no registro mestre).
-2. Auditoria do estado real do código antes de qualquer proposta.
-3. RFC curta: problema, evidência, solução, custo, riscos, critério de aceitação.
-4. Aprovação (Diretor ou AG-01, nunca o autor da RFC).
-5. Implementação em branch própria, commits pequenos e descritivos.
-6. Testes executados — saída real colada no PR, nunca "deve funcionar".
-7. PR com diff revisado; merge só após parecer de verificação.
-8. Registro do resultado (artefato, hash, comando) no registro mestre.
+## Anti-padrões que já custaram caro neste ecossistema
 
-### Regras de segurança de credenciais
-
-- Nenhuma chave, token ou segredo em código, teste, doc, log ou mensagem de commit.
-- Credenciais vivem apenas em variáveis de ambiente do provedor (Vercel, Actions secrets).
-- O diff de qualquer PR que toque `api/` ou configuração de deploy é varrido por padrões de
-  segredo antes do merge. Se aparecer algo, o merge é bloqueado e a chave é revogada.
-- Chave detectada em texto público = considerada vazada, mesmo que pareça placeholder.
-
-### Estados de maturidade (obrigatório em toda afirmação)
-
-IMPLEMENTADO (código + teste + evidência) · EXPERIMENTAL (executado com limitações) ·
-ESPECIFICAÇÃO (definido, não implementado) · BLOQUEADO (não pode ser anunciado).
-Uma especificação elegante nunca é apresentada como linguagem pronta.
+- README com número que o código não confirma (33 subsistemas quando o código diz 36).
+- Afirmar suíte verde sem rodar a suíte.
+- Módulo importado que não existe no repositório (`canonize`, `cirq_tcog`).
+- Branch e commit citados que não existem no remoto.
