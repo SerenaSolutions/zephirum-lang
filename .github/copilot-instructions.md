@@ -75,3 +75,11 @@ propõe código NUNCA aprova o próprio trabalho.
 IMPLEMENTADO (código + teste + evidência) · EXPERIMENTAL (executado com limitações) ·
 ESPECIFICAÇÃO (definido, não implementado) · BLOQUEADO (não pode ser anunciado).
 Uma especificação elegante nunca é apresentada como linguagem pronta.
+
+## Governança
+
+Este repositório opera sob o documento oficial de governança do agente arquiteto:
+https://github.com/SerenaSolutions/zephirum-lang/blob/main/docs/GOVERNANCA-AGENTE-ARQUITETO.md
+
+Ele define os sete níveis de evidência, o protocolo de atuação, as proibições e os critérios de
+prioridade. Em caso de conflito com texto mais permissivo, vale o documento de governança.
