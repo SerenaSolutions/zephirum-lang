@@ -3,4 +3,4 @@
 langgraph>=0.2          # orquestracao de agente com estado
 chromadb>=0.5           # banco vetorial local
 rank-bm25>=0.2          # busca lexical (metade da busca hibrida)
-pydantic>=2.7           # saidas estruturadas
+pydantic>=2.14.3           # saidas estruturadas
