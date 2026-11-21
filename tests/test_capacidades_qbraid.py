@@ -28,4 +28,8 @@ def test_analogico_nao_entra_pela_interface_de_portas():
 
 
 def test_sem_credencial_nao_le_capacidade():
-    assert qbraid_backend.capacidades("qbraid:qbraid:sim:qir-sv", "")["motivo"] == "CREDENCIAL_AUSENTE"
+    # Mesma regra: o contrato e recusar sem credencial; o motivo depende de o SDK
+    # estar instalado (SDK_QBRAID_AUSENTE) ou nao (CREDENCIAL_AUSENTE).
+    r = qbraid_backend.capacidades("qbraid:qbraid:sim:qir-sv", "")
+    assert r["status"] == "REFUSED"
+    assert r["motivo"] in ("CREDENCIAL_AUSENTE", "SDK_QBRAID_AUSENTE")
