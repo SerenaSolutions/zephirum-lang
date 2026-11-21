@@ -2,5 +2,5 @@
 # Nao entra no pyproject do produto: e ferramenta de processo, nao dependencia.
 langgraph>=0.2          # orquestracao de agente com estado
 chromadb>=0.5           # banco vetorial local
-rank-bm25>=0.2          # busca lexical (metade da busca hibrida)
+rank-bm25>=0.2.2          # busca lexical (metade da busca hibrida)
 pydantic>=2.7           # saidas estruturadas
