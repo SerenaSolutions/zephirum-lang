@@ -1,0 +1,4 @@
+# Somente para o perfil QPU (IBM Quantum). Instalado quando WITH_QPU=1.
+qiskit>=2.0
+qiskit-ibm-runtime>=0.40
+qiskit-qasm3-import>=0.6
