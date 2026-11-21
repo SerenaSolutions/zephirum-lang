@@ -1,0 +1,61 @@
+# ZEPHIRUM — infraestrutura em containers.
+# Perfis:
+#   (padrão)      core: ZCA + QASM3 + verificador, sem QPU, sem token
+#   qpu           core-qpu: mesma API com qiskit-ibm-runtime e token IBM
+#   quanso        quanso-tests: roda a suíte do QuanSo OS no container
+services:
+  core:
+    build:
+      context: .
+      args:
+        WITH_QPU: "0"
+    image: zephirum-core:1.0.0
+    container_name: zephirum-core
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=4).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks: [zephirum]
+
+  core-qpu:
+    profiles: ["qpu"]
+    build:
+      context: .
+      args:
+        WITH_QPU: "1"
+    image: zephirum-core:1.0.0-qpu
+    container_name: zephirum-core-qpu
+    ports:
+      - "8081:8080"
+    environment:
+      PORT: "8080"
+      IBM_QUANTUM_TOKEN: "${IBM_QUANTUM_TOKEN:?defina IBM_QUANTUM_TOKEN no .env}"
+      IBM_QUANTUM_CHANNEL: "${IBM_QUANTUM_CHANNEL:-ibm_quantum}"
+      IBM_QUANTUM_INSTANCE: "${IBM_QUANTUM_INSTANCE:-}"
+    restart: unless-stopped
+    networks: [zephirum]
+
+  quanso-tests:
+    profiles: ["quanso"]
+    image: python:3.12-slim
+    container_name: quanso-tests
+    working_dir: /repo
+    volumes:
+      - ../quanso/QuanSo:/repo:ro
+    environment:
+      PYTHONDONTWRITEBYTECODE: "1"
+    command: >
+      sh -c "pip install --no-cache-dir -q pytest &&
+             python -m pytest -q --tb=short"
+    networks: [zephirum]
+
+networks:
+  zephirum:
+    driver: bridge
