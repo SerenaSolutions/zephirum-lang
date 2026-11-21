@@ -1,0 +1,1 @@
+# Nucleo: nenhuma dependencia externa. Aritmetica exata vem da stdlib (fractions).
