@@ -36,6 +36,7 @@ def get(url, timeout=25):
 
 def main():
     falhas = []
+    pendentes = []
 
     projeto = tomllib.load(open(RAIZ / "pyproject.toml", "rb"))["project"]
     versao_local = projeto["version"]
@@ -61,7 +62,22 @@ def main():
         _, corpo = get(PYPI)
         info = json.loads(corpo)["info"]
         if info["version"] != versao_local:
-            falhas.append(f"PyPI em {info['version']} != pyproject {versao_local}")
+            # Duas situacoes diferentes, tratadas diferente:
+            # (a) pyproject A FRENTE do PyPI = release preparada e ainda nao publicada.
+            #     E o estado normal entre o bump e o `twine upload`; nao e inconsistencia.
+            # (b) PyPI A FRENTE do pyproject = fonte divergente de verdade (alguem
+            #     publicou sem subir a versao no repo). Essa sim reprova.
+            def _tupla(v):
+                try:
+                    return tuple(int(x) for x in v.split("."))
+                except Exception:
+                    return ()
+            if _tupla(versao_local) > _tupla(info["version"]):
+                pendentes.append(
+                    f"release pendente: pyproject {versao_local} > PyPI {info['version']} "
+                    f"(publicar fecha o item)")
+            else:
+                falhas.append(f"PyPI em {info['version']} A FRENTE do pyproject {versao_local}")
         print(f"versao no PyPI      : {info['version']}")
     except Exception as e:
         falhas.append(f"PyPI inacessivel: {type(e).__name__}")
@@ -101,6 +117,10 @@ def main():
             falhas.append(f"link quebrado {url}: {type(e).__name__}")
 
     print()
+    if pendentes:
+        print("PENDENTES (nao reprovam):")
+        for p_ in pendentes:
+            print("  -", p_)
     if falhas:
         print("DIVERGENCIAS:")
         for f in falhas:

@@ -32,10 +32,15 @@ abertas = {
     "VERSION": ler("VERSION").strip(),
     "docs/openapi.json": json.loads(ler("docs/openapi.json"))["info"]["version"],
 }
-try:
-    abertas["api/server.py"] = re.search(r'APP_VERSION\s*=\s*"([^"]+)"', ler("api/server.py")).group(1)
-except Exception:
-    abertas["api/server.py"] = "?"
+# api/server.py pode não existir: o PR 128 criou api/ (chat) sem servidor HTTP próprio.
+# Ausência não é divergência de versão — é ausência de segunda fonte. Declarar, não inventar.
+if (RAIZ / "api" / "server.py").exists():
+    try:
+        abertas["api/server.py"] = re.search(r'APP_VERSION\s*=\s*"([^"]+)"', ler("api/server.py")).group(1)
+    except Exception:
+        abertas["api/server.py"] = "ausente APP_VERSION"
+else:
+    abertas.pop("api/server.py", None)
 div = {k: v for k, v in abertas.items() if v != versao}
 item("versão única nas fontes", not div, f"{versao}" if not div else f"divergem: {div}")
 
@@ -48,8 +53,18 @@ mk = ler("Makefile")
 item("make test roda a suíte completa", "pytest tests" in mk, "pytest tests" if "pytest tests" in mk else "ausente")
 
 # 5. cobrança desligada por padrão
-bill = ler("api/billing.py")
-item("cobrança desligada por padrão", 'os.environ.get("ZYQL_BILLING", "off")' in bill, "ZYQL_BILLING default off")
+# Ausência do módulo de cobrança é o estado MAIS conforme: sem cobrança implementada
+# não há como cobrar. O check anterior lia api/billing.py, arquivo que nunca existiu
+# neste repositório (verificado: git log --all -- api/billing.py = vazio), e o
+# FileNotFoundError derrubava o job inteiro, escondendo os demais itens.
+_bill_path = RAIZ / "api" / "billing.py"
+if _bill_path.exists():
+    bill = ler("api/billing.py")
+    item("cobrança desligada por padrão", 'os.environ.get("ZYQL_BILLING", "off")' in bill,
+         "ZYQL_BILLING default off")
+else:
+    item("cobrança desligada por padrão", True,
+         "api/billing.py ausente: nenhuma cobrança implementada (conforme por ausência)")
 
 # 6. privacidade coerente (sem cobrança ativa, seção de modo gratuito)
 priv = ler("PRIVACY.md")
