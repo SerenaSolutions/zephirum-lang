@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Nada e assumido sobre o dispositivo: o que nao foi declarado vira recusa."""
 from zephirum.adapters import qbraid_backend
 

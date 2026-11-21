@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """O piso do Qiskit precisa conter as correcoes de seguranca do 2.6.1."""
 import re
 try:
