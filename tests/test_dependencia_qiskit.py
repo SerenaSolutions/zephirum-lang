@@ -1,6 +1,9 @@
 """O piso do Qiskit precisa conter as correcoes de seguranca do 2.6.1."""
 import re
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10 nao tem tomllib na stdlib
+    import tomli as tomllib
 from pathlib import Path
 
 import qiskit

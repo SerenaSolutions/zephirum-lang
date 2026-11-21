@@ -1,5 +1,8 @@
 """Uma versao so: pyproject, pacote e metadata nao podem divergir."""
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10 nao tem tomllib na stdlib
+    import tomli as tomllib
 from pathlib import Path
 
 import zephirum
