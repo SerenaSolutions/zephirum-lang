@@ -9,6 +9,7 @@ import hashlib, json, os, sys
 from datetime import datetime, timezone
 
 from qiskit import QuantumCircuit
+from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
 
 SHOTS = int(os.environ.get("WITNESS_SHOTS", "512"))
@@ -62,8 +63,11 @@ def main():
     service = QiskitRuntimeService(**kwargs)
     usage_before = service.usage()
 
-    sampler = Sampler(mode=service.backend(BACKEND))
-    circuits = [measure_in(bell_pair(), "Z"), measure_in(bell_pair(), "X")]
+    backend = service.backend(BACKEND)
+    # The target does not accept raw H: transpile for the device before submitting.
+    circuits = transpile([measure_in(bell_pair(), "Z"), measure_in(bell_pair(), "X")],
+                         backend=backend, optimization_level=1)
+    sampler = Sampler(mode=backend)
     job = sampler.run(circuits, shots=SHOTS)
     print("[witness] job %s submitted to %s" % (job.job_id(), BACKEND))
     result = job.result()
