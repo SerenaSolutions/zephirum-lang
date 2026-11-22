@@ -53,8 +53,12 @@ def main():
     vhash = hashlib.sha256(json.dumps(verdict, sort_keys=True).encode()).hexdigest()
 
     kwargs = {"channel": "ibm_quantum_platform", "token": token}
-    if crn:
+    # Only pass instance when the CRN is complete: a truncated or partial CRN
+    # makes the runtime reject the whole account. Token-only discovery works.
+    if crn and crn.startswith("crn:v1:") and len(crn) > 60:
         kwargs["instance"] = crn
+    elif crn:
+        print("[witness] CRN incompleto (%d chars) - usando descoberta por token" % len(crn), flush=True)
     service = QiskitRuntimeService(**kwargs)
     usage_before = service.usage()
 
