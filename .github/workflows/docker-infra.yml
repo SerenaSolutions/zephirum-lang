@@ -37,7 +37,7 @@ jobs:
       - name: Publish image
         if: github.event_name != 'pull_request'
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}/infra
+          IMAGE="ghcr.io/$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')/infra"
           docker tag zephyrum-infra:ci "$IMAGE:latest"
           docker tag zephyrum-infra:ci "$IMAGE:${GITHUB_SHA::7}"
           docker push "$IMAGE:latest"
