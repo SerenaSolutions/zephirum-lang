@@ -13,7 +13,7 @@ COPY pyproject.toml README.md ./
 COPY src/ src/
 COPY api/ api/
 RUN pip install --no-cache-dir . fastapi uvicorn \
-      qiskit==2.5.2 qiskit-ibm-runtime==0.50.0
+      "qiskit>=2.6.1,<3" "qiskit-ibm-runtime>=0.50.0"
 
 COPY docker/entrypoint.sh /opt/zyql/entrypoint.sh
 COPY docker/qpu_witness.py /opt/zyql/qpu_witness.py
