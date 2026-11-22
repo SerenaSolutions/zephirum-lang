@@ -9,6 +9,11 @@ on:
       - "pyproject.toml"
       - ".github/workflows/docker-infra.yml"
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "build | witness (witness roda o teste na QPU IBM dentro do container)"
+        required: false
+        default: "build"
 
 permissions:
   contents: read
@@ -42,3 +47,26 @@ jobs:
           docker tag zephyrum-infra:ci "$IMAGE:${GITHUB_SHA::7}"
           docker push "$IMAGE:latest"
           docker push "$IMAGE:${GITHUB_SHA::7}"
+
+  witness:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'witness'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build infrastructure image
+        run: docker build -f docker/Dockerfile.infra -t zephyrum-infra:ci .
+
+      - name: QPU witness inside the container
+        env:
+          IBM_QUANTUM_TOKEN: ${{ secrets.IBM_QUANTUM_TOKEN }}
+          IBM_QUANTUM_CRN: ${{ secrets.IBM_QUANTUM_CRN }}
+        run: |
+          mkdir -p results
+          docker run --rm             -e IBM_QUANTUM_TOKEN -e IBM_QUANTUM_CRN             -e RECEIPT_PATH=/zephyrum/os/results/witness.json             -v "$PWD/results:/zephyrum/os/results"             zephyrum-infra:ci witness
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qpu-witness-receipt
+          path: results/
