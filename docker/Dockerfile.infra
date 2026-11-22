@@ -1,4 +1,4 @@
-# ZEPHYRUM - full infrastructure image (ZYQL runtime + QEMU + QPU witness)
+# QuanSo OS - full infrastructure image (ZYQL runtime + QEMU + QPU witness)
 # Build context: repository root.  docker build -f docker/Dockerfile.infra -t zephyrum-infra .
 FROM python:3.11-slim
 

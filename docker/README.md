@@ -1,13 +1,13 @@
-# ZEPHYRUM infrastructure image
+# QuanSo OS — infrastructure image
 
-One image, four modes: the ZYQL API, the QPU witness, the Zephyrum OS under
+One image, four modes: the ZYQL API, the QPU witness, the QuanSo OS under
 QEMU, and a smoke test. Built in CI and published to GHCR so it runs anywhere.
 
 ## Modes
 - `api` - FastAPI server for ZYQL (port 8000)
 - `witness` - Bell Phi+ witness on IBM Quantum; seals a receipt binding the
   exact verdict hash to the hardware job id
-- `boot` - boots the Zephyrum OS disk image under QEMU (headless, serial)
+- `boot` - boots the QuanSo OS disk image under QEMU (headless, serial)
 - `test` - verifies the runtime inside the image
 
 ## Local use

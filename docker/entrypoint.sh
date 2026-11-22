@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ZEPHYRUM infrastructure entrypoint. Modes: api | witness | boot | test | shell
+# QuanSo OS infrastructure entrypoint (ZEPHYRUM family). Modes: api | witness | boot | test | shell
 set -euo pipefail
 MODE="${1:-${ZYQL_MODE:-api}}"
 case "$MODE" in
@@ -10,8 +10,8 @@ case "$MODE" in
     exec python /opt/zyql/qpu_witness.py
     ;;
   boot)
-    : "${OS_IMAGE:?OS_IMAGE must point to the Zephyrum OS disk image}"
-    echo "[boot] starting Zephyrum OS under QEMU (headless, serial)"
+    : "${OS_IMAGE:?OS_IMAGE must point to the QuanSo OS disk image}"
+    echo "[boot] starting QuanSo OS under QEMU (headless, serial)"
     exec qemu-system-x86_64 -m "${VM_MEM:-1024}" -smp "${VM_CPUS:-2}" \
       -drive file="$OS_IMAGE",format=qcow2,if=virtio \
       -nographic -serial mon:stdio

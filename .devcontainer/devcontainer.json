@@ -1,5 +1,5 @@
 {
-  "name": "ZEPHYRUM (Docker + QEMU + QPU)",
+  "name": "QuanSo OS (Docker + QEMU + QPU)",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
