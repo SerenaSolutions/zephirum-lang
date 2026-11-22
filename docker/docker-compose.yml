@@ -1,0 +1,29 @@
+services:
+  zyql-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.infra
+    image: zephyrum-infra:local
+    command: ["api"]
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  zyql-witness:
+    image: zephyrum-infra:local
+    command: ["witness"]
+    env_file:
+      - ../.env
+    volumes:
+      - ../receipts:/opt/zyql/receipts
+    profiles: ["witness"]
+
+  zyql-os:
+    image: zephyrum-infra:local
+    command: ["boot"]
+    environment:
+      OS_IMAGE: /images/zephyrum-os.qcow2
+      VM_MEM: "1024"
+    volumes:
+      - ../images:/images
+    profiles: ["os"]

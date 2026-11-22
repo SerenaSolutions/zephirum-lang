@@ -1,0 +1,11 @@
+.git
+.github
+book
+assets
+notebooks
+*.pdf
+*.zip
+__pycache__
+*.pyc
+receipts
+images

@@ -1,0 +1,25 @@
+# ZEPHYRUM - full infrastructure image (ZYQL runtime + QEMU + QPU witness)
+# Build context: repository root.  docker build -f docker/Dockerfile.infra -t zephyrum-infra .
+FROM python:3.11-slim
+
+ENV DEBIAN_FRONTEND=noninteractive PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      qemu-system-x86 qemu-utils ca-certificates curl git procps \
+    && apt-get clean
+
+WORKDIR /opt/zyql
+COPY pyproject.toml README.md ./
+COPY src/ src/
+COPY api/ api/
+RUN pip install --no-cache-dir . fastapi uvicorn \
+      qiskit==2.5.2 qiskit-ibm-runtime==0.50.0
+
+COPY docker/entrypoint.sh /opt/zyql/entrypoint.sh
+COPY docker/qpu_witness.py /opt/zyql/qpu_witness.py
+RUN chmod +x /opt/zyql/entrypoint.sh
+
+# Runtime contract: token and CRN are NEVER baked into the image.
+ENV ZYQL_MODE=api
+EXPOSE 8000
+ENTRYPOINT ["/opt/zyql/entrypoint.sh"]
