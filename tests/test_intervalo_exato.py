@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """O intervalo exato e relato, nao criterio: nao pode mudar nenhum veredito."""
 import pytest
 
