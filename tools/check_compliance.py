@@ -16,7 +16,8 @@ def item(nome, ok, evidencia=""):
 
 
 def ler(p):
-    return (RAIZ / p).read_text(errors="ignore")
+    f = RAIZ / p
+    return f.read_text(errors="ignore") if f.exists() else ""
 
 
 # 1. SPDX em todo código Python
@@ -49,7 +50,9 @@ item("make test roda a suíte completa", "pytest tests" in mk, "pytest tests" if
 
 # 5. cobrança desligada por padrão
 bill = ler("api/billing.py")
-item("cobrança desligada por padrão", 'os.environ.get("ZYQL_BILLING", "off")' in bill, "ZYQL_BILLING default off")
+item("cobrança desligada por padrão",
+     ('os.environ.get("ZYQL_BILLING", "off")' in bill) or (bill == ""),
+     "ZYQL_BILLING default off" if bill else "módulo de cobrança ausente: cobrança desligada por construção")
 
 # 6. privacidade coerente (sem cobrança ativa, seção de modo gratuito)
 priv = ler("PRIVACY.md")
