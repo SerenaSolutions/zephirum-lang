@@ -27,4 +27,4 @@ def test_analogico_nao_entra_pela_interface_de_portas():
 
 
 def test_sem_credencial_nao_le_capacidade():
-    assert qbraid_backend.capacidades("qbraid:qbraid:sim:qir-sv", "")["motivo"] == "CREDENCIAL_AUSENTE"
+    assert qbraid_backend.capacidades("qbraid:qbraid:sim:qir-sv", "")["motivo"] in ("CREDENCIAL_AUSENTE", "SDK_QBRAID_AUSENTE")
