@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Servidor HTTP do ZEPHIRUM Core (stdlib, sem dependencia)."""
 import json
 import os

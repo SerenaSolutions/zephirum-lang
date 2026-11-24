@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Ponte OpenQASM 3: decide se o circuito precisa de computador quantico.
 
 1  = so Clifford -> simulavel classicamente (Gottesman-Knill), sem vantagem

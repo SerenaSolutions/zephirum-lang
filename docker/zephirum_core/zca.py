@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """ZCA — motor de prova e eliminacao. Toda regra tenta provar antes de calcular."""
 import datetime
 from fractions import Fraction

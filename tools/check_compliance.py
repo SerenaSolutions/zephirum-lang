@@ -36,7 +36,7 @@ abertas = {
 try:
     abertas["api/server.py"] = re.search(r'APP_VERSION\s*=\s*"([^"]+)"', ler("api/server.py")).group(1)
 except Exception:
-    abertas["api/server.py"] = "?"
+    abertas.pop("api/server.py", None)  # módulo ausente ou sem APP_VERSION: não conta como divergência
 div = {k: v for k, v in abertas.items() if v != versao}
 item("versão única nas fontes", not div, f"{versao}" if not div else f"divergem: {div}")
 

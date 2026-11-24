@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Uma versao so: pyproject, pacote e metadata nao podem divergir."""
 try:
     import tomllib

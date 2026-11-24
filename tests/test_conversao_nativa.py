@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Conversao para portas nativas: converte o que cabe, recusa o que nao foi declarado."""
 import pytest
 

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Testes de propriedade do ZEPHIRUM Core.
 
 Para cada regra: (1) eliminacao com recibo valido, (2) fallback/resultado exato,

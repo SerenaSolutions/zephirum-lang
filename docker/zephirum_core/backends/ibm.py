@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Adaptador IBM Quantum — plano free.
 
 Regras da casa:

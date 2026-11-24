@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
 """ZEPHYRUM QPU witness - hardware is evidence, never the judge.
 
 Produces the exact verdict offline, submits a Bell Phi+ witness to IBM

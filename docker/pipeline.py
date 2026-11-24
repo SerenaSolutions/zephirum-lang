@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Roda a pilha inteira: núcleo, ZCA, portão QASM3, QuanSo OS e tentativa de QPU.
 
 Emite um relatório único em JSON e um resumo legível. Nada é inventado: cada etapa

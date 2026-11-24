@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Recibo: forma canonica (RFC 8785 simplificado) + SHA-256."""
 import hashlib
 import json
