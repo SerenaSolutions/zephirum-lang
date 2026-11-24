@@ -178,7 +178,7 @@
       "banda": 0.0848813447,
       "esperado": {
         "verdict": "REFUSED",
-        "refusal_reason": "BALANCED_ORACLE"
+        "refusal_reason": "INTERVAL_INSIDE_BAND"
       },
       "regra": "fronteira exata p0 = banda recusa como balanceado (comparacao com <=)"
     }
