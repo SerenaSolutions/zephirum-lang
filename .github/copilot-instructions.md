@@ -84,3 +84,20 @@ neste repositório. Ela vive no repositório privado `quanso-os`, em `docs/GOVER
 Resumo operacional público, sem detalhe estratégico: evidência antes de afirmação; nada é
 concluído sem teste executado; toda falha termina em correção, evidência ou limitação declarada;
 não inventar arquivo, commit, teste, resultado ou funcionalidade.
+
+## Invariantes obrigatórios (ZEPHIRUM / Serena Solutions)
+
+1. **Proof → Compute.** Antes de calcular, tente provar. Se a prova elimina o cálculo, devolva o veredito sem computar.
+2. **Lógica trivalente.** `1` verdadeiro, `0` falso, `REFUSED` sem prova. Nunca converta `REFUSED` em booleano.
+3. **Aritmética exata.** Use `Fraction`/inteiros. Float só em apresentação, nunca em decisão.
+4. **Recibo.** Toda decisão emite certificado com hash canônico; o campo `hash_alg` declara o algoritmo real.
+5. **Fail-closed.** Backend sem credencial ou sem verificação recusa com código explícito. Silêncio nunca é resposta.
+6. **Portão de cota.** Não submeta ao QPU o que o simulador clássico resolve.
+
+## Anti-padrões proibidos
+
+- `except: pass` engolindo falha de verificação.
+- Arredondar antes de comparar.
+- Chamar de "engenheiro" quem é técnico (MTE).
+- Afirmar número sem comando que o reproduza.
+- Escrever `return True` em caminho de verificação que não verificou nada.
