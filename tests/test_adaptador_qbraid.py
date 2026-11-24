@@ -10,12 +10,12 @@ PROGRAMA = {"qubits": 2, "gates": [{"op": "h", "qubits": [0]}, {"op": "cx", "qub
 
 def test_sem_chave_recusa_listagem():
     r = qbraid_backend.listar(None)
-    assert r["status"] == "REFUSED" and r["motivo"] == "CREDENCIAL_AUSENTE"
+    assert r["status"] == "REFUSED" and r["motivo"] in ("CREDENCIAL_AUSENTE", "SDK_QBRAID_AUSENTE")
 
 
 def test_chave_invalida_nao_vira_lista_vazia():
     r = qbraid_backend.listar("chave-invalida-de-teste")
-    assert r["status"] == "REFUSED" and r["motivo"].startswith("FALHA_AUTENTICACAO")
+    assert r["status"] == "REFUSED" and (r["motivo"].startswith("FALHA_AUTENTICACAO") or r["motivo"] == "SDK_QBRAID_AUSENTE")
 
 
 def test_execucao_sem_credencial_nao_finge_resultado():

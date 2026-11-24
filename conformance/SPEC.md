@@ -53,7 +53,7 @@ A decisão é tomada em duas etapas, e a primeira etapa que casa decide.
 Consequência que a v1.0.0 declarava errado e aqui fica corrigida: veredito `0`
 só existe pelo ramo 1, com `f(0) == 0`. Nunca por `p0` pequeno.
 
-Comparações são inclusivas nas duas fronteiras (`>=` e `<=`), e as fronteiras
+As comparações usam `>=` e `<=` sobre `p0`, **mas decidir exige que o intervalo de erro atravesse a banda**: se o ponto estimado toca a fronteira e o intervalo `[p0 - erro, p0 + erro]` não a cruza, o resultado é `REFUSED` com `INTERVAL_INSIDE_BAND`. Fronteiras
 exatas são casos de teste obrigatórios.
 
 ## 4. Taxonomia de recusa (fechada)

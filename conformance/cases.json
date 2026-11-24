@@ -125,10 +125,10 @@
       "shots": 1024,
       "banda": 0.0848813447,
       "esperado": {
-        "verdict": "0",
-        "refusal_reason": null
+        "verdict": "REFUSED",
+        "refusal_reason": "INTERVAL_INSIDE_BAND"
       },
-      "regra": "fronteira exata p0 = 1 - banda ainda decide (comparacao com >=)"
+      "regra": "fronteira exata p0 = 1 - banda: o ponto toca a banda mas o intervalo [p0 - erro, p0 + erro] nao a atravessa, entao recusa (regra do intervalo, SPEC 3.1)"
     },
     {
       "id": "zona-cinzenta -> INSIDE_NOISE_BAND",
