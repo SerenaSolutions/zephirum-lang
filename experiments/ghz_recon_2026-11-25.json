@@ -1,0 +1,21 @@
+{
+ "metric": "fidelity_ghz = (P(000)+P(111)) \u2014 mesma definicao de zyql_quantum_gate.ghz_integrity",
+ "backend": "ibm_fez",
+ "shots": 2048,
+ "job_id": "dc355a6q4uuc73a6aed0",
+ "counts": {
+  "000": 1046,
+  "111": 919,
+  "110": 10,
+  "010": 29,
+  "101": 23,
+  "100": 10,
+  "011": 11
+ },
+ "fidelity_ghz": 0.9595,
+ "threshold": 0.8,
+ "device_trusted": true,
+ "qpu_seconds_this_job": 3,
+ "qpu_remaining_s": 475,
+ "transpile_level": 2
+}

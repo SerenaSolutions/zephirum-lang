@@ -16,7 +16,7 @@ coherence; decohered devices are refused (REFUSED_DEVICE_DECOHERED). Every run
 seals a receipt (SHA3-256 + ML-DSA-44/FIPS 204) binding verdict, hardware job
 ID and calibration snapshot in a tamper-evident chain. The core is validated
 on three a production superconducting QPU QPUs (superconducting QPU, superconducting QPU, superconducting QPU) with citable
-job IDs: exact trivalent battery 9/9 at n=4/5/6, GHZ fidelity 0.977, CHSH
+job IDs: exact trivalent battery 9/9 at n=4/5/6, GHZ fidelity 0.9595 (ibm_fez, 2048 shots, job dc355a6q4uuc73a6aed0), CHSH
 S=2.71, Bernstein-Vazirani secret recovery, Grover n=4 target detection, and
 repetition-code correction of a single deterministic bit-flip (measured
 physical error 99.3%, the one-qubit error class this code is designed to
