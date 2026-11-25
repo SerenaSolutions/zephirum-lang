@@ -9,6 +9,31 @@
 
 [![Qiskit Ecosystem](https://qisk.it/e-b2b5fe46)](https://qisk.it/e)
 
+
+## Why this exists
+
+Quantum programming languages are built to answer yes or no. Real hardware is noisy, and the
+honest answer to "is this result trustworthy?" is often neither: it is *I refuse to decide*.
+
+ZYQL makes that refusal a first-class value. Every decision returns `1`, `0` or `REFUSED`, and
+every run is sealed in a receipt (SHA3-256 over the canonical payload, with an optional
+post-quantum ML-DSA-44 signature). A refusal is a result, not an exception.
+
+Three properties are enforced, not advertised:
+
+1. **Interval clearance.** A verdict requires the confidence interval to clear the declared
+   band, not just the point estimate. The boundary refuses instead of guessing.
+2. **Integrity gate.** Before trusting a run, the runtime tests the device itself on a GHZ
+   state. A decohered device is refused without spending a single oracle call.
+3. **Provenance chain.** Each receipt seals the previous seal, producing a tamper-evident
+   ledger of experiments.
+
+What is verified today: the full test suite runs in CI on Python 3.10, 3.11 and 3.12, the
+conformance corpus passes including boundary cases, and a hardware witness was executed on
+`ibm_fez` (512 shots, Bell pair) with the exact verdict decided before the hardware call.
+What is not claimed: quantum advantage, integration-tested third-party adapters, or results
+beyond the published receipts.
+
 <p align="center"><img src="assets/brand/zephirum-header.png" width="520" alt="ZEPHIRUM&trade; &middot; ZYQL&trade; — computação quântica antes da execução"></p>
 
 <p align="center">
