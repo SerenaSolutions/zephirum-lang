@@ -1,5 +1,10 @@
 **ZEPHIRUM / ZYQL: a quantum programming language and algorithm under active, full-time development. Work in progress, nothing here is final.**
 
+[![CI](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml/badge.svg)](https://github.com/SerenaSolutions/zephirum-lang/actions/workflows/ci.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23302046.svg)](https://doi.org/10.5281/zenodo.23302046)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Discussions](https://img.shields.io/badge/discussions-open-8A2BE2.svg)](https://github.com/SerenaSolutions/zephirum-lang/discussions)
+
 > Trivalent decisions (`1` / `0` / `REFUSED`) with sealed, verifiable receipts, built on Qiskit. Status: experimental, very early project.
 
 [![Qiskit Ecosystem](https://qisk.it/e-b2b5fe46)](https://qisk.it/e)
