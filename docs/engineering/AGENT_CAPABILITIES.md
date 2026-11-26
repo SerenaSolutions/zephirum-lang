@@ -22,3 +22,15 @@ Levantado em 2026-11-26 pelo supervisor da casa. Regra: nada declarado sem prova
 1. Abrir o Copilot em modo Agent no repositorio e listar os agentes reconhecidos.
 2. Registrar a saida em `docs/engineering/AGENT_CAPABILITIES.md` (secao "verificado no Copilot").
 3. Somente apos isso declarar a equipe OPERACIONAL.
+
+## Correção de escopo (2026-11-26, decisão do fundador)
+
+O plano atual opera SOMENTE com Copilot comum. A documentação oficial do GitHub
+diz que "Copilot cloud agent is available for all paid Copilot plans" e que os
+custom agents pertencem ao mesmo conjunto pago. Portanto:
+
+- Os 9 perfis em `.github/agents/` ficam em estado ESPECIFICACAO (nao ativos).
+- A operacao real usa `docs/engineering/AGENT_PROMPTS.md` (prompts colaveis no
+  Copilot Chat) + `.github/copilot-instructions.md` (contexto sempre ativo).
+- Paralelismo real entre agentes: NAO disponivel no plano atual. Delegacao e
+  sequencial; revisao independente exige segundo revisor (humano ou chat limpo).
