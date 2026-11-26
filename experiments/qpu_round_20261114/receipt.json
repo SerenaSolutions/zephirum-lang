@@ -1,0 +1,53 @@
+{
+  "payload": {
+    "autore": "Serena Solutions",
+    "backend": "ibm_fez",
+    "banda": 0.15,
+    "canon": "selo_sha3_256 sobre este payload canonico (sort_keys, ensure_ascii)",
+    "experiment": "zyql_qpu_round",
+    "gerado_em": "2026-11-14T23:35:33+00:00",
+    "hardware_executed": true,
+    "job_id": "dbsf0ffv5hds73diste0",
+    "mode": "qpu",
+    "provas": [
+      {
+        "esperado": "0",
+        "observado": "0",
+        "p0": 0.984375,
+        "pass_": true,
+        "shots": 256,
+        "teste": "DJ_constant"
+      },
+      {
+        "esperado": "1",
+        "observado": "1",
+        "p0": 0.007812,
+        "pass_": true,
+        "shots": 256,
+        "teste": "DJ_balanced"
+      },
+      {
+        "correlacao": 0.984375,
+        "esperado": "corr>=0.70",
+        "pass_": true,
+        "shots": 256,
+        "teste": "BELL_Z"
+      },
+      {
+        "correlacao": 0.980469,
+        "esperado": "corr>=0.70",
+        "pass_": true,
+        "shots": 256,
+        "teste": "BELL_X"
+      }
+    ],
+    "resumo": {
+      "flagged": 0,
+      "pass_": 4,
+      "total": 4
+    },
+    "shots": 256,
+    "teto_correlacao": 0.7
+  },
+  "selo_sha3_256": "7c33ab77b4fee98e7f31ed32bb11d6ada7d99fee6810d12a16bbc67b474df516"
+}
