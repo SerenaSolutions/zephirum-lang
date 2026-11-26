@@ -101,3 +101,24 @@ não inventar arquivo, commit, teste, resultado ou funcionalidade.
 - Chamar de "engenheiro" quem é técnico (MTE).
 - Afirmar número sem comando que o reproduza.
 - Escrever `return True` em caminho de verificação que não verificou nada.
+
+## Equipe multi-agente de engenharia (2026-11-26)
+
+Este repositorio opera com 9 perfis de agente em `.github/agents/` (chief-architect,
+veritas-mathematical-auditor, quantum-engineer, hybrid-computing-architect,
+language-runtime-engineer, red-team, evidence-engineer, security-engineer,
+scientific-documentation). Regras completas em `docs/engineering/`.
+
+Principios cientificos obrigatorios (valem para humanos e agentes):
+1. Proof -> Compute.
+2. Logica trivalente TRUE / FALSE / Z.
+3. Z = UNKNOWN, sem coercao silenciosa.
+4. Ausencia de evidencia nao e prova de impossibilidade.
+5. Nenhuma alegacao de superioridade quantica sem comparacao experimental adequada.
+6. Simulacao nunca e apresentada como hardware real.
+7. Proibido inventar benchmarks, job_ids ou resultados.
+8. Universalidade computacional exige demonstracao formal.
+9. Hash nao e prova de autoria nem de verdade.
+10. Declarar hipoteses, limites, complexidade e condicoes de validade.
+
+Ciclo: DISCOVERY -> PLAN -> DELEGATE -> IMPLEMENT -> TEST -> ADVERSARIAL REVIEW -> EVIDENCE -> DOCUMENT -> PULL REQUEST.
