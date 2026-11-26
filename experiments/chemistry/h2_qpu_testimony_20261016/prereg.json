@@ -1,0 +1,36 @@
+{
+ "pergunta": "O hardware quantico real reproduz a energia do estado fundamental do H2 decidida classicamente, dentro da tolerancia pre-registrada?",
+ "sistema": "H2 / STO-3G / R=0.75 A (1.4177 bohr) / reducao de paridade 2 qubits",
+ "coeficientes": {
+  "g0": -0.4804,
+  "g1": 0.3435,
+  "g2": -0.4347,
+  "g3": 0.5718,
+  "g4": 0.091,
+  "procedencia": "O'Malley et al., PRX 6, 031007 (2016); rotulo FATO (reducao publicada)"
+ },
+ "decisao_classica": {
+  "E_eletronica_Ha": -1.8514,
+  "E_repulsao_nuclear_Ha": 0.7056,
+  "E_total_Ha": -1.1458,
+  "verificacao_literatura": "FCI/STO-3G em ~0.75 A ~ -1.14 Ha (consistente); rotulo FATO (diagonalizacao exata em sandbox)"
+ },
+ "tolerancia_pre_registrada": {
+  "delta_Ha": 0.1,
+  "rotulo": "HIPOTESE de aceitacao",
+  "justificativa": "honesto para NISQ sem mitigacao, 400 shots/circuito; erro estatistico ~0.03-0.04 Ha previsto"
+ },
+ "desenho": {
+  "circuitos": [
+   "Z-basis",
+   "X-basis",
+   "Y-basis"
+  ],
+  "shots_por_circuito": 400,
+  "backend_previsto": "ibm_marrakesh",
+  "estado": "vetor fundamental exato, StatePreparation 2 qubits"
+ },
+ "maturidade": "EXPERIMENTAL",
+ "vereditos_possiveis": "VALIDADO_DENTRO_TOLERANCIA | FORA_TOLERANCIA (ambos publicaveis honestamente)",
+ "pre_registro_sha256": "5b0cb79da54cd5118f21365fb9c33470fd2a5a72751947eda11ce95b79c4debf"
+}
