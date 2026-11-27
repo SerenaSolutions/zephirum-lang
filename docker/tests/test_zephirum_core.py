@@ -113,7 +113,7 @@ class TestBackendIBMFailClosed(unittest.TestCase):
         # Sem token -> IBM-401; com token mas sem qiskit -> IBM-503. Ambos fail-closed.
         r = ibm.submeter("OPENQASM 3.0;\nqubit[1] q;\nt q[0];")
         self.assertEqual(r["veredito"], "REFUSED")
-        self.assertIn(r["codigo"], ("IBM-401", "IBM-503"))
+        self.assertIn(r["codigo"], ("IBM-401", "IBM-403", "IBM-503"))
 
     def test_portao_de_cota_barra_clifford(self):
         r = ibm.ensaio(TestPonteQasm3.BELL)

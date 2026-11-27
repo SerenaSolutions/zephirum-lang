@@ -8,6 +8,7 @@ Regras da casa:
 """
 import datetime
 import os
+import re
 
 from ..cert import emitir
 from ..qasm3 import decidir as decidir_qasm
@@ -69,8 +70,37 @@ def portao_de_cota(qasm):
     return True, {"analise": analise.get("analise"), "motivo_analise": analise.get("motivo")}
 
 
+CODIGO_SUBMISSAO_DESABILITADA = "IBM-403"
+SHOTS_MIN, SHOTS_MAX = 1, 100_000
+
+
+def submissao_autorizada():
+    """Opt-in explicito obrigatorio: por padrao NADA vai para a QPU."""
+    return (os.environ.get("ZEPHIRUM_ALLOW_QPU_SUBMIT") or "").strip().lower() in {"1", "true", "yes", "sim"}
+
+
+def validar_pedido(backend, shots):
+    """Valida backend e orcamento de tiros antes de qualquer chamada de rede."""
+    if not isinstance(backend, str) or not re.fullmatch(r"[a-z0-9_]{3,64}", backend or ""):
+        return False, "backend invalido: use nome [a-z0-9_]{3,64}"
+    try:
+        n = int(shots)
+    except (TypeError, ValueError):
+        return False, "shots deve ser inteiro"
+    if not (SHOTS_MIN <= n <= SHOTS_MAX):
+        return False, f"shots fora do intervalo {SHOTS_MIN}..{SHOTS_MAX}"
+    return True, ""
+
+
 def submeter(qasm, backend="ibm_brisbane", shots=1024, canal=None):
     """Submete ao QPU real. Nunca levanta: falha vira veredito REFUSED."""
+    if not submissao_autorizada():
+        return _recusar(CODIGO_SUBMISSAO_DESABILITADA,
+                        "submissao real desabilitada por padrao; defina ZEPHIRUM_ALLOW_QPU_SUBMIT=1 para habilitar")
+    valido, motivo_pedido = validar_pedido(backend, shots)
+    if not valido:
+        return _recusar("IBM-400", motivo_pedido)
+    shots = int(shots)
     ok, codigo, motivo = disponivel()
     if not ok:
         return _recusar(codigo, motivo)

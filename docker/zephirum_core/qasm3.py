@@ -11,6 +11,19 @@ from fractions import Fraction
 
 from .cert import digest, emitir
 
+# Gramatica efetivamente suportada (subconjunto declarado, NAO OpenQASM 3 integral).
+# Declarar o subconjunto e o que permite recusar o resto com honestidade.
+GRAMATICA_SUPORTADA = {
+    "versao": "openqasm3-subset/1.0",
+    "declaracoes": ["qubit[n]", "bit[n]", "include (avisada)"],
+    "classicas": ["measure", "reset"],
+    "clifford": ["id", "x", "y", "z", "h", "s", "sdg", "sx", "cx", "cnot", "cz", "cy", "swap", "barrier"],
+    "nao_clifford": ["t", "tdg", "ccx", "ccz", "cs", "csdg", "rx", "ry", "rz", "u", "u1", "u2", "u3", "p", "rxx", "ryy", "rzz"],
+    "recusadas": ["if", "for", "while", "gate", "box", "delay", "defcal", "cal", "c_if", "switch", "return", "extern"],
+    "conformidade": "subconjunto declarado; NAO alega conformidade OpenQASM 3 integral",
+}
+CONSTRUTOS_RECUSADOS = set(GRAMATICA_SUPORTADA["recusadas"])
+
 CLIFFORD = {"id", "x", "y", "z", "h", "s", "sdg", "sx", "cx", "cnot", "cz", "cy", "swap", "barrier"}
 NAO_CLIFFORD = {"t", "tdg", "ccx", "ccz", "cs", "csdg", "rx", "ry", "rz", "u", "u1", "u2", "u3", "p", "rxx", "ryy", "rzz"}
 CLASSICAS = {"measure", "reset", "include"}
@@ -78,6 +91,9 @@ def analisar(src):
         if cabeca in CLASSICAS:
             info["classicas"] += 1
             continue
+        if cabeca in CONSTRUTOS_RECUSADOS:
+            info["refusals"].append(f"construcao fora da gramatica declarada: {cabeca}")
+            continue
         m = re.match(r"^([a-z][a-z0-9_]*)\s*(?:\(([^)]*)\))?\s*(.*)$", st, re.I)
         if not m:
             info["refusals"].append("instrucao ilegivel: " + st[:50])
@@ -120,5 +136,7 @@ def decidir(src):
         "veredito": veredito,
         "portas": info["portas"],
         "qubits": info["qubits"],
+        "gramatica": GRAMATICA_SUPORTADA["versao"],
+        "conformidade": GRAMATICA_SUPORTADA["conformidade"],
     })
     return {"veredito": veredito, "motivo": motivo, "analise": info, "cert": cert}
