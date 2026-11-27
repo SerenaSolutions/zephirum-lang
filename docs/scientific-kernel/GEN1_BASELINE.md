@@ -50,9 +50,17 @@ Verificação feita contra o repositório:
 | Valores `1 / 0 / REFUSED` | `TRUE / FALSE / Z` (Z = UNKNOWN, §12) |
 | Integração Qiskit como dependência | Confronto tri-SDK documentado (`docs/QINTEROP.md`), SDK opcional |
 
-Conclusão: a **arquitectura** proposta é aproveitável; o **baseline** que os
-documentos afirmam é falso. Nenhum documento de engenharia pode ser escrito
-sobre aquele baseline sem fabricar factos.
+Conclusão (CORRIGIDA em 2026-11-27, 11h45 UTC — verificação via API GitHub):
+os documentos externos NÃO descrevem um projeto imaginado. Descrevem um
+SEGUNDO repositório real da mesma organização: `SerenaSolutions/zephirum-lang`
+(criado 2026-10-12, PR #145 mergeado, push em 2026-11-27T11:37Z, 2 stars,
+pacote PyPI `zephirum` v2.5.9 com 1.282 downloads no último mês, núcleo
+ZYQL 1/0/REFUSED). Este baseline descreve o OUTRO repositório — a linhagem
+deste workspace (`SerenaSolutions/zephirum`, núcleo ASK/CONTRACT/MODEL,
+TRUE/FALSE/Z, SHA-256).
+
+Existem, portanto, DUAS linhagens ZEPHIRUM com semânticas distintas.
+Consolidação é decisão do fundador (ver pauta da reunião).
 
 ## 4. Estado de maturidade (declarado vs verificado)
 
