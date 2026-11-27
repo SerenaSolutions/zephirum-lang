@@ -10,7 +10,7 @@ States: IMPLEMENTADO / TESTADO / ESPECIFICACAO / EXPERIMENTAL / BLOQUEADO / NAO_
 |---|---|---|---|---|---|
 | 1 | Maturity of the trivalent gate | MATURITY.md says PRODUCAO, README says work in progress | MATURITY.md is authoritative at component level; README stays product level; reconciliation note in both | scientific-documentation | IMPLEMENTADO |
 | 2 | ML-DSA-44 status | MATURITY.md says BETA, receipts.md says "declared roadmap" | BETA: implemented and verified locally, no external validation; receipts.md corrected | evidence-engineer | IMPLEMENTADO |
-| 3 | License | House instruction BSL 1.1 + MIT vs repo LICENSE Apache-2.0 | Repo reality is Apache-2.0; no silent change, founder decision tracked in #156 | chief-architect | BLOQUEADO (founder) |
+| 3 | License | House instruction BSL 1.1 + MIT vs repo LICENSE Apache-2.0 | Repo reality is Apache-2.0; no silent change, founder decision tracked in #156 | chief-architect | RESOLVIDO — Apache-2.0 prevalece (DOI 10.5281/zenodo.24250453, PyPI 2.5.9, LICENSE, pyproject); MIT é o depósito histórico v1.1.0; núcleo BSL vive fora deste repo. Ver docs/LICENSE_MAP.md |
 | 4 | Hash algorithm | Receipts docs say SHA3-256, docker cert.py default is SHA-256 | SHA3-256 is canonical for receipts; SHA-256 only for legacy; migration in RFC-001 #154 | evidence-engineer | ESPECIFICACAO |
 | 5 | Merge queue | 23 open PRs, several stacked | Fixed order 132, 131, 130, 120, 119, then Dependabot batch; never parallel | chief-architect | BLOQUEADO (checks) |
 | 6 | Agent team | 9 profiles exist, Copilot agents are paid | Profiles stay ESPECIFICACAO; operation via AGENT_PROMPTS.md in plain Copilot Chat | chief-architect | ESPECIFICACAO |
