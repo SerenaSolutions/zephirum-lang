@@ -1,5 +1,8 @@
 # Maturidade por componente — ZEPHIRUM/ZYQL (v2.0.0 — 08/11/2026)
 
+> **Fonte única (2026-11-27):** este documento é a referência de maturidade por componente. O README descreve o produto, não o nível de maturidade. Divergências de status do ML-DSA-44 foram reconciliadas: BETA. Ver docs/engineering/TEAM_ALIGNMENT.md.
+
+
 Declaração oficial de escopo e maturidade, componente a componente. Nada aqui é
 marketing; cada nível tem critério. Auditorias devem citar este documento.
 
