@@ -31,6 +31,8 @@ BATTERIES = [
      "transpilador multi-alvo: mesma fonte em Python/C/Java/C#"),
     ("test_qsim_gateway.py",
      "Q-SIM Gateway: emaranhamento decidido no portao, zero unidades QPU"),
+    ("test_hybrid_orchestrator.py",
+     "Orquestrador hibrido: politica explicita, fallback registado, par.12"),
 ]
 
 
