@@ -3,7 +3,7 @@
 Every decision emits a receipt: purpose, rule class, decision (1/0/REFUSED),
 interference probability, oracle calls, noise band (+-0.15), provenance and
 citations (BM25 hits), timestamp, and a SHA3-256 integrity seal (implemented).
-ML-DSA-44 (FIPS 204) signature: DECLARED ROADMAP — must use an accredited CMVP
+ML-DSA-44 (FIPS 204) signature: BETA (implemented and verified locally; external validation pending) — must use an accredited CMVP
 module with HSM/KMS-held keys; the hash seal proves integrity, not authorship
 nor authenticity.
 Canonical rational arithmetic (num/den) is used for certificate values:
