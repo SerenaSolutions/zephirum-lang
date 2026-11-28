@@ -41,6 +41,10 @@ class BackendCapability:
                  limits=None, available=True):
         if kind not in KIND_PRIORITY:
             raise ValueError("unknown backend kind: %r" % kind)
+        if not isinstance(available, bool):
+            raise ValueError(
+                "available must be a bool, not %r (no truthiness)"
+                % (available,))
         self.name = name
         self.kind = kind
         self.operations = frozenset(operations)
@@ -64,12 +68,21 @@ class Orchestrator:
 
     def __init__(self, backends, allowed_kinds=None, fallback_allowed=False):
         self.backends = list(backends)
-        self.allowed_kinds = (tuple(allowed_kinds) if allowed_kinds
-                              else KIND_PRIORITY)
+        if allowed_kinds is None:
+            self.allowed_kinds = KIND_PRIORITY
+        else:
+            self.allowed_kinds = tuple(allowed_kinds)
+            if not self.allowed_kinds:
+                raise ValueError(
+                    "empty policy authorizes nothing: fail-closed (par.12)")
         for k in self.allowed_kinds:
             if k not in KIND_PRIORITY:
                 raise ValueError("unknown kind in policy: %r" % k)
-        self.fallback_allowed = bool(fallback_allowed)
+        if not isinstance(fallback_allowed, bool):
+            raise ValueError(
+                "fallback_allowed must be a bool, not %r (no truthiness)"
+                % (fallback_allowed,))
+        self.fallback_allowed = fallback_allowed
 
     def _ordered(self, operation):
         """Backends que declaram a operação, por prioridade de kind."""
@@ -117,6 +130,13 @@ class Orchestrator:
         # candidato declarado (ex.: analítico indisponível, clássico assumiu)
         first_declared = candidates[0]
         fallback_used = (first_declared.kind != chosen.kind)
+        # REGRA 4 (Red Team 2026-11-27): simulação NUNCA substitui hardware
+        # em silêncio — nem o contrário. Se hardware declara a operação,
+        # rotear para simulador é substituição e exige fallback autorizado.
+        hw_declared = [b for b in candidates if b.kind == "quantum_hardware"]
+        if chosen.kind == "quantum_simulator" and hw_declared:
+            fallback_used = True
+            first_declared = hw_declared[0]
         if fallback_used and not self.fallback_allowed:
             receipt["reason"] = (
                 "NOT ROUTED (par.12): preferred backend %r (%s) is not "

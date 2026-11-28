@@ -37,12 +37,16 @@ def main():
                            "terms: 150, 30, -500")
     ok, v = check_contracts(parse_nexa(lying))
     assert not ok and any("negative" in x for x in v), v
-    # o checker INDEPENDENTE também tem que rejeitar o certificado
+    # A6 (Veritas 2026-11-27): o motor JÁ NÃO confia na declaração —
+    # recusa estruturalmente (§12) em vez de emitir certificado falso
     blocks = parse_nexa(lying)
-    res = NCA(blocks, "lying").compile()          # motor pode emitir (não confia)
-    cok, _ = verify(blocks, res["certificate"])
-    assert cok is False, "checker aceitou suposição mentirosa!"
-    print("(2) suposição mentirosa: máquina sinaliza + checker REJEITA")
+    try:
+        NCA(blocks, "lying").compile()
+    except ValueError as e:
+        assert ("terms_nonnegative" in str(e)) or ("assumption" in str(e)), e
+    else:
+        raise AssertionError("motor confiou na suposição mentirosa!")
+    print("(2) suposição mentirosa: máquina sinaliza + motor RECUSA (§12)")
 
     # (3) orçamento de erro não-exato: erro estrutural EXPLÍCITO no motor (§12)
     bad_budget = SRC_OK.replace("absolute_error: 0", "absolute_error: 0.5")

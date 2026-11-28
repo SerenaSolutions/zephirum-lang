@@ -69,8 +69,16 @@ def gateway(src, sdk=None):
         "residual_to_sdk": "none — the certificate is the answer",
     }
     if sdk:
+        # Red Team 2026-11-27: allowlist — nada de __import__ arbitrário
+        SDK_MODULES = {"qiskit": "qiskit", "cirq": "cirq",
+                       "pennylane": "pennylane"}
+        if sdk not in SDK_MODULES:
+            raise ValueError(
+                "unsupported sdk %r (allowed: %s) — par.12"
+                % (sdk, ", ".join(sorted(SDK_MODULES))))
+        import importlib
         try:
-            __import__(sdk)
+            importlib.import_module(SDK_MODULES[sdk])
         except ImportError:
             receipt["sdk_cross_check"] = (
                 "SKIP (§12): %s not installed in this environment" % sdk)

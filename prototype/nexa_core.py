@@ -25,9 +25,26 @@ STATUSES = (
     "UNKNOWN",
 )
 
+def _exact_div(a, b):
+    """§EXACT: divisão inteira exacta (1/3 -> Fraction(1,3), não float)."""
+    if isinstance(a, int) and isinstance(b, int):
+        return Fraction(a, b)
+    return a / b
+
+
+def _exact_pow(a, b):
+    """§12: expoente não inteiro não é certificável (recusa estrutural)."""
+    if not isinstance(b, int):
+        raise ValueError(
+            "non-integer exponent is not certifiable (par.12): %r" % (b,))
+    if isinstance(a, int) and b < 0:
+        return Fraction(1, a ** (-b))
+    return a ** b
+
+
 _BIN = {
-    ast.Add: _O.add, ast.Sub: _O.sub, ast.Mult: _O.mul, ast.Div: _O.truediv,
-    ast.Pow: _O.pow, ast.FloorDiv: _O.floordiv, ast.Mod: _O.mod,
+    ast.Add: _O.add, ast.Sub: _O.sub, ast.Mult: _O.mul, ast.Div: _exact_div,
+    ast.Pow: _exact_pow, ast.FloorDiv: _O.floordiv, ast.Mod: _O.mod,
 }
 
 
@@ -155,9 +172,18 @@ class NCA:
             net = -analysis_cost  # baseline must still run; analysis bought nothing
         else:
             eliminated = original - required
-            ratio = (100.0 * eliminated / original) if original else 0.0
-            exec_cost = float(required)
-            net = float(original) - (analysis_cost + exec_cost + 0.02)
+            try:
+                ratio = (100.0 * eliminated / original) if original else 0.0
+            except (OverflowError, ValueError):
+                ratio = 100.0 if eliminated == original else 0.0
+            try:
+                exec_cost = float(required)
+            except (OverflowError, ValueError):
+                exec_cost = float("inf")
+            try:
+                net = float(original) - (analysis_cost + exec_cost + 0.02)
+            except (OverflowError, ValueError):
+                net = float("inf")
         ev = dict(evidence)
         ev.update({
             "input_hash": self.input_hash,
@@ -269,6 +295,10 @@ class NCA:
 
         # RUNG: REDUCTION - monotone early stop (didatic example, spec S13)
         if assumption == "terms_nonnegative" and op in (">", ">=") and not unk:
+            if not all(t >= 0 for t in terms):
+                raise ValueError(
+                    "assumption terms_nonnegative violated by data (par.12): %r"
+                    % (terms,))
             s = 0
             for k, t in enumerate(terms, 1):
                 s += t
@@ -323,6 +353,10 @@ class NCA:
                 # RESIDUAL: evaluate the unknown (oracle stands in for real computation)
                 if self.model.get("unknown_value", "") != "":
                     x = _num(self.model["unknown_value"])
+                    if not (lo <= x <= hi):
+                        raise ValueError(
+                            "unknown_value %s outside declared bounds [%s, %s] "
+                            "(par.12)" % (x, lo, hi))
                     self.log("RESIDUAL", "EXECUTED",
                              "evaluated %s = %s" % (name, x))
                     s = base + x
@@ -346,25 +380,40 @@ class NCA:
 
     def _mean_partial(self, op, thr):
         known = parse_list(self.model["known"])
-        u = int(_num(self.model.get("unknown_count", "0")))
+        raw_u = _num(self.model.get("unknown_count", "0"))
+        if not isinstance(raw_u, int) or raw_u < 0:
+            raise ValueError(
+                "unknown_count must be a non-negative integer (par.12): %r"
+                % (raw_u,))
+        u = raw_u
         bounds = self.model.get("bounds", "none")
         tot = sum(known)
         N = len(known) + u
+        if u == 0:
+            if N == 0:
+                raise ValueError("empty mean has no value (par.12)")
+            exact = Fraction(tot, N)
+            self.log("ANALYTIC", "ELIMINATED",
+                     "all values known: exact mean without evaluation")
+            ev = {"known_sum": tot, "unknown_count": 0, "mean": exact,
+                  "op": op, "threshold": thr}
+            return self._finish("DECIDED_WITHOUT_EXECUTION",
+                                cmp(exact, op, thr), "EXACT_MEAN",
+                                "ANALYTIC", ev, original=max(N, 1),
+                                required=0, analysis_cost=0.05)
         if bounds != "none" and u > 0 and op == ">":
             lo, hi = bounds.split("..")
             lo, hi = _num(lo), _num(hi)
-            mean_lo = (tot + u * lo) / N
-            mean_hi = (tot + u * hi) / N
-            # FALSIFICACAO 2026-10-06: float perde o dígito que decide em
-            # magnitudes ~1e16. A decisão é por Fraction exata; o float
-            # permanece apenas como valor de exibição no certificado.
+            if hi < lo:
+                raise ValueError("inverted bounds [%s, %s] (par.12)"
+                                 % (lo, hi))
             exact_lo = Fraction(tot + u * lo) / N
             exact_hi = Fraction(tot + u * hi) / N
             self.log("LIMIT", "EXECUTED",
                      "interval arithmetic on %d unknowns in [%s, %s]" % (u, lo, hi))
             if exact_lo > thr:
                 self.log("LIMIT", "ELIMINATED",
-                         "mean_lo = %s > %s: decided without any evaluation" % (mean_lo, thr))
+                         "mean_lo = %s > %s: decided without any evaluation" % (exact_lo, thr))
                 ev = {"known_sum": tot, "unknown_count": u, "bounds": [lo, hi],
                       "mean_lo": exact_lo, "mean_hi": exact_hi,
                       "op": op, "threshold": thr, "mode": "positive"}
@@ -373,7 +422,7 @@ class NCA:
                                     original=u, required=0, analysis_cost=0.05)
             if exact_hi <= thr:
                 self.log("LIMIT", "ELIMINATED",
-                         "mean_hi = %s <= %s: refuted without evaluation" % (mean_hi, thr))
+                         "mean_hi = %s <= %s: refuted without evaluation" % (exact_hi, thr))
                 ev = {"known_sum": tot, "unknown_count": u, "bounds": [lo, hi],
                       "mean_lo": exact_lo, "mean_hi": exact_hi,
                       "op": op, "threshold": thr, "mode": "negative"}
@@ -381,7 +430,7 @@ class NCA:
                                     "INTERVAL_BOUND", "LIMIT", ev,
                                     original=u, required=0, analysis_cost=0.05)
             self.log("LIMIT", "NOT_CONCLUSIVE",
-                     "mean in [%s, %s] straddles threshold" % (mean_lo, mean_hi))
+                     "mean in [%s, %s] straddles threshold" % (exact_lo, exact_hi))
             return self._unknown("bounds insufficient to decide the mean",
                                  original=u, analysis_cost=0.05)
         self.log("LIMIT", "NOT_APPLICABLE",
@@ -402,6 +451,12 @@ class NCA:
     def _det(self, op, thr):
         M = parse_matrix(self.model["matrix"])
         n = len(M)
+        if n == 0:
+            raise ValueError("empty matrix has no determinant (par.12)")
+        if any(len(row) != n for row in M):
+            raise ValueError(
+                "determinant requires a SQUARE matrix (par.12): %d rows, "
+                "irregular or non-square" % n)
         fact = 1
         for i in range(2, n + 1):
             fact *= i
@@ -429,11 +484,16 @@ class NCA:
 
     def _geo(self, op, thr):
         r = _num(self.model["r"])
-        n = int(_num(self.model["n"]))
-        if r != 1 and isinstance(r, int):
-            closed = (r ** (n + 1) - 1) // (r - 1)
+        raw_n = _num(self.model["n"])
+        if not isinstance(raw_n, int) or raw_n < 0:
+            raise ValueError(
+                "n must be a non-negative integer (par.12): %r" % (raw_n,))
+        n = raw_n
+        if r == 1:
+            closed = n + 1
         else:
-            closed = (r ** (n + 1) - 1) / (r - 1) if r != 1 else n + 1
+            rf = r if isinstance(r, Fraction) else Fraction(r)
+            closed = (rf ** (n + 1) - 1) / (rf - 1)
         self.log("ANALYTIC", "ELIMINATED",
                  "geometric closed form instead of %d additions" % (n + 1))
         ev = {"r": r, "n": n, "closed_form": closed, "op": op, "threshold": thr}
@@ -480,7 +540,8 @@ class NCA:
             elif op == "<=":
                 ans = False if t < 0 else sq <= tsq
             elif op == "==":
-                ans = sq == tsq
+                # F1 (Red Team 2026-11-27): C >= 0; t < 0 nunca é igual
+                ans = (t >= 0) and (sq == tsq)
             else:
                 raise ValueError("unsupported op for concurrence: %r" % op)
         else:
@@ -496,12 +557,15 @@ class NCA:
 
     def _raw(self, op, thr):
         data = parse_list(self.model["data"])
+        if not data:
+            raise ValueError("raw_data is empty: no median exists (par.12)")
         self.log("REDUCTION", "NOT_APPLICABLE", "no exploitable structure")
         self.log("ANALYTIC", "NOT_APPLICABLE", "no closed form for median")
         self.log("CLASSICAL", "EXECUTED", "full sort + median")
         s = sorted(data)
         m = len(s)
-        med = s[m // 2] if m % 2 else (s[m // 2 - 1] + s[m // 2]) / 2
+        med = (s[m // 2] if m % 2
+               else Fraction(s[m // 2 - 1] + s[m // 2], 2))
         ev = {"sorted": s, "median": med, "op": op, "threshold": thr}
         return self._finish("FULL_EXECUTION_REQUIRED", cmp(med, op, thr),
                             "MEDIAN_CLASSICAL", "CLASSICAL", ev,

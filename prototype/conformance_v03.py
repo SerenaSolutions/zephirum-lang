@@ -33,6 +33,10 @@ BATTERIES = [
      "Q-SIM Gateway: emaranhamento decidido no portao, zero unidades QPU"),
     ("test_hybrid_orchestrator.py",
      "Orquestrador hibrido: politica explicita, fallback registado, par.12"),
+    ("test_veritas_regressions.py",
+     "Regressoes Veritas/Red Team: 18 contraexemplos blindados"),
+    ("test_ibm_free_qpu.py",
+     "IBM Free QPU: previsao exata vs hardware (offline; live com token)"),
 ]
 
 

@@ -58,6 +58,7 @@ _EV_WHITELIST = {
     "MEDIAN_CLASSICAL": {"sorted", "median", "op", "threshold"},
     "SCHMIDT_DET_CRITERION": {"amplitudes", "det", "norm_sq", "concurrence",
                               "op", "threshold"},
+    "EXACT_MEAN": {"known_sum", "unknown_count", "mean", "op", "threshold"},
 }
 
 
@@ -176,6 +177,21 @@ def _verify_core(blocks, cert):
             return False, "REJECT: bad status/answer pair"
         return True, "ok: monotone early stop independently verified from source"
 
+    if k == "EXACT_MEAN":
+        known = parse_list(model["known"])
+        raw_u = _num(model["unknown_count"])
+        if not isinstance(raw_u, int) or raw_u != 0:
+            return False, "REJECT: EXACT_MEAN requires unknown_count == 0"
+        N = len(known)
+        if N == 0:
+            return False, "REJECT: empty mean"
+        exact = Fraction(sum(known), N)
+        if not _eq(ev.get("mean"), exact) or cmp(exact, op, thr) != answer:
+            return False, "REJECT: exact mean mismatch"
+        if status != "DECIDED_WITHOUT_EXECUTION":
+            return False, "REJECT: exact mean must not claim execution"
+        return True, "ok: exact mean independently recomputed"
+
     if k == "INTERVAL_BOUND":
         if model.get("type") == "threshold_sum":
             terms = parse_list(model["terms"])
@@ -198,10 +214,22 @@ def _verify_core(blocks, cert):
             return True, "ok: interval bound independently recomputed"
         if model.get("type") == "mean_partial":
             known = parse_list(model["known"])
-            u = int(_num(model["unknown_count"]))
+            raw_u = _num(model["unknown_count"])
+            if not isinstance(raw_u, int) or raw_u < 0:
+                return False, "REJECT: unknown_count must be a non-negative integer"
+            u = raw_u
             lo, hi = [ _num(x) for x in model["bounds"].split("..") ]
+            if hi < lo:
+                return False, "REJECT: inverted bounds"
             tot = sum(known)
             N = len(known) + u
+            if u == 0:
+                if N == 0:
+                    return False, "REJECT: empty mean"
+                exact = Fraction(tot, N)
+                if not _eq(ev.get("mean"), exact) or cmp(exact, op, thr) != answer:
+                    return False, "REJECT: exact mean mismatch"
+                return True, "ok: exact mean independently recomputed"
             exact_lo = Fraction(tot + u * lo) / N
             exact_hi = Fraction(tot + u * hi) / N
             if not _eq(ev.get("mean_lo"), exact_lo) or not _eq(ev.get("mean_hi"), exact_hi):
@@ -225,6 +253,8 @@ def _verify_core(blocks, cert):
         if "unknown_value" not in model:
             return False, "REJECT: residual evaluation not declared in source"
         x = _num(model["unknown_value"])
+        if not (lo <= x <= hi):
+            return False, "REJECT: unknown_value outside declared bounds"
         if not _eq(ev.get("evaluated_value"), x):
             return False, "REJECT: evaluated value mismatch"
         s = base + x
@@ -237,6 +267,8 @@ def _verify_core(blocks, cert):
     if k == "TRIANGULAR_DET_ANALYTIC":
         M = parse_matrix(model["matrix"])
         n = len(M)
+        if n == 0 or any(len(row) != n for row in M):
+            return False, "REJECT: determinant requires a square non-empty matrix"
         upper = all(M[i][j] == 0 for i in range(n) for j in range(i))
         lower = all(M[i][j] == 0 for i in range(n) for j in range(i + 1, n))
         if not (upper or lower):
@@ -252,7 +284,10 @@ def _verify_core(blocks, cert):
 
     if k == "GEOMETRIC_CLOSED_FORM":
         r = _num(model["r"])
-        n = int(_num(model["n"]))
+        raw_n = _num(model["n"])
+        if not isinstance(raw_n, int) or raw_n < 0:
+            return False, "REJECT: n must be a non-negative integer"
+        n = raw_n
         # independent method: naive summation (engine used the closed form)
         s = sum(r ** i for i in range(n + 1))
         if not _eq(s, ev.get("closed_form")):
@@ -289,7 +324,8 @@ def _verify_core(blocks, cert):
         data = parse_list(model["data"])
         s = sorted(data)
         m = len(s)
-        med = s[m // 2] if m % 2 else (s[m // 2 - 1] + s[m // 2]) / 2
+        med = (s[m // 2] if m % 2
+               else Fraction(s[m // 2 - 1] + s[m // 2], 2))
         if not _eq(med, ev.get("median")) or cmp(med, op, thr) != answer:
             return False, "REJECT: median mismatch"
         return True, "ok: median recomputed independently"
@@ -333,7 +369,7 @@ def _verify_core(blocks, cert):
             elif eop == "<=":
                 rec = False if t < 0 else sq <= tsq
             else:
-                rec = sq == tsq
+                rec = (t >= 0) and (sq == tsq)
         else:
             return False, "REJECT: unexpected entanglement question"
         if rec != answer or status != "DECIDED_WITHOUT_EXECUTION":

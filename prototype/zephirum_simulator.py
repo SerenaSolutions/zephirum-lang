@@ -160,18 +160,19 @@ def simulate_full(blocks, model="exact"):
         n = int(md["n"])
         total = Fraction(0)                       # loop ingênuo vs forma fechada
         term = Fraction(1)
-        for _ in range(n):
+        for _ in range(n + 1):
             total += term
             term *= r
         return {"status": "DECIDED", "answer": cmp(total, op, thr),
-                "units": n, "detail": "naive loop vs closed form"}
+                "units": n + 1, "detail": "naive loop vs closed form"}
 
     if t == "raw_data":
         data = parse_list(md["data"])
         units = len(data)
         s = sorted(data)
         m = len(s)
-        med = s[m // 2] if m % 2 else (s[m // 2 - 1] + s[m // 2]) / 2
+        med = (s[m // 2] if m % 2
+               else Fraction(s[m // 2 - 1] + s[m // 2], 2))
         return {"status": "DECIDED", "answer": cmp(med, op, thr),
                 "units": units, "detail": "full sort + median"}
 

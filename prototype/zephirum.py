@@ -169,6 +169,12 @@ def cli(argv=None):
 
         if a.cmd == "compile":
             blocks, res = _cli_compile(a.file)
+            # M10 (Veritas 2026-11-27): certificado falso não pode ser gravado
+            from verify_certificate import verify as _verify
+            _ok, _why = _verify(blocks, res["certificate"])
+            if not _ok:
+                print("REFUSED (par.12): certificate did not verify: %s" % _why)
+                return 2
             out = Path(a.file + ".cert.json")
             out.write_text(json.dumps(res["certificate"], indent=1,
                                       sort_keys=True, default=str))
