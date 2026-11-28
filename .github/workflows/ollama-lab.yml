@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: instalar e subir ollama
-        uses: ai-action/setup-ollama@798483f55e7466b967eee0627554aa3d0e0f3279
+        uses: ai-action/setup-ollama@4d24ba3341d7b8e6ed2f80aa4ee53be6ee8e29fc
         with:
           model: ${{ inputs.modelo }}
 
