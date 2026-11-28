@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v7
       - name: instalar ferramentas leves
         run: uv pip install --system -r lab/requirements-leves.txt
       - name: camada 1 (python)
@@ -52,7 +52,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v7
       - name: instalar docling e embeddings
         run: uv pip install --system -r lab/requirements-pesados.txt
       - name: docling converte PDF em dado estruturado
